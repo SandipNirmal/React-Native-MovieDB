@@ -36,15 +36,14 @@ export default class MovieDetails extends Component {
             );
           }
         
-        const numbers = [1, 2, 3, 4, 5];
-
-        const movieList = numbers.map((movie) => {
-            <Text>movie</Text>
-        })
-        
         return (
             <View>
-                {/* {{movieList}} */}
+                <ScrollView horizontal>
+                  <Text style={{fontSize:96}}>Scroll me plz</Text>
+                  <Text style={{fontSize:96}}>Scroll me plz</Text>
+                  <Text style={{fontSize:96}}>Scroll me plz</Text>
+                  <Text style={{fontSize:96}}>Scroll me plz</Text>
+                </ScrollView>
             </View>
         );
     }
