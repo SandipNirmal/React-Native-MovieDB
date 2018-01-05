@@ -77,7 +77,7 @@ class Movies extends Component {
 }
 
 const MoviesStack = StackNavigator({
-  Movies: {
+  Movie: {
     screen: Movies,
   },
   MovieDetails: {
@@ -86,6 +86,12 @@ const MoviesStack = StackNavigator({
   AllMovies: {
     screen: AllMovies,
   },
-})
+}, {
+  headerMode: 'float',
+  cardStyle: {
+    backgroundColor: '#4a4a4a'
+  }
+});
+
 
 export default MoviesStack;
