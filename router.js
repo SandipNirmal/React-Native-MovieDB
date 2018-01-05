@@ -2,49 +2,16 @@ import React from 'react';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 
-import Movies from './components/movies';
+import MoviesStack from './components/movies';
 import MovieDetails from './components/movieDetails';
 import TvShows from './components/tvShows';
 import Search from './components/search';
 import Settings from './components/settings';
 
-// Movies Screen Stack Navigator
-const moviesScreen = StackNavigator({
-  Movie: {
-    screen: Movies,
-    navigationOptions: {
-      title: 'Movies',
-      headerTitleStyle: {
-        color: '#a9a9a9'
-      },
-      headerStyle: {
-        backgroundColor: 'black'
-      }
-    }
-  },
-  MovieDetails: {
-    screen: MovieDetails,
-    navigationOptions: {
-      title: 'Movie Details',
-      headerTitleStyle: {
-        color: '#a9a9a9'
-      },
-      headerStyle: {
-        backgroundColor: 'black'
-      }
-    }
-  }
-}, {
-  headerMode: 'float',
-  cardStyle: {
-    backgroundColor: '#4a4a4a'
-  }
-});
-
 // Application router
 export const AppRoot = TabNavigator({
   Movies: {
-    screen: moviesScreen,
+    screen: MoviesStack,
     navigationOptions: {
       tabBarLabel: 'Movies',
       tabBarIcon: ({tintColor}) => <Icon name="movie" size={30} color={tintColor}/>,

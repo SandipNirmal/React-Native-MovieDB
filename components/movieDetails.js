@@ -3,6 +3,16 @@ import {View, Text, StyleSheet, ScrollView, ActivityIndicator} from 'react-nativ
 import {Avatar, Tile} from 'react-native-elements';
 
 export default class MovieDetails extends Component {
+    // static navigationOptions = ({navigation}) => ({
+      // title: navigation.state.params.name,
+      // headerTitleStyle: {
+        // color: '#a9a9a9',
+      // },
+      // headerStyle: {
+        // backgroundColor: 'black',
+      // },
+    // );
+
     constructor(props) {
         super(props);
 
