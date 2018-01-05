@@ -2,11 +2,11 @@ import React from 'react';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 
-import MoviesStack from './components/movies';
-import MovieDetails from './components/movieDetails';
-import TvShows from './components/tvShows';
-import Search from './components/search';
-import Settings from './components/settings';
+import MoviesStack from './components/Movies';
+import MovieDetails from './components/MovieDetails';
+import TvShows from './components/TvShows';
+import Search from './components/Search';
+import Settings from './components/Settings';
 
 // Application router
 export const AppRoot = TabNavigator({

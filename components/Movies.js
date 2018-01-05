@@ -5,9 +5,9 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-import MovieDetails from './movieDetails';
-import AllMovies from './allMovies';
-import MovieList from '../components/MovieList';
+import MovieDetails from './MovieDetails';
+import AllMovies from './AllMovies';
+import MovieList from './MovieList';
 
 // TODO: Implement Configuration and LatestMovies
 import { Configuration } from '../data/configuration';
