@@ -12,9 +12,7 @@ const BackgroundImage = (props) => {
             style={Style.absoluteImage}
             source={{
             uri: bgImage
-        }}>
-            {props.children}
-        </Image>
+        }} />
     )
 }
 

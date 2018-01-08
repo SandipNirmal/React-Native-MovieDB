@@ -22,9 +22,9 @@ const style = StyleSheet.create({
         marginBottom: 10
     },
     headingText: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '500',
-        paddingTop: 10,
+        paddingTop: 20,
         paddingBottom: 10 
     },
     normalText: {

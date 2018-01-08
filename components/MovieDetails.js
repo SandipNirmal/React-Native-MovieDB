@@ -4,12 +4,13 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ActivityIndicator,
-    Image
+    ActivityIndicator
 } from 'react-native';
 import {Avatar, Tile} from 'react-native-elements';
 
 import BackgroundImage from './backgroundImage';
+import MovieInfo from './movieInfo';
+
 import style from './../styles/styles';
 
 export default class MovieDetails extends Component {
@@ -28,7 +29,7 @@ export default class MovieDetails extends Component {
 
         this.state = {
             isLoading: true,
-            list: []
+            movieData: []
         };
     }
 
@@ -47,9 +48,7 @@ export default class MovieDetails extends Component {
     }
 
     render() {
-        const images = ['https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg', 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg', 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg', 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg', 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'];
         const bgImage = 'http://image.tmdb.org/t/p/w300/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg';
-        const resizeMode = 'center';
 
         if (this.state.isLoading) {
             return (
@@ -71,8 +70,15 @@ export default class MovieDetails extends Component {
                         <Text style={[style.text, style.titleText]}>
                             {this.state.movieData.title}
                         </Text>
+                        {/* <Text style={[style.text, style.normalText]}>
+                            {this.state.movieData.tagline}
+                        </Text> */}
 
-                        {/* TODO - add component to show runningTime, release date and ratings */}
+                        <MovieInfo 
+                        releaseDate={this.state.movieData.release_date}
+                        runtime={this.state.movieData.runtime}
+                        ratings={this.state.movieData.vote_average}
+                        />
 
                         <Text style={[style.text, style.normalText]}>
                             {this.state.movieData.overview}
