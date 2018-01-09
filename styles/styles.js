@@ -25,11 +25,16 @@ const style = StyleSheet.create({
         fontSize: 18,
         fontWeight: '500',
         paddingTop: 20,
-        paddingBottom: 10 
+        paddingBottom: 10
     },
     normalText: {
         fontSize: 12
     },
+    posterSize: {
+        width: 92,
+        height: 136,
+        margin: 5
+    }
 });
 
 export default style;
