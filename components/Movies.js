@@ -16,8 +16,8 @@ class Movies extends Component {
     title: 'Movies'
   };
 
-  showMovieDetails(name) {
-    this.props.navigation.navigate('MovieDetails', {name: name});
+  showMovieDetails(movie) {
+    this.props.navigation.navigate('MovieDetails', {movie: movie});
   }
 
   showAllMovies(category) {
@@ -29,10 +29,8 @@ class Movies extends Component {
     const posterSize = Configuration['images']['poster_sizes'][0];
     let movies = [];
     LatestMovies.results.forEach(function(movie) {
-        let item = {};
-        item['name'] = movie['original_title']
-        item['uri'] = baseUrl + '/' + posterSize + '/' + movie['poster_path'];
-        movies.push(item);
+        movie['uri'] = baseUrl + '/' + posterSize + '/' + movie['poster_path'];
+        movies.push(movie);
       });
     return movies;
   }
@@ -42,10 +40,8 @@ class Movies extends Component {
     const logoSize = Configuration['images']['backdrop_sizes'][0];
     let movies = [];
     LatestMovies.results.forEach(function(movie) {
-        let item = {};
-        item['name'] = movie['original_title']
-        item['uri'] = baseUrl + '/' + logoSize + '/' + movie['backdrop_path'];
-        movies.push(item);
+        movie['uri'] = baseUrl + '/' + logoSize + '/' + movie['backdrop_path'];
+        movies.push(movie);
       });
     return movies;
   }

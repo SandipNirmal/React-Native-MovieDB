@@ -2,17 +2,13 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, Text} from 'react-native';
 import PropTypes from 'prop-types';
 
-const bgImage = 'http://image.tmdb.org/t/p/w300/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg';
-const resizeMode = 'cover';
-
 const BackgroundImage = (props) => {
 
     return (
         <Image
             style={Style.absoluteImage}
-            source={{
-            uri: bgImage
-        }} />
+            source={{uri: props.uri}}
+        />
     )
 }
 

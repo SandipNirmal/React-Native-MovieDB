@@ -12,7 +12,7 @@ import style from './../styles/styles';
 
 export default class MovieDetails extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: navigation.state.params.name,
+        title: navigation.state.params.movie.original_title,
         headerTitleStyle: {
             color: '#a9a9a9'
         },
@@ -34,8 +34,14 @@ export default class MovieDetails extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.themoviedb.org/3/movie/550?api_key=b8a04ea374eece868a6690782c9e7536&' +
-                'append_to_response=videos,images').then((response) => response.json()).then((response) => {
+        const baseUrl = "https://api.themoviedb.org/3/movie/";
+        const apiKey = "api_key=b8a04ea374eece868a6690782c9e7536";
+        const appendResponse = "append_to_response=videos,images"
+        // TODO: use lodash here + add error handling
+        const movieId = this.props.navigation.state.params.movie.id;
+        let url = `${baseUrl}${movieId}?${apiKey}&${appendResponse}`;
+
+        fetch(url).then((response) => response.json()).then((response) => {
             this.setState({isLoading: false, movieData: response});
 
             this.formImageUrls(response.images.backdrops);
@@ -43,8 +49,9 @@ export default class MovieDetails extends Component {
         }).catch((error) => {
             console.error(error);
         });
-
-        fetch('https://api.themoviedb.org/3/movie/550/credits?api_key=b8a04ea374eece868a6690782c9e7536')
+      
+        url = `${baseUrl}${movieId}/credits?${apiKey}`;
+        fetch(url)
             .then((response) => response.json())
             .then((response) => {
                 this.extractDirectors(response.crew);
@@ -123,7 +130,10 @@ export default class MovieDetails extends Component {
     }
 
     render() {
-        const bgImage = 'http://image.tmdb.org/t/p/w300/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg';
+
+        const baseUrl = Configuration['images']['secure_base_url'];
+        const size = Configuration['images']['poster_sizes'][5]
+        const bgImage = baseUrl + size + '/' + this.props.navigation.state.params.movie.poster_path;
 
         if (this.state.isLoading) {
             return (

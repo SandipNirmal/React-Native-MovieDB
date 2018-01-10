@@ -19,7 +19,7 @@ const MovieList = (props) => (
         <TouchableOpacity
           key={index}
           style={styles.posterSize}
-          onPress={() => props.onPress(movie.name)}>
+          onPress={() => props.onPress(movie)}>
           <Image
             style={styles.posterSize}
             source={{uri: movie.uri}}
