@@ -12,31 +12,18 @@ import PropTypes from 'prop-types';
 
 import style from './../styles/styles';
 
-export default class CastList extends Component {
-
-    showCastDetails() {
-        // this.props.navigation.navigate('CastDetails', {name: 'Christain Bale'});
-        // Works on both iOS and Android
-        Alert.alert('Cast Details', 'Takes user to cast details scren.', [
-            {
-                text: 'OK',
-                onPress: () => console.log('Go to Details')
-            }
-        ], {cancelable: false})
-    }
-
-    render() {
+const CastList = (props) => {
         return (
             <View>
                 <Text style={[style.text, style.headingText]}>
-                    {this.props.title}
+                    {props.title}
                 </Text>
                 <ScrollView horizontal>
-                    {this.props.items.map((item, index) => (
+                    {props.items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
                                 style={style.avatarContaier}
-                                onPress={this.showCastDetails.bind(this)}>
+                                onPress={() => props.onPress(item)}>
                                 <Image
                                     style={style.avatarSize}
                                     source={{
@@ -53,5 +40,6 @@ export default class CastList extends Component {
                 </ScrollView>
             </View>
         );
-    }
 }
+
+export default CastList;

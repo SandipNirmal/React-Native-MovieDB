@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, ActivityIndicator} from 'react-native';
 import {Avatar, Tile} from 'react-native-elements';
+import {StackNavigator} from 'react-navigation';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
 import ImageList from './ImageList';
 import CastList from './CastList'
+import CastDetails from './CastDetails';
 
 import {Configuration} from '../data/configuration';
 import style from './../styles/styles';
 
-export default class MovieDetails extends Component {
+class MovieDetails extends Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.movie.original_title,
         headerTitleStyle: {
@@ -130,6 +132,10 @@ export default class MovieDetails extends Component {
         });
     }
 
+    showCastDetails(cast) {
+      this.props.navigation.navigate('CastDetails', {cast: cast});
+    }
+
     render() {
 
         const baseUrl = Configuration['images']['secure_base_url'];
@@ -177,11 +183,34 @@ export default class MovieDetails extends Component {
                             {this.state.videos.url}
                         </Text>
 
-                        <CastList title="Director" items={this.state.directors}/>
-                        <CastList title="Cast" items={this.state.casts}/>
+                        <CastList 
+                          title="Director"
+                          items={this.state.directors}
+                          onPress={this.showCastDetails.bind(this)}
+                        />
+                        <CastList
+                          title="Cast"
+                          items={this.state.casts}
+                          onPress={this.showCastDetails.bind(this)}
+                        />
                     </View>
                 </ScrollView>
             </View>
         );
     }
 }
+
+const MovieDetailsStack = StackNavigator({
+    MovieDetailsStack: {
+      screen: MovieDetails
+    },
+    CastDetails: {
+      screen: CastDetails
+    },
+  },
+  {
+    headerMode: 'none',
+  }
+);
+
+export default MovieDetailsStack;

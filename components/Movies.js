@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
 import {Text, ScrollView, View} from 'react-native';
-import MovieDetails from './MovieDetails';
+import MovieDetailsStack from './MovieDetails';
 import AllMovies from './AllMovies';
 import MovieList from './MovieList';
-import CastDetails from './CastDetails';
 import Carousel from './Carousel';
 
 // TODO: Implement Configuration and LatestMovies
@@ -17,7 +16,7 @@ class Movies extends Component {
   };
 
   showMovieDetails(movie) {
-    this.props.navigation.navigate('MovieDetails', {movie: movie});
+    this.props.navigation.navigate('MovieDetailsStack', {movie: movie});
   }
 
   showAllMovies(category) {
@@ -81,23 +80,21 @@ class Movies extends Component {
 }
 
 const MoviesStack = StackNavigator({
-  Movie: {
-    screen: Movies
+    Movie: {
+      screen: Movies
+    },
+    MovieDetailsStack: {
+      screen: MovieDetailsStack
+    },
+    AllMovies: {
+      screen: AllMovies
+    },
   },
-  MovieDetails: {
-    screen: MovieDetails
-  },
-  AllMovies: {
-    screen: AllMovies
-  },
-  CastDetails: {
-    screen: CastDetails
-  }
-}, {
-  headerMode: 'float',
-  cardStyle: {
-    backgroundColor: '#4a4a4a'
-  }
-});
+  {
+    headerMode: 'float',
+    cardStyle: {
+      backgroundColor: '#4a4a4a'
+    }
+  });
 
 export default MoviesStack;
