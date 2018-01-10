@@ -15,6 +15,7 @@ class AllMovies extends Component {
     headerStyle: {
       backgroundColor: 'black'
     },
+    headerTintColor: '#32CD32',
   });
 
   render() {

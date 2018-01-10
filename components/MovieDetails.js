@@ -18,7 +18,8 @@ export default class MovieDetails extends Component {
         },
         headerStyle: {
             backgroundColor: 'black'
-        }
+        },
+        headerTintColor: '#32CD32',
     });
 
     constructor(props) {
