@@ -4,6 +4,8 @@ import {
   View,
 } from 'react-native';
 
+import style from './../styles/styles';
+
 class AllMovies extends Component {
   static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.category,
@@ -18,7 +20,7 @@ class AllMovies extends Component {
   render() {
     return(
       <View>
-        <Text>
+        <Text style={[style.text, style.normalText]}>
           Show All Movies here
         </Text>
       </View>

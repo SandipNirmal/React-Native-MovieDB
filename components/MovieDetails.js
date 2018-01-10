@@ -38,7 +38,7 @@ export default class MovieDetails extends Component {
                 'append_to_response=videos,images').then((response) => response.json()).then((response) => {
             this.setState({isLoading: false, movieData: response});
 
-            this.formImageUrls(response.images.posters);
+            this.formImageUrls(response.images.backdrops);
             this.formVideoUrls(response.videos.results);
         }).catch((error) => {
             console.error(error);
@@ -59,7 +59,7 @@ export default class MovieDetails extends Component {
      */
     formImageUrls(posters) {
         const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['poster_sizes'][0];
+        const posterSize = Configuration['images']['backdrop_sizes'][1];
 
         const images = posters.map((image) => {
             return `${baseUrl}${posterSize}${image['file_path']}`;
@@ -86,7 +86,7 @@ export default class MovieDetails extends Component {
      */
     extractDirectors(crew) {
         const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['profile_sizes'][0];
+        const posterSize = Configuration['images']['profile_sizes'][1];
 
         const directors = crew
         .filter((member) => member.job === 'Director')
@@ -108,7 +108,7 @@ export default class MovieDetails extends Component {
      */
     extractCast(cast) {
         const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['profile_sizes'][0];
+        const posterSize = Configuration['images']['profile_sizes'][1];
 
         const casts =  cast
         .sort((a, b) => a.order - b.order)

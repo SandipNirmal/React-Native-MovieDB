@@ -39,7 +39,7 @@ export const AppRoot = TabNavigator({
   }
 }, {
   tabBarOptions: {
-    activeTintColor: '#dedede',
+    activeTintColor: '#32CD32',
     inactiveTintColor: '#a9a9a9',
     style: {
       backgroundColor: 'black'

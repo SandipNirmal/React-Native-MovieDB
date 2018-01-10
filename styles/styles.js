@@ -35,18 +35,26 @@ const style = StyleSheet.create({
         height: 136,
         margin: 5
     },
+    backdropSize: {
+        width: 280,
+        height: 150,
+        margin: 5
+    },
     avatarContainer: {
-        width: 60,
+        width: 100,
         height: 60
     },
     avatarSize: {
-        width:50,
-        height: 50,
+        width:60,
+        height: 60,
+        borderRadius: 30,        
         margin: 10,
-        borderRadius: 25
+        marginRight: 20,
+        marginLeft: 20
     },
     avatarText: {
-        maxWidth: 60,
+        maxWidth: 90,
+        textAlign: 'center'
     }
 });
 

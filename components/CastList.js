@@ -16,7 +16,6 @@ export default class CastList extends Component {
 
     showCastDetails() {
         // this.props.navigation.navigate('CastDetails', {name: 'Christain Bale'});
-
         // Works on both iOS and Android
         Alert.alert('Cast Details', 'Takes user to cast details scren.', [
             {
@@ -33,10 +32,7 @@ export default class CastList extends Component {
                     {this.props.title}
                 </Text>
                 <ScrollView horizontal>
-                    {this
-                        .props
-                        .items
-                        .map((item, index) => (
+                    {this.props.items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
                                 style={style.avatarContaier}
@@ -48,7 +44,7 @@ export default class CastList extends Component {
                                 }}/>
                                 <Text 
                                     style={[style.text, style.normalText, style.avatarText]}
-                                    numberOfLines={1} 
+                                    numberOfLines={2} 
                                     ellipsizeMode='tail'>
                                     {item.name}
                                 </Text>

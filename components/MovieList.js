@@ -7,13 +7,14 @@ import {
   View,
 } from 'react-native';
 
+import style from './../styles/styles';
+
 const MovieList = (props) => (
   <View style={styles.container}>
     <Title {...props} />
     <ScrollView horizontal 
       showsHorizontalScrollIndicator={false}
-      style={styles.posterList}
-    >
+      style={styles.posterList}>
       {props.movies.map((movie, index) => (
         <TouchableOpacity
           key={index}
@@ -31,11 +32,11 @@ const MovieList = (props) => (
 
 const Title = (props) => (
   <View style={styles.titleContainer}>
-    <Text style={styles.titleText}>
+    <Text style={[style.text, style.headingText]}>
       {props.title}
     </Text>
     <TouchableOpacity onPress={() => props.onShowAll(props.title)}>
-      <Text style={[styles.titleText, {alignSelf: 'flex-end'}]}>
+      <Text style={[style.text, style.normalText]}>
         See All &gt;
       </Text>
     </TouchableOpacity>

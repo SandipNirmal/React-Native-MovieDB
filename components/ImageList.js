@@ -13,7 +13,7 @@ const ImageList = (props) => {
                     .images
                     .map((image, index) => (
                         <Image
-                            style={style.posterSize}
+                            style={style.backdropSize}
                             key={index}
                             source={{
                             uri: image
