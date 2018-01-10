@@ -5,6 +5,7 @@ import MovieDetails from './MovieDetails';
 import AllMovies from './AllMovies';
 import MovieList from './MovieList';
 import CastDetails from './CastDetails';
+import Carousel from './Carousel';
 
 // TODO: Implement Configuration and LatestMovies
 import {Configuration} from '../data/configuration';
@@ -16,30 +17,34 @@ class Movies extends Component {
   };
 
   showMovieDetails(name) {
-    this
-      .props
-      .navigation
-      .navigate('MovieDetails', {name: name});
+    this.props.navigation.navigate('MovieDetails', {name: name});
   }
 
   showAllMovies(category) {
-    this
-      .props
-      .navigation
-      .navigate('AllMovies', {category: category});
+    this.props.navigation.navigate('AllMovies', {category: category});
   }
 
   getMoviesList() {
     const baseUrl = Configuration['images']['secure_base_url'];
     const posterSize = Configuration['images']['poster_sizes'][0];
-    const logoSize = Configuration['images']['logo_sizes'][0];
     let movies = [];
-    LatestMovies
-      .results
-      .forEach(function (movie) {
+    LatestMovies.results.forEach(function(movie) {
         let item = {};
         item['name'] = movie['original_title']
         item['uri'] = baseUrl + '/' + posterSize + '/' + movie['poster_path'];
+        movies.push(item);
+      });
+    return movies;
+  }
+
+  getComingSoonMovieList() {
+    const baseUrl = Configuration['images']['secure_base_url'];
+    const logoSize = Configuration['images']['backdrop_sizes'][0];
+    let movies = [];
+    LatestMovies.results.forEach(function(movie) {
+        let item = {};
+        item['name'] = movie['original_title']
+        item['uri'] = baseUrl + '/' + logoSize + '/' + movie['backdrop_path'];
         movies.push(item);
       });
     return movies;
@@ -64,6 +69,10 @@ class Movies extends Component {
 
     return (
       <ScrollView>
+        <Carousel 
+          movies={this.getComingSoonMovieList()} 
+          onPress={this.showMovieDetails.bind(this)}
+        />
         {categories.map((category, index) => (<MovieList
           key={index}
           title={category.title}

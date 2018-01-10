@@ -10,7 +10,10 @@ import {
 const MovieList = (props) => (
   <View style={styles.container}>
     <Title {...props} />
-    <ScrollView horizontal style={styles.posterList}>
+    <ScrollView horizontal 
+      showsHorizontalScrollIndicator={false}
+      style={styles.posterList}
+    >
       {props.movies.map((movie, index) => (
         <TouchableOpacity
           key={index}

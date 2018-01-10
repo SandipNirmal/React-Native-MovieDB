@@ -21,12 +21,6 @@ BackgroundImage.propTypes = {
 }
 
 const Style = StyleSheet.create({
-    backgroundImage: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'cover'
-    },
     absoluteImage: {
         position: 'absolute',
         top: 0,
