@@ -1,24 +1,26 @@
 import React from 'react';
-import {Image, TouchableOpacity, ScrollView} from 'react-native';
-import PropTypes from 'prop-types'; 
+import {Image, TouchableOpacity, ScrollView, View, Text} from 'react-native';
+import PropTypes from 'prop-types';
 
 import style from './../styles/styles';
 
 const ImageList = (props) => {
     return (
-        <ScrollView horizontal>
-            {props
-                .images
-                .map((image, index) => (
-                    <TouchableOpacity key={index} style={style.posterSize}>
+        <View>
+            <Text style={[style.text, style.headingText]}>Photos</Text>
+            <ScrollView horizontal>
+                {props
+                    .images
+                    .map((image, index) => (
                         <Image
                             style={style.posterSize}
+                            key={index}
                             source={{
                             uri: image
                         }}/>
-                    </TouchableOpacity>
-                ))}
-        </ScrollView>
+                    ))}
+            </ScrollView>
+        </View>
     );
 };
 

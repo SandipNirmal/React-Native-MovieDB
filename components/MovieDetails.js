@@ -5,6 +5,7 @@ import {Avatar, Tile} from 'react-native-elements';
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
 import ImageList from './ImageList';
+import CastList from './CastList'
 
 import {Configuration} from '../data/configuration';
 import style from './../styles/styles';
@@ -26,25 +27,31 @@ export default class MovieDetails extends Component {
             isLoading: true,
             movieData: [],
             images: [],
-            videos: []
+            videos: [],
+            directors: [],
+            casts: []
         };
     }
 
     componentDidMount() {
-        // return fetch('./../data/movieDetail.json')
-        return fetch('https://api.themoviedb.org/3/movie/550?api_key=b8a04ea374eece868a6690782c9e7536&append_to_response=videos,images')
-            .then((response) => response.json())
-            .then((response) => {
-                this.setState({
-                    isLoading: false,
-                    movieData: response
-                });
-                
-                this.formImageUrls(response.images.posters);
-                this.formVideoUrls(response.videos.results);
+        fetch('https://api.themoviedb.org/3/movie/550?api_key=b8a04ea374eece868a6690782c9e7536&' +
+                'append_to_response=videos,images').then((response) => response.json()).then((response) => {
+            this.setState({isLoading: false, movieData: response});
+
+            this.formImageUrls(response.images.posters);
+            this.formVideoUrls(response.videos.results);
         }).catch((error) => {
             console.error(error);
         });
+
+        fetch('https://api.themoviedb.org/3/movie/550/credits?api_key=b8a04ea374eece868a6690782c9e7536')
+            .then((response) => response.json())
+            .then((response) => {
+                this.extractDirectors(response.crew);
+                this.extractCast(response.cast);
+            }).catch((error) => {
+                console.error(error);
+            });
     }
 
     /**
@@ -53,14 +60,12 @@ export default class MovieDetails extends Component {
     formImageUrls(posters) {
         const baseUrl = Configuration['images']['secure_base_url'];
         const posterSize = Configuration['images']['poster_sizes'][0];
-        
+
         const images = posters.map((image) => {
             return `${baseUrl}${posterSize}${image['file_path']}`;
         });
 
-        this.setState({
-            images
-        });
+        this.setState({images});
     }
 
     /**
@@ -69,16 +74,52 @@ export default class MovieDetails extends Component {
     formVideoUrls(videos) {
         const filteredVideos = videos.filter((video) => video.site === 'YouTube');
         const videoUrls = filteredVideos.map((video) => {
-            return {
-                name: video.name, 
-                url: `https://www.youtube.com/watch?v=${video.key}`
-            };
+            return {name: video.name, url: `https://www.youtube.com/watch?v=${video.key}`};
         });
-        this.setState({
-            videos: videoUrls
+        this.setState({videos: videoUrls});
+    }
+
+    /**
+     * Extracts director from crew list and form his/her avatar url. It will
+     * also slice 5 directors if list is too long 
+     * @param {array} crew
+     */
+    extractDirectors(crew) {
+        const baseUrl = Configuration['images']['secure_base_url'];
+        const posterSize = Configuration['images']['profile_sizes'][0];
+
+        const directors = crew
+        .filter((member) => member.job === 'Director')
+        .slice(0,5)
+        .map((director) => {
+            director.imageSrc = `${baseUrl}${posterSize}${director['profile_path']}`;
+            return director;
         });
 
-        console.log(this.state.videos);
+        this.setState({
+            directors
+        });
+    }
+
+    /**
+     * Extracts cast in order of their orderId and form image url
+     * 
+     * @param {array} cast
+     */
+    extractCast(cast) {
+        const baseUrl = Configuration['images']['secure_base_url'];
+        const posterSize = Configuration['images']['profile_sizes'][0];
+
+        const casts =  cast
+        .sort((a, b) => a.order - b.order)
+        .map((item) => {
+            item.imageSrc = `${baseUrl}${posterSize}${item['profile_path']}`;
+            return item;
+        });
+
+        this.setState({
+            casts
+        });
     }
 
     render() {
@@ -116,8 +157,7 @@ export default class MovieDetails extends Component {
                             {this.state.movieData.overview}
                         </Text>
 
-                        <Text style={[style.text, style.headingText]}>Photos</Text>
-                        <ImageList images={this.state.images} />
+                        <ImageList images={this.state.images}/>
 
                         <Text style={[style.text, style.headingText]}>Trailer</Text>
 
@@ -126,17 +166,8 @@ export default class MovieDetails extends Component {
                             {this.state.videos.url}
                         </Text>
 
-                        <Text style={[style.text, style.headingText]}>Director</Text>
-
-                        <Text style={[style.text, style.normalText]}>
-                            {this.state.movieData.overview}
-                        </Text>
-
-                        <Text style={[style.text, style.headingText]}>Cast</Text>
-
-                        <Text style={[style.text, style.normalText]}>
-                            {this.state.movieData.overview}
-                        </Text>
+                        <CastList title="Director" items={this.state.directors}/>
+                        <CastList title="Cast" items={this.state.casts}/>
                     </View>
                 </ScrollView>
             </View>

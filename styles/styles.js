@@ -34,6 +34,19 @@ const style = StyleSheet.create({
         width: 92,
         height: 136,
         margin: 5
+    },
+    avatarContainer: {
+        width: 60,
+        height: 60
+    },
+    avatarSize: {
+        width:50,
+        height: 50,
+        margin: 10,
+        borderRadius: 25
+    },
+    avatarText: {
+        maxWidth: 60,
     }
 });
 

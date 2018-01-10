@@ -4,6 +4,7 @@ import {Text, ScrollView, View} from 'react-native';
 import MovieDetails from './MovieDetails';
 import AllMovies from './AllMovies';
 import MovieList from './MovieList';
+import CastDetails from './CastDetails';
 
 // TODO: Implement Configuration and LatestMovies
 import {Configuration} from '../data/configuration';
@@ -66,12 +67,8 @@ class Movies extends Component {
         {categories.map((category, index) => (<MovieList
           key={index}
           title={category.title}
-          onShowAll={this
-          .showAllMovies
-          .bind(this)}
-          onPress={this
-          .showMovieDetails
-          .bind(this)}
+          onShowAll={this.showAllMovies.bind(this)}
+          onPress={this.showMovieDetails.bind(this)}
           movies={category.movies}/>))}
       </ScrollView>
     );
@@ -87,6 +84,9 @@ const MoviesStack = StackNavigator({
   },
   AllMovies: {
     screen: AllMovies
+  },
+  CastDetails: {
+    screen: CastDetails
   }
 }, {
   headerMode: 'float',
