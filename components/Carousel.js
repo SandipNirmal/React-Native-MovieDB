@@ -18,7 +18,7 @@ const Carousel = (props) => (
       <TouchableOpacity
         key={index}
         style={styles.posterSize}
-        onPress={() => props.onPress(movie.name)}>
+        onPress={() => props.onPress(movie)}>
         <ImageWithTitle movie={movie} />
       </TouchableOpacity>
     ))}
@@ -34,7 +34,7 @@ const ImageWithTitle = (props) => (
     />
     <View style={styles.absoluteTitle}>
       <Text style={styles.titleText}>
-        {props.movie.name}
+        {props.movie.original_title}
       </Text>
     </View>
   </View>
