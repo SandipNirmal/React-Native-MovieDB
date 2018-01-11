@@ -15,12 +15,8 @@ import style from './../styles/styles';
 class MovieDetails extends Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.movie.original_title,
-        headerTitleStyle: {
-            color: '#a9a9a9'
-        },
-        headerStyle: {
-            backgroundColor: 'black'
-        },
+        headerTitleStyle: style.headerText,
+        headerStyle: style.headerBackground,
         headerTintColor: '#32CD32',
     });
 

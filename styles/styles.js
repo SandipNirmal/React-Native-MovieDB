@@ -13,6 +13,12 @@ const style = StyleSheet.create({
         paddingRight: 10,
         backgroundColor: 'rgba(32, 32, 32, 0.9)'
     },
+    headerBackground: {
+        backgroundColor: '#040404'
+    },
+    headerText: {
+        color: '#CFCFCF'
+    },
     text: {
         color: '#ffffff'
     },

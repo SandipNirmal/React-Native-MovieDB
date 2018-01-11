@@ -6,13 +6,17 @@ import AllMovies from './AllMovies';
 import MovieList from './MovieList';
 import Carousel from './Carousel';
 
+import style from './../styles/styles';
+
 // TODO: Implement Configuration and LatestMovies
 import {Configuration} from '../data/configuration';
 import {LatestMovies} from '../data/latest_movies';
 
 class Movies extends Component {
   static navigationOptions = {
-    title: 'Movies'
+    title: 'Movies',
+    headerTitleStyle: style.headerText,
+    headerStyle: style.headerBackground,
   };
 
   showMovieDetails(movie) {
@@ -93,7 +97,7 @@ const MoviesStack = StackNavigator({
   {
     headerMode: 'float',
     cardStyle: {
-      backgroundColor: '#4a4a4a'
+      backgroundColor: '#4C4C4C'
     }
   });
 

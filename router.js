@@ -6,6 +6,7 @@ import MoviesStack from './components/Movies';
 import TvShows from './components/TvShows';
 import Search from './components/Search';
 import Settings from './components/Settings';
+// import style from './styles/styles';
 
 // Application router
 export const AppRoot = TabNavigator({
@@ -42,7 +43,7 @@ export const AppRoot = TabNavigator({
     activeTintColor: '#32CD32',
     inactiveTintColor: '#a9a9a9',
     style: {
-      backgroundColor: 'black'
+      backgroundColor: '#040404'
     }
   }
 });
