@@ -36,6 +36,11 @@ const style = StyleSheet.create({
     normalText: {
         fontSize: 12
     },
+    textStickToBottom: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
     posterSize: {
         width: 92,
         height: 136,
@@ -68,6 +73,20 @@ const style = StyleSheet.create({
     screenBackgroundColor: {
         backgroundColor: '#040404'
     },
+    trailerContainer: {
+        flex: 1,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#616161',
+        backgroundColor: '#020202',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    trailerPlayIcon: {},
+    trailerTitle: {
+        textAlign: 'left',
+        paddingLeft: 4
+    }
 });
 
 export default style;

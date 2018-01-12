@@ -28,8 +28,8 @@ TouchableImage.propTypes = {
 }
 
 export const TouchableText = (props) => (
-  <TouchableOpacity onPress={() => props.onPress()}>
-    <Text style={[style.text, style.headingText]}>
+  <TouchableOpacity onPress={() => props.onPress()} style={style.textStickToBottom}>
+    <Text style={[style.text, style.normalText]}>
       {props.text}
     </Text>
   </TouchableOpacity>

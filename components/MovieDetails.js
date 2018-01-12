@@ -6,7 +6,8 @@ import {StackNavigator} from 'react-navigation';
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
 import ImageList from './ImageList';
-import CastList from './CastList'
+import CastList from './CastList';
+import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';
 
 import {Configuration} from '../data/configuration';
@@ -24,7 +25,7 @@ class MovieDetails extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            movieData: [],
+            movieData: this.props.navigation.state.params.movie,
             images: [],
             videos: [],
             directors: [],
@@ -42,7 +43,6 @@ class MovieDetails extends Component {
 
         fetch(url).then((response) => response.json()).then((response) => {
             this.setState({isLoading: false, movieData: response});
-
             this.formImageUrls(response.images.backdrops);
             this.formVideoUrls(response.videos.results);
         }).catch((error) => {
@@ -136,19 +136,7 @@ class MovieDetails extends Component {
 
         const baseUrl = Configuration['images']['secure_base_url'];
         const size = Configuration['images']['poster_sizes'][5]
-        const bgImage = baseUrl + size + '/' + this.props.navigation.state.params.movie.poster_path;
-
-        if (this.state.isLoading) {
-            return (
-                <View
-                    style={[{
-                    flex: 1,
-                    paddingTop: 20
-                }, style.screenBackgroundColor]}>
-                    <ActivityIndicator/>
-                </View>
-            );
-        }
+        const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.movie.poster_path}`;
 
         return (
             <View style={[{
@@ -163,7 +151,7 @@ class MovieDetails extends Component {
 
                         <MovieInfo
                             releaseDate={this.state.movieData.release_date}
-                            runtime={this.state.movieData.runtime}
+                            runtime={this.state.movieData.runtime || 100}
                             ratings={this.state.movieData.vote_average}/>
 
                         <Text style={[style.text, style.normalText]}>
@@ -173,26 +161,19 @@ class MovieDetails extends Component {
                         <ImageList
                           title="Photos"
                           images={this.state.images}
-                          style={style.backdropSize}
-                        />
+                          style={style.backdropSize}/>
 
-                        <Text style={[style.text, style.headingText]}>Trailer</Text>
-
-                        <Text style={[style.text, style.normalText]}>
-                            {this.state.videos.name}
-                            {this.state.videos.url}
-                        </Text>
+                        <TrailerList videos={this.state.videos}/>
 
                         <CastList 
                           title="Director"
                           items={this.state.directors}
-                          onPress={this.showCastDetails.bind(this)}
-                        />
+                          onPress={this.showCastDetails.bind(this)}/>
+                        
                         <CastList
                           title="Cast"
                           items={this.state.casts}
-                          onPress={this.showCastDetails.bind(this)}
-                        />
+                          onPress={this.showCastDetails.bind(this)}/>
                     </View>
                 </ScrollView>
             </View>
