@@ -6,7 +6,7 @@ import AllMovies from './AllMovies';
 import MovieList from './MovieList';
 import Carousel from './Carousel';
 
-import style from './../styles/styles';
+import style from '../styles/styles';
 
 // TODO: Implement Configuration and LatestMovies
 import {Configuration} from '../data/configuration';
@@ -72,12 +72,18 @@ class Movies extends Component {
           movies={this.getComingSoonMovieList()} 
           onPress={this.showMovieDetails.bind(this)}
         />
-        {categories.map((category, index) => (<MovieList
-          key={index}
-          title={category.title}
-          onShowAll={this.showAllMovies.bind(this)}
-          onPress={this.showMovieDetails.bind(this)}
-          movies={category.movies}/>))}
+        {categories.map((category, index) => (
+          <MovieList
+            isTouchableImage
+            hasSeeAllOption
+            key={index}
+            title={category.title}
+            style={style.posterSize}
+            onShowAll={this.showAllMovies.bind(this)}
+            onPress={this.showMovieDetails.bind(this)}
+            images={category.movies}
+          />
+        ))}
       </ScrollView>
     );
   }

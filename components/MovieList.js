@@ -6,25 +6,30 @@ import {
   ScrollView, StyleSheet,
   View,
 } from 'react-native';
+import { TouchableImage, TouchableText } from './Touchable';
+import * as _ from 'lodash';
 
-import style from './../styles/styles';
+import style from '../styles/styles';
 
 const MovieList = (props) => (
-  <View style={styles.container}>
+  <View style={style.container}>
     <Title {...props} />
     <ScrollView horizontal 
       showsHorizontalScrollIndicator={false}
       style={styles.posterList}>
-      {props.movies.map((movie, index) => (
-        <TouchableOpacity
-          key={index}
-          style={styles.posterSize}
-          onPress={() => props.onPress(movie)}>
-          <Image
-            style={styles.posterSize}
-            source={{uri: movie.uri}}
+      {props.images.map((image, index) => (
+        props.isTouchableImage ?
+          <TouchableImage
+            key={index}
+            style={props.style}
+            onPress={() => props.onPress(image)}
+            uri={image.uri} 
           />
-        </TouchableOpacity>
+        : <Image
+            key={index}
+            style={props.style}
+            source={{uri: _.isString(image) ? image : image.uri}}
+          />
       ))}
     </ScrollView>
   </View>
@@ -35,33 +40,41 @@ const Title = (props) => (
     <Text style={[style.text, style.headingText]}>
       {props.title}
     </Text>
-    <TouchableOpacity onPress={() => props.onShowAll(props.title)}>
-      <Text style={[style.text, style.normalText]}>
-        See All &gt;
-      </Text>
-    </TouchableOpacity>
+    {
+      props.hasSeeAllOption ?
+        <TouchableText onPress={() => props.onShowAll(props.title)}
+          text="See All &gt;" />
+      : null
+    }
   </View>
 )
 
 Title.propTypes = MovieList.propTypes = {
   title: PropTypes.string.isRequired,
-  movies: PropTypes.array.isRequired,
-  onPress: PropTypes.func.isRequired,
-  onShowAll: PropTypes.func.isRequired,
+  images: PropTypes.array.isRequired,
+  isTouchableButton: PropTypes.bool,
+  hasSeeAllOption: PropTypes.bool,
+  onPress: (props, thisProp) => {
+    if(props['isTouchableButton'] && 
+      (!props[thisProp] || typeof(props[thisProp]) !== 'function')) {
+      return new Error("onPress is required when isTouchableButton is true!");
+    } else {
+      return null;
+    }
+  },
+  onShowAll: (props, thisProp) => {
+    if(props['hasSeeAllOption'] && 
+      (!props[thisProp] || typeof(props[thisProp]) !== 'function')) {
+      return new Error("onShowAll is required when hasSeeAllOption is true!");
+    } else {
+      return null;
+    }
+  },
 }
 
 const styles = StyleSheet.create({
   // TODO: does ios have a standard? if so use that
   // Image size for poster size w92 on TMDB
-  container: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  posterSize: {
-    width: 92,
-    height: 136,
-    margin: 5,
-  },
   posterList: {
     flexDirection: 'row',
   },
@@ -69,10 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: 5,
-  },
-  titleText: {
-    fontSize: 24,
-    margin: 5,
   },
 });
 
