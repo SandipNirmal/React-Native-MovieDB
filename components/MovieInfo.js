@@ -9,7 +9,7 @@ const MovieInfo = (props) => {
     return (
         <View style={Style.container}>
             <View style={Style.infoItems}>
-                <Icon name='event' color="#32CD32"/>
+                <Icon name='event' color="#32CD32" size={30}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.releaseDate}
                 </Text>
