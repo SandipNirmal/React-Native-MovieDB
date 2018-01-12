@@ -5,7 +5,7 @@ import {StackNavigator} from 'react-navigation';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
-import MovieList from './MovieList';
+import ImageList from './ImageList';
 import CastList from './CastList'
 import CastDetails from './CastDetails';
 
@@ -170,7 +170,7 @@ class MovieDetails extends Component {
                             {this.state.movieData.overview}
                         </Text>
 
-                        <MovieList
+                        <ImageList
                           title="Photos"
                           images={this.state.images}
                           style={style.backdropSize}

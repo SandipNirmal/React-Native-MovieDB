@@ -3,7 +3,7 @@ import {StackNavigator} from 'react-navigation';
 import {Text, ScrollView, View} from 'react-native';
 import MovieDetailsStack from './MovieDetails';
 import AllMovies from './AllMovies';
-import MovieList from './MovieList';
+import ImageList from './ImageList';
 import Carousel from './Carousel';
 
 import style from '../styles/styles';
@@ -73,7 +73,7 @@ class Movies extends Component {
           onPress={this.showMovieDetails.bind(this)}
         />
         {categories.map((category, index) => (
-          <MovieList
+          <ImageList
             isTouchableImage
             hasSeeAllOption
             key={index}
