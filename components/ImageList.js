@@ -35,6 +35,8 @@ const MovieList = (props) => (
   </View>
 );
 
+// TODO: See All should be of normatText. Nesting of text should fix it
+// since TouchableText is involved, the situaion gets complicated.Fix this
 const Title = (props) => (
   <View style={styles.titleContainer}>
     <Text style={[style.text, style.headingText]}>
@@ -43,7 +45,8 @@ const Title = (props) => (
     {
       props.hasSeeAllOption ?
         <TouchableText onPress={() => props.onShowAll(props.title)}
-          text="See All &gt;" />
+          text="See All &gt;"
+        />
       : null
     }
   </View>

@@ -15,7 +15,7 @@ import {LatestMovies} from '../data/latest_movies';
 class Movies extends Component {
   static navigationOptions = {
     title: 'Movies',
-    headerTitleStyle: style.headerText,
+    headerTitleStyle: style.headerTextColor,
     headerStyle: style.headerBackground,
   };
 
@@ -67,7 +67,7 @@ class Movies extends Component {
     ];
 
     return (
-      <ScrollView>
+      <ScrollView style={style.screenBackgroundColor}>
         <Carousel 
           movies={this.getComingSoonMovieList()} 
           onPress={this.showMovieDetails.bind(this)}

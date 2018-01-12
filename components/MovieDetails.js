@@ -15,9 +15,9 @@ import style from '../styles/styles';
 class MovieDetails extends Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.movie.original_title,
-        headerTitleStyle: style.headerText,
+        headerTitleStyle: style.headerTextColor,
         headerStyle: style.headerBackground,
-        headerTintColor: '#32CD32',
+        headerTintColor: style.headerTintColor,
     });
 
     constructor(props) {
@@ -141,19 +141,19 @@ class MovieDetails extends Component {
         if (this.state.isLoading) {
             return (
                 <View
-                    style={{
+                    style={[{
                     flex: 1,
                     paddingTop: 20
-                }}>
+                }, style.screenBackgroundColor]}>
                     <ActivityIndicator/>
                 </View>
             );
         }
 
         return (
-            <View style={{
+            <View style={[{
                 flex: 1
-            }}>
+            }, style.screenBackgroundColor]}>
                 <BackgroundImage uri={bgImage}/>
                 <ScrollView>
                     <View style={style.detailsContainer}>

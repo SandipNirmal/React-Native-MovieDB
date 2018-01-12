@@ -16,7 +16,7 @@ const style = StyleSheet.create({
     headerBackground: {
         backgroundColor: '#040404'
     },
-    headerText: {
+    headerTextColor: {
         color: '#CFCFCF'
     },
     text: {
@@ -61,7 +61,13 @@ const style = StyleSheet.create({
     avatarText: {
         maxWidth: 90,
         textAlign: 'center'
-    }
+    },
+    headerTintColor: {
+        color: '#32CD32'
+    },
+    screenBackgroundColor: {
+        backgroundColor: '#040404'
+    },
 });
 
 export default style;

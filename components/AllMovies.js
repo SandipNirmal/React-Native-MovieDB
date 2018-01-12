@@ -9,18 +9,14 @@ import style from './../styles/styles';
 class AllMovies extends Component {
   static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.category,
-    headerTitleStyle: {
-      color: '#a9a9a9'
-    },
-    headerStyle: {
-      backgroundColor: 'black'
-    },
-    headerTintColor: '#32CD32',
+    headerTitleStyle: style.headerTextColor,
+    headerStyle: style.headerBackground,
+    headerTintColor: style.headerTintColor,
   });
 
   render() {
     return(
-      <View>
+      <View style={style.screenBackgroundColor}>
         <Text style={[style.text, style.normalText]}>
           Show All Movies here
         </Text>
