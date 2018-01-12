@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Image,
+  FlatList,
   Text, TouchableOpacity,
   ScrollView, StyleSheet,
   View,
@@ -11,7 +12,7 @@ import * as _ from 'lodash';
 
 import style from '../styles/styles';
 
-const MovieList = (props) => (
+const HorizontalImageList = (props) => (
   <View style={style.container}>
     <Title {...props} />
     <ScrollView horizontal 
@@ -44,7 +45,8 @@ const Title = (props) => (
     </Text>
     {
       props.hasSeeAllOption ?
-        <TouchableText onPress={() => props.onShowAll(props.title)}
+        <TouchableText
+          onPress={() => props.onShowAll(props.title, props.images)}
           text="See All &gt;"
         />
       : null
@@ -52,7 +54,7 @@ const Title = (props) => (
   </View>
 )
 
-Title.propTypes = MovieList.propTypes = {
+Title.propTypes = HorizontalImageList.propTypes = {
   title: PropTypes.string.isRequired,
   images: PropTypes.array.isRequired,
   isTouchableButton: PropTypes.bool,
@@ -75,6 +77,34 @@ Title.propTypes = MovieList.propTypes = {
   },
 }
 
+// TODO numColumns should be calculated based on the screenwidth
+const FlatImageList = (props) => (
+  <FlatList
+    style={props.style}
+    numColumns={props.numColumns}
+    data={props.images}
+    renderItem={
+      ({item}) => <TouchableImage
+                    key={item.id}
+                    onPress={() => props.onPress(item)}
+                    style={style.posterSize}
+                    uri={item.uri}
+                  />
+    }
+    keyExtractor={(item, index) => index}
+  />
+)
+
+FlatImageList.protoTypes = {
+  images: PropTypes.array.isRequired,
+  onPress: PropTypes.func.isRequired,
+  numColumns: PropTypes.number.isRequired,
+  style: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.object
+  ])
+}
+
 const styles = StyleSheet.create({
   // TODO: does ios have a standard? if so use that
   // Image size for poster size w92 on TMDB
@@ -88,4 +118,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieList;
+export {FlatImageList};
+export default HorizontalImageList;

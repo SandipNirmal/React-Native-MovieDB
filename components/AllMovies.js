@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import { FlatImageList } from './ImageList';
+import MovieDetailsStack from './MovieDetails';
 
-import style from './../styles/styles';
+import style from '../styles/styles';
 
 class AllMovies extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -14,15 +13,34 @@ class AllMovies extends Component {
     headerTintColor: style.headerTintColor,
   });
 
+  showMovieDetails(movie) {
+    this.props.navigation.navigate('MovieDetailsStack', {movie: movie});
+  }
+
   render() {
+    const movies = this.props.navigation.state.params.movies;
     return(
-      <View style={style.screenBackgroundColor}>
-        <Text style={[style.text, style.normalText]}>
-          Show All Movies here
-        </Text>
-      </View>
+      <FlatImageList
+        numColumns={4}
+        style={style.screenBackgroundColor}
+        images={movies}
+        onPress={this.showMovieDetails.bind(this)}
+      />
     )
   }
 }
 
-export default AllMovies;
+const AllMoviesStack = StackNavigator({
+    AllMoviesStack: {
+      screen: AllMovies
+    },
+    MovieDetailsStack: {
+      screen: MovieDetailsStack
+    }
+  },
+  {
+    headerMode: 'none',
+  }
+)
+
+export default AllMoviesStack;

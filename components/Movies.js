@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {StackNavigator} from 'react-navigation';
 import {Text, ScrollView, View} from 'react-native';
 import MovieDetailsStack from './MovieDetails';
-import AllMovies from './AllMovies';
-import ImageList from './ImageList';
+import AllMoviesStack from './AllMovies';
+import HorizontalImageList from './ImageList';
 import Carousel from './Carousel';
 
 import style from '../styles/styles';
@@ -15,6 +15,7 @@ import {LatestMovies} from '../data/latest_movies';
 class Movies extends Component {
   static navigationOptions = {
     title: 'Movies',
+    headerBackTitle: "MovieDetails",
     headerTitleStyle: style.headerTextColor,
     headerStyle: style.headerBackground,
   };
@@ -23,8 +24,9 @@ class Movies extends Component {
     this.props.navigation.navigate('MovieDetailsStack', {movie: movie});
   }
 
-  showAllMovies(category) {
-    this.props.navigation.navigate('AllMovies', {category: category});
+  showAllMovies(category, movies) {
+    this.props.navigation.navigate('AllMoviesStack', 
+      {category: category, movies:movies});
   }
 
   getMoviesList() {
@@ -73,7 +75,7 @@ class Movies extends Component {
           onPress={this.showMovieDetails.bind(this)}
         />
         {categories.map((category, index) => (
-          <ImageList
+          <HorizontalImageList
             isTouchableImage
             hasSeeAllOption
             key={index}
@@ -96,8 +98,8 @@ const MoviesStack = StackNavigator({
     MovieDetailsStack: {
       screen: MovieDetailsStack
     },
-    AllMovies: {
-      screen: AllMovies
+    AllMoviesStack: {
+      screen: AllMoviesStack
     },
   },
   {
