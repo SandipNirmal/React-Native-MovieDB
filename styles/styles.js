@@ -67,9 +67,6 @@ const style = StyleSheet.create({
         maxWidth: 90,
         textAlign: 'center'
     },
-    headerTintColor: {
-        color: '#32CD32'
-    },
     screenBackgroundColor: {
         backgroundColor: '#040404'
     },
@@ -89,4 +86,11 @@ const style = StyleSheet.create({
     }
 });
 
+const StackNavHeaderStyles = {
+  headerTitleStyle: style.headerTextColor,
+  headerStyle: style.headerBackground,
+  headerTintColor: "#32CD32",
+}
+
+export {StackNavHeaderStyles}
 export default style;

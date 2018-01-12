@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
-import style from '../styles/styles';
+import style, { StackNavHeaderStyles } from '../styles/styles';
 
 export default class CastDetails extends Component {
   //TODO: the back button should ideally show MovieDetails but it isn't
@@ -10,9 +10,7 @@ export default class CastDetails extends Component {
 
   static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.cast.name,
-    headerTitleStyle: style.headerTextColor,
-    headerStyle: style.headerBackground,
-    headerTintColor: style.headerTintColor,
+    ...StackNavHeaderStyles,
   });
 
   render() {

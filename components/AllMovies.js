@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 import { FlatImageList } from './ImageList';
-import MovieDetailsStack from './MovieDetails';
 
-import style from '../styles/styles';
+import style, { StackNavHeaderStyles } from '../styles/styles';
 
 class AllMovies extends Component {
   static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.category,
-    headerTitleStyle: style.headerTextColor,
-    headerStyle: style.headerBackground,
-    headerTintColor: style.headerTintColor,
+    ...StackNavHeaderStyles,
   });
 
   showMovieDetails(movie) {
-    this.props.navigation.navigate('MovieDetailsStack', {movie: movie});
+    this.props.navigation.navigate('MovieDetails', {movie: movie});
   }
 
   render() {
@@ -30,17 +27,4 @@ class AllMovies extends Component {
   }
 }
 
-const AllMoviesStack = StackNavigator({
-    AllMoviesStack: {
-      screen: AllMovies
-    },
-    MovieDetailsStack: {
-      screen: MovieDetailsStack
-    }
-  },
-  {
-    headerMode: 'none',
-  }
-)
-
-export default AllMoviesStack;
+export default AllMovies;

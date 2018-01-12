@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import {Avatar, Tile} from 'react-native-elements';
-import {StackNavigator} from 'react-navigation';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
@@ -17,18 +16,12 @@ import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';
 
 import {Configuration} from '../data/configuration';
-import style from '../styles/styles';
+import style, { StackNavHeaderStyles } from '../styles/styles';
 
 class MovieDetails extends Component {
-    // ideally the stack navigator should pick the headerBackTitle
-    // as the title name. There seems to be a bug; used a work around
-    // suggested in
-    // https://github.com/react-navigation/react-navigation/issues/115
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.movie.original_title,
-        headerTitleStyle: style.headerTextColor,
-        headerStyle: style.headerBackground,
-        headerTintColor: style.headerTintColor,
+        ...StackNavHeaderStyles,
     });
 
     constructor(props) {
@@ -191,17 +184,4 @@ class MovieDetails extends Component {
     }
 }
 
-const MovieDetailsStack = StackNavigator({
-    MovieDetailsStack: {
-      screen: MovieDetails
-    },
-    CastDetails: {
-      screen: CastDetails
-    },
-  },
-  {
-    headerMode: 'none',
-  }
-);
-
-export default MovieDetailsStack;
+export default MovieDetails;
