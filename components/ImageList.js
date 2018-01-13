@@ -81,13 +81,14 @@ Title.propTypes = HorizontalImageList.propTypes = {
 const FlatImageList = (props) => (
   <FlatList
     style={props.style}
+    // contentContainerStyle={style.flatListContainer}
     numColumns={props.numColumns}
     data={props.images}
     renderItem={
       ({item}) => <TouchableImage
                     key={item.id}
                     onPress={() => props.onPress(item)}
-                    style={style.posterSize}
+                    style={[style.posterSize, styles.flatList]}
                     uri={item.uri}
                   />
     }
@@ -116,6 +117,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginLeft: 5,
   },
+  flatList: {
+    justifyContent: 'space-between'
+  }
 });
 
 export {FlatImageList};

@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import {Dimensions} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FlatImageList } from './ImageList';
 
 import style, { StackNavHeaderStyles } from '../styles/styles';
+
+// return device width and height
+const {height, width} = Dimensions.get('window');
+const numColumns = parseInt(width / (92 + (5 * 2))); 
 
 class AllMovies extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -18,7 +23,7 @@ class AllMovies extends Component {
     const movies = this.props.navigation.state.params.movies;
     return(
       <FlatImageList
-        numColumns={4}
+        numColumns={numColumns}
         style={style.screenBackgroundColor}
         images={movies}
         onPress={this.showMovieDetails.bind(this)}
