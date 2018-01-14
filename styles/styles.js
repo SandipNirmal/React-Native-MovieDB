@@ -65,6 +65,17 @@ const style = StyleSheet.create({
     width: 100,
     height: 60
   },
+  castBackground: {
+    flex:1,
+    height: (0.618 * (APP_CONSTANT.height - 104)),
+    backgroundColor: '#595959',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  castBiography: {
+    padding: 20,
+    backgroundColor: 'rgba(32, 32, 32, 0.9)'
+  },
   avatarSize: {
     width: 60,
     height: 60,
@@ -72,6 +83,11 @@ const style = StyleSheet.create({
     margin: 10,
     marginRight: 20,
     marginLeft: 20
+  },
+  avatarBigSize: {
+    width:  80,
+    height: 80,
+    borderRadius: 40
   },
   avatarText: {
     maxWidth: 90,
