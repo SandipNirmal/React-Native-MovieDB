@@ -16,6 +16,7 @@ import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';
 
 import {Configuration} from '../data/configuration';
+import Constant from './../utilities/constants';
 import style, { StackNavHeaderStyles } from '../styles/styles';
 
 class MovieDetails extends Component {
@@ -37,14 +38,15 @@ class MovieDetails extends Component {
     }
 
     componentDidMount() {
-        const baseUrl = "https://api.themoviedb.org/3/movie/";
-        const apiKey = "api_key=b8a04ea374eece868a6690782c9e7536";
+        const baseUrl = Constant.api_base_url;
+        const apiKey = Constant.api_key;
+        const movie_url = '/movie/'; 
         const appendResponse = "append_to_response=videos,images"
         // TODO: use lodash here + add error handling
         const movieId = this.props.navigation.state.params.movie.id;
-        let url = `${baseUrl}${movieId}?${apiKey}&${appendResponse}`;
 
-        fetch(url).then((response) => response.json()).then((response) => {
+        const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
+        fetch(movieUrl).then((response) => response.json()).then((response) => {
             this.setState({isLoading: false, movieData: response});
             this.formImageUrls(response.images.backdrops);
             this.formVideoUrls(response.videos.results);
@@ -52,8 +54,8 @@ class MovieDetails extends Component {
             console.error(error);
         });
       
-        url = `${baseUrl}${movieId}/credits?${apiKey}`;
-        fetch(url)
+        const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
+        fetch(movieCreditsUrl)
             .then((response) => response.json())
             .then((response) => {
                 this.extractDirectors(response.crew);
