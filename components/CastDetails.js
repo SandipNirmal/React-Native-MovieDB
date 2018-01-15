@@ -119,7 +119,8 @@ export default class CastDetails extends Component {
             style={style.posterSize}
             onPress={this.showMovieDetails.bind(this)}
             images={movie.movies}
-          />))} */}
+          />))} */
+      }
       </View>
     )
   }
