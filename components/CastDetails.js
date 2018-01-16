@@ -30,7 +30,8 @@ export default class CastDetails extends Component {
     this.state = {
       isLoading: true,
       isMoviesLoaded: false,
-      castData: []
+      castData: [],
+      movieList: []
     };
   }
 
@@ -63,17 +64,35 @@ export default class CastDetails extends Component {
     .then((response) => {
       console.log('Movies', response);
       this.setState({
-        moviesForCast: response,
+        movieList: this.formImageUrls(response),
         isMoviesLoaded: true
       });
     }).catch((error) => {
       console.error(error);
     });
-
   }
 
-  render() {
+  showMovieDetails(movie) {
+    this.props.navigation.navigate('MovieDetails', {movie: movie});
+  }
 
+  /**
+   * Forms image urls for movies
+   */
+  formImageUrls(res) {
+    const baseUrl = Configuration['images']['secure_base_url'];
+    const posterSize = Configuration['images']['poster_sizes'][0];
+    const movieList = [...res.cast, ...res.crew];
+    
+    const movies = movieList.map((movie) => {
+        movie['uri'] = baseUrl + '/' + posterSize + '/' + movie['poster_path'];
+        return movie;
+      });
+    return movies;
+  }
+  
+
+  render() {
     if (this.state.isLoading) {
       return (
         <View style={[{
@@ -88,39 +107,35 @@ export default class CastDetails extends Component {
       <View style={[{
         flex: 1
     }, style.screenBackgroundColor]}>
-      <ScrollView style={style.screenBackgroundColor}>
-          <View style={style.castBackground}>
-            <Image style={[style.avatarSize, style.avatarBigSize]}
-                   source={{uri: this.state.castData.imageSrc}}/>
-            <Text style={[style.text, style.titleText]}>
-              {this.state.castData.name}
-            </Text>
-            <Text style={[style.text, style.normalText]}>
-              {this.state.castData.birthday}
-            </Text>
-            <Text style={[style.text, style.normalText]}>
-              {this.state.castData.place_of_birth}
-            </Text>
-          </View>
+        <ScrollView style={style.screenBackgroundColor}>
+            <View style={style.castBackground}>
+              <Image style={[style.avatarSize, style.avatarBigSize]}
+                    source={{uri: this.state.castData.imageSrc}}/>
+              <Text style={[style.text, style.titleText]}>
+                {this.state.castData.name}
+              </Text>
+              <Text style={[style.text, style.normalText]}>
+                {this.state.castData.birthday}
+              </Text>
+              <Text style={[style.text, style.normalText]}>
+                {this.state.castData.place_of_birth}
+              </Text>
+            </View>
 
-          <View style={[style.castBiography]}>
-            <Text style={[style.text, style.normalText]}>
-              {this.state.castData.biography}
-            </Text>
-          </View>
-      </ScrollView>
+            <View style={[style.castBiography]}>
+              <Text style={[style.text, style.normalText]}>
+                {this.state.castData.biography}
+              </Text>
 
-      {/* {this.state.moviesForCast.cast.map((movie, index) => (
-      <HorizontalImageList
-            isTouchableImage
-            hasSeeAllOption
-            key={index}
-            title={movie.title}
-            style={style.posterSize}
-            onPress={this.showMovieDetails.bind(this)}
-            images={movie.movies}
-          />))} */
-      }
+              <HorizontalImageList
+                isTouchableImage
+                title='Known For'
+                style={style.posterSize}
+                onPress={this.showMovieDetails.bind(this)}
+                images={this.state.movieList}
+              />
+            </View>
+        </ScrollView>
       </View>
     )
   }
