@@ -7,18 +7,11 @@ import React, {
     StyleSheet
   } from 'react-native';
   
-  import style, { StackNavHeaderStyles } from '../styles/styles';
-  
-  export default class TvShows extends Component {
-    static navigationOptions = {
-      title: 'Movies',
-      ...StackNavHeaderStyles,
-    };
-
+  export default class TvShowSeasons extends Component {
     render() {
       return (
           <View>
-              <Text style={styles.container}>TV Shows</Text>
+              <Text style={styles.container}>TV Show Episodes</Text>
           </View>
       );
     }
