@@ -97,18 +97,29 @@ const style = StyleSheet.create({
     backgroundColor: '#040404'
   },
   trailerContainer: {
-    flex: 1,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#616161',
     backgroundColor: '#020202',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   trailerPlayIcon: {},
   trailerTitle: {
     textAlign: 'left',
     paddingLeft: 4
+  },
+  centerContentContainer: {
+    flex: 1,
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  appName: {
+    marginTop: 15,
+    fontSize: 48,
+    fontWeight: '500'
+  },
+  startupScreenTextProps: {
+    color: '#32CD32',
+    textAlign: 'center',
   }
 });
 

@@ -16,7 +16,7 @@ const Trailer = (props) => {
                     <Text style={[style.text, style.normalText, style.trailerTitle]}>
                         {video.name}
                     </Text>
-                    <View style={[style.backdropSize, style.trailerContainer]}>
+                    <View style={[style.backdropSize, style.centerContentContainer, style.trailerContainer]}>
                     <Icon name='youtube-play' type='font-awesome' size={50} color='#ff0000' style={style.trailerPlayIcon}/>
                     </View>
                     {/* <Text style={[style.text, style.normalText]}>
