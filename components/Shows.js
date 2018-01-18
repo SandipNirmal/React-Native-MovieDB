@@ -26,7 +26,7 @@ class Shows extends Component {
     }
   }
   componentDidMount() {
-    console.log("Need to override this in base class");
+    console.error("Need to override this in base class");
   }
 
   fetch(category, route) {
@@ -37,10 +37,9 @@ class Shows extends Component {
 
     fetch(uri).then((response) => response.json()).then((response) => {
       let { categories } = this.state;
-      console.log(categories);
       categories[category] = this.getUriPopulated(response.results);
       this.setState({isLoading: false, categories});
-    }).catch(error => console.log(error))
+    }).catch(error => console.error(error))
   }
 
   getUriPopulated(shows, imageType="poster") {
@@ -55,11 +54,11 @@ class Shows extends Component {
   }
 
   showDetails(show) {
-    console.log("need to override this in base class");
+    console.error("need to override this in base class");
   }
 
   showAll(category, shows) {
-    console.log("need to override this in base class");
+    console.error("need to override this in base class");
   }
 
   render() {

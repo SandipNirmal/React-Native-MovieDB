@@ -47,7 +47,6 @@ export default class CastDetails extends Component {
     fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         response.imageSrc = `${baseImageUrl}${posterSize}${response['profile_path']}`;
         this.setState({
           isLoading: false,
@@ -62,7 +61,6 @@ export default class CastDetails extends Component {
     fetch(`${baseUrl}${castKnownForUrl}?${apiKey}`)
     .then((response) => response.json())
     .then((response) => {
-      console.log('Movies', response);
       this.setState({
         movieList: this.formImageUrls(response),
         isMoviesLoaded: true

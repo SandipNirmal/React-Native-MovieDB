@@ -31,11 +31,10 @@ class SplashScreen extends Component {
 
     fetch(uri).then((response) => response.json()).then((response) => {
       if (_.get(this, 'props.navigation.navigate')) {
-        console.log(this.props)
         this.props.screenProps = {movies: response.results}
         this.props.navigation.navigate('MainScreen', {movies: response.results});
       }
-    }).catch(error => console.log(error))
+    }).catch(error => console.error(error))
   }
 
   render() {
