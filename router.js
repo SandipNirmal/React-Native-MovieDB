@@ -2,11 +2,11 @@ import React from 'react';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 
-import TvShows from './components/TvShows';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import MoviesStack from './routes/Movies';
 import SplashScreen from './components/SplashScreen';
+import TvShowStack from './routes/TvShows';
 
 // Application router
 const MainScreen = TabNavigator({
@@ -18,7 +18,7 @@ const MainScreen = TabNavigator({
 			}
 		},
 		TvShows: {
-			screen: TvShows,
+			screen: TvShowStack,
 			navigationOptions: {
 				tabBarLabel: 'TV Shows',
 				tabBarIcon: ({tintColor}) => <Icon name="tv" size={30} color={tintColor}/>
