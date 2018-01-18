@@ -7,7 +7,7 @@ import HorizontalImageList from './ImageList';
 import Carousel from './Carousel';
 import Constant from './../utilities/constants';
 
-import style, { StackNavHeaderStyles } from '../styles/styles';
+import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';
 
 // TODO: Implement Configuration and Latestshows
 import {Configuration} from '../data/configuration';
@@ -26,7 +26,7 @@ class Shows extends Component {
     }
   }
   componentDidMount() {
-    console.log("Need to override this in base class");
+    console.error("Need to override this in base class");
   }
 
   fetch(category, route) {
@@ -39,10 +39,9 @@ class Shows extends Component {
 
     fetch(uri).then((response) => response.json()).then((response) => {
       let { categories } = this.state;
-      console.log(categories);
       categories[category] = this.getUriPopulated(response.results);
       this.setState({isLoading: false, categories});
-    }).catch(error => console.log(error))
+    }).catch(error => console.error(error))
   }
 
   getUriPopulated(shows, imageType="poster") {
@@ -57,11 +56,11 @@ class Shows extends Component {
   }
 
   showDetails(show) {
-    console.log("need to override this in base class");
+    console.error("need to override this in base class");
   }
 
   showAll(category, shows) {
-    console.log("need to override this in base class");
+    console.error("need to override this in base class");
   }
 
   render() {
@@ -70,7 +69,7 @@ class Shows extends Component {
     return (
       isLoading ?
         <ScrollView style={style.screenBackgroundColor}>
-          <ActivityIndicator size="large" color="#32CD32" />
+          <ActivityIndicator size="large" color={primaryColor} />
         </ScrollView>
       :
         <ScrollView style={style.screenBackgroundColor}>

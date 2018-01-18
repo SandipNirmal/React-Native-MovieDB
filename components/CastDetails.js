@@ -13,13 +13,7 @@ import {Configuration} from '../data/configuration';
 import style, {StackNavHeaderStyles} from '../styles/styles';
 
 export default class CastDetails extends Component {
-  //TODO: the back button should ideally show MovieDetails but it isn't
-  // doing that even after explicitly setting headerBackTitle: "MovieDetails" 
-  // in MovieDetails figure out why
-
-  static navigationOptions = ({
-    navigation
-  }) => ({
+  static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.cast.name,
     ...StackNavHeaderStyles,
   });
@@ -47,7 +41,6 @@ export default class CastDetails extends Component {
     fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         response.imageSrc = `${baseImageUrl}${posterSize}${response['profile_path']}`;
         this.setState({
           isLoading: false,
@@ -62,7 +55,6 @@ export default class CastDetails extends Component {
     fetch(`${baseUrl}${castKnownForUrl}?${apiKey}`)
     .then((response) => response.json())
     .then((response) => {
-      console.log('Movies', response);
       this.setState({
         movieList: this.formImageUrls(response),
         isMoviesLoaded: true
