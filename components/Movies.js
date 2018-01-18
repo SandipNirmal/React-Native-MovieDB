@@ -48,7 +48,7 @@ class Movies extends Component {
     fetch(uri).then((response) => response.json()).then((response) => {
       let { categories } = this.state;
       categories[category] = this.getUriPopulated(response.results);
-      this.setState({isLoading: false, categories: categories});
+      this.setState({categories});
     }).catch(error => console.log(error))
   }
 
@@ -73,30 +73,27 @@ class Movies extends Component {
   }
 
   render() {
-    const { isLoading, categories } = this.state;
+    const { categories } = this.state;
 
     return (
-      isLoading ?
-        <StartupScreen />
-      :
-        <ScrollView style={style.screenBackgroundColor}>
-          <Carousel 
-            movies={this.getUriPopulated(categories['nowShowing'], 'backdrop')} 
+      <ScrollView style={style.screenBackgroundColor}>
+        <Carousel 
+          movies={this.getUriPopulated(categories['nowShowing'], 'backdrop')} 
+          onPress={this.showMovieDetails.bind(this)}
+        />
+        {Object.keys(categories).map((category, index) => (
+          <HorizontalImageList
+            isTouchableImage
+            hasSeeAllOption
+            key={index}
+            title={category.toTitle()}
+            style={style.posterSize}
+            onShowAll={this.showAllMovies.bind(this)}
             onPress={this.showMovieDetails.bind(this)}
+            images={this.state.categories[category]}
           />
-          {Object.keys(categories).map((category, index) => (
-            <HorizontalImageList
-              isTouchableImage
-              hasSeeAllOption
-              key={index}
-              title={category.toTitle()}
-              style={style.posterSize}
-              onShowAll={this.showAllMovies.bind(this)}
-              onPress={this.showMovieDetails.bind(this)}
-              images={this.state.categories[category]}
-            />
-          ))}
-        </ScrollView>
+        ))}
+      </ScrollView>
     );
   }
 }
