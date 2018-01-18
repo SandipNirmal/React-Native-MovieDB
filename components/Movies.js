@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Text, ScrollView, View} from 'react-native';
 import HorizontalImageList from './ImageList';
 import Carousel from './Carousel';
-import StartupScreen from './StartupScreen';
 import Constant from './../utilities/constants';
 
 import style, { StackNavHeaderStyles } from '../styles/styles';
@@ -23,8 +22,9 @@ class Movies extends Component {
 
   constructor(props) {
     super(props);
+		// TODO : nowShowing should pick up the movies from previous screen
+		// the props are somehow not getting passed down to children.
     this.state = {
-      "isLoading": true,
       "categories": {
         "nowShowing": [],
         "comingSoon": [],

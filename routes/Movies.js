@@ -5,7 +5,7 @@ import AllMovies from '../components/AllMovies';
 import CastDetails from '../components/CastDetails';
 
 const MoviesStack = StackNavigator({
-    Movie: {
+    Movies: {
       screen: Movies
     },
     MovieDetails: {
