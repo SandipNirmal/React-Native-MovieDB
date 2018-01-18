@@ -32,8 +32,10 @@ class Shows extends Component {
   fetch(category, route) {
     const baseUrl = Constant.api_base_url;
     const apiKey = Constant.api_key;
-    const language = "language=en-US";
-    const uri = `${baseUrl}${route}?${apiKey}&${language}&page=1`;
+    // const language = "language=en-US";
+    // const uri = `${baseUrl}${route}?${apiKey}&${language}&page=1`;
+    const language = Constant.lan_region;
+    const uri = `${baseUrl}${route}?${apiKey}${language}`;
 
     fetch(uri).then((response) => response.json()).then((response) => {
       let { categories } = this.state;
