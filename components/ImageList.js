@@ -22,13 +22,13 @@ const HorizontalImageList = (props) => (
         props.isTouchableImage ?
           <TouchableImage
             key={index}
-            style={props.style}
+            style={[style.imagePlaceholder, props.style]}
             onPress={() => props.onPress(image)}
             uri={image.uri} 
           />
         : <Image
             key={index}
-            style={props.style}
+            style={[style.imagePlaceholder, props.style]}
             source={{uri: _.isString(image) ? image : image.uri}}
           />
       ))}

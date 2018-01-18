@@ -9,7 +9,6 @@ import style from './../styles/styles';
 
 export const TouchableImage = (props) => (
   <TouchableOpacity
-    style={props.style}
     onPress={() => props.onPress()}>
     <Image
       style={props.style}
