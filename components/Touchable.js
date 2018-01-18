@@ -22,6 +22,7 @@ TouchableImage.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.number,
+    PropTypes.array,
   ]).isRequired,
   uri: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
