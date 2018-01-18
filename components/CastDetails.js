@@ -13,13 +13,7 @@ import {Configuration} from '../data/configuration';
 import style, {StackNavHeaderStyles} from '../styles/styles';
 
 export default class CastDetails extends Component {
-  //TODO: the back button should ideally show MovieDetails but it isn't
-  // doing that even after explicitly setting headerBackTitle: "MovieDetails" 
-  // in MovieDetails figure out why
-
-  static navigationOptions = ({
-    navigation
-  }) => ({
+  static navigationOptions = ({navigation}) => ({
     title: navigation.state.params.cast.name,
     ...StackNavHeaderStyles,
   });

@@ -5,6 +5,7 @@ import {
 
 import APP_CONSTANT from './../utilities/constants.js';
 const marginTop = APP_CONSTANT.height / APP_CONSTANT.goldenRatio;
+const primaryColor = "#32CD32"
 
 const style = StyleSheet.create({
   container: {
@@ -122,7 +123,7 @@ const style = StyleSheet.create({
     fontWeight: '500'
   },
   startupScreenTextProps: {
-    color: '#32CD32',
+    color: primaryColor,
     textAlign: 'center',
   }
 });
@@ -130,10 +131,12 @@ const style = StyleSheet.create({
 const StackNavHeaderStyles = {
   headerTitleStyle: style.headerTextColor,
   headerStyle: style.headerBackground,
-  headerTintColor: "#32CD32",
+  headerTintColor: primaryColor,
 }
 
 export {
-  StackNavHeaderStyles
+  StackNavHeaderStyles,
+  primaryColor,
 }
+
 export default style;

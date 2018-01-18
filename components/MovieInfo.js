@@ -3,25 +3,25 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'react-native-elements';
 import PropTypes from 'prop-types';
 
-import style from './../styles/styles';
+import style, { primaryColor } from './../styles/styles';
 
 const MovieInfo = (props) => {
     return (
         <View style={Style.container}>
             <View style={Style.infoItems}>
-                <Icon name='event' color="#32CD32" size={30}/>
+                <Icon name='event' color={primaryColor} size={30}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.releaseDate}
                 </Text>
             </View>
             <View style={Style.infoItems}>
-                <Icon name='schedule' color="#32CD32"/>
+                <Icon name='schedule' color={primaryColor}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.runtime} Min
                 </Text>
             </View>
             <View style={Style.infoItems}>
-                <Icon name='stars' color="#32CD32"/>
+                <Icon name='stars' color={primaryColor}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.ratings}
                 </Text>

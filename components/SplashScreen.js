@@ -9,9 +9,8 @@ import { Avatar } from 'react-native-elements';
 import Constant from './../utilities/constants';
 import * as _ from 'lodash';
 
-import style, { StackNavHeaderStyles } from '../styles/styles';
+import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';
 
-const textColor = "#32CD32";
 
 class SplashScreen extends Component {
   static navigationOptions = {};
@@ -43,7 +42,7 @@ class SplashScreen extends Component {
       <Avatar
           xlarge
           rounded
-          containerStyle={{backgroundColor: textColor}}
+          containerStyle={{backgroundColor: primaryColor}}
           title="L"
           titleStyle={{fontWeight: '900', fontSize: 100}}
         />
@@ -53,7 +52,7 @@ class SplashScreen extends Component {
         <View style={{marginTop: 50, marginBottom: 50}}>
           <ActivityIndicator
             size="large"
-            color={textColor}
+            color={primaryColor}
           />
         </View>
         <Text style={[style.titleText, style.startupScreenTextProps]}>

@@ -8,6 +8,8 @@ import MoviesStack from './routes/Movies';
 import SplashScreen from './components/SplashScreen';
 import TvShowStack from './routes/TvShows';
 
+import { primaryColor } from './styles/styles.js';
+
 // Application router
 const MainScreen = TabNavigator({
 		Movies: {
@@ -42,7 +44,7 @@ const MainScreen = TabNavigator({
   {
 		initialRouteName: 'Movies',
 		tabBarOptions: {
-			activeTintColor: '#32CD32',
+			activeTintColor: primaryColor,
 			inactiveTintColor: '#a9a9a9',
 			style: {
 				backgroundColor: '#040404'

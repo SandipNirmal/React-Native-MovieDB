@@ -7,7 +7,7 @@ import HorizontalImageList from './ImageList';
 import Carousel from './Carousel';
 import Constant from './../utilities/constants';
 
-import style, { StackNavHeaderStyles } from '../styles/styles';
+import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';
 
 // TODO: Implement Configuration and Latestshows
 import {Configuration} from '../data/configuration';
@@ -67,7 +67,7 @@ class Shows extends Component {
     return (
       isLoading ?
         <ScrollView style={style.screenBackgroundColor}>
-          <ActivityIndicator size="large" color="#32CD32" />
+          <ActivityIndicator size="large" color={primaryColor} />
         </ScrollView>
       :
         <ScrollView style={style.screenBackgroundColor}>
