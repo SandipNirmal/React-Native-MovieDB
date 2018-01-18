@@ -5,10 +5,14 @@ import TvShow from '../components/TvShows';
 import TvShowDetails from '../components/TvShowDetails';
 import TvShowSeasons from '../components/TvShowSeasons';
 import CastDetails from '../components/CastDetails';
+import AllTvShows from '../components/AllTvShows';
 
 const TvShowStack = StackNavigator({
     TvShow: {
       screen: TvShow
+    },
+    AllTvShows: {
+      screen: AllTvShows
     },
     TvShowDetails: {
       screen: TvShowDetails

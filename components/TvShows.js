@@ -1,32 +1,49 @@
-import React, {
-    Component
-  } from 'react';
-  import {
-    View,
-    Text,
-    StyleSheet
-  } from 'react-native';
-  
-  import style, { StackNavHeaderStyles } from '../styles/styles';
-  
-  export default class TvShows extends Component {
-    static navigationOptions = {
-      title: 'Movies',
-      ...StackNavHeaderStyles,
-    };
+import React, {Component} from 'react';
+import Shows from './Shows';
 
-    render() {
-      return (
-          <View>
-              <Text style={styles.container}>TV Shows</Text>
-          </View>
-      );
+import style, { StackNavHeaderStyles } from '../styles/styles';
+
+class TvShows extends Shows {
+  static navigationOptions = {
+    title: 'TvShows',
+    ...StackNavHeaderStyles,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state['categories'] = {
+      'showingToday': [],
+      'topRated': [],
+      'popular': [],
     }
+    this.carouselCategory = "showingToday";
   }
-  
-  const styles = StyleSheet.create({
-    container: {
-      textAlign: 'center',
-      top: 50
-    }
-  });
+
+  /**
+   * @overrides
+   */
+  componentDidMount() {
+    // calls base class functions
+    this.fetch('showingToday', '/tv/airing_today');
+    this.fetch('topRated', '/tv/top_rated');
+    this.fetch('popular', '/tv/popular');
+  }
+
+  /**
+   * @overrides
+   */
+  showDetails(show) {
+    this.props.navigation.navigate('TvShowDetails', {tvShow: show});
+  }
+
+  /**
+   * @overrides
+   */
+  showAll(category, shows) {
+    this.props.navigation.navigate('AllTvShows', 
+      {category: category, tvShows: shows});
+  }
+}
+
+export default TvShows;
+

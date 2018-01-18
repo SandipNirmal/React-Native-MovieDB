@@ -14,12 +14,12 @@ const Carousel = (props) => (
     showsHorizontalScrollIndicator={false}
     style={styles.container}
   >
-    {props.movies.map((movie, index) => (
+    {props.images.map((image, index) => (
       <TouchableOpacity
         key={index}
         style={styles.posterSize}
-        onPress={() => props.onPress(movie)}>
-        <ImageWithTitle movie={movie} />
+        onPress={() => props.onPress(image)}>
+        <ImageWithTitle image={image} />
       </TouchableOpacity>
     ))}
   </ScrollView>
@@ -30,11 +30,11 @@ const ImageWithTitle = (props) => (
   <View>
     <Image
       style={styles.posterSize}
-      source={{uri: props.movie.uri}}
+      source={{uri: props.image.uri}}
     />
     <View style={styles.absoluteTitle}>
       <Text style={styles.titleText}>
-        {props.movie.original_title}
+        {props.image.original_title}
       </Text>
     </View>
   </View>
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 32,
     fontWeight: 'bold',
-    fontFamily: 'Cochin',
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
     color: 'white'
