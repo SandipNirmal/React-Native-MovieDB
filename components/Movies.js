@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import Shows from './Shows';
 
-import style, { StackNavHeaderStyles } from '../styles/styles';
+import style from '../styles/styles';
 
 class Movies extends Shows {
-  static navigationOptions = {
-    title: 'Movies',
-    ...StackNavHeaderStyles,
-  };
-
   constructor(props) {
     super(props);
 		// TODO : nowShowing should pick up the movies from previous screen

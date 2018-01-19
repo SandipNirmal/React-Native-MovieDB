@@ -13,11 +13,6 @@ import {Configuration} from '../data/configuration';
 import style, {StackNavHeaderStyles} from '../styles/styles';
 
 export default class CastDetails extends Component {
-  static navigationOptions = ({navigation}) => ({
-    title: navigation.state.params.cast.name,
-    ...StackNavHeaderStyles,
-  });
-
   constructor(props) {
     super(props);
 

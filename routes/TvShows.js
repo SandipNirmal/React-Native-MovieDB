@@ -7,12 +7,22 @@ import TvShowSeasons from '../components/TvShowSeasons';
 import CastDetails from '../components/CastDetails';
 import AllTvShows from '../components/AllTvShows';
 
+import { StackNavHeaderStyles } from '../styles/styles';
+
 const TvShowStack = StackNavigator({
     TvShow: {
-      screen: TvShow
+      screen: TvShow,
+      navigationOptions: {
+        title: 'TvShows',
+        ...StackNavHeaderStyles,
+      },
     },
     AllTvShows: {
-      screen: AllTvShows
+      screen: AllTvShows,
+      navigationOptions: ({navigation}) => ({
+        title: navigation.state.params.category,
+        ...StackNavHeaderStyles,
+      }),
     },
     TvShowDetails: {
       screen: TvShowDetails

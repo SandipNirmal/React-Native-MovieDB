@@ -17,14 +17,9 @@ import CastDetails from './CastDetails';
 
 import {Configuration} from '../data/configuration';
 import Constant from './../utilities/constants';
-import style, { StackNavHeaderStyles } from '../styles/styles';
+import style from '../styles/styles';
 
 class MovieDetails extends Component {
-    static navigationOptions = ({navigation}) => ({
-        title: navigation.state.params.movie.original_title,
-        ...StackNavHeaderStyles,
-    });
-
     constructor(props) {
         super(props);
         this.state = {
