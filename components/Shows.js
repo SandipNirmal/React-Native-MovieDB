@@ -3,8 +3,8 @@ import {
   ActivityIndicator,
   ScrollView,
 } from 'react-native';
-import HorizontalImageList from './ImageList';
-import Carousel from './Carousel';
+import HorizontalImageList from './common/ImageList';
+import Carousel from './common/Carousel';
 import Constant from './../utilities/constants';
 
 import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';

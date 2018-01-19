@@ -10,7 +10,7 @@ import {Avatar, Tile} from 'react-native-elements';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
-import HorizontalImageList from './ImageList';
+import HorizontalImageList from './common/ImageList';
 import CastList from './CastList'
 import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Dimensions} from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { FlatImageList } from './ImageList';
+import { FlatImageList } from './common/ImageList';
 
 import style, { StackNavHeaderStyles } from '../styles/styles';
 

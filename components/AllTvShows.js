@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Dimensions} from 'react-native';
-import { FlatImageList } from './ImageList';
+import { FlatImageList } from './common/ImageList';
 
 import style, { StackNavHeaderStyles } from '../styles/styles';
 

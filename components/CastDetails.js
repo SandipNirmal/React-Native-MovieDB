@@ -7,7 +7,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import HorizontalImageList from './ImageList';
+import HorizontalImageList from './common/ImageList';
 import Constant from './../utilities/constants';
 import {Configuration} from '../data/configuration';
 import style, {StackNavHeaderStyles} from '../styles/styles';
