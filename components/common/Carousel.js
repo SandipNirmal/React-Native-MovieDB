@@ -7,6 +7,8 @@ import {
   View,
 } from 'react-native';
 
+import style from './../../styles/styles';
+
 const Carousel = (props) => (
   <ScrollView 
     horizontal
@@ -33,37 +35,36 @@ const ImageWithTitle = (props) => (
       source={{uri: props.image.uri}}
     />
     <View style={styles.absoluteTitle}>
-      <Text style={styles.titleText}>
+      <Text style={[style.titleText, styles.titleText]}>
         {props.image.original_title}
       </Text>
     </View>
   </View>
 )
 
-var deviceWidth = Dimensions.get('window').width;
+var {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   posterSize: {
     flexGrow:1,
-    height: 250,
-    width: deviceWidth,
+    // height: (height * (1 - 0.618)),
+    height: 180,
+    width: width,
   },
   absoluteTitle: {
     position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
-    right: 0, 
+    right: 10, 
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   titleText: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
+    fontSize: 20,
+    backgroundColor: 'transparent',
     color: 'white'
   }
 });

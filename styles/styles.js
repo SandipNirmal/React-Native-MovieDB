@@ -1,6 +1,6 @@
 import {
-  Stylesheet,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native';
 
 import APP_CONSTANT from './../utilities/constants.js';
@@ -9,8 +9,8 @@ const primaryColor = "#32CD32"
 
 const style = StyleSheet.create({
   container: {
-    marginTop: 20,
-    marginBottom: 20
+    marginTop: 10,
+    marginBottom: 10
   },
   detailsContainer: {
     marginTop,
@@ -21,7 +21,7 @@ const style = StyleSheet.create({
     backgroundColor: 'rgba(32, 32, 32, 0.9)'
   },
   flatListContainer: {
-      flex: 1,
+    flex: 1,
     justifyContent: 'space-between',
   },
   headerBackground: {
@@ -40,9 +40,9 @@ const style = StyleSheet.create({
   },
   headingText: {
     fontSize: 18,
-    fontWeight: '500',
-    paddingTop: 20,
-    paddingBottom: 10
+    fontWeight: '300',
+    paddingTop: 6,
+    paddingBottom: 6
   },
   normalText: {
     fontSize: 12
@@ -125,6 +125,13 @@ const style = StyleSheet.create({
   startupScreenTextProps: {
     color: primaryColor,
     textAlign: 'center',
+  },
+  videoPlayerContainer: {
+    height: 180
+  },
+  detailHeadings: {
+    marginTop:15,
+    marginBottom: 4
   }
 });
 

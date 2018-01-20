@@ -15,7 +15,7 @@ import style from './../styles/styles';
 const CastList = (props) => {
         return (
             <View>
-                <Text style={[style.text, style.headingText]}>
+                <Text style={[style.text, style.headingText, style.detailHeadings]}>
                     {props.title}
                 </Text>
                 <ScrollView horizontal>

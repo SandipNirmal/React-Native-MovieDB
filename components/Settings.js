@@ -31,7 +31,7 @@ async _initSettings() {
     language: 'IN-hi',
     region: 'IN' 
   };
-  console.log('settings', settings);
+  
   this.setState({
     language: settings.language,
     region: settings.region

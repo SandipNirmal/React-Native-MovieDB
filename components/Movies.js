@@ -30,7 +30,7 @@ class Movies extends Shows {
    * @overrides
    */
   showDetails(movie) {
-    dispatch()
+    // dispatch()
     this.props.navigation.navigate('MovieDetails', {movie: movie});
   }
 

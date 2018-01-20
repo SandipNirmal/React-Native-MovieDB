@@ -80,7 +80,7 @@ class MovieDetails extends Component {
     formVideoUrls(videos) {
         const filteredVideos = videos.filter((video) => video.site === 'YouTube');
         const videoUrls = filteredVideos.map((video) => {
-            return {name: video.name, url: `https://www.youtube.com/watch?v=${video.key}`};
+            return {name: video.name, url: `https://www.youtube.com/embed/${video.key}`};
         });
         this.setState({videos: videoUrls});
     }

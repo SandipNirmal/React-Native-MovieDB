@@ -4,24 +4,18 @@ import {Icon} from 'react-native-elements';
 
 import style from './../styles/styles';
 
+import VideoPlayer from './VideoPlayer';
+
 const Trailer = (props) => {
     return (
         <View>
-            <Text style={[style.text, style.headingText]}>Trailers</Text>
+            <Text style={[style.text, style.headingText, style.detailHeadings]}>Trailers</Text>
             <ScrollView horizontal 
                 showsHorizontalScrollIndicator={false}
                 style={style.posterList}>
             {props.videos.map((video, index) => (
                 <View key={index} >
-                    <Text style={[style.text, style.normalText, style.trailerTitle]}>
-                        {video.name}
-                    </Text>
-                    <View style={[style.backdropSize, style.centerContentContainer, style.trailerContainer]}>
-                    <Icon name='youtube-play' type='font-awesome' size={50} color='#ff0000' style={style.trailerPlayIcon}/>
-                    </View>
-                    {/* <Text style={[style.text, style.normalText]}>
-                        {video.url}
-                    </Text> */}
+                    <VideoPlayer url={video.url}/>
                 </View>
             ))}
             </ScrollView>
