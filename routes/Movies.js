@@ -3,6 +3,8 @@ import Movies from '../components/Movies';
 import MovieDetails from '../components/MovieDetails';
 import AllMovies from '../components/AllMovies';
 import CastDetails from '../components/CastDetails';
+import VideoPlayer from './../components/VideoPlayer';
+import Trailer from './../components/TrailerList';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -35,6 +37,9 @@ const MoviesStack = StackNavigator({
         ...StackNavHeaderStyles,
       }),
     },
+    VideoPlayer: {
+      screen: VideoPlayer
+    }
   },
   {
     headerMode: 'float',

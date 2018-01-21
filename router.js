@@ -2,11 +2,12 @@ import React from 'react';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 
-import Search from './components/Search';
-import Settings from './components/Settings';
-import MoviesStack from './routes/Movies';
+
 import SplashScreen from './components/SplashScreen';
+import MoviesStack from './routes/Movies';
 import TvShowStack from './routes/TvShows';
+import Search from './components/Search';
+import SettingsStack from './routes/Settings';
 
 import { primaryColor } from './styles/styles.js';
 
@@ -34,7 +35,7 @@ const MainScreen = TabNavigator({
 			}
 		},
 		Settings: {
-			screen: Settings,
+			screen: SettingsStack,
 			navigationOptions: {
 				tabBarLabel: 'Settings',
 				tabBarIcon: ({tintColor}) => <Icon name="settings" size={30} color={tintColor}/>

@@ -9,6 +9,8 @@ const VideoPlayer = (props) => {
             style={[style.videoPlayerContainer, style.backdropSize]}
             javaScriptEnabled={true}
             domStorageEnabled={true}
+            // allowsInlineMediaPlayback={true}
+            // mediaPlaybackRequiresUserAction={false}
             source={{uri: props.url }}
         />
     );

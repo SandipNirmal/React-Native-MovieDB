@@ -48,21 +48,9 @@ render() {
         <ScrollView>
           <Text style={[style.titleText]}> Setings </Text>
           <Text style={[style.headingText]}>Select Language</Text>
-          <Picker
-            selectedValue={this.state.language}
-            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-            <Picker.Item label="English" value="US-en" />
-            <Picker.Item label="Hindi" value="IN-hi" />
-          </Picker>
           <Text>{this.state.language}</Text>
 
           <Text style={[style.headingText]}>Select Region</Text>
-          <Picker
-            selectedValue={this.state.region}
-            onValueChange={(itemValue, itemIndex) => this.setState({region: itemValue})}>
-            <Picker.Item label="US" value="US" />
-            <Picker.Item label="India" value="IN" />
-          </Picker>
           <Text>{this.state.region}</Text>
 
           <Button title='Save Settings' />
