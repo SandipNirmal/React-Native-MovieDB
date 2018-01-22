@@ -6,7 +6,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Avatar, Tile} from 'react-native-elements';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';

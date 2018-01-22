@@ -25,7 +25,11 @@ const TvShowStack = StackNavigator({
       }),
     },
     TvShowDetails: {
-      screen: TvShowDetails
+      screen: TvShowDetails,
+      navigationOptions: ({navigation}) => ({
+        title: navigation.state.params.tvShow.name,
+        ...StackNavHeaderStyles,
+      }),
     },
     TvShowSeasons: {
       screen: TvShowSeasons
