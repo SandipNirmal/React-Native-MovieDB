@@ -27,8 +27,6 @@ export default class TvShowDetails extends Component {
       const size = Configuration['images']['poster_sizes'][5]
       const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.tvShow.poster_path}`;
 
-      console.log('Data', this.state.data);
-
     return (
       <View style={[{
               flex: 1

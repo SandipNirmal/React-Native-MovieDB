@@ -37,7 +37,12 @@ const MoviesStack = StackNavigator({
       }),
     },
     VideoPlayer: {
-      screen: VideoPlayer
+      screen: VideoPlayer,
+      navigationOptions: ({navigation}) => ({
+        tabBarVisible: false,
+        headerVisible: false,
+        ...StackNavHeaderStyles,
+      }),
     }
   },
   {

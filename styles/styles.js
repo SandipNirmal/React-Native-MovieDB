@@ -127,7 +127,7 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
   videoPlayerContainer: {
-    height: 180
+    flex: 1
   },
   detailHeadings: {
     marginTop:15,

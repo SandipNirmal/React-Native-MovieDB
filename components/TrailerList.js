@@ -1,10 +1,8 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
-import {Icon} from 'react-native-elements';
 
+import TrailerItem from './TrailerItem';
 import style from './../styles/styles';
-
-import VideoPlayer from './VideoPlayer';
 
 const Trailer = (props) => {
     return (
@@ -14,10 +12,11 @@ const Trailer = (props) => {
                 showsHorizontalScrollIndicator={false}
                 style={style.posterList}>
             {props.videos.map((video, index) => (
-                <View key={index} >
-                    <VideoPlayer url={video.url}/>
-                </View>
-            ))}
+                // <View key={index} >
+                //     <VideoPlayer url={video.url}/>
+                // </View>
+                <TrailerItem key={index} video={video} onPlay={props.playVideo}/>
+              ))}
             </ScrollView>
         </View>
     )
