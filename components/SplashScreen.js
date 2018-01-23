@@ -2,26 +2,19 @@ import React, { Component } from 'react';
 import {
   ActivityIndicator,
   Text,
-  StyleSheet,
   View,
 } from 'react-native';
-import { Avatar } from 'react-native-elements';
-import Constant from './../utilities/constants';
 import * as _ from 'lodash';
+import { connect } from 'react-redux';
+import { movieFetched } from '../Actions';
+import { Avatar } from 'react-native-elements';
+import { getUriPopulated } from '../utilities/utils';
+import Constant from '../utilities/constants';
 
-import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';
+import style, { primaryColor } from '../styles/styles';
 
 
 class SplashScreen extends Component {
-  static navigationOptions = {};
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      "isLoading": true,
-    }
-  }
-
   componentDidMount() {
     const baseUrl = Constant.api_base_url + '/movie/';
     const apiKey = Constant.api_key;
@@ -30,8 +23,8 @@ class SplashScreen extends Component {
 
     fetch(uri).then((response) => response.json()).then((response) => {
       if (_.get(this, 'props.navigation.navigate')) {
-        this.props.screenProps = {movies: response.results}
-        this.props.navigation.navigate('MainScreen', {movies: response.results});
+        this.props.onFetchCompleted('nowShowing', getUriPopulated(response.results));
+        this.props.navigation.navigate('MainScreen');
       }
     }).catch(error => console.error(error))
   }
@@ -63,4 +56,14 @@ class SplashScreen extends Component {
   }
 };
 
-export default SplashScreen;
+const mapStateToProps = state => ({
+  isFetching: state.movies.isFetching,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFetchCompleted: (category, movies) => {
+    dispatch(movieFetched(category, movies));
+  } 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

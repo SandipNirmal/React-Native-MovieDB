@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import Shows from './Shows';
+import { connect } from 'react-redux';
+import { fetchingTvShows, tvShowsFetched } from '../Actions';
+import * as _ from 'lodash';
 
 import style from '../styles/styles';
 
 class TvShows extends Shows {
   constructor(props) {
     super(props);
-    this.state['categories'] = {
-      'showingToday': [],
-      'topRated': [],
-      'popular': [],
-    }
     this.carouselCategory = "showingToday";
   }
 
@@ -19,6 +17,9 @@ class TvShows extends Shows {
    */
   componentDidMount() {
     // calls base class functions
+    if(_.isEmpty(this.props.categories.showingToday)) {
+      this.props.onFetching();
+    }
     this.fetch('showingToday', '/tv/airing_today');
     this.fetch('topRated', '/tv/top_rated');
     this.fetch('popular', '/tv/popular');
@@ -40,5 +41,17 @@ class TvShows extends Shows {
   }
 }
 
-export default TvShows;
+const mapStateToProps = state => ({
+  ...state.tvShows
+});
 
+const mapDispatchToProps = dispatch => ({
+  onFetching: () => {
+    dispatch(fetchingTvShows());
+  },
+  onFetchCompleted: (category, tvShows) => {
+    dispatch(tvShowsFetched(category, tvShows));
+  }, 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TvShows);

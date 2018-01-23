@@ -5,26 +5,16 @@ import {
 } from 'react-native';
 import HorizontalImageList from './common/ImageList';
 import Carousel from './common/Carousel';
-import Constant from './../utilities/constants';
+import Constant from '../utilities/constants';
+import { getUriPopulated } from '../utilities/utils';
 
 import style, { primaryColor, StackNavHeaderStyles } from '../styles/styles';
-
-// TODO: Implement Configuration and Latestshows
-import {Configuration} from '../data/configuration';
 
 String.prototype.toTitle = function() {
   return this.replace(/([A-Z])/g, " $1").replace(/(.)/, c => c.toUpperCase());
 };
 
 class Shows extends Component {
-  constructor(props) {
-    super(props);
-    // Need to override state in base classes
-    this.state = {
-      "isLoading": true,
-      "categories": {}
-    }
-  }
   componentDidMount() {
     console.error("Need to override this in base class");
   }
@@ -32,27 +22,12 @@ class Shows extends Component {
   fetch(category, route) {
     const baseUrl = Constant.api_base_url;
     const apiKey = Constant.api_key;
-    // const language = "language=en-US";
-    // const uri = `${baseUrl}${route}?${apiKey}&${language}&page=1`;
     const language = Constant.lan_region;
     const uri = `${baseUrl}${route}?${apiKey}${language}`;
 
     fetch(uri).then((response) => response.json()).then((response) => {
-      let { categories } = this.state;
-      categories[category] = this.getUriPopulated(response.results);
-      this.setState({isLoading: false, categories});
+      this.props.onFetchCompleted(category, getUriPopulated(response.results));
     }).catch(error => console.error(error))
-  }
-
-  getUriPopulated(shows, imageType="poster") {
-    const secureUrl = Configuration['images']['secure_base_url'];
-    const size = Configuration['images'][`${imageType}_sizes`][0];
-
-    return shows.map((show) => {
-      const path = show[`${imageType}_path`];
-      show['uri'] = `${secureUrl}${size}${path}`;
-      return show
-    });
   }
 
   showDetails(show) {
@@ -64,17 +39,17 @@ class Shows extends Component {
   }
 
   render() {
-    const { isLoading, categories } = this.state;
+    const { isFetching, categories } = this.props;
 
     return (
-      isLoading ?
+      isFetching ?
         <ScrollView style={style.screenBackgroundColor}>
           <ActivityIndicator size="large" color={primaryColor} />
         </ScrollView>
       :
         <ScrollView style={style.screenBackgroundColor}>
           <Carousel 
-            images={this.getUriPopulated(categories[this.carouselCategory], 'backdrop')} 
+            images={getUriPopulated(categories[this.carouselCategory], 'backdrop')} 
             onPress={this.showDetails.bind(this)}
           />
           {Object.keys(categories).map((category, index) => (
@@ -86,7 +61,7 @@ class Shows extends Component {
               style={style.posterSize}
               onShowAll={this.showAll.bind(this)}
               onPress={this.showDetails.bind(this)}
-              images={this.state.categories[category]}
+              images={categories[category]}
             />
           ))}
         </ScrollView>

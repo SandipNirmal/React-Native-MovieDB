@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import Shows from './Shows';
+import { connect } from 'react-redux';
+import { fetchingMovies, movieFetched } from '../Actions';
 
 import style from '../styles/styles';
 
 class Movies extends Shows {
   constructor(props) {
     super(props);
-		// TODO : nowShowing should pick up the movies from previous screen
-		// the props are somehow not getting passed down to children.
-    this.state['categories'] = {
-      'nowShowing': [],
-      'comingSoon': [],
-      'popular': [],
-    }
     this.carouselCategory = "nowShowing";
   }
 
@@ -43,4 +38,17 @@ class Movies extends Shows {
   }
 }
 
-export default Movies;
+const mapStateToProps = state => ({
+  ...state.movies
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFetching: () => {
+    dispatch(fetchingMovies());
+  },
+  onFetchCompleted: (category, movies) => {
+    dispatch(movieFetched(category, movies));
+  } 
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);
