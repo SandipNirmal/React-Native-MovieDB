@@ -131,6 +131,10 @@ class MovieDetails extends Component {
       this.props.navigation.navigate('CastDetails', {cast: cast});
     }
 
+    playVideo(url) {
+        this.props.navigation.navigate('VideoPlayer', {url});
+    }
+
     render() {
 
         const baseUrl = Configuration['images']['secure_base_url'];
@@ -162,7 +166,9 @@ class MovieDetails extends Component {
                           images={this.state.images}
                           style={style.backdropSize}/>
 
-                        <TrailerList videos={this.state.videos}/>
+                        <TrailerList 
+                            videos={this.state.videos} 
+                            playVideo={this.playVideo.bind(this)}/>
 
                         <CastList 
                           title="Director"
