@@ -39,7 +39,9 @@ class Movies extends Shows {
 }
 
 const mapStateToProps = state => ({
-  ...state.movies
+  ...state.movies,
+  config: state.configuration,
+  settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({

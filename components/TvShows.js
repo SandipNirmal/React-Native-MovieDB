@@ -42,7 +42,9 @@ class TvShows extends Shows {
 }
 
 const mapStateToProps = state => ({
-  ...state.tvShows
+  ...state.tvShows,
+  config: state.configuration,
+  settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({

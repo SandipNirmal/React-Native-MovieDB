@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
-import { movieFetched } from '../Actions';
+import { configFetched, movieFetched } from '../Actions';
 import { Avatar } from 'react-native-elements';
 import { getUriPopulated } from '../utilities/utils';
 import Constant from '../utilities/constants';
@@ -16,16 +16,20 @@ import style, { primaryColor } from '../styles/styles';
 
 class SplashScreen extends Component {
   componentDidMount() {
-    const baseUrl = Constant.api_base_url + '/movie/';
     const apiKey = Constant.api_key;
-    const language = "language=en-US";
-    const uri = `${baseUrl}now_playing?${apiKey}&${language}&page=1`;
+    let uri = `${Constant.api_base_url}/configuration?${apiKey}`
+    const { onFetchCompleted, onConfigFetched, config, settings } = this.props;
 
     fetch(uri).then((response) => response.json()).then((response) => {
-      if (_.get(this, 'props.navigation.navigate')) {
-        this.props.onFetchCompleted('nowShowing', getUriPopulated(response.results));
-        this.props.navigation.navigate('MainScreen');
-      }
+      onConfigFetched(response);
+      uri = `${Constant.api_base_url}/movie/now_playing?${apiKey}&language=${settings.language}&page=1`;
+      fetch(uri).then((response) => response.json()).then((response) => {
+        if (_.get(this, 'props.navigation.navigate')) {
+          onFetchCompleted('nowShowing',
+            getUriPopulated(response.results, config, 'posterSizeForImageList'));
+          this.props.navigation.navigate('MainScreen');
+        }
+      }).catch(error => console.error(error))
     }).catch(error => console.error(error))
   }
 
@@ -58,12 +62,17 @@ class SplashScreen extends Component {
 
 const mapStateToProps = state => ({
   isFetching: state.movies.isFetching,
+  config: state.configuration,
+  settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
   onFetchCompleted: (category, movies) => {
     dispatch(movieFetched(category, movies));
-  } 
+  },
+  onConfigFetched: config => {
+    dispatch(configFetched(config));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

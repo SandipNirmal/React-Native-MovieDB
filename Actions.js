@@ -5,6 +5,13 @@ String.prototype.toUnderScore = function() {
   return this.replace(/([A-Z])/g, "_$1");
 };
 
+// CONFIGURATION
+export const CONFIG_FETCHED = "CONFIG_FETCHED";
+export const configFetched = (config) => ({
+  type: "CONFIG_FETCHED",
+  config,
+});
+
 // MOVIES
 export const FETCHING_MOVIES = "FETCHING_MOVIES";
 export const fetchingMovies = () => ({

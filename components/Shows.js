@@ -22,11 +22,13 @@ class Shows extends Component {
   fetch(category, route) {
     const baseUrl = Constant.api_base_url;
     const apiKey = Constant.api_key;
-    const language = Constant.lan_region;
-    const uri = `${baseUrl}${route}?${apiKey}${language}`;
+    const { onFetchCompleted, config } = this.props;
+    const { language, region } = this.props.settings;
+    const uri = `${baseUrl}${route}?${apiKey}&language=${language}&region=${region}&page=1`;
 
     fetch(uri).then((response) => response.json()).then((response) => {
-      this.props.onFetchCompleted(category, getUriPopulated(response.results));
+      onFetchCompleted(category,
+        getUriPopulated(response.results, config, "posterSizeForImageList"));
     }).catch(error => console.error(error))
   }
 
@@ -39,7 +41,7 @@ class Shows extends Component {
   }
 
   render() {
-    const { isFetching, categories } = this.props;
+    const { isFetching, categories, config } = this.props;
 
     return (
       isFetching ?
@@ -49,7 +51,7 @@ class Shows extends Component {
       :
         <ScrollView style={style.screenBackgroundColor}>
           <Carousel 
-            images={getUriPopulated(categories[this.carouselCategory], 'backdrop')} 
+            images={getUriPopulated(categories[this.carouselCategory], config, 'backdropSize')} 
             onPress={this.showDetails.bind(this)}
           />
           {Object.keys(categories).map((category, index) => (

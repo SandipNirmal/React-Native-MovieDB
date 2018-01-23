@@ -20,19 +20,19 @@ export default {
   'search': {
 
   },
-  'image': {
-    'secure_base_url': '',
-    'backdrop_size': '',
-    'poster_size': '',
-    'logo_size': '',
-    'profile_size': '',
-    'still_size': '',
-  },
   'config': {
-    'api_key': '',
+    'apiKey': '',
+    'image': {
+      'secureBaseUrl': '',
+      'backdropSize': '',
+      'posterSizeForBackground': '',
+      'posterSizeForImageList': '',
+      'profileSize': '',
+    },
   },
   'settings': {
-    'language': ''
+    'language': 'IN-hi',
+    'region': 'IN',
   }
 }
 
