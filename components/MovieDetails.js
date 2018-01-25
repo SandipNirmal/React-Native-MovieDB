@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import { 
-  ActivityIndicator,
-  Button,
-  ScrollView, StyleSheet,
-  Text,
-  View,
+import React, { Component } from 'react';
+import {
+    ActivityIndicator,
+    Button,
+    ScrollView, StyleSheet,
+    Text,
+    View,
 } from 'react-native';
+// import Orientation from 'react-native-orientation';
 
 import BackgroundImage from './BackgroundImage';
 import MovieInfo from './MovieInfo';
@@ -14,7 +15,7 @@ import CastList from './CastList'
 import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';
 
-import {Configuration} from '../data/configuration';
+import { Configuration } from '../data/configuration';
 import Constant from './../utilities/constants';
 import style from '../styles/styles';
 
@@ -31,23 +32,27 @@ class MovieDetails extends Component {
         };
     }
 
+    componentWillMount() {
+        // Orientation.lockToPortrait();
+    }
+
     componentDidMount() {
         const baseUrl = Constant.api_base_url;
         const apiKey = Constant.api_key;
-        const movie_url = '/movie/'; 
+        const movie_url = '/movie/';
         const appendResponse = "append_to_response=videos,images"
         // TODO: use lodash here + add error handling
         const movieId = this.props.navigation.state.params.movie.id;
 
         const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
         fetch(movieUrl).then((response) => response.json()).then((response) => {
-            this.setState({isLoading: false, movieData: response});
+            this.setState({ isLoading: false, movieData: response });
             this.formImageUrls(response.images.backdrops);
             this.formVideoUrls(response.videos.results);
         }).catch((error) => {
             console.error(error);
         });
-      
+
         const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
         fetch(movieCreditsUrl)
             .then((response) => response.json())
@@ -70,7 +75,7 @@ class MovieDetails extends Component {
             return `${baseUrl}${posterSize}${image['file_path']}`;
         });
 
-        this.setState({images});
+        this.setState({ images });
     }
 
     /**
@@ -79,9 +84,9 @@ class MovieDetails extends Component {
     formVideoUrls(videos) {
         const filteredVideos = videos.filter((video) => video.site === 'YouTube');
         const videoUrls = filteredVideos.map((video) => {
-            return {name: video.name, url: `https://www.youtube.com/embed/${video.key}`};
+            return { name: video.name, url: `https://www.youtube.com/embed/${video.key}` };
         });
-        this.setState({videos: videoUrls});
+        this.setState({ videos: videoUrls });
     }
 
     /**
@@ -94,12 +99,12 @@ class MovieDetails extends Component {
         const posterSize = Configuration['images']['profile_sizes'][1];
 
         const directors = crew
-        .filter((member) => member.job === 'Director')
-        .slice(0,5)
-        .map((director) => {
-            director.imageSrc = `${baseUrl}${posterSize}${director['profile_path']}`;
-            return director;
-        });
+            .filter((member) => member.job === 'Director')
+            .slice(0, 5)
+            .map((director) => {
+                director.imageSrc = `${baseUrl}${posterSize}${director['profile_path']}`;
+                return director;
+            });
 
         this.setState({
             directors
@@ -115,12 +120,12 @@ class MovieDetails extends Component {
         const baseUrl = Configuration['images']['secure_base_url'];
         const posterSize = Configuration['images']['profile_sizes'][1];
 
-        const casts =  cast
-        .sort((a, b) => a.order - b.order)
-        .map((item) => {
-            item.imageSrc = `${baseUrl}${posterSize}${item['profile_path']}`;
-            return item;
-        });
+        const casts = cast
+            .sort((a, b) => a.order - b.order)
+            .map((item) => {
+                item.imageSrc = `${baseUrl}${posterSize}${item['profile_path']}`;
+                return item;
+            });
 
         this.setState({
             casts
@@ -128,11 +133,11 @@ class MovieDetails extends Component {
     }
 
     showCastDetails(cast) {
-      this.props.navigation.navigate('CastDetails', {cast: cast});
+        this.props.navigation.navigate('CastDetails', { cast: cast });
     }
 
     playVideo(url) {
-        this.props.navigation.navigate('VideoPlayer', {url});
+        this.props.navigation.navigate('VideoPlayer', { url });
     }
 
     render() {

@@ -5,7 +5,7 @@ import style from './../styles/styles';
 // import Orientation from 'react-native-orientation';
 
 export default class VideoPlayer extends Component {
-    static navigationOptions = { header: null }
+    // static navigationOptions = { }
 
     constructor(props) {
         super(props);
@@ -14,9 +14,13 @@ export default class VideoPlayer extends Component {
         }
     }
 
-    componentWillMount(){
-        // Orientation.lockToLandscape()
-    }
+    // componentWillMount(){
+    //     Orientation.lockToLandscape()
+    // }
+
+    // componentWillUnmount() {
+    //     Orientation.lockToPortrait()
+    // }
 
     render() {
         return (
