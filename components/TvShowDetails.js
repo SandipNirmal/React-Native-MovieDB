@@ -6,16 +6,16 @@ class TvShowDetails extends Details {
   componentDidMount() {
     const baseUrl = Constant.api_base_url;
     const apiKey = Constant.api_key;
-    const movie_url = '/tv/'; 
+    const tvShow_url = '/tv/'; 
     const appendResponse = "append_to_response=videos,images"
     // TODO: use lodash here + add error handling
-    const movieId = this.props.navigation.state.params.item.id;
+    const tvShowId = this.props.navigation.state.params.item.id;
 
-    const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
-    const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
+    const tvShowUrl = `${baseUrl}${tvShow_url}${tvShowId}?${apiKey}&${appendResponse}`;
+    const tvShowCreditsUrl = `${baseUrl}${tvShow_url}${tvShowId}/credits?${apiKey}`;
 
-    this.fetchDetails(movieUrl);
-    this.fetchPeople(movieCreditsUrl);
+    this.fetchDetails(tvShowUrl);
+    this.fetchPeople(tvShowCreditsUrl);
   }
 }
 

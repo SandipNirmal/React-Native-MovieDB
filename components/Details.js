@@ -79,7 +79,9 @@ class Details extends Component {
     const baseUrl = Configuration['images']['secure_base_url'];
     const size = Configuration['images']['poster_sizes'][5]
     const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.item.poster_path}`;
-    const {images, videos} = this.state.data;
+    const { data } = this.state;
+    const {images, videos} = data;
+    const releaseDate = data.release_date || data.first_air_date;
 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
@@ -91,9 +93,9 @@ class Details extends Component {
             </Text>
 
             <MovieInfo
-                releaseDate={this.state.data.release_date}
-                runtime={this.state.data.runtime || 100}
-                  ratings={this.state.data.vote_average}
+                releaseDate={releaseDate}
+                runtime={data.runtime || 100}
+                  ratings={data.vote_average}
               />
 
             <Text style={[style.text, style.normalText]}>
