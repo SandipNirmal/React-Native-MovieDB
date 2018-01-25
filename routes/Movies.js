@@ -18,7 +18,7 @@ const MoviesStack = StackNavigator({
     MovieDetails: {
       screen: MovieDetails,
       navigationOptions: ({navigation}) => ({
-        title: navigation.state.params.movie.original_title,
+        title: navigation.state.params.item.original_title,
         ...StackNavHeaderStyles,
       }),
     },

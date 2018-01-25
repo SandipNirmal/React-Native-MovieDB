@@ -26,7 +26,7 @@ class Movies extends Shows {
    */
   showDetails(movie) {
     // dispatch()
-    this.props.navigation.navigate('MovieDetails', {movie: movie});
+    this.props.navigation.navigate('MovieDetails', {item: movie});
   }
 
   /**
