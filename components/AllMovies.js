@@ -12,7 +12,7 @@ const numColumns = parseInt(width / (92 + (5 * 2)));
 class AllMovies extends Component {
 
   showMovieDetails(movie) {
-    this.props.navigation.navigate('MovieDetails', {movie: movie});
+    this.props.navigation.navigate('MovieDetails', {item: movie});
   }
 
   render() {
