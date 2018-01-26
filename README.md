@@ -11,17 +11,22 @@ git clone https://github.com/SandipNirmal/LaLuneiOSClone
 #### Install dependancies
 
 ```
-yarn
-
-or
-
 npm i
 ```
 
+
+#### Link dependancies
+
+``` JavaScript
+react-native link react-native-orientation // link orientation
+
+react-native link react-native-vector-icons // fonts
+
+```
 #### run application
 
 ```
-yarn start  # Start expo app
+react-native run-ios
 
-yarn start run-ios  # start app on iOS simulator
+npm start
 ```
