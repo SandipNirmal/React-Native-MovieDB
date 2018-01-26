@@ -10,7 +10,7 @@ const numColumns = parseInt(width / (92 + (5 * 2)));
 
 class AllTvShows extends Component {
   showDetails(show) {
-    this.props.navigation.navigate('TvShowDetails', {tvShow: show});
+    this.props.navigation.navigate('TvShowDetails', {item: show});
   }
 
   render() {
