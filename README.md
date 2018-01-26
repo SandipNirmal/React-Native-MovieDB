@@ -8,14 +8,14 @@
 git clone https://github.com/SandipNirmal/LaLuneiOSClone
 ```
 
-#### Install dependancies
+#### Install Dependancies
 
 ```
 npm i
 ```
 
 
-#### Link dependancies
+#### Link Dependancies
 
 ``` JavaScript
 react-native link react-native-orientation // link orientation
@@ -23,7 +23,7 @@ react-native link react-native-orientation // link orientation
 react-native link react-native-vector-icons // fonts
 
 ```
-#### run application
+#### Run Application
 
 ```
 react-native run-ios
