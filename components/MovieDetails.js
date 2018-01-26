@@ -1,194 +1,22 @@
-import React, { Component } from 'react';
-import {
-    ActivityIndicator,
-    Button,
-    ScrollView, StyleSheet,
-    Text,
-    View,
-} from 'react-native';
-// import Orientation from 'react-native-orientation';
+import React, {Component} from 'react';
+import Details from './Details';
+import Constant from '../utilities/constants';
 
-import BackgroundImage from './BackgroundImage';
-import MovieInfo from './MovieInfo';
-import HorizontalImageList from './common/ImageList';
-import CastList from './CastList'
-import TrailerList from './TrailerList';
-import CastDetails from './CastDetails';
+class MovieDetails extends Details {
+  componentDidMount() {
+    const baseUrl = Constant.api_base_url;
+    const apiKey = Constant.api_key;
+    const movie_url = '/movie/'; 
+    const appendResponse = "append_to_response=videos,images"
+    // TODO: use lodash here + add error handling
+    const movieId = this.props.navigation.state.params.item.id;
 
-import { Configuration } from '../data/configuration';
-import Constant from './../utilities/constants';
-import style from '../styles/styles';
+    const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
+    const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
 
-class MovieDetails extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true,
-            movieData: this.props.navigation.state.params.movie,
-            images: [],
-            videos: [],
-            directors: [],
-            casts: []
-        };
-    }
-
-    componentWillMount() {
-        // Orientation.lockToPortrait();
-    }
-
-    componentDidMount() {
-        const baseUrl = Constant.api_base_url;
-        const apiKey = Constant.api_key;
-        const movie_url = '/movie/';
-        const appendResponse = "append_to_response=videos,images"
-        // TODO: use lodash here + add error handling
-        const movieId = this.props.navigation.state.params.movie.id;
-
-        const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
-        fetch(movieUrl).then((response) => response.json()).then((response) => {
-            this.setState({ isLoading: false, movieData: response });
-            this.formImageUrls(response.images.backdrops);
-            this.formVideoUrls(response.videos.results);
-        }).catch((error) => {
-            console.error(error);
-        });
-
-        const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
-        fetch(movieCreditsUrl)
-            .then((response) => response.json())
-            .then((response) => {
-                this.extractDirectors(response.crew);
-                this.extractCast(response.cast);
-            }).catch((error) => {
-                console.error(error);
-            });
-    }
-
-    /**
-     * Forms Images URL's
-     */
-    formImageUrls(posters) {
-        const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['backdrop_sizes'][1];
-
-        const images = posters.map((image) => {
-            return `${baseUrl}${posterSize}${image['file_path']}`;
-        });
-
-        this.setState({ images });
-    }
-
-    /**
-     * Forms video urls
-     */
-    formVideoUrls(videos) {
-        const filteredVideos = videos.filter((video) => video.site === 'YouTube');
-        const videoUrls = filteredVideos.map((video) => {
-            return { name: video.name, url: `https://www.youtube.com/embed/${video.key}` };
-        });
-        this.setState({ videos: videoUrls });
-    }
-
-    /**
-     * Extracts director from crew list and form his/her avatar url. It will
-     * also slice 5 directors if list is too long 
-     * @param {array} crew
-     */
-    extractDirectors(crew) {
-        const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['profile_sizes'][1];
-
-        const directors = crew
-            .filter((member) => member.job === 'Director')
-            .slice(0, 5)
-            .map((director) => {
-                director.imageSrc = `${baseUrl}${posterSize}${director['profile_path']}`;
-                return director;
-            });
-
-        this.setState({
-            directors
-        });
-    }
-
-    /**
-     * Extracts cast in order of their orderId and form image url
-     * 
-     * @param {array} cast
-     */
-    extractCast(cast) {
-        const baseUrl = Configuration['images']['secure_base_url'];
-        const posterSize = Configuration['images']['profile_sizes'][1];
-
-        const casts = cast
-            .sort((a, b) => a.order - b.order)
-            .map((item) => {
-                item.imageSrc = `${baseUrl}${posterSize}${item['profile_path']}`;
-                return item;
-            });
-
-        this.setState({
-            casts
-        });
-    }
-
-    showCastDetails(cast) {
-        this.props.navigation.navigate('CastDetails', { cast: cast });
-    }
-
-    playVideo(url) {
-        this.props.navigation.navigate('VideoPlayer', { url });
-    }
-
-    render() {
-
-        const baseUrl = Configuration['images']['secure_base_url'];
-        const size = Configuration['images']['poster_sizes'][5]
-        const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.movie.poster_path}`;
-
-        return (
-            <View style={[{
-                flex: 1
-            }, style.screenBackgroundColor]}>
-                <BackgroundImage uri={bgImage}/>
-                <ScrollView>
-                    <View style={style.detailsContainer}>
-                        <Text style={[style.text, style.titleText]}>
-                            {this.state.movieData.title}
-                        </Text>
-
-                        <MovieInfo
-                            releaseDate={this.state.movieData.release_date}
-                            runtime={this.state.movieData.runtime || 100}
-                            ratings={this.state.movieData.vote_average}/>
-
-                        <Text style={[style.text, style.normalText]}>
-                            {this.state.movieData.overview}
-                        </Text>
-
-                        <HorizontalImageList
-                          title="Photos"
-                          images={this.state.images}
-                          style={style.backdropSize}/>
-
-                        <TrailerList 
-                            videos={this.state.videos} 
-                            playVideo={this.playVideo.bind(this)}/>
-
-                        <CastList 
-                          title="Director"
-                          items={this.state.directors}
-                          onPress={this.showCastDetails.bind(this)}/>
-                        
-                        <CastList
-                          title="Cast"
-                          items={this.state.casts}
-                          onPress={this.showCastDetails.bind(this)}/>
-                    </View>
-                </ScrollView>
-            </View>
-        );
-    }
+    this.fetchDetails(movieUrl);
+    this.fetchPeople(movieCreditsUrl);
+  }
 }
 
 export default MovieDetails;

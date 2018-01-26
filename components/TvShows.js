@@ -29,7 +29,7 @@ class TvShows extends Shows {
    * @overrides
    */
   showDetails(show) {
-    this.props.navigation.navigate('TvShowDetails', {tvShow: show});
+    this.props.navigation.navigate('TvShowDetails', {item: show});
   }
 
   /**

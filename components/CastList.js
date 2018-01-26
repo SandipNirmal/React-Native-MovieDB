@@ -27,7 +27,7 @@ const CastList = (props) => {
                                 <Image
                                     style={style.avatarSize}
                                     source={{
-                                    uri: item.imageSrc
+                                    uri: item.uri
                                 }}/>
                                 <Text 
                                     style={[style.text, style.normalText, style.avatarText]}
