@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {WebView, StyleSheet} from 'react-native';
 
 import style from './../styles/styles';
-// import Orientation from 'react-native-orientation';
+import Orientation from 'react-native-orientation';
 
 export default class VideoPlayer extends Component {
     // static navigationOptions = { }
@@ -14,13 +14,13 @@ export default class VideoPlayer extends Component {
         }
     }
 
-    // componentWillMount(){
-    //     Orientation.lockToLandscape()
-    // }
+    componentWillMount(){
+        Orientation.lockToLandscape()
+    }
 
-    // componentWillUnmount() {
-    //     Orientation.lockToPortrait()
-    // }
+    componentWillUnmount() {
+        Orientation.lockToPortrait()
+    }
 
     render() {
         return (

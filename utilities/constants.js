@@ -1,5 +1,5 @@
 import {Dimensions} from 'react-native';
-import {API_KEY} from 'react-native-dotenv';
+// import {API_KEY} from 'react-native-dotenv';
 
 // return device width and height
 // const {height:winHeight, width:winWidth} = Dimensions.get('window');
