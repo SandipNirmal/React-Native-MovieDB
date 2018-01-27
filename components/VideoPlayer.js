@@ -5,8 +5,6 @@ import style from './../styles/styles';
 import Orientation from 'react-native-orientation';
 
 export default class VideoPlayer extends Component {
-    // static navigationOptions = { }
-
     constructor(props) {
         super(props);
         this.state = {

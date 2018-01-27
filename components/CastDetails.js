@@ -60,7 +60,7 @@ export default class CastDetails extends Component {
   }
 
   showMovieDetails(movie) {
-    this.props.navigation.navigate('MovieDetails', {movie: movie});
+    this.props.navigation.navigate('MovieDetails', {item: movie});
   }
 
   /**
