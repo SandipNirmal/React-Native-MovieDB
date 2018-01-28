@@ -132,6 +132,26 @@ const style = StyleSheet.create({
   detailHeadings: {
     marginTop:15,
     marginBottom: 4
+  },
+  searchBar: {
+    color: '#ffffff'
+  },
+  searchItem: {
+    flex: 1,
+    height: 80,
+    flexDirection: 'row',
+    margin:6,
+    borderColor: '#b1b1b1',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 8
+  },
+  searchItemImage: {
+    width: 60,
+    height: 80
+  },
+  searchItemData: {
+    flex:1
   }
 });
 

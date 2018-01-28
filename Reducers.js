@@ -78,5 +78,3 @@ function settings(state=initialState['settings'], action) {
 
 const laLune = combineReducers({movies, tvShows, configuration, settings});
 export default laLune;
-
-

@@ -6,6 +6,7 @@ import {
   View,
   StatusBar
 } from 'react-native';
+import Orientation from 'react-native-orientation';
 
 import { AppRoot } from './router';
 import LaLune from './Reducers';
@@ -13,10 +14,16 @@ import LaLune from './Reducers';
 let store = createStore(LaLune);
 
 export default class App extends React.Component {
+
+  // Component did mount event
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
+
   render() {
     return (
       <Provider store={store}>
-        <View style={{flex: 1}}>
+        <View style={styles.container}>
           {/* <StatusBar /> // style the bar */}
           <AppRoot />
         </View>
@@ -28,8 +35,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#040404',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
