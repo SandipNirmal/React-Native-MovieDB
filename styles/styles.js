@@ -133,12 +133,9 @@ const style = StyleSheet.create({
     marginTop:15,
     marginBottom: 4
   },
-  searchBar: {
-    color: '#ffffff'
-  },
   searchItem: {
     flex: 1,
-    height: 80,
+    height: 100,
     flexDirection: 'row',
     margin:6,
     borderColor: '#b1b1b1',
@@ -147,11 +144,16 @@ const style = StyleSheet.create({
     borderRadius: 8
   },
   searchItemImage: {
-    width: 60,
-    height: 80
+    width: 80,
+    height:100
   },
   searchItemData: {
-    flex:1
+    flexGrow:3,
+    paddingTop: 4,
+    paddingLeft: 15
+  },
+  searchResult: {
+    marginBottom: 100
   }
 });
 
