@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
-import { SearchBar } from 'react-native-elements'
+import { SearchBar, ButtonGroup } from 'react-native-elements'
 import * as _ from 'lodash';
 
 import style, { primaryColor } from './../styles/styles';
@@ -14,7 +14,8 @@ export default class Movies extends Component {
     super(props);
     this.state = {
       searchResult: [],
-      searchInProgress: false
+      searchInProgress: false,
+      selectedIndex: 0
     }
   }
 
@@ -45,6 +46,12 @@ export default class Movies extends Component {
 
   onClearText = () => {}
 
+  updateIndex = (e) => {
+    this.setState({
+      selectedIndex: e
+    })
+  }
+
   // Redirect user to respective screen based on search result
   onSelectItem = (item) => {
     switch(item.media_type) {
@@ -67,7 +74,8 @@ export default class Movies extends Component {
   }
 
   render() {
-    const {searchResult, searchInProgress} = this.state;
+    const buttons = ['Movie', 'Tv', 'Person']
+    const {searchResult, searchInProgress, selectedIndex} = this.state;
 
     return (
         <View>
@@ -77,6 +85,13 @@ export default class Movies extends Component {
             onChangeText={_.debounce(this.onTextChange, 1000)}
             onClearText={this.onClearText}
             placeholder='Search' />
+
+        <ButtonGroup
+              onPress={this.updateIndex}
+              selectedIndex={selectedIndex}
+              buttons={buttons}
+              containerStyle={{height: 30, backgroundColor: '#e1e1e1', marginTop: 10}}
+            />
 
             <View>
             {/* <Text>Search Results</Text> */}

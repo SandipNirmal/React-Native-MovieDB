@@ -25,12 +25,12 @@ const SearchItem = ({item}) => {
         <Text style={[style.text, style.headingText]}>{name}</Text>
         <Text style={[style.text, style.normalText]}>{type.toUpperCase()}</Text>
       </View>
-      <View style={style.rightArrow}>
+      {/* <View style={style.rightArrow}>
       <Icon 
         name='chevron-right'
         size={40}
         color='white'/>
-      </View>
+      </View> */}
     </View>
   )
 }

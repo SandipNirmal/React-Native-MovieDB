@@ -5,7 +5,7 @@ import {
 import Search from './../components/Search';
 
 const SearchStack = StackNavigator({
-  Settings: {
+  Search: {
     screen: Search
   }
 }, {

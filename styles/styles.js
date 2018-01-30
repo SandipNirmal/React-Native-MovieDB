@@ -135,7 +135,7 @@ const style = StyleSheet.create({
   },
   searchItem: {
     flex: 1,
-    height: 100,
+    height: 90,
     flexDirection: 'row',
     padding:2,
     margin: 6,
@@ -144,8 +144,8 @@ const style = StyleSheet.create({
     shadowColor: '#191919'
   },
   searchItemImage: {
-    width: 80,
-    height:96
+    width: 64,
+    height: 86
   },
   searchItemData: {
     width: 220,
@@ -154,7 +154,7 @@ const style = StyleSheet.create({
     paddingLeft: 25
   },
   searchResult: {
-    marginBottom: 100
+    marginBottom: 200
   },
   rightArrow: {
     flexGrow: 1,
