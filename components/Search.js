@@ -72,12 +72,13 @@ export default class Movies extends Component {
     return (
         <View>
           <SearchBar
+            style={{marginTop: 20}}
             round
             onChangeText={_.debounce(this.onTextChange, 1000)}
             onClearText={this.onClearText}
             placeholder='Search' />
 
-            <View style={{marginTop: 20}}>
+            <View>
             {/* <Text>Search Results</Text> */}
             {searchInProgress ? 
               <ActivityIndicator size="large" color={primaryColor}/> :

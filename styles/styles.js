@@ -137,23 +137,30 @@ const style = StyleSheet.create({
     flex: 1,
     height: 100,
     flexDirection: 'row',
-    margin:6,
-    borderColor: '#b1b1b1',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 8
+    padding:2,
+    margin: 6,
+    backgroundColor: '#393939',
+    shadowRadius: 0,
+    shadowColor: '#191919'
   },
   searchItemImage: {
     width: 80,
-    height:100
+    height:96
   },
   searchItemData: {
-    flexGrow:3,
-    paddingTop: 4,
-    paddingLeft: 15
+    width: 220,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingLeft: 25
   },
   searchResult: {
     marginBottom: 100
+  },
+  rightArrow: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 5
   }
 });
 

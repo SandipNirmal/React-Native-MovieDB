@@ -6,7 +6,7 @@ import {Icon} from 'react-native-elements';
 import SplashScreen from './components/SplashScreen';
 import MoviesStack from './routes/Movies';
 import TvShowStack from './routes/TvShows';
-import Search from './components/Search';
+import SearchStack from './routes/Search';
 import SettingsStack from './routes/Settings';
 
 import { primaryColor } from './styles/styles.js';
@@ -28,7 +28,7 @@ const MainScreen = TabNavigator({
 			}
 		},
 		Search: {
-			screen: Search,
+			screen: SearchStack,
 			navigationOptions: {
 				tabBarLabel: 'Search',
 				tabBarIcon: ({tintColor}) => <Icon name="search" size={30} color={tintColor}/>

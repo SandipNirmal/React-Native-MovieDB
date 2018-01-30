@@ -23,3 +23,5 @@ yarn-error.log*
 package-lock.json
 .env
 ios/build/
+ios/main.jsbundle
+ios/main.jsbundle.meta

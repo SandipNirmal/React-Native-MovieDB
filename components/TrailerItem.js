@@ -15,7 +15,7 @@ const TrailerItem = ({video, onPlay}) => {
           style={[style.backdropSize, style.centerContentContainer, style.trailerContainer]}>		
           <Icon 
               name='youtube-play' 
-              type='font-awesome' 
+              type='font-awesome'
               size={50} 
               color='#ff0000' 
               style={style.trailerPlayIcon}/>		
