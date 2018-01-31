@@ -6,6 +6,7 @@ import TvShowDetails from '../components/TvShowDetails';
 import TvShowSeasons from '../components/TvShowSeasons';
 import CastDetails from '../components/CastDetails';
 import AllTvShows from '../components/AllTvShows';
+import SeasonDetails from '../components/SeasonDetails';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -41,6 +42,13 @@ const TvShowStack = StackNavigator({
         ...StackNavHeaderStyles,
       }),
     },
+    SeasonDetails: {
+      screen: SeasonDetails,
+      navigationOptions: ({navigation}) => ({
+        title: navigation.state.params.season.name,
+        ...StackNavHeaderStyles,
+      }),
+    }
   },
   {
     headerMode: 'float',

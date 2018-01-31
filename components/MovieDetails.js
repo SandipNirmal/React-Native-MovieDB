@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Details from './Details';
 import Constant from '../utilities/constants';
+import CastList from './CastList'
 
 class MovieDetails extends Details {
   componentDidMount() {
@@ -14,8 +15,15 @@ class MovieDetails extends Details {
     const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
     const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
 
-    this.fetchDetails(movieUrl);
-    this.fetchPeople(movieCreditsUrl);
+    this.fetchDetails(movieUrl, movieCreditsUrl);
+  }
+
+  getSpecialComponent() {
+    return <CastList 
+              title="Director"
+              items={this.state.directors}
+              onPress={this.showCastDetails.bind(this)}
+            />
   }
 }
 

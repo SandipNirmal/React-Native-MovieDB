@@ -14,8 +14,7 @@ import CastList from './CastList'
 import TrailerList from './TrailerList';
 import CastDetails from './CastDetails';
 
-import {Configuration} from '../data/configuration';
-import Constant from '../utilities/constants';
+import { Configuration } from '../data/configuration';
 import { getUriPopulatedTemp } from '../utilities/utils';
 import style from '../styles/styles';
 
@@ -31,19 +30,21 @@ class Details extends Component {
   }
 
   componentDidMount() {
-    console.error("Override!!")
+    console.error("Override!!");
   }
 
-  fetchDetails(uri) {
-    fetch(uri).then((response) => response.json()).then((response) => {
+  getSpecialComponent() {
+    console.error("Override!!");
+  }
+
+  fetchDetails(imagesUri, peopleUri) {
+    fetch(imagesUri).then((response) => response.json()).then((response) => {
       response.images = getUriPopulatedTemp(response.images.backdrops, 'backdrop');
       response.videos = this.formVideoUrls(response.videos.results) 
       this.setState({isLoading: false, data: response});
     }).catch((error) => { console.error(error); });
-  }
 
-  fetchPeople(uri) {
-    fetch(uri).then((response) => response.json()).then((response) => {
+    fetch(peopleUri).then((response) => response.json()).then((response) => {
       this.setState({
         directors: getUriPopulatedTemp(response.crew.filter((member) => 
           member.job === 'Director'), 'profile')
@@ -113,12 +114,8 @@ class Details extends Component {
                 playVideo={this.playVideo.bind(this)}
             />
 
-            <CastList 
-              title="Director"
-              items={this.state.directors}
-              onPress={this.showCastDetails.bind(this)}
-            />
-            
+            {this.getSpecialComponent()} 
+
             <CastList
               title="Cast"
               items={this.state.casts}
