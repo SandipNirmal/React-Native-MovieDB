@@ -5,17 +5,18 @@ import * as _ from 'lodash';
 
 import style, { primaryColor } from './../styles/styles';
 import Constant from '../utilities/constants';
-
-import SearcResult from './SearchResult';
 import SearchResult from './SearchResult';
   
+const buttons = ['Movie', 'Tv', 'Person']
+
 export default class Movies extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchResult: [],
       searchInProgress: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      filteredResults: []
     }
   }
 
@@ -36,6 +37,7 @@ export default class Movies extends Component {
       .then(res => {
         this.setState({
           searchResult: res.results,
+          filteredResults: this.filterSearchResults(res.results, this.state.selectedIndex),
           searchInProgress: false
         });
       }, (err) => {
@@ -48,7 +50,17 @@ export default class Movies extends Component {
 
   updateIndex = (e) => {
     this.setState({
-      selectedIndex: e
+      selectedIndex: e,
+      filteredResults: this.filterSearchResults(this.state.searchResult, e)
+    });
+  }
+
+  /**
+   * Filters search results based on media_type
+   */
+  filterSearchResults = (results, index) => {
+    return results.filter((result) => {
+      return result.media_type.toLowerCase() === buttons[index].toLowerCase()
     })
   }
 
@@ -74,8 +86,7 @@ export default class Movies extends Component {
   }
 
   render() {
-    const buttons = ['Movie', 'Tv', 'Person']
-    const {searchResult, searchInProgress, selectedIndex} = this.state;
+    const {filteredResults, searchInProgress, selectedIndex} = this.state;
 
     return (
         <View>
@@ -86,19 +97,19 @@ export default class Movies extends Component {
             onClearText={this.onClearText}
             placeholder='Search' />
 
-        <ButtonGroup
+          <ButtonGroup
               onPress={this.updateIndex}
               selectedIndex={selectedIndex}
               buttons={buttons}
               containerStyle={{height: 30, backgroundColor: '#e1e1e1', marginTop: 10}}
             />
 
-            <View>
-            {/* <Text>Search Results</Text> */}
-            {searchInProgress ? 
-              <ActivityIndicator size="large" color={primaryColor}/> :
-              <SearchResult items={searchResult} onSelect={this.onSelectItem}/>}
-            </View>
+          <View>
+          {searchInProgress ? 
+            <ActivityIndicator size="large" color={primaryColor}/> :
+            <SearchResult items={filteredResults} onSelect={this.onSelectItem}/>}
+          </View>
+
         </View>
     );
   }

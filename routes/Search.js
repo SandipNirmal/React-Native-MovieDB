@@ -14,7 +14,8 @@ const SearchStack = StackNavigator({
     headerVisible: false,
   },
   cardStyle: {
-    backgroundColor: '#4C4C4C'
+    backgroundColor: '#494949'
+    // backgroundColor: 'rgba(4, 4, 4, 0.6)'  
   }
 });
 

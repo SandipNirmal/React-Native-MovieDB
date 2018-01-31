@@ -99,6 +99,9 @@ const style = StyleSheet.create({
     backgroundColor: '#545454',
   },
   screenBackgroundColor: {
+    backgroundColor: 'rgba(4, 4, 4, 0.75)'
+  },
+  splashScreenBackground: {
     backgroundColor: '#040404'
   },
   trailerContainer: {
