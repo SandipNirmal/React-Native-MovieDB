@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Details from './Details';
-import Constant from '../utilities/constants';
-import CastList from './CastList'
+import Details from '../base/Details';
+import Constant from '../../utilities/constants';
+import CastList from '../common/CastList'
 
 class MovieDetails extends Details {
   componentDidMount() {

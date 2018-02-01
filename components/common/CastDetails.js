@@ -7,10 +7,10 @@ import {
   ScrollView
 } from 'react-native';
 
-import HorizontalImageList from './common/ImageList';
-import Constant from './../utilities/constants';
-import {Configuration} from '../data/configuration';
-import style, {StackNavHeaderStyles} from '../styles/styles';
+import HorizontalImageList from './ImageList';
+import Constant from '../../utilities/constants';
+import {Configuration} from '../../data/configuration';
+import style, {StackNavHeaderStyles} from '../../styles/styles';
 
 export default class CastDetails extends Component {
   constructor(props) {

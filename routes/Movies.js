@@ -1,9 +1,9 @@
 import {StackNavigator} from 'react-navigation';
-import Movies from '../components/Movies';
-import MovieDetails from '../components/MovieDetails';
-import AllMovies from '../components/AllMovies';
-import CastDetails from '../components/CastDetails';
-import VideoPlayer from './../components/VideoPlayer';
+import Movies from '../components/movies/Movies';
+import MovieDetails from '../components/movies/MovieDetails';
+import AllMovies from '../components/movies/AllMovies';
+import CastDetails from '../components/common/CastDetails';
+import VideoPlayer from '../components/common/VideoPlayer';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 

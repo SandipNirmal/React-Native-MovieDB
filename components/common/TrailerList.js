@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 
 import TrailerItem from './TrailerItem';
-import style from './../styles/styles';
+import style from '../../styles/styles';
 
 const Trailer = (props) => {
     return (

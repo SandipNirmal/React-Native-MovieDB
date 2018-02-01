@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Dimensions} from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { FlatImageList } from './common/ImageList';
+import { FlatImageList } from '../common/ImageList';
 
-import style from '../styles/styles';
+import style from '../../styles/styles';
 
 // return device width and height
 const {height, width} = Dimensions.get('window');

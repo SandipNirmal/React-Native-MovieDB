@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Shows from './Shows';
+import Shows from '../base/Shows';
 import { connect } from 'react-redux';
-import { fetchingMovies, movieFetched } from '../Actions';
+import { fetchingMovies, movieFetched } from '../../Actions';
 
-import style from '../styles/styles';
+import style from '../../styles/styles';
 
 class Movies extends Shows {
   constructor(props) {

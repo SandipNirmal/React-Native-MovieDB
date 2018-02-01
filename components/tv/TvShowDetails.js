@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Details from './Details';
-import Constant from '../utilities/constants';
-import HorizontalImageList from './common/ImageList';
-import style from '../styles/styles';
+import Details from '../base/Details';
+import Constant from '../../utilities/constants';
+import HorizontalImageList from '../common/ImageList';
+import style from '../../styles/styles';
 import * as _ from 'lodash';
-import { getUriPopulatedTemp } from '../utilities/utils';
+import { getUriPopulatedTemp } from '../../utilities/utils';
 
 class TvShowDetails extends Details {
   componentDidMount() {

@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import {Configuration} from '../data/configuration';
+import {Configuration} from '../../data/configuration';
 
-import style from './../styles/styles';
+import style from '../../styles/styles';
 
 const SearchItem = ({item}) => {
   const secureUrl = Configuration['images']['secure_base_url'];

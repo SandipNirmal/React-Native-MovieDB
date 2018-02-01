@@ -7,16 +7,16 @@ import {
   View,
 } from 'react-native';
 
-import BackgroundImage from './BackgroundImage';
-import ShowOverview from './common/ShowOverview';
-import HorizontalImageList from './common/ImageList';
-import CastList from './CastList'
-import TrailerList from './TrailerList';
-import CastDetails from './CastDetails';
+import BackgroundImage from '../common/BackgroundImage';
+import ShowOverview from '../common/ShowOverview';
+import HorizontalImageList from '../common/ImageList';
+import CastList from '../common/CastList'
+import TrailerList from '../common/TrailerList';
+import CastDetails from '../common/CastDetails';
 
-import { Configuration } from '../data/configuration';
-import { getUriPopulatedTemp } from '../utilities/utils';
-import style from '../styles/styles';
+import { Configuration } from '../../data/configuration';
+import { getUriPopulatedTemp } from '../../utilities/utils';
+import style from '../../styles/styles';
 
 class Details extends Component {
   constructor(props) {

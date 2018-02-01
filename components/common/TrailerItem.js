@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, TouchableOpacity,} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import style from './../styles/styles';
+import style from '../../styles/styles';
 
 const TrailerItem = ({video, onPlay}) => {
   return (

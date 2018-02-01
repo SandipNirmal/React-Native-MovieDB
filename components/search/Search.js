@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import { SearchBar, ButtonGroup } from 'react-native-elements'
 import * as _ from 'lodash';
 
-import style, { primaryColor } from './../styles/styles';
-import Constant from '../utilities/constants';
+import style, { primaryColor } from '../../styles/styles';
+import Constant from '../../utilities/constants';
 import SearchResult from './SearchResult';
   
 const buttons = ['Movie', 'Tv', 'Person']

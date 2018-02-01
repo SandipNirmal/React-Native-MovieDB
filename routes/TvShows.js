@@ -1,12 +1,11 @@
 // To add TvShows. Think if this is really required?
 // we can have this for readability purpose
 import {StackNavigator} from 'react-navigation';
-import TvShow from '../components/TvShows';
-import TvShowDetails from '../components/TvShowDetails';
-import TvShowSeasons from '../components/TvShowSeasons';
-import CastDetails from '../components/CastDetails';
-import AllTvShows from '../components/AllTvShows';
-import SeasonDetails from '../components/SeasonDetails';
+import TvShow from '../components/tv/TvShows';
+import TvShowDetails from '../components/tv/TvShowDetails';
+import CastDetails from '../components/common/CastDetails';
+import AllTvShows from '../components/tv/AllTvShows';
+import SeasonDetails from '../components/tv/SeasonDetails';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -31,9 +30,6 @@ const TvShowStack = StackNavigator({
         title: navigation.state.params.item.name,
         ...StackNavHeaderStyles,
       }),
-    },
-    TvShowSeasons: {
-      screen: TvShowSeasons
     },
     CastDetails: {
       screen: CastDetails,

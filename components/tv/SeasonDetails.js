@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {View, Text, ScrollView } from 'react-native';
 
-import BackgroundImage from './BackgroundImage';
-import ShowOverview from './common/ShowOverview';
+import BackgroundImage from '../common/BackgroundImage';
+import ShowOverview from '../common/ShowOverview';
 import EpisodeList from './EpisodeList';
 
-import { Configuration } from '../data/configuration';
-import style from './../styles/styles';
+import { Configuration } from '../../data/configuration';
+import style from '../../styles/styles';
 
 class SeasonDetails extends Component {
 
@@ -16,7 +16,7 @@ class SeasonDetails extends Component {
     const baseUrl = Configuration['images']['secure_base_url'];
     const size = Configuration['images']['poster_sizes'][5]
     const bgImage = `${baseUrl}${size}/${poster_path}`;
-    
+    console.log(this); 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
         <BackgroundImage uri={bgImage}/>
@@ -26,7 +26,7 @@ class SeasonDetails extends Component {
                 Season {season_number}
             </Text>
             <ShowOverview
-                date={air_date}
+                date={air_date || "Unknown"}
                 episodes={episode_count}
               />
           </View>

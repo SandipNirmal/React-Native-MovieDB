@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ScrollView, TouchableOpacity, Text} from 'react-native';
 
-import style from './../styles/styles';
+import style from '../../styles/styles';
 import SearchItem from './SearchItem';
 
 const SearchResult = (props) => {

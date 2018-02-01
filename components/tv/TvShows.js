@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Shows from './Shows';
 import { connect } from 'react-redux';
-import { fetchingTvShows, tvShowsFetched } from '../Actions';
+import Shows from '../base/Shows';
+import { fetchingTvShows, tvShowsFetched } from '../../Actions';
 import * as _ from 'lodash';
 
-import style from '../styles/styles';
+import style from '../../styles/styles';
 
 class TvShows extends Shows {
   constructor(props) {

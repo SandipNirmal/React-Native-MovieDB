@@ -2,7 +2,7 @@ import {
   StackNavigator
 } from 'react-navigation';
 
-import Search from './../components/Search';
+import Search from './../components/search/Search';
 
 const SearchStack = StackNavigator({
   Search: {
