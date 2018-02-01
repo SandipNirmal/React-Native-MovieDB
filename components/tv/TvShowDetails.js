@@ -23,7 +23,8 @@ class TvShowDetails extends Details {
 
   showSeasonDetails(season) {
     this.props.navigation.navigate('SeasonDetails', {season: season,
-      title: this.props.navigation.state.params.item.name});
+      title: this.props.navigation.state.params.item.name,
+      tvShowId: this.props.navigation.state.params.item.id});
   }
 
   getSpecialComponent() {
@@ -34,7 +35,7 @@ class TvShowDetails extends Details {
             title="Seasons"
             style={style.posterSize}
             onPress={this.showSeasonDetails.bind(this)}
-            images={getUriPopulatedTemp(seasons)}
+            images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
           />
   }
 }

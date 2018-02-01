@@ -44,8 +44,18 @@ const style = StyleSheet.create({
     paddingTop: 6,
     paddingBottom: 6
   },
+  subHeadingText: {
+    fontSize: 14,
+    fontWeight: '700',
+    paddingTop: 6,
+    paddingBottom: 6
+  },
   normalText: {
     fontSize: 12
+  },
+  secondaryText: {
+    color: '#e1e1e1',
+    paddingBottom: 4
   },
   textStickToBottom: {
     display: 'flex',
@@ -164,6 +174,26 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingRight: 5
+  },
+  episodeItem: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderBottomColor: '#e1e1e1',
+    borderBottomWidth: 1
+  },
+  episodePosterContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  episodePoster: {
+    width: 92,
+    height: 52
+  },
+  episodeDesc: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingHorizontal: 8
   }
 });
 
