@@ -14,18 +14,32 @@ const MovieInfo = (props) => {
                     {props.releaseDate}
                 </Text>
             </View>
+            
+            {props.runtime &&
             <View style={Style.infoItems}>
                 <Icon name='schedule' color={primaryColor}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.runtime} Min
                 </Text>
             </View>
+            }
+
+            {props.ratings && 
             <View style={Style.infoItems}>
                 <Icon name='stars' color={primaryColor}/>
                 <Text style={[style.text, Style.infoText]}>
                     {props.ratings}
                 </Text>
             </View>
+            }
+
+            {props.episodes && 
+            <View style={Style.infoItems}>
+                <Text style={[style.text, style.normalText]}>
+                    Episodes: {props.episodes}
+                </Text>
+            </View>
+            }
         </View>
     );
 }
@@ -52,8 +66,9 @@ const Style = StyleSheet.create({
 
 MovieInfo.propTypes = {
     releaseDate: PropTypes.string.isRequired,
-    runtime: PropTypes.number.isRequired,
-    ratings: PropTypes.number.isRequired
+    runtime: PropTypes.number,
+    ratings: PropTypes.number,
+    episodes: PropTypes.number
 }
 
 export default MovieInfo;

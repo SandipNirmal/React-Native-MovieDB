@@ -96,7 +96,7 @@ class Details extends Component {
             <MovieInfo
                 releaseDate={releaseDate}
                 runtime={data.runtime || 100}
-                  ratings={data.vote_average}
+                ratings={data.vote_average}
               />
 
             <Text style={[style.text, style.normalText]}>

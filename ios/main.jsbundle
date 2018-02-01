@@ -52883,7 +52883,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
       backgroundColor: '#040404'
     }
   });
-},335,[109,336,356,12,373,374,688],"la-lune-ios-clone/App.js");
+},335,[109,336,356,12,373,374,689],"la-lune-ios-clone/App.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   'use strict';
 
@@ -54995,7 +54995,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
 	}, {
 		headerMode: 'none'
 	});
-},374,[109,375,441,654,661,677,682,686,660],"la-lune-ios-clone/router.js");
+},374,[109,375,441,654,661,677,683,687,660],"la-lune-ios-clone/router.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   module.exports = {
     get createNavigationContainer() {
@@ -79496,7 +79496,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
         return _react2.default.createElement(
           _reactNative.View,
           {
-            style: [_styles2.default.centerContentContainer, _styles2.default.screenBackgroundColor],
+            style: [_styles2.default.centerContentContainer, _styles2.default.splashScreenBackground],
             __source: {
               fileName: _jsxFileName,
               lineNumber: 38
@@ -86962,6 +86962,9 @@ __d(function (global, require, module, exports, _dependencyMap) {
       backgroundColor: '#545454'
     },
     screenBackgroundColor: {
+      backgroundColor: 'rgba(4, 4, 4, 0.75)'
+    },
+    splashScreenBackground: {
       backgroundColor: '#040404'
     },
     trailerContainer: {
@@ -86998,7 +87001,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
     },
     searchItem: {
       flex: 1,
-      height: 100,
+      height: 90,
       flexDirection: 'row',
       padding: 2,
       margin: 6,
@@ -87007,8 +87010,8 @@ __d(function (global, require, module, exports, _dependencyMap) {
       shadowColor: '#191919'
     },
     searchItemImage: {
-      width: 80,
-      height: 96
+      width: 64,
+      height: 86
     },
     searchItemData: {
       width: 220,
@@ -87017,7 +87020,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
       paddingLeft: 25
     },
     searchResult: {
-      marginBottom: 100
+      marginBottom: 200
     },
     rightArrow: {
       flexGrow: 1,
@@ -87760,6 +87763,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  var _jsxFileName = "/Users/sandipnirmal/Work/React-Native/LaLuneiOSClone/components/MovieDetails.js";
 
   var _react = require(_dependencyMap[0], "react");
 
@@ -87772,6 +87776,10 @@ __d(function (global, require, module, exports, _dependencyMap) {
   var _constants = require(_dependencyMap[2], "../utilities/constants");
 
   var _constants2 = babelHelpers.interopRequireDefault(_constants);
+
+  var _CastList = require(_dependencyMap[3], "./CastList");
+
+  var _CastList2 = babelHelpers.interopRequireDefault(_CastList);
 
   var MovieDetails = function (_Details) {
     babelHelpers.inherits(MovieDetails, _Details);
@@ -87791,15 +87799,27 @@ __d(function (global, require, module, exports, _dependencyMap) {
         var movieId = this.props.navigation.state.params.item.id;
         var movieUrl = "" + baseUrl + movie_url + movieId + "?" + apiKey + "&" + appendResponse;
         var movieCreditsUrl = "" + baseUrl + movie_url + movieId + "/credits?" + apiKey;
-        this.fetchDetails(movieUrl);
-        this.fetchPeople(movieCreditsUrl);
+        this.fetchDetails(movieUrl, movieCreditsUrl);
+      }
+    }, {
+      key: "getSpecialComponent",
+      value: function getSpecialComponent() {
+        return _react2.default.createElement(_CastList2.default, {
+          title: "Director",
+          items: this.state.directors,
+          onPress: this.showCastDetails.bind(this),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 22
+          }
+        });
       }
     }]);
     return MovieDetails;
   }(_Details3.default);
 
   exports.default = MovieDetails;
-},667,[109,668,659],"la-lune-ios-clone/components/MovieDetails.js");
+},667,[109,668,659,671],"la-lune-ios-clone/components/MovieDetails.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -87838,13 +87858,9 @@ __d(function (global, require, module, exports, _dependencyMap) {
 
   var _configuration = require(_dependencyMap[8], "../data/configuration");
 
-  var _constants = require(_dependencyMap[9], "../utilities/constants");
+  var _utils = require(_dependencyMap[9], "../utilities/utils");
 
-  var _constants2 = babelHelpers.interopRequireDefault(_constants);
-
-  var _utils = require(_dependencyMap[10], "../utilities/utils");
-
-  var _styles = require(_dependencyMap[11], "../styles/styles");
+  var _styles = require(_dependencyMap[10], "../styles/styles");
 
   var _styles2 = babelHelpers.interopRequireDefault(_styles);
 
@@ -87871,11 +87887,16 @@ __d(function (global, require, module, exports, _dependencyMap) {
         console.error("Override!!");
       }
     }, {
+      key: "getSpecialComponent",
+      value: function getSpecialComponent() {
+        console.error("Override!!");
+      }
+    }, {
       key: "fetchDetails",
-      value: function fetchDetails(uri) {
+      value: function fetchDetails(imagesUri, peopleUri) {
         var _this2 = this;
 
-        fetch(uri).then(function (response) {
+        fetch(imagesUri).then(function (response) {
           return response.json();
         }).then(function (response) {
           response.images = (0, _utils.getUriPopulatedTemp)(response.images.backdrops, 'backdrop');
@@ -87888,22 +87909,16 @@ __d(function (global, require, module, exports, _dependencyMap) {
         }).catch(function (error) {
           console.error(error);
         });
-      }
-    }, {
-      key: "fetchPeople",
-      value: function fetchPeople(uri) {
-        var _this3 = this;
-
-        fetch(uri).then(function (response) {
+        fetch(peopleUri).then(function (response) {
           return response.json();
         }).then(function (response) {
-          _this3.setState({
+          _this2.setState({
             directors: (0, _utils.getUriPopulatedTemp)(response.crew.filter(function (member) {
               return member.job === 'Director';
             }), 'profile')
           });
 
-          _this3.setState({
+          _this2.setState({
             casts: (0, _utils.getUriPopulatedTemp)(response.cast.sort(function (a, b) {
               return a.order - b.order;
             }), 'profile')
@@ -87957,14 +87972,14 @@ __d(function (global, require, module, exports, _dependencyMap) {
             }, _styles2.default.screenBackgroundColor],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 87
+              lineNumber: 88
             }
           },
           _react2.default.createElement(_BackgroundImage2.default, {
             uri: bgImage,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 88
+              lineNumber: 89
             }
           }),
           _react2.default.createElement(
@@ -87972,7 +87987,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 89
+                lineNumber: 90
               }
             },
             _react2.default.createElement(
@@ -87981,7 +87996,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
                 style: _styles2.default.detailsContainer,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 90
+                  lineNumber: 91
                 }
               },
               _react2.default.createElement(
@@ -87990,7 +88005,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
                   style: [_styles2.default.text, _styles2.default.titleText],
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 91
+                    lineNumber: 92
                   }
                 },
                 this.state.data.title
@@ -88001,7 +88016,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
                 ratings: data.vote_average,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 95
+                  lineNumber: 96
                 }
               }),
               _react2.default.createElement(
@@ -88010,7 +88025,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
                   style: [_styles2.default.text, _styles2.default.normalText],
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 101
+                    lineNumber: 102
                   }
                 },
                 this.state.data.overview
@@ -88021,7 +88036,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
                 style: _styles2.default.backdropSize,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 105
+                  lineNumber: 106
                 }
               }),
               _react2.default.createElement(_TrailerList2.default, {
@@ -88029,25 +88044,17 @@ __d(function (global, require, module, exports, _dependencyMap) {
                 playVideo: this.playVideo.bind(this),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 111
+                  lineNumber: 112
                 }
               }),
-              _react2.default.createElement(_CastList2.default, {
-                title: "Director",
-                items: this.state.directors,
-                onPress: this.showCastDetails.bind(this),
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 116
-                }
-              }),
+              this.getSpecialComponent(),
               _react2.default.createElement(_CastList2.default, {
                 title: "Cast",
                 items: this.state.casts,
                 onPress: this.showCastDetails.bind(this),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 122
+                  lineNumber: 119
                 }
               })
             )
@@ -88059,7 +88066,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   }(_react.Component);
 
   exports.default = Details;
-},668,[109,12,669,670,664,671,672,674,658,659,657,660],"la-lune-ios-clone/components/Details.js");
+},668,[109,12,669,670,664,671,672,674,658,657,660],"la-lune-ios-clone/components/Details.js");
 __d(function (global, require, module, exports, _dependencyMap) {
     Object.defineProperty(exports, "__esModule", {
         value: true
@@ -88889,7 +88896,11 @@ __d(function (global, require, module, exports, _dependencyMap) {
 
   var _AllTvShows2 = babelHelpers.interopRequireDefault(_AllTvShows);
 
-  var _styles = require(_dependencyMap[6], "../styles/styles");
+  var _SeasonDetails = require(_dependencyMap[6], "../components/SeasonDetails");
+
+  var _SeasonDetails2 = babelHelpers.interopRequireDefault(_SeasonDetails);
+
+  var _styles = require(_dependencyMap[7], "../styles/styles");
 
   var TvShowStack = (0, _reactNavigation.StackNavigator)({
     TvShow: {
@@ -88927,6 +88938,15 @@ __d(function (global, require, module, exports, _dependencyMap) {
           title: navigation.state.params.cast.name
         }, _styles.StackNavHeaderStyles);
       }
+    },
+    SeasonDetails: {
+      screen: _SeasonDetails2.default,
+      navigationOptions: function navigationOptions(_ref4) {
+        var navigation = _ref4.navigation;
+        return babelHelpers.extends({
+          title: navigation.state.params.season.name
+        }, _styles.StackNavHeaderStyles);
+      }
     }
   }, {
     headerMode: 'float',
@@ -88935,7 +88955,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
     }
   });
   exports.default = TvShowStack;
-},677,[375,678,679,680,674,681,660],"la-lune-ios-clone/routes/TvShows.js");
+},677,[375,678,679,680,674,681,682,660],"la-lune-ios-clone/routes/TvShows.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89027,6 +89047,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  var _jsxFileName = "/Users/sandipnirmal/Work/React-Native/LaLuneiOSClone/components/TvShowDetails.js";
 
   var _react = require(_dependencyMap[0], "react");
 
@@ -89039,6 +89060,20 @@ __d(function (global, require, module, exports, _dependencyMap) {
   var _constants = require(_dependencyMap[2], "../utilities/constants");
 
   var _constants2 = babelHelpers.interopRequireDefault(_constants);
+
+  var _ImageList = require(_dependencyMap[3], "./common/ImageList");
+
+  var _ImageList2 = babelHelpers.interopRequireDefault(_ImageList);
+
+  var _styles = require(_dependencyMap[4], "../styles/styles");
+
+  var _styles2 = babelHelpers.interopRequireDefault(_styles);
+
+  var _lodash = require(_dependencyMap[5], "lodash");
+
+  var _ = babelHelpers.interopRequireWildcard(_lodash);
+
+  var _utils = require(_dependencyMap[6], "../utilities/utils");
 
   var TvShowDetails = function (_Details) {
     babelHelpers.inherits(TvShowDetails, _Details);
@@ -89058,15 +89093,38 @@ __d(function (global, require, module, exports, _dependencyMap) {
         var tvShowId = this.props.navigation.state.params.item.id;
         var tvShowUrl = "" + baseUrl + tvShow_url + tvShowId + "?" + apiKey + "&" + appendResponse;
         var tvShowCreditsUrl = "" + baseUrl + tvShow_url + tvShowId + "/credits?" + apiKey;
-        this.fetchDetails(tvShowUrl);
-        this.fetchPeople(tvShowCreditsUrl);
+        this.fetchDetails(tvShowUrl, tvShowCreditsUrl);
+      }
+    }, {
+      key: "showSeasonDetails",
+      value: function showSeasonDetails(season) {
+        this.props.navigation.navigate('SeasonDetails', {
+          season: season
+        });
+      }
+    }, {
+      key: "getSpecialComponent",
+      value: function getSpecialComponent() {
+        var seasons = _.get(this, 'state.data.seasons', []);
+
+        return _react2.default.createElement(_ImageList2.default, {
+          isTouchableImage: true,
+          title: "Seasons",
+          style: _styles2.default.posterSize,
+          onPress: this.showSeasonDetails.bind(this),
+          images: (0, _utils.getUriPopulatedTemp)(seasons),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 31
+          }
+        });
       }
     }]);
     return TvShowDetails;
   }(_Details3.default);
 
   exports.default = TvShowDetails;
-},679,[109,668,659],"la-lune-ios-clone/components/TvShowDetails.js");
+},679,[109,668,659,664,660,655,657],"la-lune-ios-clone/components/TvShowDetails.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89188,6 +89246,62 @@ __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  var _jsxFileName = "/Users/sandipnirmal/Work/React-Native/LaLuneiOSClone/components/SeasonDetails.js";
+
+  var _react = require(_dependencyMap[0], "react");
+
+  var _react2 = babelHelpers.interopRequireDefault(_react);
+
+  var _reactNative = require(_dependencyMap[1], "react-native");
+
+  var _styles = require(_dependencyMap[2], "../styles/styles");
+
+  var _styles2 = babelHelpers.interopRequireDefault(_styles);
+
+  var SeasonDetails = function (_Component) {
+    babelHelpers.inherits(SeasonDetails, _Component);
+
+    function SeasonDetails() {
+      babelHelpers.classCallCheck(this, SeasonDetails);
+      return babelHelpers.possibleConstructorReturn(this, (SeasonDetails.__proto__ || Object.getPrototypeOf(SeasonDetails)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SeasonDetails, [{
+      key: "render",
+      value: function render() {
+        var season = this.props.navigation.state.params.season;
+        return _react2.default.createElement(
+          _reactNative.ScrollView,
+          {
+            style: _styles2.default.screenBackgroundColor,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 11
+            }
+          },
+          _react2.default.createElement(
+            _reactNative.Text,
+            {
+              style: [_styles2.default.text, _styles2.default.headingText],
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 12
+              }
+            },
+            "Season Details go here"
+          )
+        );
+      }
+    }]);
+    return SeasonDetails;
+  }(_react.Component);
+
+  exports.default = SeasonDetails;
+},682,[109,12,660],"la-lune-ios-clone/components/SeasonDetails.js");
+__d(function (global, require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
 
   var _reactNavigation = require(_dependencyMap[0], "react-navigation");
 
@@ -89196,7 +89310,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   var _Search2 = babelHelpers.interopRequireDefault(_Search);
 
   var SearchStack = (0, _reactNavigation.StackNavigator)({
-    Settings: {
+    Search: {
       screen: _Search2.default
     }
   }, {
@@ -89205,11 +89319,11 @@ __d(function (global, require, module, exports, _dependencyMap) {
       headerVisible: false
     },
     cardStyle: {
-      backgroundColor: '#4C4C4C'
+      backgroundColor: '#494949'
     }
   });
   exports.default = SearchStack;
-},682,[375,683],"la-lune-ios-clone/routes/Search.js");
+},683,[375,684],"la-lune-ios-clone/routes/Search.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89240,6 +89354,8 @@ __d(function (global, require, module, exports, _dependencyMap) {
 
   var _SearchResult2 = babelHelpers.interopRequireDefault(_SearchResult);
 
+  var buttons = ['Movie', 'Tv', 'Person'];
+
   var Movies = function (_Component) {
     babelHelpers.inherits(Movies, _Component);
 
@@ -89266,6 +89382,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
           }).then(function (res) {
             _this.setState({
               searchResult: res.results,
+              filteredResults: _this.filterSearchResults(res.results, _this.state.selectedIndex),
               searchInProgress: false
             });
           }, function (err) {
@@ -89275,6 +89392,19 @@ __d(function (global, require, module, exports, _dependencyMap) {
       };
 
       _this.onClearText = function () {};
+
+      _this.updateIndex = function (e) {
+        _this.setState({
+          selectedIndex: e,
+          filteredResults: _this.filterSearchResults(_this.state.searchResult, e)
+        });
+      };
+
+      _this.filterSearchResults = function (results, index) {
+        return results.filter(function (result) {
+          return result.media_type.toLowerCase() === buttons[index].toLowerCase();
+        });
+      };
 
       _this.onSelectItem = function (item) {
         switch (item.media_type) {
@@ -89307,7 +89437,9 @@ __d(function (global, require, module, exports, _dependencyMap) {
 
       _this.state = {
         searchResult: [],
-        searchInProgress: false
+        searchInProgress: false,
+        selectedIndex: 0,
+        filteredResults: []
       };
       return _this;
     }
@@ -89316,14 +89448,15 @@ __d(function (global, require, module, exports, _dependencyMap) {
       key: "render",
       value: function render() {
         var _state = this.state,
-            searchResult = _state.searchResult,
-            searchInProgress = _state.searchInProgress;
+            filteredResults = _state.filteredResults,
+            searchInProgress = _state.searchInProgress,
+            selectedIndex = _state.selectedIndex;
         return _react2.default.createElement(
           _reactNative.View,
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 73
+              lineNumber: 92
             }
           },
           _react2.default.createElement(_reactNativeElements.SearchBar, {
@@ -89336,7 +89469,21 @@ __d(function (global, require, module, exports, _dependencyMap) {
             placeholder: "Search",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 74
+              lineNumber: 93
+            }
+          }),
+          _react2.default.createElement(_reactNativeElements.ButtonGroup, {
+            onPress: this.updateIndex,
+            selectedIndex: selectedIndex,
+            buttons: buttons,
+            containerStyle: {
+              height: 30,
+              backgroundColor: '#e1e1e1',
+              marginTop: 10
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 100
             }
           }),
           _react2.default.createElement(
@@ -89344,7 +89491,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 81
+                lineNumber: 107
               }
             },
             searchInProgress ? _react2.default.createElement(_reactNative.ActivityIndicator, {
@@ -89352,14 +89499,14 @@ __d(function (global, require, module, exports, _dependencyMap) {
               color: _styles.primaryColor,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 84
+                lineNumber: 109
               }
             }) : _react2.default.createElement(_SearchResult2.default, {
-              items: searchResult,
+              items: filteredResults,
               onSelect: this.onSelectItem,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 85
+                lineNumber: 110
               }
             })
           )
@@ -89370,7 +89517,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   }(_react.Component);
 
   exports.default = Movies;
-},683,[109,12,441,655,660,659,684],"la-lune-ios-clone/components/Search.js");
+},684,[109,12,441,655,660,659,685],"la-lune-ios-clone/components/Search.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89436,7 +89583,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   };
 
   exports.default = SearchResult;
-},684,[109,12,660,685],"la-lune-ios-clone/components/SearchResult.js");
+},685,[109,12,660,686],"la-lune-ios-clone/components/SearchResult.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89524,31 +89671,12 @@ __d(function (global, require, module, exports, _dependencyMap) {
           },
           type.toUpperCase()
         )
-      ),
-      _react2.default.createElement(
-        _reactNative.View,
-        {
-          style: _styles2.default.rightArrow,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 28
-          }
-        },
-        _react2.default.createElement(_reactNativeElements.Icon, {
-          name: "chevron-right",
-          size: 40,
-          color: "white",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 29
-          }
-        })
       )
     );
   };
 
   exports.default = SearchItem;
-},685,[109,12,441,658,660],"la-lune-ios-clone/components/SearchItem.js");
+},686,[109,12,441,658,660],"la-lune-ios-clone/components/SearchItem.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89576,7 +89704,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
     }
   });
   exports.default = SettingsStack;
-},686,[375,687,660],"la-lune-ios-clone/routes/Settings.js");
+},687,[375,688,660],"la-lune-ios-clone/routes/Settings.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89748,7 +89876,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
   }(_react.Component);
 
   exports.default = Movies;
-},687,[109,12,441,660],"la-lune-ios-clone/components/Settings.js");
+},688,[109,12,441,660],"la-lune-ios-clone/components/Settings.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89877,7 +90005,7 @@ __d(function (global, require, module, exports, _dependencyMap) {
     settings: settings
   });
   exports.default = laLune;
-},688,[336,689,655,656,12],"la-lune-ios-clone/Reducers.js");
+},689,[336,690,655,656,12],"la-lune-ios-clone/Reducers.js");
 __d(function (global, require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -89917,6 +90045,6 @@ __d(function (global, require, module, exports, _dependencyMap) {
       'region': 'IN'
     }
   };
-},689,[],"la-lune-ios-clone/State.js");
+},690,[],"la-lune-ios-clone/State.js");
 require(23);
 require(11);
