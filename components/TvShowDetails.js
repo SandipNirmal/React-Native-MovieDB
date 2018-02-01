@@ -22,7 +22,8 @@ class TvShowDetails extends Details {
   }
 
   showSeasonDetails(season) {
-    this.props.navigation.navigate('SeasonDetails', {season: season});
+    this.props.navigation.navigate('SeasonDetails', {season: season,
+      title: this.props.navigation.state.params.item.name});
   }
 
   getSpecialComponent() {

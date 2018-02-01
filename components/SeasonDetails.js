@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {View, Text, ScrollView } from 'react-native';
 
 import BackgroundImage from './BackgroundImage';
-import MovieInfo from './MovieInfo';
+import ShowOverview from './common/ShowOverview';
 import EpisodeList from './EpisodeList';
 
 import { Configuration } from '../data/configuration';
 import style from './../styles/styles';
 
-export default class SeasonDetails extends Component {
+class SeasonDetails extends Component {
 
   render() {
     const { poster_path, air_date, episode_count, season_number } = this.props.navigation.state.params.season;
@@ -25,8 +25,8 @@ export default class SeasonDetails extends Component {
             <Text style={[style.text, style.titleText]}>
                 Season {season_number}
             </Text>
-            <MovieInfo
-                releaseDate={air_date}
+            <ShowOverview
+                date={air_date}
                 episodes={episode_count}
               />
           </View>
@@ -37,4 +37,7 @@ export default class SeasonDetails extends Component {
     );
   }
 }
+
+export default SeasonDetails;
+
 

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import BackgroundImage from './BackgroundImage';
-import MovieInfo from './MovieInfo';
+import ShowOverview from './common/ShowOverview';
 import HorizontalImageList from './common/ImageList';
 import CastList from './CastList'
 import TrailerList from './TrailerList';
@@ -93,8 +93,8 @@ class Details extends Component {
                 {this.state.data.title}
             </Text>
 
-            <MovieInfo
-                releaseDate={releaseDate}
+            <ShowOverview
+                date={releaseDate}
                 runtime={data.runtime || 100}
                 ratings={data.vote_average}
               />

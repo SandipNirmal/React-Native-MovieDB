@@ -45,7 +45,7 @@ const TvShowStack = StackNavigator({
     SeasonDetails: {
       screen: SeasonDetails,
       navigationOptions: ({navigation}) => ({
-        title: navigation.state.params.season.name,
+        title: navigation.state.params.title,
         ...StackNavHeaderStyles,
       }),
     }
