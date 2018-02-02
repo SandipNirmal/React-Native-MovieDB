@@ -1,6 +1,6 @@
 export default {
   'movies': {
-    'isFetching': false,
+    'isFetching': true,
     'categories': {
       'nowShowing': [],
       'comingSoon': [],

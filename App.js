@@ -7,11 +7,28 @@ import {
   StatusBar
 } from 'react-native';
 import Orientation from 'react-native-orientation';
+import { connect } from 'react-redux';
 
-import { AppRoot } from './router';
+import MainScreen from './router';
+import SplashScreen from './components/SplashScreen';
 import LaLune from './Reducers';
 
 let store = createStore(LaLune);
+
+class Screen extends React.Component {
+  render() {
+    const { isFetching } = this.props;
+    const screen = isFetching ? <SplashScreen /> : <MoviesStack />;
+    return screen;
+  }
+}
+
+const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = state => ({
+  isFetching: state.movies.isFetching,
+});
+
+const AppRoot = connect(mapStateToProps, mapDispatchToProps)(Screen);
 
 export default class App extends React.Component {
 
@@ -24,7 +41,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          {/* <StatusBar /> // style the bar */}
           <AppRoot />
         </View>
       </Provider>
@@ -36,7 +52,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#040404',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });

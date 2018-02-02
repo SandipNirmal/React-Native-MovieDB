@@ -24,11 +24,8 @@ class SplashScreen extends Component {
       onConfigFetched(response);
       uri = `${Constant.api_base_url}/movie/now_playing?${apiKey}&language=${settings.language}&page=1`;
       fetch(uri).then((response) => response.json()).then((response) => {
-        if (_.get(this, 'props.navigation.navigate')) {
-          onFetchCompleted('nowShowing',
-            getUriPopulated(response.results, config, 'posterSizeForImageList'));
-          this.props.navigation.navigate('MainScreen');
-        }
+        onFetchCompleted('nowShowing',
+          getUriPopulated(response.results, config, 'posterSizeForImageList'));
       }).catch(error => console.error(error))
     }).catch(error => console.error(error))
   }
@@ -61,7 +58,6 @@ class SplashScreen extends Component {
 };
 
 const mapStateToProps = state => ({
-  isFetching: state.movies.isFetching,
   config: state.configuration,
   settings: state.settings,
 });

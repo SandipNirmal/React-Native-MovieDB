@@ -53,15 +53,4 @@ const MainScreen = TabNavigator({
 		}
 });
 
-export const AppRoot = StackNavigator({
-    SplashScreen	: {
-      screen: SplashScreen,
-    },
-    MainScreen: {
-      screen: MainScreen,
-    }
-  },
-  {
-    headerMode: 'none',
-  }
-)
+export default MainScreen;
