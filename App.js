@@ -18,7 +18,7 @@ let store = createStore(LaLune);
 class Screen extends React.Component {
   render() {
     const { isFetching } = this.props;
-    const screen = isFetching ? <SplashScreen /> : <MoviesStack />;
+    const screen = isFetching ? <SplashScreen /> : <MainScreen />;
     return screen;
   }
 }
