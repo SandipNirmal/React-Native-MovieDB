@@ -4,6 +4,7 @@ import {View, ScrollView, TouchableOpacity, Text} from 'react-native';
 import style from '../../styles/styles';
 import SearchItem from './SearchItem';
 
+// TODO - Rewrite using react-native-elements List, ListItem
 const SearchResult = (props) => {
   return (
     <View>

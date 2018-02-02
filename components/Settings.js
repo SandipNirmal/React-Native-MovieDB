@@ -7,11 +7,20 @@ import {
   AsyncStorage,
   Picker
 } from 'react-native';
-import {Button} from 'react-native-elements';
+import { List, ListItem, Button } from 'react-native-elements'
 
 import style from './../styles/styles';
 
 const SETTINGS_KEY = 'Settings'
+
+const settingList = [
+  {
+    title: 'App Name: La Lune',
+  },
+  {
+    title: 'App Version: 0.0.1',
+  }
+];
 
 export default class Movies extends Component {
 
@@ -45,16 +54,26 @@ saveSettings() {
 render() {
   return (
       <View>
-        <ScrollView>
-          <Text style={[style.titleText]}> Setings </Text>
+          {/* <Text style={[style.titleText]}> Setings </Text>
           <Text style={[style.headingText]}>Select Language</Text>
           <Text>{this.state.language}</Text>
 
           <Text style={[style.headingText]}>Select Region</Text>
           <Text>{this.state.region}</Text>
 
-          <Button title='Save Settings' />
-        </ScrollView>
+          <Button title='Save Settings' /> */}
+          <List containerStyle={{marginBottom: 20}}>
+          {
+            settingList.map((l, i) => (
+              <ListItem
+                key={i}
+                title={l.title}
+                // leftIcon={{name: l.icon}}
+                hideChevron
+                />
+            ))
+          }
+          </List>
       </View>
     );
   }

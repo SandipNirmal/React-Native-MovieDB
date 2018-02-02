@@ -95,7 +95,14 @@ export default class Movies extends Component {
             round
             onChangeText={_.debounce(this.onTextChange, 1000)}
             onClearText={this.onClearText}
-            placeholder='Search' />
+            placeholder='Search'
+            />
+          
+          {/* <SearchBar
+            showLoading
+            platform="ios"
+            cancelButtonTitle="Cancel"
+            placeholder='Search' /> */}
 
           <ButtonGroup
               onPress={this.updateIndex}
