@@ -35,9 +35,8 @@ class TvShows extends Shows {
   /**
    * @overrides
    */
-  showAll(category, shows) {
-    this.props.navigation.navigate('AllTvShows', 
-      {category: category, tvShows: shows});
+  showAll(category) {
+    this.props.navigation.navigate('AllTvShows', {category: category});
   }
 }
 

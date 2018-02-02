@@ -32,9 +32,8 @@ class Movies extends Shows {
   /**
    * @overrides
    */
-  showAll(category, movies) {
-    this.props.navigation.navigate('AllMovies', 
-      {category: category, movies:movies});
+  showAll(category) {
+    this.props.navigation.navigate('AllMovies', {category: category});
   }
 }
 

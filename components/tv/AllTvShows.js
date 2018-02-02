@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Dimensions} from 'react-native';
 import { FlatImageList } from '../common/ImageList';
+import { connect } from 'react-redux';
 
 import style from '../../styles/styles';
 
@@ -14,17 +15,23 @@ class AllTvShows extends Component {
   }
 
   render() {
-    const { tvShows } = this.props.navigation.state.params;
+    const { category } = this.props.navigation.state.params;
+    const { categories } = this.props;
     return(
       <FlatImageList
         numColumns={numColumns}
         style={style.screenBackgroundColor}
-        images={tvShows}
+        images={categories[category.toCategory()]}
         onPress={this.showDetails.bind(this)}
       />
     )
   }
 }
 
-export default AllTvShows;
+const mapStateToProps = state => ({
+  ...state.tvShows,
+});
 
+const mapDispatchToProps = dispatch => ({ });
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllTvShows);
