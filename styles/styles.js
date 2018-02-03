@@ -206,6 +206,7 @@ const StackNavHeaderStyles = {
 export {
   StackNavHeaderStyles,
   primaryColor,
+  marginTop
 }
 
 export default style;

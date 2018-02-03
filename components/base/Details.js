@@ -16,7 +16,7 @@ import CastDetails from '../common/CastDetails';
 
 import { Configuration } from '../../data/configuration';
 import { getUriPopulatedTemp } from '../../utilities/utils';
-import style from '../../styles/styles';
+import style, {marginTop} from '../../styles/styles';
 
 class Details extends Component {
   constructor(props) {
@@ -26,6 +26,8 @@ class Details extends Component {
       data: this.props.navigation.state.params.item,
       directors: [],
       casts: [],
+      opacity: 1,
+      blur: 0
     };
   }
 
@@ -76,31 +78,54 @@ class Details extends Component {
     this.props.navigation.navigate('VideoPlayer', {url});
   }
 
+  handleOnScroll = (e) => {
+    const yOffset = e.nativeEvent.contentOffset.y;
+    const blurConstant = 25;
+    // If Y scroll position is more than detail poster then blur it
+    if (yOffset > marginTop) {
+      this.setState({
+        opacity: 0,
+        blur: blurConstant
+      })
+    } else {
+      const opacity = 1 - (yOffset/marginTop);
+      const blur = parseInt((yOffset * blurConstant ) / marginTop, 10);
+      console.log(blur);
+      this.setState({
+        opacity,
+        blur
+      })
+    }
+  }
+
   render() {
     const baseUrl = Configuration['images']['secure_base_url'];
     const size = Configuration['images']['poster_sizes'][5]
     const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.item.poster_path}`;
-    const { data } = this.state;
-    const {images, videos} = data;
-    const releaseDate = data.release_date || data.first_air_date;
+    const {
+      title, images, videos, release_date,
+      first_air_date, runtime, vote_average, overview} = this.state.data;
 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
-        <BackgroundImage uri={bgImage}/>
-        <ScrollView>
+        <BackgroundImage 
+          uri={bgImage} 
+          opacity={this.state.opacity}
+          blur={this.state.blur}/>
+        <ScrollView onScroll={this.handleOnScroll} scrollEventThrottle={160}>
           <View style={style.detailsContainer}>
             <Text style={[style.text, style.titleText]}>
-                {this.state.data.title}
+                {title}
             </Text>
 
             <ShowOverview
-                date={releaseDate}
-                runtime={data.runtime || 100}
-                ratings={data.vote_average}
+                date={release_date || first_air_date}
+                runtime={runtime || 100}
+                ratings={vote_average}
               />
 
             <Text style={[style.text, style.normalText]}>
-                {this.state.data.overview}
+                {overview}
             </Text>
 
             <HorizontalImageList

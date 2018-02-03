@@ -6,14 +6,18 @@ const BackgroundImage = (props) => {
 
     return (
         <Image
-            style={Style.absoluteImage}
+            // style={[Style.absoluteImage, {opacity: props.opacity}]}
+            style={[Style.absoluteImage]}
             source={{uri: props.uri}}
+            blurRadius={props.blur || 0}
         />
     )
 }
 
 BackgroundImage.propTypes = {
-    uri: PropTypes.string.isRequired
+    uri: PropTypes.string.isRequired,
+    opacity: PropTypes.number,
+    blur: PropTypes.number
 }
 
 const Style = StyleSheet.create({
