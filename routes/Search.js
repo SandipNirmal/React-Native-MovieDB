@@ -1,11 +1,11 @@
-import {
-  StackNavigator
-} from 'react-navigation';
+import React from 'react';
+import { StackNavigator } from 'react-navigation';
 
 import Search from './../components/search/Search';
 import TvShowDetails from './../components/tv/TvShowDetails';
 import MovieDetails from './../components/movies/MovieDetails';
 import CastDetails from './../components/common/CastDetails';
+import ShareButton from './../components/common/shareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -24,6 +24,11 @@ const SearchStack = StackNavigator({
     }) => ({
       title: navigation.state.params.item.original_title,
       ...StackNavHeaderStyles,
+      headerRight: <ShareButton 
+                      name={navigation.state.params.item.original_title}
+                      type="movie"
+                      id={navigation.state.params.item.id}
+                    />
     }),
   },
   TvShowDetails: {
@@ -33,6 +38,11 @@ const SearchStack = StackNavigator({
     }) => ({
       title: navigation.state.params.item.original_title,
       ...StackNavHeaderStyles,
+      headerRight: <ShareButton 
+                      name={navigation.state.params.item.name}
+                      type="tv"
+                      id={navigation.state.params.item.id}
+                    />
     }),
   },
   CastDetails: {
@@ -42,6 +52,11 @@ const SearchStack = StackNavigator({
     }) => ({
       title: navigation.state.params.cast.name,
       ...StackNavHeaderStyles,
+      headerRight: <ShareButton 
+                      name={navigation.state.params.cast.name}
+                      type="person"
+                      id={navigation.state.params.cast.id}
+                    />
     }),
   },
 }, {

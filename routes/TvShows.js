@@ -1,11 +1,14 @@
 // To add TvShows. Think if this is really required?
 // we can have this for readability purpose
+import React from 'react';
 import {StackNavigator} from 'react-navigation';
+
 import TvShow from '../components/tv/TvShows';
 import TvShowDetails from '../components/tv/TvShowDetails';
 import CastDetails from '../components/common/CastDetails';
 import AllTvShows from '../components/tv/AllTvShows';
 import SeasonDetails from '../components/tv/SeasonDetails';
+import ShareButton from './../components/common/shareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -29,6 +32,11 @@ const TvShowStack = StackNavigator({
       navigationOptions: ({navigation}) => ({
         title: navigation.state.params.item.name,
         ...StackNavHeaderStyles,
+        headerRight: <ShareButton 
+                      name={navigation.state.params.item.name}
+                      type="tv"
+                      id={navigation.state.params.item.id}
+                    />
       }),
     },
     CastDetails: {
@@ -36,6 +44,11 @@ const TvShowStack = StackNavigator({
       navigationOptions: ({navigation}) => ({
         title: navigation.state.params.cast.name,
         ...StackNavHeaderStyles,
+        headerRight: <ShareButton 
+                      name={navigation.state.params.cast.name}
+                      type="person"
+                      id={navigation.state.params.cast.id}
+                    />
       }),
     },
     SeasonDetails: {
