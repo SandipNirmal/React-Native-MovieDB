@@ -80,7 +80,7 @@ class Details extends Component {
 
   handleOnScroll = (e) => {
     const yOffset = e.nativeEvent.contentOffset.y;
-    const blurConstant = 25;
+    const blurConstant = 10;
     // If Y scroll position is more than detail poster then blur it
     if (yOffset > marginTop) {
       this.setState({
@@ -90,7 +90,6 @@ class Details extends Component {
     } else {
       const opacity = 1 - (yOffset/marginTop);
       const blur = parseInt((yOffset * blurConstant ) / marginTop, 10);
-      console.log(blur);
       this.setState({
         opacity,
         blur
@@ -112,7 +111,10 @@ class Details extends Component {
           uri={bgImage} 
           opacity={this.state.opacity}
           blur={this.state.blur}/>
-        <ScrollView onScroll={this.handleOnScroll} scrollEventThrottle={160}>
+        <ScrollView>
+
+        { // TODO - Disabling onScroll blur. Need better solution
+          /* onScroll={this.handleOnScroll} scrollEventThrottle={160} */}
           <View style={style.detailsContainer}>
             <Text style={[style.text, style.titleText]}>
                 {title}

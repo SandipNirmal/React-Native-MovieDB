@@ -9,7 +9,7 @@ const BackgroundImage = (props) => {
             // style={[Style.absoluteImage, {opacity: props.opacity}]}
             style={[Style.absoluteImage]}
             source={{uri: props.uri}}
-            blurRadius={props.blur || 0}
+            // blurRadius={props.blur || 0}
         />
     )
 }

@@ -48,7 +48,9 @@ const MainScreen = TabNavigator({
 			activeTintColor: primaryColor,
 			inactiveTintColor: '#a9a9a9',
 			style: {
-				backgroundColor: '#040404'
+				backgroundColor: '#222',
+				borderTopColor: '#181818',
+				borderTopWidth: 1
 			}
 		}
 });

@@ -62,7 +62,7 @@ const SearchStack = StackNavigator({
 }, {
   headerMode: 'float',
   cardStyle: {
-    backgroundColor: '#494949'
+    backgroundColor: '#181818'
     // backgroundColor: 'rgba(4, 4, 4, 0.6)'  
   }
 });

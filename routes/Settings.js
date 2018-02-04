@@ -14,7 +14,7 @@ const SettingsStack = StackNavigator({
 }, {
   headerMode: 'float',
   cardStyle: {
-    backgroundColor: '#4C4C4C'
+    backgroundColor: '#181818'
   }
 });
 

@@ -7,7 +7,8 @@ import {
   AsyncStorage,
   Picker
 } from 'react-native';
-import { List, ListItem, Button } from 'react-native-elements'
+import { Button, List } from 'react-native-elements'
+import ListItem from './common/ListItem';
 
 import style from './../styles/styles';
 
@@ -15,10 +16,12 @@ const SETTINGS_KEY = 'Settings'
 
 const settingList = [
   {
-    title: 'App Name: La Lune',
+    name: 'App Name',
+    value: 'La Lune'
   },
   {
-    title: 'App Version: 0.0.1',
+    name: 'App Version',
+    value: '0.0.1'
   }
 ];
 
@@ -62,7 +65,7 @@ render() {
           <Text>{this.state.region}</Text>
 
           <Button title='Save Settings' /> */}
-          <List containerStyle={{marginBottom: 20}}>
+          {/* <List containerStyle={{marginBottom: 20}}>
           {
             settingList.map((l, i) => (
               <ListItem
@@ -73,7 +76,12 @@ render() {
                 />
             ))
           }
-          </List>
+          </List> */}
+          <ScrollView style={{marginTop: 20, minHeight: 400}}>
+            {settingList.map((setting, index) => (
+              <ListItem name={setting.name} value={setting.value} key={index}/>
+            ))}
+          </ScrollView>
       </View>
     );
   }

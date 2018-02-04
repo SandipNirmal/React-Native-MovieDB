@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerBackground: {
-    backgroundColor: '#040404'
+    backgroundColor: '#222222'
   },
   headerTextColor: {
     color: '#CFCFCF'
@@ -109,7 +109,8 @@ const style = StyleSheet.create({
     backgroundColor: '#545454',
   },
   screenBackgroundColor: {
-    backgroundColor: 'rgba(4, 4, 4, 0.75)'
+    // backgroundColor: 'rgba(4, 4, 4, 0.75)'
+    backgroundColor: '#181818'
   },
   splashScreenBackground: {
     backgroundColor: '#040404'
@@ -194,6 +195,26 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingHorizontal: 8
+  },
+  listContainer: {
+    display: 'flex',
+    flexGrow: 1,
+    flexDirection: 'row',
+    height: 54,
+    backgroundColor: 'rgba(30, 30, 30, 0.7)',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth:1,
+    borderBottomColor: '#444444',
+    marginBottom: 4
+  },
+  listTitle: {
+    flexGrow: 1,
+    paddingLeft: 5
+  },
+  listValue: {
+    flexGrow: 3,
+    paddingRight: 5
   }
 });
 

@@ -105,6 +105,7 @@ export default class Movies extends Component {
             placeholder='Search' /> */}
 
           <ButtonGroup
+              lightTheme={false}
               onPress={this.updateIndex}
               selectedIndex={selectedIndex}
               buttons={buttons}
