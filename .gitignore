@@ -27,3 +27,6 @@ ios/main.jsbundle
 ios/main.jsbundle.meta
 ios/LaLuneClone.xcodeproj/project.xcworkspace/*
 ios/LaLuneClone.xcodeproj/xcuserdata/*
+android/app/
+android/build
+android/.gradle/
