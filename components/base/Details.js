@@ -5,6 +5,8 @@ import {
   ScrollView, StyleSheet,
   Text,
   View,
+  Linking,
+  Platform
 } from 'react-native';
 
 import BackgroundImage from '../common/BackgroundImage';
@@ -61,7 +63,7 @@ class Details extends Component {
     return filteredVideos.map((video) => {
       return {
         name: video.name,
-        url: `https://www.youtube.com/embed/${video.key}`
+        url: `https://www.youtube.com/embed/${video.key}?&autoplay=1`
       };
     });
   }
@@ -71,7 +73,16 @@ class Details extends Component {
   }
 
   playVideo(url) {
-    this.props.navigation.navigate('VideoPlayer', {url});
+    if (Platform.OS === 'ios') {
+      this
+        .props
+        .navigation
+        .navigate('VideoPlayer', {url});
+    } else if (Platform.OS === 'android') {
+      Linking
+        .openURL(url)
+        .catch(err => console.error('An error occurred', err));
+    }
   }
 
   handleOnScroll = (e) => {

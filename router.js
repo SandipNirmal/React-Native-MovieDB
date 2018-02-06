@@ -1,5 +1,5 @@
 import React from 'react';
-import {TabNavigator, StackNavigator} from 'react-navigation';
+import {TabNavigator, TabBarBottom} from 'react-navigation';
 import {Icon} from 'react-native-elements';
 
 
@@ -52,7 +52,11 @@ const MainScreen = TabNavigator({
 				borderTopColor: '#181818',
 				borderTopWidth: 1
 			}
-		}
+		},
+		tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    swipeEnabled: false,
 });
 
 export default MainScreen;

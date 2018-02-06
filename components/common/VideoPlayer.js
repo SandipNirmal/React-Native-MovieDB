@@ -8,7 +8,7 @@ export default class VideoPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: `${this.props.navigation.state.params.url}?autoplay=1`,
+            url: this.props.navigation.state.params.url,
         }
     }
 

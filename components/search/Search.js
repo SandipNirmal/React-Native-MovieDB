@@ -97,12 +97,6 @@ export default class Movies extends Component {
             onClearText={this.onClearText}
             placeholder='Search'
             />
-          
-          {/* <SearchBar
-            showLoading
-            platform="ios"
-            cancelButtonTitle="Cancel"
-            placeholder='Search' /> */}
 
           <ButtonGroup
               lightTheme={false}
