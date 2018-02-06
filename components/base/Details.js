@@ -22,10 +22,6 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      data: this.props.navigation.state.params.item,
-      directors: [],
-      casts: [],
       opacity: 1,
       blur: 0
     };
@@ -40,20 +36,20 @@ class Details extends Component {
   }
 
   fetchDetails(imagesUri, peopleUri) {
+    const { onDetailsFetched } = this.props;
     fetch(imagesUri).then((response) => response.json()).then((response) => {
       response.images = getUriPopulatedTemp(response.images.backdrops, 'backdrop');
       response.videos = this.formVideoUrls(response.videos.results) 
-      this.setState({isLoading: false, data: response});
+      onDetailsFetched(response, 'imagesAndVideos');
     }).catch((error) => { console.error(error); });
 
     fetch(peopleUri).then((response) => response.json()).then((response) => {
-      this.setState({
-        directors: getUriPopulatedTemp(response.crew.filter((member) => 
-          member.job === 'Director'), 'profile')
-      });
-      this.setState({
-        casts: getUriPopulatedTemp(response.cast.sort((a, b) => a.order - b.order), 'profile')
-      });
+      const people = {
+        'directors': getUriPopulatedTemp(response.crew.filter((member) => 
+          member.job === 'Director'), 'profile'),
+        'casts': getUriPopulatedTemp(response.cast.sort((a, b) => a.order - b.order), 'profile')
+      }
+      onDetailsFetched(people, 'directorsAndCast');
     }).catch((error) => { console.error(error); });
   }
 
@@ -100,10 +96,11 @@ class Details extends Component {
   render() {
     const baseUrl = Configuration['images']['secure_base_url'];
     const size = Configuration['images']['poster_sizes'][5]
-    const bgImage = `${baseUrl}${size}/${this.props.navigation.state.params.item.poster_path}`;
+    const bgImage = `${baseUrl}${size}/${this.props.details.poster_path}`;
     const {
-      title, images, videos, release_date,
-      first_air_date, runtime, vote_average, overview} = this.state.data;
+      title, images, videos, release_date, casts, first_air_date, runtime,
+      vote_average, overview
+    } = this.props.details;
 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
@@ -145,7 +142,7 @@ class Details extends Component {
 
             <CastList
               title="Cast"
-              items={this.state.casts}
+              items={casts || []}
               onPress={this.showCastDetails.bind(this)}
             />
           </View>

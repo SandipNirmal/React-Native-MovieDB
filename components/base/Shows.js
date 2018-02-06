@@ -41,7 +41,7 @@ class Shows extends Component {
   }
 
   render() {
-    const { isFetching, categories, config } = this.props;
+    const { isFetching, onShowDetails, categories, config } = this.props;
 
     return (
       isFetching ?
@@ -52,7 +52,7 @@ class Shows extends Component {
         <ScrollView style={style.screenBackgroundColor}>
           <Carousel 
             images={getUriPopulated(categories[this.carouselCategory], config, 'backdropSize')} 
-            onPress={this.showDetails.bind(this)}
+            onPress={onShowDetails.bind(this)}
           />
           {Object.keys(categories).map((category, index) => (
             <HorizontalImageList
@@ -62,7 +62,7 @@ class Shows extends Component {
               title={category.toTitle()}
               style={style.posterSize}
               onShowAll={this.showAll.bind(this)}
-              onPress={this.showDetails.bind(this)}
+              onPress={onShowDetails.bind(this)}
               images={categories[category]}
             />
           ))}

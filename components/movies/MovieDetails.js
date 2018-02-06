@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Details from '../base/Details';
 import Constant from '../../utilities/constants';
 import CastList from '../common/CastList'
+import { connect } from 'react-redux';
+import { movieDetailsFetched } from '../../Actions';
 
 class MovieDetails extends Details {
   componentDidMount() {
@@ -9,8 +11,7 @@ class MovieDetails extends Details {
     const apiKey = Constant.api_key;
     const movie_url = '/movie/'; 
     const appendResponse = "append_to_response=videos,images"
-    // TODO: use lodash here + add error handling
-    const movieId = this.props.navigation.state.params.item.id;
+    const movieId = this.props.details.id;
 
     const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`;
     const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`;
@@ -21,10 +22,20 @@ class MovieDetails extends Details {
   getSpecialComponent() {
     return <CastList 
               title="Director"
-              items={this.state.directors}
+              items={this.props.details.directors || []}
               onPress={this.showCastDetails.bind(this)}
             />
   }
 }
 
-export default MovieDetails;
+const mapStateToProps = state => ({
+  details: state.movies.details,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onDetailsFetched: (details, category) => {
+    dispatch(movieDetailsFetched(details, category))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

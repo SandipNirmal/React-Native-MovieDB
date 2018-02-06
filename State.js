@@ -6,7 +6,7 @@ export default {
       'comingSoon': [],
       'popular': []
     },
-    'details': []
+    'details': {}
   },
   'tvShows': {
     'isFetching': false,
@@ -15,7 +15,7 @@ export default {
       'topRated': [],
       'popular': [],
     },
-    'details': []
+    'details': {}
   },
   'search': {
 

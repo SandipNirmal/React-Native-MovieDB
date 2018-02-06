@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Shows from '../base/Shows';
 import { connect } from 'react-redux';
-import { fetchingMovies, movieFetched } from '../../Actions';
+import { selectedMovie, fetchingMovies, movieFetched } from '../../Actions';
+import { NavigationActions } from 'react-navigation';
 
 import style from '../../styles/styles';
 
@@ -24,14 +25,6 @@ class Movies extends Shows {
   /**
    * @overrides
    */
-  showDetails(movie) {
-    // dispatch()
-    this.props.navigation.navigate('MovieDetails', {item: movie});
-  }
-
-  /**
-   * @overrides
-   */
   showAll(category) {
     this.props.navigation.navigate('AllMovies', {category: category});
   }
@@ -49,7 +42,11 @@ const mapDispatchToProps = dispatch => ({
   },
   onFetchCompleted: (category, movies) => {
     dispatch(movieFetched(category, movies));
-  } 
+  },
+  onShowDetails: (movie) => {
+    dispatch(selectedMovie(movie));
+    dispatch(NavigationActions.navigate({routeName: 'MovieDetails'}));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);

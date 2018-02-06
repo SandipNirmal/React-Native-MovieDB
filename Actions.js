@@ -27,6 +27,19 @@ export const movieFetched = (category, movies) => ({
   movies,
 });
 
+export const MOVIE_SELECTED = "MOVIE_SELECTED";
+export const selectedMovie = (movie) => ({
+  type: "MOVIE_SELECTED",
+  movie
+});
+
+export const MOVIE_DETAILS_FETCHED = "MOVIE_DETAILS_FETCHED";
+export const movieDetailsFetched = (details, category) => ({
+  type: "MOVIE_DETAILS_FETCHED",
+  details,
+  category
+});
+
 // TV SHOWS
 export const FETCHING_TV_SHOWS = "FETCHING_TV_SHOWS";
 export const fetchingTvShows = () => ({
@@ -40,4 +53,17 @@ export const POPULAR_TV_SHOWS_FETCHED = "POPULAR_TV_SHOWS_FETCHED";
 export const tvShowsFetched = (category, tvShows) => ({
   type: category.toUnderScore().toUpperCase() + "_TV_SHOWS_FETCHED",
   tvShows,
+});
+
+export const TV_SHOW_SELECTED = "TV_SHOW_SELECTED";
+export const selectedTvShow = (tvShow) => ({
+  type: "TV_SHOW_SELECTED",
+  tvShow
+});
+
+export const TV_SHOW_DETAILS_FETCHED = "TV_SHOW_DETAILS_FETCHED";
+export const tvShowDetailsFetched = (details, category) => ({
+  type: "TV_SHOW_DETAILS_FETCHED",
+  details,
+  category
 });

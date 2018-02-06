@@ -9,16 +9,16 @@ import {
 import Orientation from 'react-native-orientation';
 import { connect } from 'react-redux';
 
-import MainScreen from './router';
+import AppNavigation from './components/AppNavigation';
 import SplashScreen from './components/SplashScreen';
-import LaLune from './Reducers';
+import LaLune from './reducers/root';
 
 let store = createStore(LaLune);
 
 class Screen extends React.Component {
   render() {
     const { isFetching } = this.props;
-    const screen = isFetching ? <SplashScreen /> : <MainScreen />;
+    const screen = isFetching ? <SplashScreen /> : <AppNavigation />;
     return screen;
   }
 }

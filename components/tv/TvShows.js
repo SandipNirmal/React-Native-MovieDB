@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Shows from '../base/Shows';
-import { fetchingTvShows, tvShowsFetched } from '../../Actions';
+import { selectedTvShow, fetchingTvShows, tvShowsFetched } from '../../Actions';
+import { NavigationActions } from 'react-navigation';
 import * as _ from 'lodash';
 
 import style from '../../styles/styles';
@@ -28,13 +29,6 @@ class TvShows extends Shows {
   /**
    * @overrides
    */
-  showDetails(show) {
-    this.props.navigation.navigate('TvShowDetails', {item: show});
-  }
-
-  /**
-   * @overrides
-   */
   showAll(category) {
     this.props.navigation.navigate('AllTvShows', {category: category});
   }
@@ -53,6 +47,10 @@ const mapDispatchToProps = dispatch => ({
   onFetchCompleted: (category, tvShows) => {
     dispatch(tvShowsFetched(category, tvShows));
   }, 
+  onShowDetails: (tvShow) => {
+    dispatch(selectedTvShow(tvShow));
+    dispatch(NavigationActions.navigate({routeName: 'TvShowDetails'}));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TvShows);

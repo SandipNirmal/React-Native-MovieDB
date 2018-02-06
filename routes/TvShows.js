@@ -11,6 +11,7 @@ import SeasonDetails from '../components/tv/SeasonDetails';
 import ShareButton from './../components/common/shareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
+import * as _ from 'lodash';
 
 const TvShowStack = StackNavigator({
     TvShow: {
@@ -29,13 +30,12 @@ const TvShowStack = StackNavigator({
     },
     TvShowDetails: {
       screen: TvShowDetails,
-      navigationOptions: ({navigation}) => ({
-        title: navigation.state.params.item.name,
+      navigationOptions: ({navigation: {state: {params}}}) => ({
         ...StackNavHeaderStyles,
         headerRight: <ShareButton 
-                      name={navigation.state.params.item.name}
+                      name={_.get(params, 'movie.name', 'FixThis')}
                       type="tv"
-                      id={navigation.state.params.item.id}
+                      id={_.get(params, 'movie.id', 'FixThis')}
                     />
       }),
     },

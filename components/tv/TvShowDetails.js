@@ -5,6 +5,8 @@ import HorizontalImageList from '../common/ImageList';
 import style from '../../styles/styles';
 import * as _ from 'lodash';
 import { getUriPopulatedTemp } from '../../utilities/utils';
+import { connect } from 'react-redux';
+import { tvShowDetailsFetched } from '../../Actions';
 
 class TvShowDetails extends Details {
   componentDidMount() {
@@ -12,8 +14,7 @@ class TvShowDetails extends Details {
     const apiKey = Constant.api_key;
     const tvShow_url = '/tv/'; 
     const appendResponse = "append_to_response=videos,images"
-    // TODO: use lodash here + add error handling
-    const tvShowId = this.props.navigation.state.params.item.id;
+    const tvShowId = this.props.details.id;
 
     const tvShowUrl = `${baseUrl}${tvShow_url}${tvShowId}?${apiKey}&${appendResponse}`;
     const tvShowCreditsUrl = `${baseUrl}${tvShow_url}${tvShowId}/credits?${apiKey}`;
@@ -23,12 +24,12 @@ class TvShowDetails extends Details {
 
   showSeasonDetails(season) {
     this.props.navigation.navigate('SeasonDetails', {season: season,
-      title: this.props.navigation.state.params.item.name,
-      tvShowId: this.props.navigation.state.params.item.id});
+      title: this.props.details.name,
+      tvShowId: this.props.details.id});
   }
 
   getSpecialComponent() {
-    const seasons = _.get(this, 'state.data.seasons', []);
+    const seasons = _.get(this, 'props.details.seasons', []);
     
     return <HorizontalImageList
             isTouchableImage
@@ -40,5 +41,14 @@ class TvShowDetails extends Details {
   }
 }
 
+const mapStateToProps = state => ({
+  details: state.tvShows.details,
+});
 
-export default TvShowDetails;
+const mapDispatchToProps = dispatch => ({
+  onDetailsFetched: (details, category) => {
+    dispatch(tvShowDetailsFetched(details, category))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TvShowDetails);

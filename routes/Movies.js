@@ -7,6 +7,7 @@ import AllMovies from '../components/movies/AllMovies';
 import CastDetails from '../components/common/CastDetails';
 import VideoPlayer from '../components/common/VideoPlayer';
 import ShareButton from './../components/common/shareButton';
+import * as _ from 'lodash';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 
@@ -20,13 +21,12 @@ const MoviesStack = StackNavigator({
     },
     MovieDetails: {
       screen: MovieDetails,
-      navigationOptions: ({navigation}) => ({
-        title: navigation.state.params.item.original_title,
+      navigationOptions: ({navigation: {state: {params}}}) => ({
         ...StackNavHeaderStyles,
         headerRight: <ShareButton 
-                      name={navigation.state.params.item.original_title}
+                      name={_.get(params, 'movie.name', 'FixThis')}
                       type="movie"
-                      id={navigation.state.params.item.id}
+                      id={_.get(params, 'movie.id', 'FixThis')}
                     />
       }),
     },
