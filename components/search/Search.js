@@ -89,30 +89,29 @@ export default class Movies extends Component {
     const {filteredResults, searchInProgress, selectedIndex} = this.state;
 
     return (
+      <View>
+        <SearchBar
+          style={{marginTop: 20}}
+          round
+          onChangeText={_.debounce(this.onTextChange, 1000)}
+          onClearText={this.onClearText}
+          placeholder='Search'
+          />
+
+        <ButtonGroup
+            lightTheme={false}
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons}
+            containerStyle={{height: 30, backgroundColor: '#e1e1e1', marginTop: 10}}
+          />
+
         <View>
-          <SearchBar
-            style={{marginTop: 20}}
-            round
-            onChangeText={_.debounce(this.onTextChange, 1000)}
-            onClearText={this.onClearText}
-            placeholder='Search'
-            />
-
-          <ButtonGroup
-              lightTheme={false}
-              onPress={this.updateIndex}
-              selectedIndex={selectedIndex}
-              buttons={buttons}
-              containerStyle={{height: 30, backgroundColor: '#e1e1e1', marginTop: 10}}
-            />
-
-          <View>
-          {searchInProgress ? 
-            <ActivityIndicator size="large" color={primaryColor}/> :
-            <SearchResult items={filteredResults} onSelect={this.onSelectItem}/>}
-          </View>
-
+        {searchInProgress ? 
+          <ActivityIndicator size="large" color={primaryColor}/> :
+          <SearchResult items={filteredResults} onSelect={this.onSelectItem}/>}
         </View>
+      </View>
     );
   }
 }
