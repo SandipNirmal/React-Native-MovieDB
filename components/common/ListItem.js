@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 
 import style from './../../styles/styles';
 
-const ListItem = (props) => {
+const LaLuneListItem = (props) => {
   return (
     <View style={style.listContainer}>
       <View style={style.listTitle}>
@@ -20,4 +20,4 @@ const ListItem = (props) => {
   )
 }
 
-export default ListItem;
+export default LaLuneListItem;
