@@ -24,6 +24,10 @@
     "react-test-renderer": "16.2.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ],
+    "testPathIgnorePatterns": ["/node_modules/", "__tests_/__mocks__"]
   }
 }
