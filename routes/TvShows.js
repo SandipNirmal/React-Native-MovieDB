@@ -13,6 +13,7 @@ import ShareButton from './../components/common/shareButton';
 import { StackNavHeaderStyles } from '../styles/styles';
 import * as _ from 'lodash';
 
+// TODO: Fix the shareButton name and id
 const TvShowStack = StackNavigator({
     TvShow: {
       screen: TvShow,

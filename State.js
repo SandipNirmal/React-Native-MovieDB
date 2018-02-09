@@ -18,7 +18,10 @@ export default {
     'details': {}
   },
   'search': {
-
+    'isSearching': false,
+    'selectedIndex': 0,
+    'results': [],
+    'details': {},
   },
   'config': {
     'apiKey': '',

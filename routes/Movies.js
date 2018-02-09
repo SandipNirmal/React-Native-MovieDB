@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 
 import {StackNavHeaderStyles} from '../styles/styles';
 
+// TODO: Fix the shareButton name and id
 const MoviesStack = StackNavigator({
   Movies: {
     screen: Movies,

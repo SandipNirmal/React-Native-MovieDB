@@ -8,7 +8,9 @@ import CastDetails from './../components/common/CastDetails';
 import ShareButton from './../components/common/shareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
+import * as _ from 'lodash';
 
+// TODO: Fix the shareButton name and id
 const SearchStack = StackNavigator({
   Search: {
     screen: Search,
@@ -20,30 +22,34 @@ const SearchStack = StackNavigator({
   MovieDetails: {
     screen: MovieDetails,
     navigationOptions: ({
-      navigation
+      navigation: {
+        state: {
+          params
+        }
+      }
     }) => ({
-      title: navigation.state.params.item.original_title,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton 
-                      name={navigation.state.params.item.original_title}
-                      type="movie"
-                      id={navigation.state.params.item.id}
-                    />
-    }),
+      headerRight: <ShareButton
+          name={_.get(params, 'movie.name', 'FixThis')}
+          type="movie"
+          id={+_.get(params, 'movie.id', 'FixThis')}/>
+    })
   },
   TvShowDetails: {
     screen: TvShowDetails,
     navigationOptions: ({
-      navigation
+      navigation: {
+        state: {
+          params
+        }
+      }
     }) => ({
-      title: navigation.state.params.item.original_title,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton 
-                      name={navigation.state.params.item.name}
-                      type="tv"
-                      id={navigation.state.params.item.id}
-                    />
-    }),
+      headerRight: <ShareButton
+          name={_.get(params, 'movie.name', 'FixThis')}
+          type="tv"
+          id={+_.get(params, 'movie.id', 'FixThis')}/>
+    })
   },
   CastDetails: {
     screen: CastDetails,
