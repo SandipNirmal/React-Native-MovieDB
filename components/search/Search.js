@@ -8,7 +8,7 @@ import Constant from '../../utilities/constants';
 import SearchResult from './SearchResult';
 import { 
   doneSearchingMoviesEtc,
-  searchFilterChanged, searchingForMoviesEtc,
+  searchFilterChanged, searchingForMoviesEtc, searchResultSelected,
   selectedMovie, selectedTvShow,
 } from '../../Actions';
 import { NavigationActions } from 'react-navigation';
@@ -101,13 +101,12 @@ const mapDispatchToProps = dispatch => ({
     // maintained. Ex: on movies tab, select a movie, go to search, type in
     // a movie, select the result, go back to movie tab. Currently the state
     // will not be maintained. Fix this
+    dispatch(searchResultSelected(result));
     switch(result.media_type) {
       case 'movie':
-        dispatch(selectedMovie(result));
         dispatch(NavigationActions.navigate({routeName: 'MovieDetails'}));
         break;
       case 'tv':
-        dispatch(selectedTvShow(result));
         dispatch(NavigationActions.navigate({routeName: 'TvShowDetails'}));
       // TODO: add redux to castDetails, then work on following case
       // case 'person':

@@ -17,9 +17,9 @@ const search = (state=initialState['search'], action) => {
       return newState;
     case A.SEARCH_RESULT_SELECTED:
       // We can choose to cache the movies. is that necessary think?
-      newState.details = Object.assign({}, newState.details, action.movie);
+      newState.details = Object.assign({}, newState.details, action.result);
       return newState;
-    case A.RESULT_DETAILS_FETCHED :
+    case A.SEARCH_ITEM_DETAILS_FETCHED :
       // TODO make the category a const variable
       if (action.category === 'imagesAndVideos') {
         newState.details = Object.assign({}, newState.details, action.details);

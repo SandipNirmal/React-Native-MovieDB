@@ -93,9 +93,9 @@ export const searchResultSelected = (result) => ({
   result
 });
 
-export const RESULT_DETAILS_FETCHED = "RESULT_DETAILS_FETCHED";
-export const resultDetailsFetched = (details, category) => ({
-  type: "RESULT_DETAILS_FETCHED",
+export const SEARCH_ITEM_DETAILS_FETCHED = "SEARCH_ITEM_DETAILS_FETCHED";
+export const searchItemDetailsFetched = (details, category) => ({
+  type: "SEARCH_ITEM_DETAILS_FETCHED",
   details,
   category
 });

@@ -3,7 +3,7 @@ import Details from '../base/Details';
 import Constant from '../../utilities/constants';
 import CastList from '../common/CastList'
 import { connect } from 'react-redux';
-import { movieDetailsFetched } from '../../Actions';
+import { searchItemDetailsFetched, movieDetailsFetched } from '../../Actions';
 
 class MovieDetails extends Details {
   componentDidMount() {
@@ -28,13 +28,18 @@ class MovieDetails extends Details {
   }
 }
 
-const mapStateToProps = state => ({
-  details: state.movies.details,
+const mapStateToProps = ({tabNavHelper, search, movies}) => ({
+  details: tabNavHelper.currentTab === 'Search' ? search.details : movies.details,
+  currentTab: tabNavHelper.currentTab,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onDetailsFetched: (details, category) => {
-    dispatch(movieDetailsFetched(details, category))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onDetailsFetched: (details, category, currentTab) => {
+    if (currentTab === 'Search') {
+      dispatch(searchItemDetailsFetched(details, category))
+    } else {
+      dispatch(movieDetailsFetched(details, category))
+    }
   }
 });
 

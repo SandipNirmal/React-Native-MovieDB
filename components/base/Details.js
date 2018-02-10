@@ -38,11 +38,11 @@ class Details extends Component {
   }
 
   fetchDetails(imagesUri, peopleUri) {
-    const { onDetailsFetched } = this.props;
+    const { onDetailsFetched, currentTab } = this.props;
     fetch(imagesUri).then((response) => response.json()).then((response) => {
       response.images = getUriPopulatedTemp(response.images.backdrops, 'backdrop');
       response.videos = this.formVideoUrls(response.videos.results) 
-      onDetailsFetched(response, 'imagesAndVideos');
+      onDetailsFetched(response, 'imagesAndVideos', currentTab);
     }).catch((error) => { console.error(error); });
 
     fetch(peopleUri).then((response) => response.json()).then((response) => {
@@ -51,7 +51,7 @@ class Details extends Component {
           member.job === 'Director'), 'profile'),
         'casts': getUriPopulatedTemp(response.cast.sort((a, b) => a.order - b.order), 'profile')
       }
-      onDetailsFetched(people, 'directorsAndCast');
+      onDetailsFetched(people, 'directorsAndCast', currentTab);
     }).catch((error) => { console.error(error); });
   }
 
