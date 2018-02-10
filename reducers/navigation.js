@@ -1,10 +1,9 @@
 import AppNavigator from "../router";
 
-const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams("Movies")
-);
-
-const navigationReducer = (state = initialState, action) => {
+// Refer https://github.com/react-navigation/react-navigation/issues/2332
+// to understand why we keep initialState as undefined
+const initialState = undefined;
+const navigationReducer = (state=initialState, action) => {
   const newState = AppNavigator.router.getStateForAction(action, state);
   return newState || state;
 };

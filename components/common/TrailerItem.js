@@ -14,11 +14,11 @@ const TrailerItem = ({video, onPlay}) => {
         <View 
           style={[style.backdropSize, style.centerContentContainer, style.trailerContainer]}>		
           <Icon 
-              name='youtube-play' 
-              type='font-awesome'
-              size={50} 
-              color='#ff0000' 
-              style={style.trailerPlayIcon}/>		
+            name='youtube-play' 
+            type='font-awesome'
+            size={50} 
+            color='#ff0000' 
+            style={style.trailerPlayIcon}/>		
         </View>
       </TouchableOpacity>
     </View>

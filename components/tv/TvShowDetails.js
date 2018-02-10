@@ -6,7 +6,7 @@ import style from '../../styles/styles';
 import * as _ from 'lodash';
 import { getUriPopulatedTemp } from '../../utilities/utils';
 import { connect } from 'react-redux';
-import { tvShowDetailsFetched } from '../../Actions';
+import { searchItemDetailsFetched, tvShowDetailsFetched } from '../../Actions';
 
 class TvShowDetails extends Details {
   componentDidMount() {
@@ -25,29 +25,35 @@ class TvShowDetails extends Details {
   showSeasonDetails(season) {
     this.props.navigation.navigate('SeasonDetails', {season: season,
       title: this.props.details.name,
-      tvShowId: this.props.details.id});
+      tvShowId: this.props.details.id
+    });
   }
 
   getSpecialComponent() {
     const seasons = _.get(this, 'props.details.seasons', []);
     
     return <HorizontalImageList
-            isTouchableImage
-            title="Seasons"
-            style={style.posterSize}
-            onPress={this.showSeasonDetails.bind(this)}
-            images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
-          />
+             isTouchableImage
+             title="Seasons"
+             style={style.posterSize}
+             onPress={this.showSeasonDetails.bind(this)}
+             images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
+           />
   }
 }
 
-const mapStateToProps = state => ({
-  details: state.tvShows.details,
+const mapStateToProps = ({tabNavHelper, search, tvShows}) => ({
+  details: tabNavHelper.currentTab === 'Search' ? search.details : tvShows.details,
+  currentTab: tabNavHelper.currentTab,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDetailsFetched: (details, category) => {
-    dispatch(tvShowDetailsFetched(details, category))
+  onDetailsFetched: (details, category, currentTab) => {
+    if (currentTab === 'Search') {
+      dispatch(searchItemDetailsFetched(details, category))
+    } else {
+      dispatch(tvShowDetailsFetched(details, category))
+    }
   }
 });
 

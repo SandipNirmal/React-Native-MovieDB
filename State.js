@@ -18,7 +18,10 @@ export default {
     'details': {}
   },
   'search': {
-
+    'isSearching': false,
+    'selectedIndex': 0,
+    'results': [],
+    'details': {},
   },
   'config': {
     'apiKey': '',
@@ -33,6 +36,10 @@ export default {
   'settings': {
     'language': 'IN-hi',
     'region': 'IN',
+  },
+  // TODO: We should not be using the following. Study the right way of doing this
+  'helper': {
+    'currentTab': ''
   }
 }
 

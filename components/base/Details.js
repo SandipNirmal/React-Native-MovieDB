@@ -38,11 +38,11 @@ class Details extends Component {
   }
 
   fetchDetails(imagesUri, peopleUri) {
-    const { onDetailsFetched } = this.props;
+    const { onDetailsFetched, currentTab } = this.props;
     fetch(imagesUri).then((response) => response.json()).then((response) => {
       response.images = getUriPopulatedTemp(response.images.backdrops, 'backdrop');
       response.videos = this.formVideoUrls(response.videos.results) 
-      onDetailsFetched(response, 'imagesAndVideos');
+      onDetailsFetched(response, 'imagesAndVideos', currentTab);
     }).catch((error) => { console.error(error); });
 
     fetch(peopleUri).then((response) => response.json()).then((response) => {
@@ -51,7 +51,7 @@ class Details extends Component {
           member.job === 'Director'), 'profile'),
         'casts': getUriPopulatedTemp(response.cast.sort((a, b) => a.order - b.order), 'profile')
       }
-      onDetailsFetched(people, 'directorsAndCast');
+      onDetailsFetched(people, 'directorsAndCast', currentTab);
     }).catch((error) => { console.error(error); });
   }
 
@@ -125,17 +125,17 @@ class Details extends Component {
           /* onScroll={this.handleOnScroll} scrollEventThrottle={160} */}
           <View style={style.detailsContainer}>
             <Text style={[style.text, style.titleText]}>
-                {title}
+              {title}
             </Text>
 
             <ShowOverview
-                date={release_date || first_air_date}
-                runtime={runtime || 100}
-                ratings={vote_average}
+              date={release_date || first_air_date}
+              runtime={runtime || 100}
+              ratings={vote_average}
               />
 
             <Text style={[style.text, style.normalText]}>
-                {overview}
+              {overview}
             </Text>
 
             <HorizontalImageList
@@ -145,8 +145,8 @@ class Details extends Component {
             />
 
             <TrailerList 
-                videos={videos || []} 
-                playVideo={this.playVideo.bind(this)}
+              videos={videos || []} 
+              playVideo={this.playVideo.bind(this)}
             />
 
             {this.getSpecialComponent()} 
