@@ -33,7 +33,7 @@ class SplashScreen extends Component {
   render() {
     return(
       <View style={[style.centerContentContainer, style.splashScreenBackground]}>
-      <Avatar
+        <Avatar
           xlarge
           rounded
           containerStyle={{backgroundColor: primaryColor}}

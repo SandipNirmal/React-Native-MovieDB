@@ -50,13 +50,12 @@ class SeasonDetails extends Component {
         <ScrollView>
           <View style={style.detailsContainer}>
             <Text style={[style.text, style.titleText]}>
-                Season {season_number}
+              Season {season_number}
             </Text>
             <ShowOverview
-                date={air_date || "Unknown"}
-                episodes={episode_count || episodes.length}
-              />
-
+              date={air_date || "Unknown"}
+              episodes={episode_count || episodes.length}
+            />
             <EpisodeList episodes={episodes} />
           </View>
         </ScrollView>

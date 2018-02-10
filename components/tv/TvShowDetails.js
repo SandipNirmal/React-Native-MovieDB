@@ -25,19 +25,20 @@ class TvShowDetails extends Details {
   showSeasonDetails(season) {
     this.props.navigation.navigate('SeasonDetails', {season: season,
       title: this.props.details.name,
-      tvShowId: this.props.details.id});
+      tvShowId: this.props.details.id
+    });
   }
 
   getSpecialComponent() {
     const seasons = _.get(this, 'props.details.seasons', []);
     
     return <HorizontalImageList
-            isTouchableImage
-            title="Seasons"
-            style={style.posterSize}
-            onPress={this.showSeasonDetails.bind(this)}
-            images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
-          />
+             isTouchableImage
+             title="Seasons"
+             style={style.posterSize}
+             onPress={this.showSeasonDetails.bind(this)}
+             images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
+           />
   }
 }
 

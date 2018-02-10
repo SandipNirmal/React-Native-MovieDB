@@ -22,13 +22,13 @@ const onShare = (title, media_type, media_id) => {
 const ShareButton = (props) => {
   const {name, type, id} = props;
   return (
-      <Icon
-      name={(os === 'ios') ? 'ios-share-outline' : 'share'}
-      type={(os === 'ios') ? 'ionicon' : ''}
-      color="#32CD32"
-      size={30}
-      underlayColor="#222222"
-      onPress={() => {onShare(name, type, id)}} />
+    <Icon
+    name={(os === 'ios') ? 'ios-share-outline' : 'share'}
+    type={(os === 'ios') ? 'ionicon' : ''}
+    color="#32CD32"
+    size={30}
+    underlayColor="#222222"
+    onPress={() => {onShare(name, type, id)}} />
   )
 }
 

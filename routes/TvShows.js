@@ -8,7 +8,7 @@ import TvShowDetails from '../components/tv/TvShowDetails';
 import CastDetails from '../components/common/CastDetails';
 import AllTvShows from '../components/tv/AllTvShows';
 import SeasonDetails from '../components/tv/SeasonDetails';
-import ShareButton from './../components/common/shareButton';
+import ShareButton from './../components/common/ShareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 import * as _ from 'lodash';

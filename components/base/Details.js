@@ -125,17 +125,17 @@ class Details extends Component {
           /* onScroll={this.handleOnScroll} scrollEventThrottle={160} */}
           <View style={style.detailsContainer}>
             <Text style={[style.text, style.titleText]}>
-                {title}
+              {title}
             </Text>
 
             <ShowOverview
-                date={release_date || first_air_date}
-                runtime={runtime || 100}
-                ratings={vote_average}
+              date={release_date || first_air_date}
+              runtime={runtime || 100}
+              ratings={vote_average}
               />
 
             <Text style={[style.text, style.normalText]}>
-                {overview}
+              {overview}
             </Text>
 
             <HorizontalImageList
@@ -145,8 +145,8 @@ class Details extends Component {
             />
 
             <TrailerList 
-                videos={videos || []} 
-                playVideo={this.playVideo.bind(this)}
+              videos={videos || []} 
+              playVideo={this.playVideo.bind(this)}
             />
 
             {this.getSpecialComponent()} 

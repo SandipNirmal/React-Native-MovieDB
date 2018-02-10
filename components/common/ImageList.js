@@ -84,13 +84,13 @@ const FlatImageList = (props) => (
     // contentContainerStyle={style.flatListContainer}
     numColumns={props.numColumns}
     data={props.images}
-    renderItem={
-      ({item}) => <TouchableImage
-                    key={item.id}
-                    onPress={() => props.onPress(item)}
-                    style={[style.posterSize, styles.flatList]}
-                    uri={item.uri}
-                  />
+    renderItem={({item}) =>
+      <TouchableImage
+        key={item.id}
+        onPress={() => props.onPress(item)}
+        style={[style.posterSize, styles.flatList]}
+        uri={item.uri}
+      />
     }
     keyExtractor={(item, index) => index}
   />

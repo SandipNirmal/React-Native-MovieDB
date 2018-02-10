@@ -5,7 +5,7 @@ import Search from './../components/search/Search';
 import TvShowDetails from './../components/tv/TvShowDetails';
 import MovieDetails from './../components/movies/MovieDetails';
 import CastDetails from './../components/common/CastDetails';
-import ShareButton from './../components/common/shareButton';
+import ShareButton from './../components/common/ShareButton';
 
 import { StackNavHeaderStyles } from '../styles/styles';
 import * as _ from 'lodash';
