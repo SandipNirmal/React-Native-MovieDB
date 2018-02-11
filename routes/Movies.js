@@ -31,9 +31,9 @@ const MoviesStack = StackNavigator({
     }) => ({
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'movie.name', 'FixThis')}
+          name={_.get(params, 'name')}
           type="movie"
-          id={+_.get(params, 'movie.id', 'FixThis')}/>
+          id={_.get(params, 'id')}/>
     })
   },
   AllMovies: {

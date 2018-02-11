@@ -34,9 +34,9 @@ const TvShowStack = StackNavigator({
       navigationOptions: ({navigation: {state: {params}}}) => ({
         ...StackNavHeaderStyles,
         headerRight: <ShareButton 
-                      name={_.get(params, 'movie.name', 'FixThis')}
+                      name={_.get(params, 'name')}
                       type="tv"
-                      id={+_.get(params, 'movie.id', 'FixThis')}
+                      id={+_.get(params, 'id')}
                     />
       }),
     },
