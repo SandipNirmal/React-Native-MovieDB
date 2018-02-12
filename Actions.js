@@ -88,9 +88,10 @@ export const searchFilterChanged = (index) => ({
 });
 
 export const SEARCH_RESULT_SELECTED = "SEARCH_RESULT_SELECTED";
-export const searchResultSelected = (result) => ({
+export const searchResultSelected = (result, mediaType) => ({
   type: "SEARCH_RESULT_SELECTED",
-  result
+  result,
+  mediaType,
 });
 
 export const SEARCH_ITEM_DETAILS_FETCHED = "SEARCH_ITEM_DETAILS_FETCHED";
@@ -99,3 +100,26 @@ export const searchItemDetailsFetched = (details, category) => ({
   details,
   category
 });
+
+
+// CAST
+export const MOVIES_CAST_SELECTED = "MOVIES_CAST_SELECTED";
+export const TVSHOWS_CAST_SELECTED = "TVSHOWS_CAST_SELECTED";
+export const castSelected = (cast, screen) => ({
+  type: `${screen.toUpperCase()}_CAST_SELECTED`,
+  cast
+});
+
+export const FETCHING_MOVIES_CAST_DETAILS = "FETCHING_MOVIES_CAST_DETAILS";
+export const FETCHING_TVSHOWS_CAST_DETAILS = "FETCHING_TVSHOWS_CAST_DETAILS";
+export const fetchingCastDetails = (screen) => ({
+  type: `FETCHING_${screen.toUpperCase()}_CAST_DETAILS`
+});
+
+export const MOVIES_CAST_DETAILS_FETCHED = "MOVIES_CAST_DETAILS_FETCHED";
+export const TVSHOWS_CAST_DETAILS_FETCHED = "TVSHOWS_CAST_DETAILS_FETCHED";
+export const castDetailsFetched = (details, category, screen) => ({
+  type: `${screen.toUpperCase()}_CAST_DETAILS_FETCHED`,
+  details,
+  category
+})

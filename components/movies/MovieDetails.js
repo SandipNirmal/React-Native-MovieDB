@@ -3,7 +3,12 @@ import Details from '../base/Details';
 import Constant from '../../utilities/constants';
 import CastList from '../common/CastList'
 import { connect } from 'react-redux';
-import { searchItemDetailsFetched, movieDetailsFetched } from '../../Actions';
+import { 
+  castSelected,
+  searchItemDetailsFetched,
+  movieDetailsFetched
+} from '../../Actions';
+import { NavigationActions } from 'react-navigation';
 
 class MovieDetails extends Details {
   componentDidMount() {
@@ -33,14 +38,21 @@ const mapStateToProps = ({tabNavHelper, search, movies}) => ({
   currentTab: tabNavHelper.currentTab,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   onDetailsFetched: (details, category, currentTab) => {
     if (currentTab === 'Search') {
       dispatch(searchItemDetailsFetched(details, category))
     } else {
       dispatch(movieDetailsFetched(details, category))
     }
-  }
+  },
+  onCastSelected: (cast, currentTab) => {
+    dispatch(castSelected(cast, currentTab));
+    dispatch(NavigationActions.navigate({routeName: 'CastDetails', params: {
+      name: cast.name,
+      id: cast.id
+    }}));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

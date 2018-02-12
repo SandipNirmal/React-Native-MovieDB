@@ -96,22 +96,22 @@ const mapDispatchToProps = dispatch => ({
     dispatch(doneSearchingMoviesEtc(results));
   },
   onSearchResultSelected: (result) => {
-    // TODO: Ideally we should maintain the search result seperate from that of
-    // the movies or TvShows, so that the navigation state and screens are
-    // maintained. Ex: on movies tab, select a movie, go to search, type in
-    // a movie, select the result, go back to movie tab. Currently the state
-    // will not be maintained. Fix this
-    dispatch(searchResultSelected(result));
+    const params = {
+      name: result.name,
+      id: result.id
+    }
+
+    dispatch(searchResultSelected(result, result.media_type));
     switch(result.media_type) {
       case 'movie':
-        dispatch(NavigationActions.navigate({routeName: 'MovieDetails'}));
+        dispatch(NavigationActions.navigate({routeName: 'MovieDetails', params}));
         break;
       case 'tv':
-        dispatch(NavigationActions.navigate({routeName: 'TvShowDetails'}));
-      // TODO: add redux to castDetails, then work on following case
-      // case 'person':
-        // dispatch(tvShowSelected(result));
-        // dispatch(NavigationActions.navigate({routeName: 'CastDetails'}));
+        dispatch(NavigationActions.navigate({routeName: 'TvShowDetails', params}));
+        break;
+      case 'person':
+        dispatch(NavigationActions.navigate({routeName: 'CastDetails', params}));
+        break;
       default:
         console.log('Unrecognised media type');
         break;

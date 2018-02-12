@@ -42,15 +42,20 @@ const TvShowStack = StackNavigator({
     },
     CastDetails: {
       screen: CastDetails,
-      navigationOptions: ({navigation}) => ({
-        title: navigation.state.params.cast.name,
+      navigationOptions: ({
+        navigation: {
+          state: {
+            params
+          }
+        }
+      }) => ({
+        title: params.name,
         ...StackNavHeaderStyles,
-        headerRight: <ShareButton 
-                      name={navigation.state.params.cast.name}
-                      type="person"
-                      id={navigation.state.params.cast.id}
-                    />
-      }),
+        headerRight: <ShareButton
+            name={params.name}
+            type="person"
+            id={params.id}/>
+      })
     },
     SeasonDetails: {
       screen: SeasonDetails,

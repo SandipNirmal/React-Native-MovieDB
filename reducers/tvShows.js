@@ -1,5 +1,6 @@
 import initialState from '../State';
 import * as A from '../Actions';
+import { populateDetails, populateCastDetails } from './common';
 
 function tvShows(state=initialState['tvShows'], action) {
   let newState = JSON.parse(JSON.stringify(state));
@@ -24,14 +25,16 @@ function tvShows(state=initialState['tvShows'], action) {
       newState.details = Object.assign({}, newState.details, action.tvShow);
       return newState;
     case A.TV_SHOW_DETAILS_FETCHED:
-      // TODO make the category a const variable
-      if (action.category === 'imagesAndVideos') {
-        newState.details = Object.assign({}, newState.details, action.details);
-      } else if (action.category === 'directorsAndCast') {
-        newState.details['directors'] = action.details['directors'];
-        newState.details['casts'] = action.details['casts'];
-      }
+      return populateDetails(newState, action);
+    case A.TVSHOWS_CAST_SELECTED:
+      newState.cast.details = Object.assign({}, newState.cast.details, action.cast);
       return newState;
+    case A.FETCHING_TVSHOWS_CAST_DETAILS:
+      newState.cast.isFetching = true;
+      return newState;
+    case A.TVSHOWS_CAST_DETAILS_FETCHED:
+      newState.cast.isFetching = false;
+      return populateCastDetails(newState, action);
     default: return state;
   }
 }

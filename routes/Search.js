@@ -54,16 +54,19 @@ const SearchStack = StackNavigator({
   CastDetails: {
     screen: CastDetails,
     navigationOptions: ({
-      navigation
+      navigation: {
+        state: {
+          params
+        }
+      }
     }) => ({
-      title: navigation.state.params.cast.name,
+      title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton 
-                      name={navigation.state.params.cast.name}
-                      type="person"
-                      id={navigation.state.params.cast.id}
-                    />
-    }),
+      headerRight: <ShareButton
+          name={params.name}
+          type="person"
+          id={params.id}/>
+    })
   },
 }, {
   headerMode: 'float',

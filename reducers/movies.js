@@ -1,5 +1,6 @@
 import initialState from '../State';
 import * as A from '../Actions';
+import { populateDetails, populateCastDetails } from './common';
 
 function movies(state=initialState['movies'], action) {
   let newState = JSON.parse(JSON.stringify(state));
@@ -24,14 +25,16 @@ function movies(state=initialState['movies'], action) {
       newState.details = Object.assign({}, newState.details, action.movie);
       return newState;
     case A.MOVIE_DETAILS_FETCHED:
-      // TODO make the category a const variable
-      if (action.category === 'imagesAndVideos') {
-        newState.details = Object.assign({}, newState.details, action.details);
-      } else if (action.category === 'directorsAndCast') {
-        newState.details['directors'] = action.details['directors'];
-        newState.details['casts'] = action.details['casts'];
-      }
+      return populateDetails(newState, action);
+    case A.MOVIES_CAST_SELECTED:
+      newState.cast.details = Object.assign({}, newState.cast.details, action.cast);
       return newState;
+    case A.FETCHING_MOVIES_CAST_DETAILS:
+      newState.cast.isFetching = true;
+      return newState;
+    case A.MOVIES_CAST_DETAILS_FETCHED:
+      newState.cast.isFetching = false;
+      return populateCastDetails(newState, action);
     default: return state;
   }
 }

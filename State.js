@@ -6,7 +6,11 @@ export default {
       'comingSoon': [],
       'popular': []
     },
-    'details': {}
+    'details': {},
+    'cast': {
+      'isFetching': false,
+      'details': {}
+    },
   },
   'tvShows': {
     'isFetching': false,
@@ -15,13 +19,21 @@ export default {
       'topRated': [],
       'popular': [],
     },
-    'details': {}
+    'details': {},
+    'cast': {
+      'isFetching': false,
+      'details': {}
+    },
   },
   'search': {
     'isSearching': false,
     'selectedIndex': 0,
     'results': [],
     'details': {},
+    'cast': {
+      'isFetching': false,
+      'details': {}
+    },
   },
   'config': {
     'apiKey': '',
@@ -39,7 +51,7 @@ export default {
   },
   // TODO: We should not be using the following. Study the right way of doing this
   'helper': {
-    'currentTab': ''
+    'currentTab': 'Movies'
   }
 }
 
