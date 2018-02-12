@@ -32,6 +32,7 @@ const TvShowStack = StackNavigator({
     TvShowDetails: {
       screen: TvShowDetails,
       navigationOptions: ({navigation: {state: {params}}}) => ({
+        title: params.name,
         ...StackNavHeaderStyles,
         headerRight: <ShareButton 
                       name={_.get(params, 'name')}

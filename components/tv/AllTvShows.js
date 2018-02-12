@@ -34,7 +34,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onShowDetails: (tvShow) => {
     dispatch(selectedTvShow(tvShow));
-    dispatch(NavigationActions.navigate({routeName: 'TvShowDetails'}));
+    dispatch(NavigationActions.navigate({routeName: 'TvShowDetails', params:{
+      name: tvShow.name,
+      id: tvShow.id
+    }}));
   },
 });
 

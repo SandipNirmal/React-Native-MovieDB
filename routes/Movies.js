@@ -29,11 +29,12 @@ const MoviesStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'name')}
+          name={params.name}
           type="movie"
-          id={_.get(params, 'id')}/>
+          id={params.id}/>
     })
   },
   AllMovies: {

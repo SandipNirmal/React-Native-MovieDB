@@ -28,11 +28,12 @@ const SearchStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'movie.name', 'FixThis')}
+          name={params.name}
           type="movie"
-          id={+_.get(params, 'movie.id', 'FixThis')}/>
+          id={params.id}/>
     })
   },
   TvShowDetails: {
@@ -44,11 +45,12 @@ const SearchStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'movie.name', 'FixThis')}
+          name={params.name}
           type="tv"
-          id={+_.get(params, 'movie.id', 'FixThis')}/>
+          id={params.id}/>
     })
   },
   CastDetails: {

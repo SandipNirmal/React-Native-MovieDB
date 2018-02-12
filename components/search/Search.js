@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onSearchResultSelected: (result) => {
     const params = {
-      name: result.name,
+      name: result.name || result.title,
       id: result.id
     }
 

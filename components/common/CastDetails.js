@@ -139,7 +139,10 @@ const mapDispatchToProps = dispatch => ({
   },
   onShowDetails: (movie) => {
     dispatch(selectedMovie(movie));
-    dispatch(NavigationActions.navigate({routeName: 'MovieDetails'}));
+    dispatch(NavigationActions.navigate({routeName: 'MovieDetails', params: {
+      name: movie.name,
+      id: movie.id
+    }}));
   },
 });
 
