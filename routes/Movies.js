@@ -29,11 +29,12 @@ const MoviesStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'name')}
+          name={params.name}
           type="movie"
-          id={_.get(params, 'id')}/>
+          id={params.id}/>
     })
   },
   AllMovies: {
@@ -45,13 +46,19 @@ const MoviesStack = StackNavigator({
   },
   CastDetails: {
     screen: CastDetails,
-    navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.cast.name,
+    navigationOptions: ({
+      navigation: {
+        state: {
+          params
+        }
+      }
+    }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={navigation.state.params.cast.name}
+          name={params.name}
           type="person"
-          id={navigation.state.params.cast.id}/>
+          id={params.id}/>
     })
   },
   VideoPlayer: {

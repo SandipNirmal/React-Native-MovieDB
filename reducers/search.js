@@ -1,5 +1,6 @@
 import initialState from '../State';
 import * as A from '../Actions';
+import { populateDetails, populateCastDetails } from './common';
 
 const search = (state=initialState['search'], action) => {
   // TODO : optimise
@@ -17,17 +18,17 @@ const search = (state=initialState['search'], action) => {
       return newState;
     case A.SEARCH_RESULT_SELECTED:
       // We can choose to cache the movies. is that necessary think?
-      newState.details = Object.assign({}, newState.details, action.result);
-      return newState;
-    case A.SEARCH_ITEM_DETAILS_FETCHED :
-      // TODO make the category a const variable
-      if (action.category === 'imagesAndVideos') {
-        newState.details = Object.assign({}, newState.details, action.details);
-      } else if (action.category === 'directorsAndCast') {
-        newState.details['directors'] = action.details['directors'];
-        newState.details['casts'] = action.details['casts'];
+      if (action.mediaType === 'person') {
+        newState.cast.details = Object.assign({}, newState.cast.details, action.result);
+      } else {
+        newState.details = Object.assign({}, newState.details, action.result);
       }
       return newState;
+    case A.SEARCH_ITEM_DETAILS_FETCHED :
+      // if (newState.isFetching !== undefined)
+        // newState.isFetching = false;
+      newState = populateDetails(newState, action);
+      return populateCastDetails(newState, action);
     default:
       return state;
   }

@@ -28,11 +28,12 @@ const SearchStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'movie.name', 'FixThis')}
+          name={params.name}
           type="movie"
-          id={+_.get(params, 'movie.id', 'FixThis')}/>
+          id={params.id}/>
     })
   },
   TvShowDetails: {
@@ -44,26 +45,30 @@ const SearchStack = StackNavigator({
         }
       }
     }) => ({
+      title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={_.get(params, 'movie.name', 'FixThis')}
+          name={params.name}
           type="tv"
-          id={+_.get(params, 'movie.id', 'FixThis')}/>
+          id={params.id}/>
     })
   },
   CastDetails: {
     screen: CastDetails,
     navigationOptions: ({
-      navigation
+      navigation: {
+        state: {
+          params
+        }
+      }
     }) => ({
-      title: navigation.state.params.cast.name,
+      title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton 
-                      name={navigation.state.params.cast.name}
-                      type="person"
-                      id={navigation.state.params.cast.id}
-                    />
-    }),
+      headerRight: <ShareButton
+          name={params.name}
+          type="person"
+          id={params.id}/>
+    })
   },
 }, {
   headerMode: 'float',

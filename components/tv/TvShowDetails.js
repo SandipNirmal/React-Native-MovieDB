@@ -6,7 +6,12 @@ import style from '../../styles/styles';
 import * as _ from 'lodash';
 import { getUriPopulatedTemp } from '../../utilities/utils';
 import { connect } from 'react-redux';
-import { searchItemDetailsFetched, tvShowDetailsFetched } from '../../Actions';
+import { 
+  castSelected,
+  searchItemDetailsFetched,
+  tvShowDetailsFetched
+} from '../../Actions';
+import { NavigationActions } from 'react-navigation';
 
 class TvShowDetails extends Details {
   componentDidMount() {
@@ -54,7 +59,14 @@ const mapDispatchToProps = dispatch => ({
     } else {
       dispatch(tvShowDetailsFetched(details, category))
     }
-  }
+  },
+  onCastSelected: (cast, currentTab) => {
+    dispatch(castSelected(cast, currentTab));
+    dispatch(NavigationActions.navigate({routeName: 'CastDetails', params: {
+      name: cast.name,
+      id: cast.id
+    }}));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TvShowDetails);

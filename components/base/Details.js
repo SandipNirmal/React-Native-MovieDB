@@ -69,7 +69,7 @@ class Details extends Component {
   }
 
   showCastDetails(cast) {
-    this.props.navigation.navigate('CastDetails', {cast: cast});
+    this.props.onCastSelected(cast, this.props.currentTab);
   }
 
   playVideo(url) {

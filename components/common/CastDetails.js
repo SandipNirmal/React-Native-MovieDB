@@ -9,39 +9,33 @@ import {
 
 import HorizontalImageList from './ImageList';
 import Constant from '../../utilities/constants';
+import { getUriPopulatedTemp } from '../../utilities/utils';
 import {Configuration} from '../../data/configuration';
+import { connect } from 'react-redux';
+import {
+  castDetailsFetched,
+  fetchingCastDetails,
+  selectedMovie, searchItemDetailsFetched,
+} from '../../Actions';
+import { NavigationActions } from 'react-navigation';
 import style, {StackNavHeaderStyles} from '../../styles/styles';
 
-export default class CastDetails extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: true,
-      isMoviesLoaded: false,
-      castData: [],
-      movieList: []
-    };
-  }
-
+class CastDetails extends Component {
   componentDidMount() {
     const baseUrl = Constant.api_base_url;
     const apiKey = Constant.api_key;
-    const castDetailUrl = `/person/${this.props.navigation.state.params.cast.id}`;
+    const castDetailUrl = `/person/${this.props.details.id}`;
     const castKnownForUrl = `${castDetailUrl}/movie_credits`;
     const baseImageUrl = Configuration['images']['secure_base_url'];
     const posterSize = Configuration['images']['profile_sizes'][1];
 
     // fetch Cast Details
+    this.props.onFetching(this.props.currentTab);
     fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
       .then((response) => response.json())
       .then((response) => {
         response.imageSrc = `${baseImageUrl}${posterSize}${response['profile_path']}`;
-        this.setState({
-          isLoading: false,
-          castData: response
-        });
-
+        this.props.onDetailsFetched(response, 'bio', this.props.currentTab);
       }).catch((error) => {
         console.error(error);
       });
@@ -50,41 +44,20 @@ export default class CastDetails extends Component {
     fetch(`${baseUrl}${castKnownForUrl}?${apiKey}`)
     .then((response) => response.json())
     .then((response) => {
-      this.setState({
-        movieList: this.formImageUrls(response),
-        isMoviesLoaded: true
-      });
+      const movieList = [...response.cast, ...response.crew];
+      this.props.onDetailsFetched(getUriPopulatedTemp(movieList),
+                                  'movies', this.props.currentTab);
     }).catch((error) => {
       console.error(error);
     });
   }
 
-  showMovieDetails(movie) {
-    this.props.navigation.navigate('MovieDetails', {item: movie});
-  }
-
-  /**
-   * Forms image urls for movies
-   */
-  formImageUrls(res) {
-    const baseUrl = Configuration['images']['secure_base_url'];
-    const posterSize = Configuration['images']['poster_sizes'][0];
-    const movieList = [...res.cast, ...res.crew];
-    
-    const movies = movieList.map((movie) => {
-        movie['uri'] = baseUrl + '/' + posterSize + '/' + movie['poster_path'];
-        return movie;
-      });
-    return movies;
-  }
-  
-
   render() {
-    if (this.state.isLoading) {
+    const { onShowDetails, isFetching, details } = this.props;
+
+    if (isFetching) {
       return (
-        <View style={[{
-          flex: 1
-      }, style.screenBackgroundColor]}>
+        <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
           <ActivityIndicator />
         </View>
       )
@@ -97,29 +70,29 @@ export default class CastDetails extends Component {
         <ScrollView style={style.screenBackgroundColor}>
             <View style={style.castBackground}>
               <Image style={[style.avatarSize, style.avatarBigSize]}
-                    source={{uri: this.state.castData.imageSrc}}/>
+                    source={{uri: details.imageSrc}}/>
               <Text style={[style.text, style.titleText]}>
-                {this.state.castData.name}
+                {details.name}
               </Text>
               <Text style={[style.text, style.normalText]}>
-                {this.state.castData.birthday}
+                {details.birthday}
               </Text>
               <Text style={[style.text, style.normalText]}>
-                {this.state.castData.place_of_birth}
+                {details.place_of_birth}
               </Text>
             </View>
 
             <View style={[style.castBiography]}>
               <Text style={[style.text, style.normalText]}>
-                {this.state.castData.biography}
+                {details.biography}
               </Text>
 
               <HorizontalImageList
                 isTouchableImage
                 title='Known For'
                 style={style.posterSize}
-                onPress={this.showMovieDetails.bind(this)}
-                images={this.state.movieList}
+                onPress={onShowDetails.bind(this)}
+                images={details.movies || []}
               />
             </View>
         </ScrollView>
@@ -127,3 +100,50 @@ export default class CastDetails extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  const currentTab = state.tabNavHelper.currentTab;
+  console.log(currentTab);
+
+  if (currentTab === 'Movies') {
+    return {
+      currentTab,
+      ...state.movies.cast
+    }
+  } else if (currentTab === 'TvShows') {
+    return {
+      currentTab,
+      ...state.tvShows.cast
+    }
+  } else if (currentTab === 'Search') {
+    console.log("search : " , state.search)
+    return {
+      currentTab,
+      ...state.search.cast
+    }
+  } else {
+    return {};
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  onFetching: (currentTab) => {
+    dispatch(fetchingCastDetails(currentTab));
+  },
+  onDetailsFetched: (details, category, currentTab) => {
+    if (currentTab === 'Search') {
+      dispatch(searchItemDetailsFetched(details, category))
+    } else {
+      dispatch(castDetailsFetched(details, category, currentTab))
+    }
+  },
+  onShowDetails: (movie) => {
+    dispatch(selectedMovie(movie));
+    dispatch(NavigationActions.navigate({routeName: 'MovieDetails', params: {
+      name: movie.name,
+      id: movie.id
+    }}));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CastDetails);

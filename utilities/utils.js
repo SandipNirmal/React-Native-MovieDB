@@ -13,6 +13,7 @@ export const getUriPopulated = (shows, config, key) => {
 }
 
  
+// TODO: get rid of this and make use of getUriPopulated alone
 export const getUriPopulatedTemp = (shows, imageType="poster") => {
   const secureUrl = Configuration['images']['secure_base_url'];
   const size = Configuration['images'][`${imageType}_sizes`][0];
