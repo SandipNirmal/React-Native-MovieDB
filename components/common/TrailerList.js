@@ -5,22 +5,35 @@ import TrailerItem from './TrailerItem';
 import style from '../../styles/styles';
 
 const Trailer = (props) => {
+
+  const showTrailers = () => {
     return (
-      <View>
-        <Text style={[style.text, style.headingText, style.detailHeadings]}>Trailers</Text>
-        <ScrollView horizontal 
-          showsHorizontalScrollIndicator={false}
-          style={style.posterList}
-        >
-          {props.videos.map((video, index) => (
-            // <View key={index} >
-            //     <VideoPlayer url={video.url}/>
-            // </View>
-            <TrailerItem key={index} video={video} onPlay={props.playVideo}/>
-          ))}
-        </ScrollView>
-      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={style.posterList}>
+
+        {props.videos.map((video, index) => (
+          <TrailerItem key={index} video={video} onPlay={props.playVideo}/>
+        ))}
+      </ScrollView>
     )
+  }
+  return (
+    <View>
+      <Text style={[style.text, style.headingText, style.detailHeadings]}>Trailers</Text>
+
+      {props.videos.length ? 
+        showTrailers() : 
+        <View style={{height: 100, alignContent: 'center', alignItems:'center'}}>
+          <Text 
+            style={[style.text, style.subHeadingText]}>
+            No Trailers
+          </Text>
+        </View>
+      }
+    </View>
+  )
 }
 
 export default Trailer;

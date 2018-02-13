@@ -7,7 +7,6 @@ import AllMovies from '../components/movies/AllMovies';
 import CastDetails from '../components/common/CastDetails';
 import VideoPlayer from '../components/common/VideoPlayer';
 import ShareButton from './../components/common/ShareButton';
-import * as _ from 'lodash';
 
 import {StackNavHeaderStyles} from '../styles/styles';
 

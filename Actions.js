@@ -123,3 +123,29 @@ export const castDetailsFetched = (details, category, screen) => ({
   details,
   category
 })
+
+// Settings 
+export const SETTINGS_LANGUAGE_CHANGED = 'SETTINGS_LANGUAGE_CHANGED';
+export const SETTINGS_REGION_CHANGED = 'SETTINGS_REGION_CHANGED';
+export const SETTINGS_THEME_CHANGED = 'SETTINGS_THEME_CHANGED';
+
+export const languageChangeAction = (language) => {
+  return {
+    type: SETTINGS_LANGUAGE_CHANGED,
+    payload: language
+  }
+}
+
+export const regionChangeAction = (region) => {
+  return {
+    type: SETTINGS_REGION_CHANGED,
+    payload: region
+  }
+}
+
+export const themeChangeAction = (theme) => {
+  return {
+    type: SETTINGS_THEME_CHANGED,
+    payload: theme
+  }
+}

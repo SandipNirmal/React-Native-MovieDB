@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import movies from './movies';
 import tvShows from './tvShows';
 import configuration from './configuration';
@@ -14,6 +14,6 @@ const laLune = combineReducers({
   settings,
   navigation,
   search,
-  tabNavHelper,
+  tabNavHelper
 });
 export default laLune;

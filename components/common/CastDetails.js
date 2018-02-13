@@ -6,12 +6,12 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import HorizontalImageList from './ImageList';
 import Constant from '../../utilities/constants';
 import { getUriPopulatedTemp } from '../../utilities/utils';
 import {Configuration} from '../../data/configuration';
-import { connect } from 'react-redux';
 import {
   castDetailsFetched,
   fetchingCastDetails,
@@ -140,7 +140,7 @@ const mapDispatchToProps = dispatch => ({
   onShowDetails: (movie) => {
     dispatch(selectedMovie(movie));
     dispatch(NavigationActions.navigate({routeName: 'MovieDetails', params: {
-      name: movie.name,
+      name: movie.name || movie.original_title,
       id: movie.id
     }}));
   },

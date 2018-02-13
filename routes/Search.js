@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator } from 'react-navigation';
+import {StackNavigator} from 'react-navigation';
 
 import Search from './../components/search/Search';
 import TvShowDetails from './../components/tv/TvShowDetails';
@@ -7,8 +7,7 @@ import MovieDetails from './../components/movies/MovieDetails';
 import CastDetails from './../components/common/CastDetails';
 import ShareButton from './../components/common/ShareButton';
 
-import { StackNavHeaderStyles } from '../styles/styles';
-import * as _ from 'lodash';
+import {StackNavHeaderStyles} from '../styles/styles';
 
 // TODO: Fix the shareButton name and id
 const SearchStack = StackNavigator({
@@ -16,8 +15,8 @@ const SearchStack = StackNavigator({
     screen: Search,
     navigationOptions: {
       title: 'Search',
-      ...StackNavHeaderStyles,
-    },
+      ...StackNavHeaderStyles
+    }
   },
   MovieDetails: {
     screen: MovieDetails,
@@ -30,10 +29,7 @@ const SearchStack = StackNavigator({
     }) => ({
       title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton
-          name={params.name}
-          type="movie"
-          id={params.id}/>
+      headerRight: <ShareButton name={params.name} type="movie" id={params.id}/>
     })
   },
   TvShowDetails: {
@@ -47,10 +43,7 @@ const SearchStack = StackNavigator({
     }) => ({
       title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton
-          name={params.name}
-          type="tv"
-          id={params.id}/>
+      headerRight: <ShareButton name={params.name} type="tv" id={params.id}/>
     })
   },
   CastDetails: {
@@ -64,17 +57,14 @@ const SearchStack = StackNavigator({
     }) => ({
       title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton
-          name={params.name}
-          type="person"
-          id={params.id}/>
+      headerRight: <ShareButton name={params.name} type="person" id={params.id}/>
     })
-  },
+  }
 }, {
   headerMode: 'float',
   cardStyle: {
     backgroundColor: '#181818'
-    // backgroundColor: 'rgba(4, 4, 4, 0.6)'  
+    // backgroundColor: 'rgba(4, 4, 4, 0.6)'
   }
 });
 

@@ -129,7 +129,7 @@ class Details extends Component {
             </Text>
 
             <ShowOverview
-              date={release_date || first_air_date}
+              date={release_date || first_air_date || ''}
               runtime={runtime || 100}
               ratings={vote_average}
               />
