@@ -16,6 +16,12 @@ const search = (state=initialState['search'], action) => {
     case A.SEARCH_FILTER_CHANGED:
       newState.selectedIndex = action.index;
       return newState;
+    case A.FETCHING_MOVIES_CAST_DETAILS:
+      newState.cast.isFetching = true;
+      return newState;
+    case A.SEARCH_CAST_SELECTED:
+      newState.cast.details = Object.assign({}, newState.cast.details, action.cast);
+      return newState;
     case A.SEARCH_RESULT_SELECTED:
       // We can choose to cache the movies. is that necessary think?
       if (action.mediaType === 'person') {
@@ -24,9 +30,10 @@ const search = (state=initialState['search'], action) => {
         newState.details = Object.assign({}, newState.details, action.result);
       }
       return newState;
-    case A.SEARCH_ITEM_DETAILS_FETCHED :
-      // if (newState.isFetching !== undefined)
-        // newState.isFetching = false;
+    case A.SEARCH_CAST_DETAILS_FETCHED:
+    case A.SEARCH_ITEM_DETAILS_FETCHED:
+      if (newState.isFetching !== undefined)
+        newState.cast.isFetching = false;
       newState = populateDetails(newState, action);
       return populateCastDetails(newState, action);
     default:
