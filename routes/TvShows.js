@@ -12,22 +12,7 @@ import ShareButton from './../components/common/ShareButton';
 
 import {StackNavHeaderStyles} from '../styles/styles';
 
-// TODO: Fix the shareButton name and id
-const TvShowStack = StackNavigator({
-  TvShow: {
-    screen: TvShow,
-    navigationOptions: {
-      title: 'TvShows',
-      ...StackNavHeaderStyles
-    }
-  },
-  AllTvShows: {
-    screen: AllTvShows,
-    navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.category,
-      ...StackNavHeaderStyles
-    })
-  },
+const TvShowDetailsRoutes = {
   TvShowDetails: {
     screen: TvShowDetails,
     navigationOptions: ({
@@ -63,11 +48,33 @@ const TvShowStack = StackNavigator({
       ...StackNavHeaderStyles
     })
   }
-}, {
-  headerMode: 'float',
-  cardStyle: {
-    backgroundColor: '#4C4C4C'
-  }
-});
+};
 
+const TvShowStack = StackNavigator(
+  {
+    TvShow: {
+      screen: TvShow,
+      navigationOptions: {
+        title: 'TvShows',
+        ...StackNavHeaderStyles
+      }
+    },
+    AllTvShows: {
+      screen: AllTvShows,
+      navigationOptions: ({navigation}) => ({
+        title: navigation.state.params.category,
+        ...StackNavHeaderStyles
+      })
+    },
+    ...TvShowDetailsRoutes,
+  },
+  {
+    headerMode: 'float',
+    cardStyle: {
+      backgroundColor: '#4C4C4C'
+    }
+  }
+);
+
+export { TvShowDetailsRoutes };
 export default TvShowStack;

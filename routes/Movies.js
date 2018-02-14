@@ -10,15 +10,7 @@ import ShareButton from './../components/common/ShareButton';
 
 import {StackNavHeaderStyles} from '../styles/styles';
 
-// TODO: Fix the shareButton name and id
-const MoviesStack = StackNavigator({
-  Movies: {
-    screen: Movies,
-    navigationOptions: {
-      title: 'Movies',
-      ...StackNavHeaderStyles
-    }
-  },
+const MovieDetailsRoutes = {
   MovieDetails: {
     screen: MovieDetails,
     navigationOptions: ({
@@ -34,13 +26,6 @@ const MoviesStack = StackNavigator({
           name={params.name}
           type="movie"
           id={params.id}/>
-    })
-  },
-  AllMovies: {
-    screen: AllMovies,
-    navigationOptions: ({navigation}) => ({
-      title: navigation.state.params.category,
-      ...StackNavHeaderStyles
     })
   },
   CastDetails: {
@@ -68,11 +53,33 @@ const MoviesStack = StackNavigator({
       ...StackNavHeaderStyles
     })
   }
-}, {
-  headerMode: 'float',
-  cardStyle: {
-    backgroundColor: '#4C4C4C'
-  }
-});
+};
 
+const MoviesStack = StackNavigator(
+  {
+    Movies: {
+      screen: Movies,
+      navigationOptions: {
+        title: 'Movies',
+        ...StackNavHeaderStyles
+      }
+    },
+    AllMovies: {
+      screen: AllMovies,
+      navigationOptions: ({navigation}) => ({
+        title: navigation.state.params.category,
+        ...StackNavHeaderStyles
+      })
+    },
+    ...MovieDetailsRoutes,
+  },
+  {
+    headerMode: 'float',
+    cardStyle: {
+      backgroundColor: '#4C4C4C'
+    }
+  }
+);
+
+export { MovieDetailsRoutes };
 export default MoviesStack;
