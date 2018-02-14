@@ -10,8 +10,7 @@ import { connect } from 'react-redux';
 
 import HorizontalImageList from './ImageList';
 import Constant from '../../utilities/constants';
-import { getUriPopulatedTemp } from '../../utilities/utils';
-import {Configuration} from '../../data/configuration';
+import { getUriPopulated } from '../../utilities/utils';
 import {
   castDetailsFetched,
   fetchingCastDetails,
@@ -26,15 +25,22 @@ class CastDetails extends Component {
     const apiKey = Constant.api_key;
     const castDetailUrl = `/person/${this.props.details.id}`;
     const castKnownForUrl = `${castDetailUrl}/movie_credits`;
-    const baseImageUrl = Configuration['images']['secure_base_url'];
-    const posterSize = Configuration['images']['profile_sizes'][1];
+    const { config, currentTab,
+      config: {
+        image: {
+          secureBaseUrl, posterSizeForBackground 
+        }
+      }
+    } = this.props;
+
+    if (currentTab !== "Search") // search tab already has the data available
+      this.props.onFetching(currentTab);
 
     // fetch Cast Details
-    this.props.onFetching(this.props.currentTab);
     fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
       .then((response) => response.json())
       .then((response) => {
-        response.imageSrc = `${baseImageUrl}${posterSize}${response['profile_path']}`;
+        response.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${response['profile_path']}`;
         this.props.onDetailsFetched(response, 'bio', this.props.currentTab);
       }).catch((error) => {
         console.error(error);
@@ -45,7 +51,7 @@ class CastDetails extends Component {
     .then((response) => response.json())
     .then((response) => {
       const movieList = [...response.cast, ...response.crew];
-      this.props.onDetailsFetched(getUriPopulatedTemp(movieList),
+      this.props.onDetailsFetched(getUriPopulated(movieList, config, 'posterSizeForImageList'),
                                   'movies', this.props.currentTab);
     }).catch((error) => {
       console.error(error);
@@ -103,21 +109,22 @@ class CastDetails extends Component {
 
 const mapStateToProps = state => {
   const currentTab = state.tabNavHelper.currentTab;
-  console.log(currentTab);
 
   if (currentTab === 'Movies') {
     return {
+      config: state.configuration,
       currentTab,
       ...state.movies.cast
     }
   } else if (currentTab === 'TvShows') {
     return {
+      config: state.configuration,
       currentTab,
       ...state.tvShows.cast
     }
   } else if (currentTab === 'Search') {
-    console.log("search : " , state.search)
     return {
+      config: state.configuration,
       currentTab,
       ...state.search.cast
     }

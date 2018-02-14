@@ -17,7 +17,7 @@ import TrailerList from '../common/TrailerList';
 import CastDetails from '../common/CastDetails';
 
 import { Configuration } from '../../data/configuration';
-import { getUriPopulatedTemp } from '../../utilities/utils';
+import { getUriPopulated } from '../../utilities/utils';
 import style, {marginTop} from '../../styles/styles';
 
 class Details extends Component {
@@ -38,18 +38,18 @@ class Details extends Component {
   }
 
   fetchDetails(imagesUri, peopleUri) {
-    const { onDetailsFetched, currentTab } = this.props;
+    const { onDetailsFetched, currentTab, config } = this.props;
     fetch(imagesUri).then((response) => response.json()).then((response) => {
-      response.images = getUriPopulatedTemp(response.images.backdrops, 'backdrop');
+      response.images = getUriPopulated(response.images.backdrops, config, 'backdropSize');
       response.videos = this.formVideoUrls(response.videos.results) 
       onDetailsFetched(response, 'imagesAndVideos', currentTab);
     }).catch((error) => { console.error(error); });
 
     fetch(peopleUri).then((response) => response.json()).then((response) => {
       const people = {
-        'directors': getUriPopulatedTemp(response.crew.filter((member) => 
-          member.job === 'Director'), 'profile'),
-        'casts': getUriPopulatedTemp(response.cast.sort((a, b) => a.order - b.order), 'profile')
+        'directors': getUriPopulated(response.crew.filter((member) => 
+          member.job === 'Director'), config, 'profileSize'),
+        'casts': getUriPopulated(response.cast.sort((a, b) => a.order - b.order), config, 'profileSize')
       }
       onDetailsFetched(people, 'directorsAndCast', currentTab);
     }).catch((error) => { console.error(error); });

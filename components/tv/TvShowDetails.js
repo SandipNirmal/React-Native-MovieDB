@@ -4,7 +4,7 @@ import Constant from '../../utilities/constants';
 import HorizontalImageList from '../common/ImageList';
 import style from '../../styles/styles';
 import * as _ from 'lodash';
-import { getUriPopulatedTemp } from '../../utilities/utils';
+import { getUriPopulated } from '../../utilities/utils';
 import { connect } from 'react-redux';
 import { 
   castSelected,
@@ -36,20 +36,22 @@ class TvShowDetails extends Details {
 
   getSpecialComponent() {
     const seasons = _.get(this, 'props.details.seasons', []);
+    const { config } = this.props;
     
     return <HorizontalImageList
              isTouchableImage
              title="Seasons"
              style={style.posterSize}
              onPress={this.showSeasonDetails.bind(this)}
-             images={getUriPopulatedTemp(seasons.sort((a, b) => b.season_number - a.season_number))}
+             images={getUriPopulated(seasons.sort((a, b) => b.season_number - a.season_number), config, 'posterSizeForImageList')}
            />
   }
 }
 
-const mapStateToProps = ({tabNavHelper, search, tvShows}) => ({
+const mapStateToProps = ({tabNavHelper, search, tvShows, configuration}) => ({
   details: tabNavHelper.currentTab === 'Search' ? search.details : tvShows.details,
   currentTab: tabNavHelper.currentTab,
+  config: configuration,
 });
 
 const mapDispatchToProps = dispatch => ({

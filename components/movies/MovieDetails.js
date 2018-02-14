@@ -33,9 +33,10 @@ class MovieDetails extends Details {
   }
 }
 
-const mapStateToProps = ({tabNavHelper, search, movies}) => ({
+const mapStateToProps = ({tabNavHelper, search, movies, configuration}) => ({
   details: tabNavHelper.currentTab === 'Search' ? search.details : movies.details,
   currentTab: tabNavHelper.currentTab,
+  config: configuration,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,24 +3,12 @@ import {Configuration} from '../data/configuration';
 export const getUriPopulated = (shows, config, key) => {
   const {image} = config
   // decipher imageType from key
+  // ex: posterSizeForImageList, extract poster from string
   const imageType = key.substring(0, key.indexOf('S'))
 
   return shows.map((show) => {
-    const path = show[`${imageType}_path`];
+    const path = show['file_path'] || show[`${imageType}_path`];
     show['uri'] = `${image.secureBaseUrl}${image[key]}${path}`;
     return show
   });
-}
-
- 
-// TODO: get rid of this and make use of getUriPopulated alone
-export const getUriPopulatedTemp = (shows, imageType="poster") => {
-  const secureUrl = Configuration['images']['secure_base_url'];
-  const size = Configuration['images'][`${imageType}_sizes`][0];
-
-  return shows.map((show) => {
-    const path = show['file_path'] || show[`${imageType}_path`];
-    show['uri'] = `${secureUrl}${size}${path}`;
-      return show;
-  })
 }

@@ -16,7 +16,7 @@ const search = (state=initialState['search'], action) => {
     case A.SEARCH_FILTER_CHANGED:
       newState.selectedIndex = action.index;
       return newState;
-    case A.FETCHING_MOVIES_CAST_DETAILS:
+    case A.FETCHING_SEARCH_CAST_DETAILS:
       newState.cast.isFetching = true;
       return newState;
     case A.SEARCH_CAST_SELECTED:
@@ -32,7 +32,7 @@ const search = (state=initialState['search'], action) => {
       return newState;
     case A.SEARCH_CAST_DETAILS_FETCHED:
     case A.SEARCH_ITEM_DETAILS_FETCHED:
-      if (newState.isFetching !== undefined)
+      if (action.isFetching !== undefined)
         newState.cast.isFetching = false;
       newState = populateDetails(newState, action);
       return populateCastDetails(newState, action);

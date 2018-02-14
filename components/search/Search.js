@@ -48,7 +48,6 @@ class Search extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {results, isSearching, onFilterChanged, onSearchResultSelected,
       selectedIndex} = this.props;
     const filteredResults = this.filterSearchResults(results, selectedIndex);
