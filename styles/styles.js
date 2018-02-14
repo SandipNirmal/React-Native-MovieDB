@@ -1,7 +1,4 @@
-import {
-  StyleSheet,
-  Platform
-} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 import APP_CONSTANT from './../utilities/constants.js';
 const marginTop = APP_CONSTANT.height / APP_CONSTANT.goldenRatio;
@@ -22,7 +19,7 @@ const style = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   headerBackground: {
     backgroundColor: '#222222'
@@ -60,7 +57,7 @@ const style = StyleSheet.create({
   textStickToBottom: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   posterSize: {
     width: 92,
@@ -77,7 +74,7 @@ const style = StyleSheet.create({
     height: 60
   },
   castBackground: {
-    flex:1,
+    flex: 1,
     height: (0.618 * (APP_CONSTANT.height - 104)),
     backgroundColor: '#595959',
     alignItems: 'center',
@@ -97,7 +94,7 @@ const style = StyleSheet.create({
     marginLeft: 20
   },
   avatarBigSize: {
-    width:  80,
+    width: 80,
     height: 80,
     borderRadius: 40
   },
@@ -106,7 +103,7 @@ const style = StyleSheet.create({
     textAlign: 'center'
   },
   imagePlaceholder: {
-    backgroundColor: '#545454',
+    backgroundColor: '#545454'
   },
   screenBackgroundColor: {
     // backgroundColor: 'rgba(4, 4, 4, 0.75)'
@@ -119,7 +116,7 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#616161',
-    backgroundColor: '#020202',
+    backgroundColor: '#020202'
   },
   trailerPlayIcon: {},
   trailerTitle: {
@@ -128,8 +125,8 @@ const style = StyleSheet.create({
   },
   centerContentContainer: {
     flex: 1,
-    justifyContent:'center',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   appName: {
     marginTop: 15,
@@ -138,20 +135,20 @@ const style = StyleSheet.create({
   },
   startupScreenTextProps: {
     color: primaryColor,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   videoPlayerContainer: {
     flex: 1
   },
   detailHeadings: {
-    marginTop:15,
+    marginTop: 15,
     marginBottom: 4
   },
   searchItem: {
     flex: 1,
     height: 90,
     flexDirection: 'row',
-    padding:2,
+    padding: 2,
     margin: 6,
     backgroundColor: '#393939',
     shadowRadius: 0,
@@ -184,6 +181,7 @@ const style = StyleSheet.create({
     borderBottomWidth: 1
   },
   episodePosterContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -192,12 +190,12 @@ const style = StyleSheet.create({
     height: 52
   },
   episodeDesc: {
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingHorizontal: 8
+    paddingLeft: 15
   },
   listContainer: {
-    display: 'flex',
     flexGrow: 1,
     flexDirection: 'row',
     height: 54,
@@ -219,13 +217,9 @@ const style = StyleSheet.create({
 const StackNavHeaderStyles = {
   headerTitleStyle: style.headerTextColor,
   headerStyle: style.headerBackground,
-  headerTintColor: primaryColor,
+  headerTintColor: primaryColor
 }
 
-export {
-  StackNavHeaderStyles,
-  primaryColor,
-  marginTop
-}
+export {StackNavHeaderStyles, primaryColor, marginTop}
 
 export default style;
