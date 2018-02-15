@@ -11,7 +11,7 @@ const SearchResult = (props) => {
       <ScrollView style={style.searchResult}>
       {props.items.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => {props.onSelect(item)}}>
-            <SearchItem item={item}/>
+            <SearchItem item={item} config={props.config}/>
           </TouchableOpacity>
         ))}
       </ScrollView>
