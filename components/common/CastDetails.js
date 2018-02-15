@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -6,7 +8,6 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native';
-import { connect } from 'react-redux';
 
 import HorizontalImageList from './ImageList';
 import Constant from '../../utilities/constants';
@@ -16,8 +17,8 @@ import {
   fetchingCastDetails,
   selectedMovie, searchItemDetailsFetched,
 } from '../../Actions';
-import { NavigationActions } from 'react-navigation';
-import style, {StackNavHeaderStyles} from '../../styles/styles';
+
+import style, { primaryColor, StackNavHeaderStyles } from '../../styles/styles';
 
 class CastDetails extends Component {
   componentDidMount() {
@@ -63,9 +64,9 @@ class CastDetails extends Component {
 
     if (isFetching) {
       return (
-        <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
-          <ActivityIndicator />
-        </View>
+        <ScrollView style={style.screenBackgroundColor}>
+          <ActivityIndicator size="large" color={primaryColor} />
+        </ScrollView>
       )
     }
     
@@ -109,27 +110,16 @@ class CastDetails extends Component {
 
 const mapStateToProps = state => {
   const currentTab = state.tabNavHelper.currentTab;
+  const mapScreenToStateProps = {
+    'Movies': 'movies',
+    'TvShows': 'tvShows',
+    'Search': 'search'
+  }
 
-  if (currentTab === 'Movies') {
-    return {
+  return {
       config: state.configuration,
       currentTab,
-      ...state.movies.cast
-    }
-  } else if (currentTab === 'TvShows') {
-    return {
-      config: state.configuration,
-      currentTab,
-      ...state.tvShows.cast
-    }
-  } else if (currentTab === 'Search') {
-    return {
-      config: state.configuration,
-      currentTab,
-      ...state.search.cast
-    }
-  } else {
-    return {};
+      ...state[mapScreenToStateProps[currentTab]].cast
   }
 }
 
