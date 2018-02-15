@@ -6,8 +6,6 @@ import {
 } from './../Actions';
 
 export default function settings(state = initialState['settings'], action) {
-  // console.log('Action', action);
-
   switch (action.type) {
     case SETTINGS_LANGUAGE_CHANGED:
       return state;
