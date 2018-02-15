@@ -1,5 +1,7 @@
-export const LANGUAGE_CHANGED = "LANGUAGE_CHANGED";
-export const REGION_CHANGED = "REGION_CHANGED";
+import axios from 'axios';
+
+const ROOT_URL = 'https://api.themoviedb.org/3';
+const API_KEY = 'api_key=b8a04ea374eece868a6690782c9e7536';
 
 String.prototype.toUnderScore = function() {
   return this.replace(/([A-Z])/g, "_$1");
@@ -126,6 +128,17 @@ export const castDetailsFetched = (details, category, screen) => ({
   details,
   category
 })
+
+export const FETCH_CAST_DETAILS = 'FETCH_CAST_DETAILS';
+export function fetchCastDetails(castId) {
+  const castDetailUrl = `/person/${castId}`;
+  const request = axios.get(`${ROOT_URL}${castDetailUrl}?${API_KEY}`);
+
+  return {
+    type: FETCH_CAST_DETAILS,
+    payload: request
+  }
+}
 
 // Settings 
 export const SETTINGS_LANGUAGE_CHANGED = 'SETTINGS_LANGUAGE_CHANGED';

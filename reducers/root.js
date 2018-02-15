@@ -6,6 +6,7 @@ import settings from './settings';
 import navigation from './navigation';
 import search from './search';
 import tabNavHelper from './tabNavHelper';
+import CastsReducer from './casts';
 
 const laLune = combineReducers({
   movies,
@@ -14,6 +15,7 @@ const laLune = combineReducers({
   settings,
   navigation,
   search,
-  tabNavHelper
+  tabNavHelper,
+  cast: CastsReducer
 });
 export default laLune;
