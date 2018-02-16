@@ -1,7 +1,11 @@
 import axios from 'axios';
+import {AsyncStorage} from 'react-native';
+
+import initialState from './State';
 
 const ROOT_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'api_key=b8a04ea374eece868a6690782c9e7536';
+const SETTINGS_KEY = 'Settings'
 
 String.prototype.toUnderScore = function() {
   return this.replace(/([A-Z])/g, "_$1");
@@ -69,7 +73,6 @@ export const tvShowDetailsFetched = (details, category) => ({
   details,
   category
 });
-
 
 // SEARCH
 export const SEARCHING_MOVIES_ETC = "SEARCHING_MOVIES_ETC";
@@ -144,6 +147,8 @@ export function fetchCastDetails(castId) {
 export const SETTINGS_LANGUAGE_CHANGED = 'SETTINGS_LANGUAGE_CHANGED';
 export const SETTINGS_REGION_CHANGED = 'SETTINGS_REGION_CHANGED';
 export const SETTINGS_THEME_CHANGED = 'SETTINGS_THEME_CHANGED';
+export const FETCH_SETTINGS = 'FETCH_SETTINGS';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
 export const languageChangeAction = (language) => {
   return {
@@ -163,5 +168,23 @@ export const themeChangeAction = (theme) => {
   return {
     type: SETTINGS_THEME_CHANGED,
     payload: theme
+  }
+}
+
+export const fetchSettingsAction = async () => {
+  const payload = JSON.parse(await AsyncStorage.getItem(SETTINGS_KEY)) || initialState['settings'];
+
+  return {
+    type: FETCH_SETTINGS,
+    payload
+  }
+}
+
+export const saveSettingsAction = (values = initialState['settings']) => {
+  const payload = AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(values));
+
+  return {
+    type: SAVE_SETTINGS,
+    payload
   }
 }

@@ -4,21 +4,21 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  AsyncStorage
+  Button
 } from 'react-native';
-import {Button} from 'react-native-elements';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+
 import {
   languageChangeAction, 
   regionChangeAction, 
-  themeChangeAction
+  themeChangeAction,
+  fetchSettingsAction,
+  saveSettingsAction
 } from './../../Actions';
 
 import {LaLuneListItem, TouchableListItem} from './../common/ListItem';
 import style from './../../styles/styles';
 
-const SETTINGS_KEY = 'Settings'
 const appInfo = [
   {
     name: 'App Name',
@@ -31,31 +31,17 @@ const appInfo = [
 const settings = ['Language', 'Region', 'Theme'];
 
 class Settings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      language: 'IN-hi',
-      region: 'IN',
-      theme: 'dark'
-    }
-
-    this._initSettings();
+  componentDidMount() {
+    this.props.fetchSettingsAction();
   }
 
-  async _initSettings() {
-    const settings = JSON.parse(await AsyncStorage.getItem(SETTINGS_KEY)) || {
-      language: 'IN-hi',
-      region: 'IN'
-    };
-
-    this.setState({language: settings.language, region: settings.region});
-  }
-
-  saveSettings() {
-    AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(this.state));
+  changeTheme = () => {
+    const theme = (this.props.settings.theme === 'dark') ? 'light' : 'dark';
+    this.props.themeChangeAction(theme);
   }
 
   render() {
+    const {language, region, theme} = this.props.settings;
     return (
       <View>
         <ScrollView style={{marginTop: 20,minHeight: 400}}>
@@ -78,6 +64,27 @@ class Settings extends Component {
                 onPress={() => this.props.languageChangeAction('en')}/>
               ))}
           </View>
+
+          <View>
+            <Text style={[style.text, style.subHeadingText]}>
+              Added For Testing Redux
+            </Text>
+            <Text style={[style.text, style.normalText]}>
+              Language : {language}
+            </Text>
+            <Text style={[style.text, style.normalText]}>
+              Region : {region}
+            </Text>
+            <Text style={[style.text, style.normalText]}>
+              Theme : {theme}
+            </Text>
+
+            <Button
+              onPress={this.changeTheme}
+              title="Change Theme"
+              accessibilityLabel="Changes application theme."
+              />
+          </View>
         </ScrollView>
       </View>
     );
@@ -90,12 +97,10 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    languageChangeAction, 
-    regionChangeAction, 
-    themeChangeAction
-    }, dispatch);
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Settings)
+export default connect(mapStateToProps, {
+  languageChangeAction, 
+  regionChangeAction, 
+  themeChangeAction,
+  fetchSettingsAction,
+  saveSettingsAction
+})(Settings);
