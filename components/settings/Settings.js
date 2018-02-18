@@ -1,21 +1,11 @@
 import React, {Component} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  StyleSheet,
-  Button
-} from 'react-native';
+import {View, ScrollView, Text, Button} from 'react-native';
+import {NavigationActions} from 'react-navigation';
 import {connect} from 'react-redux';
 
-import {
-  languageChangeAction, 
-  regionChangeAction, 
-  themeChangeAction,
-  fetchSettingsAction,
-  saveSettingsAction
-} from './../../Actions';
-
+import {languageChangeAction, regionChangeAction, 
+        themeChangeAction, fetchSettingsAction, 
+        saveSettingsAction} from './../../Actions';
 import {LaLuneListItem, TouchableListItem} from './../common/ListItem';
 import style from './../../styles/styles';
 
@@ -36,7 +26,9 @@ class Settings extends Component {
   }
 
   changeTheme = () => {
-    const theme = (this.props.settings.theme === 'dark') ? 'light' : 'dark';
+    const theme = (this.props.settings.theme === 'dark')
+      ? 'light'
+      : 'dark';
     this.props.themeChangeAction(theme);
   }
 
@@ -44,7 +36,11 @@ class Settings extends Component {
     const {language, region, theme} = this.props.settings;
     return (
       <View>
-        <ScrollView style={{marginTop: 20,minHeight: 400}}>
+        <ScrollView
+          style={{
+          marginTop: 20,
+          minHeight: 400
+        }}>
           <Text style={[style.text, style.headingText]}>
             About
           </Text>
@@ -58,11 +54,14 @@ class Settings extends Component {
             </Text>
 
             {settings.map((setting) => (
-              <TouchableListItem
-                key={setting}
-                name={setting}
-                onPress={() => this.props.languageChangeAction('en')}/>
-              ))}
+            <TouchableListItem
+              key={setting}
+              name={setting}
+              onPress={() => {
+                // this.props.languageChangeAction('en')
+                NavigationActions.navigate({
+                  routeName: 'LanguageSettings'
+                })}}/>))}
           </View>
 
           <View>
@@ -82,8 +81,7 @@ class Settings extends Component {
             <Button
               onPress={this.changeTheme}
               title="Change Theme"
-              accessibilityLabel="Changes application theme."
-              />
+              accessibilityLabel="Changes application theme."/>
           </View>
         </ScrollView>
       </View>
@@ -92,15 +90,13 @@ class Settings extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    settings: state.settings
-  }
+  return {settings: state.settings}
 }
 
 export default connect(mapStateToProps, {
   languageChangeAction, 
   regionChangeAction, 
-  themeChangeAction,
-  fetchSettingsAction,
-  saveSettingsAction
-})(Settings);
+  themeChangeAction, 
+  fetchSettingsAction, 
+  saveSettingsAction}
+)(Settings);

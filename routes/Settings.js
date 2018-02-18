@@ -1,8 +1,7 @@
 import {StackNavigator} from 'react-navigation';
 
 import Settings from './../components/settings/Settings';
-import RegionSettings from './../components/settings/RegionSettings';
-import LanguageSettings from './../components/settings/LanguageSettings';
+import {LanguageSettings, RegionSettings, ThemeSettings} from './../components/settings/SettingsDetail';
 import {StackNavHeaderStyles} from '../styles/styles';
 
 const SettingsStack = StackNavigator({
@@ -24,6 +23,13 @@ const SettingsStack = StackNavigator({
     screen: RegionSettings,
     navigationOptions: {
       title: 'Choose Region',
+      ...StackNavHeaderStyles,
+    }
+  },
+  ThemeSettings: {
+    screen: ThemeSettings,
+    navigationOptions: {
+      title: 'Choose Theme',
       ...StackNavHeaderStyles,
     }
   }
