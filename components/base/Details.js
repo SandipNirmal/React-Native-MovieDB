@@ -16,7 +16,6 @@ import CastList from '../common/CastList'
 import TrailerList from '../common/TrailerList';
 import CastDetails from '../common/CastDetails';
 
-import { Configuration } from '../../data/configuration';
 import { getUriPopulated } from '../../utilities/utils';
 import style, {marginTop} from '../../styles/styles';
 
@@ -105,13 +104,16 @@ class Details extends Component {
   }
 
   render() {
-    const baseUrl = Configuration['images']['secure_base_url'];
-    const size = Configuration['images']['poster_sizes'][5]
-    const bgImage = `${baseUrl}${size}/${this.props.details.poster_path}`;
     const {
-      title, images, videos, release_date, casts, first_air_date, runtime,
-      vote_average, overview
-    } = this.props.details;
+      config: {
+        image: { secureBaseUrl, posterSizeForBackground }
+      },
+      details: {
+        title, images, videos, release_date, casts, first_air_date, runtime,
+        vote_average, overview, poster_path
+      }
+    } = this.props;
+    const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`;
 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
