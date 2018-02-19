@@ -43,6 +43,7 @@ export default {
       'posterSizeForBackground': '',
       'posterSizeForImageList': '',
       'profileSize': '',
+      'stillSize': '',
     },
   },
   'settings': {

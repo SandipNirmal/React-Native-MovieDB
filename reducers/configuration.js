@@ -18,6 +18,7 @@ function configuration(state=initialState['config'], action) {
       newState.image.posterSizeForImageList = images.poster_sizes[1];
       newState.image.posterSizeForBackground = images.poster_sizes[5];
       newState.image.profileSize = images.profile_sizes[1];
+      newState.image.stillSize = images.still_sizes[1];
     }
     return newState;
   }

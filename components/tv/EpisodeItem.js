@@ -1,15 +1,13 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
+import {connect} from 'react-redux';
 
-import {Configuration} from './../../data/configuration';
 import style from './../../styles/styles';
 
-const EpisodeItem = ({data}) => {
+const EpisodeItem = ({data, config}) => {
   const {name, overview, still_path, episode_number} = data;
-
-  const baseUrl = Configuration['images']['secure_base_url'];
-  const size = Configuration['images']['still_sizes'][1]
-  const episodeImg = `${baseUrl}${size}/${still_path}`;
+  const {secureBaseUrl, stillSize} = config.image;
+  const episodeImg = `${secureBaseUrl}${stillSize}/${still_path}`;
 
   return (
     <View style={style.episodeItem}>
@@ -28,4 +26,8 @@ const EpisodeItem = ({data}) => {
   )
 }
 
-export default EpisodeItem;
+const mapStateToProps = state => ({
+  config: state.configuration 
+});
+
+export default connect(mapStateToProps)(EpisodeItem);

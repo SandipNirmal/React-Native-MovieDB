@@ -1,5 +1,3 @@
-import {Configuration} from '../data/configuration';
-
 export const getUriPopulated = (shows, config, key) => {
   const {image} = config
   // decipher imageType from key
