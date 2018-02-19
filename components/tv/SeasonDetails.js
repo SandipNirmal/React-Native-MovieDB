@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import {View, Text, ScrollView } from 'react-native';
+import {connect} from 'react-redux';
 
 import BackgroundImage from '../common/BackgroundImage';
 import ShowOverview from '../common/ShowOverview';
 import EpisodeList from './EpisodeList';
 
-import { Configuration } from '../../data/configuration';
 import Constant from './../../utilities/constants';
 import style from '../../styles/styles';
 
 class SeasonDetails extends Component {
 
+  // TODO: Use redux store
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +40,8 @@ class SeasonDetails extends Component {
 
   render() {
     const { poster_path, air_date, episode_count, season_number, episodes = [] } = this.state.season;
-    
-    const baseUrl = Configuration['images']['secure_base_url'];
-    const size = Configuration['images']['poster_sizes'][5]
-    const bgImage = `${baseUrl}${size}/${poster_path}`;
+    const { secureBaseUrl, posterSizeForBackground } = this.props.config.image;
+    const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`;
 
     return (
       <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
@@ -64,6 +63,9 @@ class SeasonDetails extends Component {
   }
 }
 
-export default SeasonDetails;
+const mapStateToProps = state => ({
+  config: state.configuration
+});
+export default connect(mapStateToProps)(SeasonDetails);
 
 
