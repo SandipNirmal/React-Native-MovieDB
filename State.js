@@ -39,12 +39,17 @@ export default {
     'apiKey': '',
     'image': {
       'secureBaseUrl': '',
+      'numColumns': 3,  // default
       'backdropSize': '',
       'posterSizeForBackground': '',
       'posterSizeForImageList': '',
       'profileSize': '',
       'stillSize': '',
     },
+    'style': {
+      'posterSize': {},
+      'backdropSize': {}
+    }
   },
   'settings': {
     'language': 'IN-hi',

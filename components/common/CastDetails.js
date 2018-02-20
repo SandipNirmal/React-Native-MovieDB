@@ -60,7 +60,7 @@ class CastDetails extends Component {
   }
 
   render() {
-    const {onShowDetails, isFetching, details} = this.props;
+    const {onShowDetails, isFetching, details, config} = this.props;
 
     if (isFetching) {
       return (
@@ -99,7 +99,7 @@ class CastDetails extends Component {
             <HorizontalImageList
               isTouchableImage
               title='Known For'
-              style={style.posterSize}
+              style={config.style.posterSize}
               onPress={onShowDetails.bind(this)}
               images={details.movies || []}/>
           </View>

@@ -59,16 +59,6 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
-  posterSize: {
-    width: 92,
-    height: 136,
-    margin: 5
-  },
-  backdropSize: {
-    width: 280,
-    height: 150,
-    margin: 5
-  },
   avatarContainer: {
     width: 100,
     height: 60

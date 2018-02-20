@@ -106,7 +106,8 @@ class Details extends Component {
   render() {
     const {
       config: {
-        image: { secureBaseUrl, posterSizeForBackground }
+        image: { secureBaseUrl, posterSizeForBackground },
+        style: { backdropSize }
       },
       details: {
         title, images, videos, release_date, casts, first_air_date, runtime,
@@ -143,7 +144,7 @@ class Details extends Component {
             <HorizontalImageList
               title="Photos"
               images={images || []}
-              style={style.backdropSize}
+              style={backdropSize}
             />
 
             <TrailerList 

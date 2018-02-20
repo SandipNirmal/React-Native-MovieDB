@@ -41,7 +41,7 @@ class TvShowDetails extends Details {
     return <HorizontalImageList
              isTouchableImage
              title="Seasons"
-             style={style.posterSize}
+             style={config.style.posterSize}
              onPress={this.showSeasonDetails.bind(this)}
              images={getUriPopulated(seasons.sort((a, b) => b.season_number - a.season_number), config, 'posterSizeForImageList')}
            />

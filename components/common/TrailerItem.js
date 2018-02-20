@@ -1,10 +1,11 @@
 import React from 'react';
 import {Text, View, TouchableOpacity,} from 'react-native';
 import {Icon} from 'react-native-elements';
+import {connect} from 'react-redux';
 
-import style from '../../styles/styles';
+import styles from '../../styles/styles';
 
-const TrailerItem = ({video, onPlay}) => {
+const TrailerItem = ({style, video, onPlay}) => {
   return (
     <View>
       <Text style={[style.text, style.normalText, style.trailerTitle]}>
@@ -12,7 +13,7 @@ const TrailerItem = ({video, onPlay}) => {
       </Text>
       <TouchableOpacity onPress={() => {onPlay(video.url)}}>
         <View 
-          style={[style.backdropSize, style.centerContentContainer, style.trailerContainer]}>		
+          style={[style.backdropSize, styles.centerContentContainer, styles.trailerContainer]}>		
           <Icon 
             name='youtube-play' 
             type='font-awesome'
@@ -25,4 +26,7 @@ const TrailerItem = ({video, onPlay}) => {
   )
 }
 
-export default TrailerItem;
+const mapStateToProps = state => ({
+  style: state.configuration.style
+})
+export default connect(mapStateToProps)(TrailerItem);

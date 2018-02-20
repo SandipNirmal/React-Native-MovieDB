@@ -77,18 +77,16 @@ Title.propTypes = HorizontalImageList.propTypes = {
   },
 }
 
-// TODO numColumns should be calculated based on the screenwidth
 const FlatImageList = (props) => (
   <FlatList
-    style={props.style}
-    // contentContainerStyle={style.flatListContainer}
+    style={props.style.bgColor}
     numColumns={props.numColumns}
     data={props.images}
     renderItem={({item}) =>
       <TouchableImage
         key={item.id}
         onPress={() => props.onPress(item)}
-        style={[style.posterSize, styles.flatList]}
+        style={[props.style.imageStyle, styles.flatList]}
         uri={item.uri}
       />
     }

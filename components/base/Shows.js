@@ -8,7 +8,7 @@ import Carousel from '../common/Carousel';
 import Constant from '../../utilities/constants';
 import { getUriPopulated } from '../../utilities/utils';
 
-import style, { primaryColor, StackNavHeaderStyles } from '../../styles/styles';
+import style, { primaryColor } from '../../styles/styles';
 
 String.prototype.toTitle = function() {
   return this.replace(/([A-Z])/g, " $1").replace(/(.)/, c => c.toUpperCase());
@@ -60,7 +60,7 @@ class Shows extends Component {
               hasSeeAllOption
               key={index}
               title={category.toTitle()}
-              style={style.posterSize}
+              style={config.style.posterSize}
               onShowAll={this.showAll.bind(this)}
               onPress={onShowDetails.bind(this)}
               images={categories[category]}

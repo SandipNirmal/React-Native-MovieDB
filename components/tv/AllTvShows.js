@@ -13,13 +13,16 @@ const numColumns = parseInt(width / (92 + (5 * 2)));
 
 class AllTvShows extends Component {
   render() {
-    const { onShowDetails, categories } = this.props;
+    const { onShowDetails, categories, config } = this.props;
     const { category } = this.props.navigation.state.params;
 
     return(
       <FlatImageList
-        numColumns={numColumns}
-        style={style.screenBackgroundColor}
+        numColumns={config.image.numColumns}
+        style={{
+          bgColor: style.screenBackgroundColor,
+          imageStyle: config.style.posterSize 
+        }}
         images={categories[category.toCategory()]}
         onPress={onShowDetails.bind(this)}
       />
@@ -29,6 +32,7 @@ class AllTvShows extends Component {
 
 const mapStateToProps = state => ({
   ...state.tvShows,
+  config: state.configuration
 });
 
 const mapDispatchToProps = dispatch => ({

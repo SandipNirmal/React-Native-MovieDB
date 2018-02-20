@@ -19,13 +19,17 @@ String.prototype.toCategory = function() {
 
 class AllMovies extends Component {
   render() {
-    const { onShowDetails, categories } = this.props;
+    const { onShowDetails, categories, config } = this.props;
     const { category } = this.props.navigation.state.params;
 
     return(
+      // TODO: Move config.style to FlatImageList? Think customization !
       <FlatImageList
-        numColumns={numColumns}
-        style={style.screenBackgroundColor}
+        numColumns={config.image.numColumns}
+        style={{
+          bgColor: style.screenBackgroundColor,
+          imageStyle: config.style.posterSize 
+        }}
         images={categories[category.toCategory()]}
         onPress={onShowDetails.bind(this)}
       />
@@ -35,6 +39,7 @@ class AllMovies extends Component {
 
 const mapStateToProps = state => ({
   ...state.movies,
+  config: state.configuration
 });
 
 const mapDispatchToProps = dispatch => ({
