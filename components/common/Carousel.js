@@ -7,32 +7,69 @@ import {
   Text, TouchableOpacity,
   View,
 } from 'react-native';
-
+import * as _ from 'lodash';
 import style from './../../styles/styles';
 
-const Carousel = (props) => (
-  <ScrollView 
-    horizontal
-    pagingEnabled
-    showsHorizontalScrollIndicator={false}
-    style={style.flexContainer}
-  >
-    {props.images.map((image, index) => (
-      <TouchableOpacity
-        key={index}
-        style={styles.posterSize}
-        onPress={() => props.onPress(image)}>
-        <ImageWithTitle image={image} />
-      </TouchableOpacity>
-    ))}
-  </ScrollView>
-);
+class Carousel extends Component {
+  componentDidMount() {
+    const scrollNext = () => {
+      const children = _.get(this, "scrollView.props.children", false);
+      const {width} = this.props.carouselStyle;
+
+      if(children) {
+        const maxScroll = children.length * width;
+        if ((this.currentScroll  + width) < maxScroll) {
+          this.currentScroll += width;
+        } else {
+          this.currentScroll = 0;
+        }
+      }
+      // This needs to be done when orientation is changed.
+      // TODO: Remove this.
+      // This is implemented in a hurry, Use the diff of remainder vs current
+      // scroll to scroll appropriately 
+      if (this.currentScroll % width !== 0)
+        this.currentScroll = 0;
+      this.scrollView &&
+        this.scrollView.scrollTo({x: this.currentScroll, y: 0, animated: false});
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(scrollNext, 5000);
+    }
+    scrollNext(); 
+  }
+
+  componentDidUnMount() {
+    clearTimeout(this.scrollTimeout);
+  }
+
+  render() {
+    const { onPress, images, carouselStyle } = this.props;
+    return(
+      <ScrollView 
+        horizontal
+        pagingEnabled
+        ref={ref => this.scrollView = ref}
+        showsHorizontalScrollIndicator={false}
+        style={style.flexContainer}
+      >
+        {images.map((image, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.posterSize}
+            onPress={() => onPress(image)}>
+            <ImageWithTitle image={image} style={carouselStyle}/>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    )
+  }
+}
 
 
-const TitledImage = (props) => (
+const ImageWithTitle = (props) => (
   <View>
     <Image
-      style={props.carouselStyle}
+      style={props.style}
       source={{uri: props.image.uri}}
     />
     <View style={styles.absoluteTitle}>
@@ -43,8 +80,6 @@ const TitledImage = (props) => (
   </View>
 )
 
-const mapStateToProps = state => ({carouselStyle: state.configuration.style.carousel});
-const ImageWithTitle = connect(mapStateToProps)(TitledImage);
 
 const styles = StyleSheet.create({
   absoluteTitle: {
@@ -63,4 +98,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Carousel;
+const mapStateToProps = state => ({carouselStyle: state.configuration.style.carousel});
+export default connect(mapStateToProps)(Carousel);

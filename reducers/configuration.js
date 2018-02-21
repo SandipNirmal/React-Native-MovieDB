@@ -6,8 +6,10 @@ import * as A from '../Actions';
 
 const margin = 5;
 
-const getCarouselStyle = (width) => {
-  const aspectRatioForCarousel = 0.55;
+const getCarouselStyle = (width, height) => {
+  // landscape orientation or portrait
+  let aspectRatioForCarousel = (width > height) ? 0.45 : 0.55;
+
   return {
     flexGrow:1,
     height: width * aspectRatioForCarousel,
@@ -53,7 +55,7 @@ const populateStylesAndCol = (newState) => {
   newState.image.numColumns = numColumns;
   newState.style.posterSize = getPosterSizeStyle(width, numColumns);
   newState.style.backdropSize = getBackdropSizeStyle(width);
-  newState.style.carousel = getCarouselStyle(width);
+  newState.style.carousel = getCarouselStyle(width, height);
 }
 
 function configuration(state=initialState['config'], action) {
