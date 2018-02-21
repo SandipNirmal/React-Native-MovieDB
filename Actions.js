@@ -143,6 +143,12 @@ export function fetchCastDetails(castId) {
   }
 }
 
+// Layout
+export const LAYOUT_CHANGED = 'LAYOUT_CHANGED';
+export const layoutChanged = () => ({
+  type: LAYOUT_CHANGED
+});
+
 // Settings 
 export const SETTINGS_LANGUAGE_CHANGED = 'SETTINGS_LANGUAGE_CHANGED';
 export const SETTINGS_REGION_CHANGED = 'SETTINGS_REGION_CHANGED';

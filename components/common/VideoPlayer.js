@@ -23,7 +23,7 @@ export default class VideoPlayer extends Component {
   render() {
     return (
       <WebView
-        style={style.videoPlayerContainer}
+        style={style.flexContainer}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         allowsInlineMediaPlayback={true}

@@ -8,23 +8,27 @@ import promise from 'redux-promise';
 import AppNavigation from './components/AppNavigation';
 import SplashScreen from './components/SplashScreen';
 import LaLune from './reducers/root';
+import {layoutChanged} from './Actions';
 
 class Screen extends Component {
   render() {
-    const {isFetching} = this.props;
-    const screen = isFetching
-      ? <SplashScreen/>
-      : <AppNavigation/>;
-    return screen;
+    const {isFetching, onLayoutChange} = this.props;
+    return (
+      <View style={styles.container} onLayout={onLayoutChange}>
+        { isFetching ? <SplashScreen /> : <AppNavigation /> }
+      </View>
+    )
   }
 }
 
-// TODO - Use redux-promise middleware properly
-// https://medium.com/react-native-training/redux-4-ways-95a130da0cdc
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-
 const mapStateToProps = state => ({isFetching: state.movies.isFetching});
-const AppRoot = connect(mapStateToProps, null)(Screen);
+const mapDispatchToProps = dispatch => ({
+  onLayoutChange: (e) => {
+    dispatch(layoutChanged());
+  }
+});
+
+const AppRoot = connect(mapStateToProps, mapDispatchToProps)(Screen);
 
 export default class App extends Component {
   // Component did mount event
@@ -33,11 +37,13 @@ export default class App extends Component {
   }
 
   render() {
+    // TODO - Use redux-promise middleware properly
+    // https://medium.com/react-native-training/redux-4-ways-95a130da0cdc
+    const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
     return (
       <Provider store={createStoreWithMiddleware(LaLune)}>
-        <View style={styles.container}>
-          <AppRoot/>
-        </View>
+        <AppRoot/>
       </Provider>
     );
   }

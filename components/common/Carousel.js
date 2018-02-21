@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Dimensions,
   Image,
@@ -14,7 +15,7 @@ const Carousel = (props) => (
     horizontal
     pagingEnabled
     showsHorizontalScrollIndicator={false}
-    style={styles.container}
+    style={style.flexContainer}
   >
     {props.images.map((image, index) => (
       <TouchableOpacity
@@ -28,10 +29,10 @@ const Carousel = (props) => (
 );
 
 
-const ImageWithTitle = (props) => (
+const TitledImage = (props) => (
   <View>
     <Image
-      style={styles.posterSize}
+      style={props.carouselStyle}
       source={{uri: props.image.uri}}
     />
     <View style={styles.absoluteTitle}>
@@ -42,17 +43,10 @@ const ImageWithTitle = (props) => (
   </View>
 )
 
-var {width, height} = Dimensions.get('window');
+const mapStateToProps = state => ({carouselStyle: state.configuration.style.carousel});
+const ImageWithTitle = connect(mapStateToProps)(TitledImage);
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  posterSize: {
-    flexGrow:1,
-    // height: (height * (1 - 0.618)),
-    height: 180,
-    width: width,
-  },
   absoluteTitle: {
     position: 'absolute',
     top: 0,

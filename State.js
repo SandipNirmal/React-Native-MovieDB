@@ -48,7 +48,8 @@ export default {
     },
     'style': {
       'posterSize': {},
-      'backdropSize': {}
+      'backdropSize': {},
+      'carousel': {}
     }
   },
   'settings': {

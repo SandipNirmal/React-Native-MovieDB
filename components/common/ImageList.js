@@ -77,8 +77,11 @@ Title.propTypes = HorizontalImageList.propTypes = {
   },
 }
 
+// Note, Changing numColumns on the fly is not supported. Change the key prop
+// on FlatList when changing the number of columns to force refresh
 const FlatImageList = (props) => (
   <FlatList
+    key={"dummy_key_" + props.numColumns}
     style={props.style.bgColor}
     numColumns={props.numColumns}
     data={props.images}
