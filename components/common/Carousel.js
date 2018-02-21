@@ -74,7 +74,7 @@ const ImageWithTitle = (props) => (
     />
     <View style={styles.absoluteTitle}>
       <Text style={[style.titleText, styles.titleText]}>
-        {props.image.original_title}
+        {props.image.original_title || props.image.original_name}
       </Text>
     </View>
   </View>
