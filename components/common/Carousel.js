@@ -12,30 +12,31 @@ import style from './../../styles/styles';
 
 class Carousel extends Component {
   componentDidMount() {
+    this.currentIndex = 0;
+
     const scrollNext = () => {
       const children = _.get(this, "scrollView.props.children", false);
       const {width} = this.props.carouselStyle;
 
       if(children) {
-        const maxScroll = children.length * width;
-        if ((this.currentScroll  + width) < maxScroll) {
-          this.currentScroll += width;
+        if ((this.currentIndex + 1) < children.length) {
+          this.currentIndex += 1;
         } else {
-          this.currentScroll = 0;
+          this.currentIndex = 0;
         }
       }
-      // This needs to be done when orientation is changed.
-      // TODO: Remove this.
-      // This is implemented in a hurry, Use the diff of remainder vs current
-      // scroll to scroll appropriately 
-      if (this.currentScroll % width !== 0)
-        this.currentScroll = 0;
       this.scrollView &&
-        this.scrollView.scrollTo({x: this.currentScroll, y: 0, animated: false});
+        this.scrollView.scrollTo({x: this.currentIndex * width, y: 0, animated: false});
       clearTimeout(this.scrollTimeout);
       this.scrollTimeout = setTimeout(scrollNext, 5000);
     }
-    scrollNext(); 
+    scrollNext();
+  }
+
+  componentDidUpdate() {
+    const {width} = this.props.carouselStyle;
+    this.scrollView &&
+      this.scrollView.scrollTo({x: this.currentIndex * width, y: 0, animated: false});
   }
 
   componentDidUnMount() {
