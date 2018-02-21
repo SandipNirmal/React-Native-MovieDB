@@ -29,7 +29,7 @@ class Settings extends Component {
     const theme = (this.props.settings.theme === 'dark')
       ? 'light'
       : 'dark';
-    this.props.themeChangeAction(theme);
+    this.props.saveSettingsAction({...this.props.settings, theme:theme });
   }
 
   render() {
@@ -58,7 +58,6 @@ class Settings extends Component {
               key={setting}
               name={setting}
               onPress={() => {
-                // this.props.languageChangeAction('en')
                 NavigationActions.navigate({
                   routeName: 'LanguageSettings'
                 })}}/>))}
@@ -94,9 +93,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  languageChangeAction, 
-  regionChangeAction, 
-  themeChangeAction, 
   fetchSettingsAction, 
   saveSettingsAction}
 )(Settings);

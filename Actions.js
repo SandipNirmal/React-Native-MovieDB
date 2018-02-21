@@ -150,27 +150,6 @@ export const SETTINGS_THEME_CHANGED = 'SETTINGS_THEME_CHANGED';
 export const FETCH_SETTINGS = 'FETCH_SETTINGS';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
-export const languageChangeAction = (language) => {
-  return {
-    type: SETTINGS_LANGUAGE_CHANGED,
-    payload: language
-  }
-}
-
-export const regionChangeAction = (region) => {
-  return {
-    type: SETTINGS_REGION_CHANGED,
-    payload: region
-  }
-}
-
-export const themeChangeAction = (theme) => {
-  return {
-    type: SETTINGS_THEME_CHANGED,
-    payload: theme
-  }
-}
-
 export const fetchSettingsAction = async () => {
   const payload = JSON.parse(await AsyncStorage.getItem(SETTINGS_KEY)) || initialState['settings'];
 
@@ -180,11 +159,20 @@ export const fetchSettingsAction = async () => {
   }
 }
 
-export const saveSettingsAction = (values = initialState['settings']) => {
-  const payload = AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(values));
+export const saveSettingsAction = async (values = initialState['settings']) => {
+  
+  try {
+    await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(values));
+    const payload = JSON.parse(await AsyncStorage.getItem(SETTINGS_KEY));
 
-  return {
-    type: SAVE_SETTINGS,
-    payload
+    return {
+      type: SAVE_SETTINGS,
+      payload
+    }
+  } catch(e){
+    return {
+      type: SAVE_SETTINGS,
+      payload: null
+    }
   }
 }
