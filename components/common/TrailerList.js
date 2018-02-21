@@ -1,11 +1,10 @@
-import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import React from 'react'
+import {View, Text, ScrollView} from 'react-native'
 
-import TrailerItem from './TrailerItem';
-import style from '../../styles/styles';
+import TrailerItem from './TrailerItem'
+import style from '../../styles/styles'
 
 const Trailer = (props) => {
-
   const showTrailers = () => {
     return (
       <ScrollView
@@ -14,7 +13,7 @@ const Trailer = (props) => {
         style={style.posterList}>
 
         {props.videos.map((video, index) => (
-          <TrailerItem key={index} video={video} onPlay={props.playVideo}/>
+          <TrailerItem key={index} video={video} onPlay={props.playVideo} />
         ))}
       </ScrollView>
     )
@@ -23,10 +22,10 @@ const Trailer = (props) => {
     <View>
       <Text style={[style.text, style.headingText, style.detailHeadings]}>Trailers</Text>
 
-      {props.videos.length ? 
-        showTrailers() : 
-        <View style={{height: 100, alignContent: 'center', alignItems:'center'}}>
-          <Text 
+      {props.videos.length
+        ? showTrailers()
+        : <View style={{height: 100, alignContent: 'center', alignItems: 'center'}}>
+          <Text
             style={[style.text, style.subHeadingText]}>
             No Trailers
           </Text>
@@ -36,4 +35,4 @@ const Trailer = (props) => {
   )
 }
 
-export default Trailer;
+export default Trailer

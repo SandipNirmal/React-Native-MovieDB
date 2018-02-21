@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React from 'react'
+import {View, Text} from 'react-native'
 
 const RegionSettings = (props) => {
   return (
@@ -9,4 +9,4 @@ const RegionSettings = (props) => {
   )
 }
 
-export default RegionSettings;
+export default RegionSettings

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Image,
-  Text, TouchableOpacity,
-} from 'react-native';
+  Text, TouchableOpacity
+} from 'react-native'
 
-import style from '../../styles/styles';
+import style from '../../styles/styles'
 
 export const TouchableImage = (props) => (
   <TouchableOpacity
@@ -21,10 +21,10 @@ TouchableImage.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.number,
-    PropTypes.array,
+    PropTypes.array
   ]).isRequired,
   uri: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired
 }
 
 export const TouchableText = (props) => (

@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {
-    Image,
-    Text,
-    TouchableOpacity,
-    ScrollView,
-    StyleSheet,
-    View,
-    Alert
-} from 'react-native';
-import PropTypes from 'prop-types';
+  Image,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  View,
+  Alert
+} from 'react-native'
+import PropTypes from 'prop-types'
 
-import style from '../../styles/styles';
+import style from '../../styles/styles'
 
 const CastList = (props) => {
   return (
@@ -30,8 +30,8 @@ const CastList = (props) => {
               <Image
                 style={style.avatarSize}
                 source={{
-                uri: item.uri
-              }}/>
+                  uri: item.uri
+                }} />
               <Text
                 style={[style.text, style.normalText, style.avatarText]}
                 numberOfLines={2}
@@ -39,10 +39,10 @@ const CastList = (props) => {
                 {item.name}
               </Text>
             </TouchableOpacity>
-            ))}
+          ))}
       </ScrollView>
     </View>
-  );
+  )
 }
 
-export default CastList;
+export default CastList

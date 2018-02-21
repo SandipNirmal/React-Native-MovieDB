@@ -1,14 +1,14 @@
-import React from 'react';
-import {StackNavigator} from 'react-navigation';
+import React from 'react'
+import {StackNavigator} from 'react-navigation'
 
-import Movies from '../components/movies/Movies';
-import MovieDetails from '../components/movies/MovieDetails';
-import AllMovies from '../components/movies/AllMovies';
-import CastDetails from '../components/common/CastDetails';
-import VideoPlayer from '../components/common/VideoPlayer';
-import ShareButton from './../components/common/ShareButton';
+import Movies from '../components/movies/Movies'
+import MovieDetails from '../components/movies/MovieDetails'
+import AllMovies from '../components/movies/AllMovies'
+import CastDetails from '../components/common/CastDetails'
+import VideoPlayer from '../components/common/VideoPlayer'
+import ShareButton from './../components/common/ShareButton'
 
-import {StackNavHeaderStyles} from '../styles/styles';
+import {StackNavHeaderStyles} from '../styles/styles'
 
 const MovieDetailsRoutes = {
   MovieDetails: {
@@ -23,9 +23,9 @@ const MovieDetailsRoutes = {
       title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={params.name}
-          type="movie"
-          id={params.id}/>
+        name={params.name}
+        type='movie'
+        id={params.id} />
     })
   },
   CastDetails: {
@@ -40,9 +40,9 @@ const MovieDetailsRoutes = {
       title: params.name,
       ...StackNavHeaderStyles,
       headerRight: <ShareButton
-          name={params.name}
-          type="person"
-          id={params.id}/>
+        name={params.name}
+        type='person'
+        id={params.id} />
     })
   },
   VideoPlayer: {
@@ -53,7 +53,7 @@ const MovieDetailsRoutes = {
       ...StackNavHeaderStyles
     })
   }
-};
+}
 
 const MoviesStack = StackNavigator(
   {
@@ -71,7 +71,7 @@ const MoviesStack = StackNavigator(
         ...StackNavHeaderStyles
       })
     },
-    ...MovieDetailsRoutes,
+    ...MovieDetailsRoutes
   },
   {
     headerMode: 'float',
@@ -79,7 +79,7 @@ const MoviesStack = StackNavigator(
       backgroundColor: '#4C4C4C'
     }
   }
-);
+)
 
-export { MovieDetailsRoutes };
-export default MoviesStack;
+export { MovieDetailsRoutes }
+export default MoviesStack

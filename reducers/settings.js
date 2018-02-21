@@ -1,18 +1,18 @@
-import initialState from '../State';
+import initialState from '../State'
 import {
   FETCH_SETTINGS,
   SAVE_SETTINGS
-} from './../Actions';
+} from './../Actions'
 
-export default function settings(state = initialState['settings'], action) {
+export default function settings (state = initialState['settings'], action) {
   switch (action.type) {
     case FETCH_SETTINGS:
-      return action.payload;
-    
+      return action.payload
+
     case SAVE_SETTINGS:
-      return action.payload ? action.payload : state;
-    
+      return action.payload ? action.payload : state
+
     default:
-    return state;
+      return state
   }
 }

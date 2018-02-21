@@ -1,41 +1,41 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import Shows from '../base/Shows';
-import {selectedTvShow, fetchingTvShows, tvShowsFetched} from '../../Actions';
-import {NavigationActions} from 'react-navigation';
-import * as _ from 'lodash';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Shows from '../base/Shows'
+import {selectedTvShow, fetchingTvShows, tvShowsFetched} from '../../Actions'
+import {NavigationActions} from 'react-navigation'
+import * as _ from 'lodash'
 
-import style from '../../styles/styles';
+import style from '../../styles/styles'
 
 class TvShows extends Shows {
-  constructor(props) {
-    super(props);
-    this.carouselCategory = "showingToday";
+  constructor (props) {
+    super(props)
+    this.carouselCategory = 'showingToday'
   }
 
   /**
    * @overrides
    */
-  componentDidMount() {
+  componentDidMount () {
     // calls base class functions
     if (_.isEmpty(this.props.categories.showingToday)) {
       this
         .props
-        .onFetching();
+        .onFetching()
     }
-    this.fetch('showingToday', '/tv/airing_today');
-    this.fetch('topRated', '/tv/top_rated');
-    this.fetch('popular', '/tv/popular');
+    this.fetch('showingToday', '/tv/airing_today')
+    this.fetch('topRated', '/tv/top_rated')
+    this.fetch('popular', '/tv/popular')
   }
 
   /**
    * @overrides
    */
-  showAll(category) {
+  showAll (category) {
     this
       .props
       .navigation
-      .navigate('AllTvShows', {category: category});
+      .navigate('AllTvShows', {category: category})
   }
 }
 
@@ -43,22 +43,23 @@ const mapStateToProps = state => ({
   ...state.tvShows,
   config: state.configuration,
   settings: state.settings
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   onFetching: () => {
-    dispatch(fetchingTvShows());
+    dispatch(fetchingTvShows())
   },
   onFetchCompleted: (category, tvShows) => {
-    dispatch(tvShowsFetched(category, tvShows));
+    dispatch(tvShowsFetched(category, tvShows))
   },
   onShowDetails: (tvShow) => {
-    dispatch(selectedTvShow(tvShow));
-    dispatch(NavigationActions.navigate({routeName: 'TvShowDetails', params: {
-      id: tvShow.id,
-      name: tvShow.name
-    }}));
+    dispatch(selectedTvShow(tvShow))
+    dispatch(NavigationActions.navigate({routeName: 'TvShowDetails',
+      params: {
+        id: tvShow.id,
+        name: tvShow.name
+      }}))
   }
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(TvShows);
+export default connect(mapStateToProps, mapDispatchToProps)(TvShows)

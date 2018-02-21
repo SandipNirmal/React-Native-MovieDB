@@ -1,16 +1,16 @@
 // To add TvShows. Think if this is really required? we can have this for
 // readability purpose
-import React from 'react';
-import {StackNavigator} from 'react-navigation';
+import React from 'react'
+import {StackNavigator} from 'react-navigation'
 
-import TvShow from '../components/tv/TvShows';
-import TvShowDetails from '../components/tv/TvShowDetails';
-import CastDetails from '../components/common/CastDetails';
-import AllTvShows from '../components/tv/AllTvShows';
-import SeasonDetails from '../components/tv/SeasonDetails';
-import ShareButton from './../components/common/ShareButton';
+import TvShow from '../components/tv/TvShows'
+import TvShowDetails from '../components/tv/TvShowDetails'
+import CastDetails from '../components/common/CastDetails'
+import AllTvShows from '../components/tv/AllTvShows'
+import SeasonDetails from '../components/tv/SeasonDetails'
+import ShareButton from './../components/common/ShareButton'
 
-import {StackNavHeaderStyles} from '../styles/styles';
+import {StackNavHeaderStyles} from '../styles/styles'
 
 const TvShowDetailsRoutes = {
   TvShowDetails: {
@@ -24,7 +24,7 @@ const TvShowDetailsRoutes = {
     }) => ({
       title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton name={params.name} type="tv" id={params.id}/>
+      headerRight: <ShareButton name={params.name} type='tv' id={params.id} />
     })
   },
   CastDetails: {
@@ -38,7 +38,7 @@ const TvShowDetailsRoutes = {
     }) => ({
       title: params.name,
       ...StackNavHeaderStyles,
-      headerRight: <ShareButton name={params.name} type="person" id={params.id}/>
+      headerRight: <ShareButton name={params.name} type='person' id={params.id} />
     })
   },
   SeasonDetails: {
@@ -48,7 +48,7 @@ const TvShowDetailsRoutes = {
       ...StackNavHeaderStyles
     })
   }
-};
+}
 
 const TvShowStack = StackNavigator(
   {
@@ -66,7 +66,7 @@ const TvShowStack = StackNavigator(
         ...StackNavHeaderStyles
       })
     },
-    ...TvShowDetailsRoutes,
+    ...TvShowDetailsRoutes
   },
   {
     headerMode: 'float',
@@ -74,7 +74,7 @@ const TvShowStack = StackNavigator(
       backgroundColor: '#4C4C4C'
     }
   }
-);
+)
 
-export { TvShowDetailsRoutes };
-export default TvShowStack;
+export { TvShowDetailsRoutes }
+export default TvShowStack

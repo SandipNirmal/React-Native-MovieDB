@@ -1,8 +1,8 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform} from 'react-native'
 
-import APP_CONSTANT from './../utilities/constants.js';
-const marginTop = APP_CONSTANT.height / APP_CONSTANT.goldenRatio;
-const primaryColor = "#32CD32"
+import APP_CONSTANT from './../utilities/constants.js'
+const marginTop = APP_CONSTANT.height / APP_CONSTANT.goldenRatio
+const primaryColor = '#32CD32'
 
 const style = StyleSheet.create({
   container: {
@@ -202,7 +202,7 @@ const style = StyleSheet.create({
     flexGrow: 3,
     paddingRight: 5
   }
-});
+})
 
 const StackNavHeaderStyles = {
   headerTitleStyle: style.headerTextColor,
@@ -212,4 +212,4 @@ const StackNavHeaderStyles = {
 
 export {StackNavHeaderStyles, primaryColor, marginTop}
 
-export default style;
+export default style

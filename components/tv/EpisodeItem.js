@@ -1,13 +1,13 @@
-import React from 'react';
-import {View, Text, Image} from 'react-native';
-import {connect} from 'react-redux';
+import React from 'react'
+import {View, Text, Image} from 'react-native'
+import {connect} from 'react-redux'
 
-import style from './../../styles/styles';
+import style from './../../styles/styles'
 
 const EpisodeItem = ({data, config}) => {
-  const {name, overview, still_path, episode_number} = data;
-  const {secureBaseUrl, stillSize} = config.image;
-  const episodeImg = `${secureBaseUrl}${stillSize}/${still_path}`;
+  const {name, overview, still_path, episode_number} = data
+  const {secureBaseUrl, stillSize} = config.image
+  const episodeImg = `${secureBaseUrl}${stillSize}/${still_path}`
 
   return (
     <View style={style.episodeItem}>
@@ -19,7 +19,7 @@ const EpisodeItem = ({data, config}) => {
       </View>
       <View style={style.episodeDesc}>
         <Text style={[style.text, style.subHeadingText]}>{name}</Text>
-        <Text style={[style.secondaryText, style.normalText]}>Episode #{episode_number}</Text>            
+        <Text style={[style.secondaryText, style.normalText]}>Episode #{episode_number}</Text>
         <Text style={[style.text, style.normalText]}>{overview}</Text>
       </View>
     </View>
@@ -27,7 +27,7 @@ const EpisodeItem = ({data, config}) => {
 }
 
 const mapStateToProps = state => ({
-  config: state.configuration 
-});
+  config: state.configuration
+})
 
-export default connect(mapStateToProps)(EpisodeItem);
+export default connect(mapStateToProps)(EpisodeItem)

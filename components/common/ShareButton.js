@@ -1,9 +1,9 @@
-import React from 'react';
-import {Share, Platform} from 'react-native';
-import {Icon} from 'react-native-elements';
-import PropTypes from 'prop-types';
+import React from 'react'
+import {Share, Platform} from 'react-native'
+import {Icon} from 'react-native-elements'
+import PropTypes from 'prop-types'
 
-const os = Platform.OS;
+const os = Platform.OS
 
 const onShare = (title, media_type, media_id) => {
   Share.share({
@@ -20,15 +20,15 @@ const onShare = (title, media_type, media_id) => {
 }
 
 const ShareButton = (props) => {
-  const {name, type, id} = props;
+  const {name, type, id} = props
   return (
     <Icon
-    name={(os === 'ios') ? 'ios-share-outline' : 'share'}
-    type={(os === 'ios') ? 'ionicon' : ''}
-    color="#32CD32"
-    size={30}
-    underlayColor="#222222"
-    onPress={() => {onShare(name, type, id)}} />
+      name={(os === 'ios') ? 'ios-share-outline' : 'share'}
+      type={(os === 'ios') ? 'ionicon' : ''}
+      color='#32CD32'
+      size={30}
+      underlayColor='#222222'
+      onPress={() => { onShare(name, type, id) }} />
   )
 }
 
@@ -38,4 +38,4 @@ ShareButton.propTypes = {
   id: PropTypes.number.isRequired
 }
 
-export default ShareButton;
+export default ShareButton

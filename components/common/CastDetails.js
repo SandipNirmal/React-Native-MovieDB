@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
-import {NavigationActions} from 'react-navigation';
-import {connect} from 'react-redux';
+import React, {Component} from 'react'
+import {NavigationActions} from 'react-navigation'
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {View, Text, Image, ActivityIndicator, ScrollView} from 'react-native';
+import {View, Text, Image, ActivityIndicator, ScrollView} from 'react-native'
 
-import HorizontalImageList from './ImageList';
-import Constant from '../../utilities/constants';
-import {getUriPopulated} from '../../utilities/utils';
-import {castDetailsFetched, fetchingCastDetails, selectedMovie, searchItemDetailsFetched, fetchCastDetails} from '../../Actions';
+import HorizontalImageList from './ImageList'
+import Constant from '../../utilities/constants'
+import {getUriPopulated} from '../../utilities/utils'
+import {castDetailsFetched, fetchingCastDetails, selectedMovie, searchItemDetailsFetched, fetchCastDetails} from '../../Actions'
 
-import style, {primaryColor, StackNavHeaderStyles} from '../../styles/styles';
+import style, {primaryColor, StackNavHeaderStyles} from '../../styles/styles'
 
 class CastDetails extends Component {
-  componentDidMount() {
-    this.props.fetchCastDetails(this.props.details.id);
+  componentDidMount () {
+    this.props.fetchCastDetails(this.props.details.id)
 
-    const baseUrl = Constant.api_base_url;
-    const apiKey = Constant.api_key;
-    const castDetailUrl = `/person/${this.props.details.id}`;
-    const castKnownForUrl = `${castDetailUrl}/movie_credits`;
+    const baseUrl = Constant.api_base_url
+    const apiKey = Constant.api_key
+    const castDetailUrl = `/person/${this.props.details.id}`
+    const castKnownForUrl = `${castDetailUrl}/movie_credits`
     const {
       config,
       currentTab,
@@ -28,20 +28,20 @@ class CastDetails extends Component {
           posterSizeForBackground
         }
       }
-    } = this.props;
+    } = this.props
 
-    if (currentTab !== "Search") // search tab already has the data available
-      this.props.onFetching(currentTab);
-    
+    if (currentTab !== 'Search') // search tab already has the data available
+    { this.props.onFetching(currentTab) }
+
     // fetch Cast Details
     fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
       .then((response) => response.json())
       .then((response) => {
-        response.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${response['profile_path']}`;
-        this.props.onDetailsFetched(response, 'bio', this.props.currentTab);
+        response.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${response['profile_path']}`
+        this.props.onDetailsFetched(response, 'bio', this.props.currentTab)
       }).catch((error) => {
-        console.error(error);
-      });
+        console.error(error)
+      })
 
     // fetch Casts other movies
     fetch(`${baseUrl}${castKnownForUrl}?${apiKey}`)
@@ -50,22 +50,22 @@ class CastDetails extends Component {
         const movieList = [
           ...response.cast,
           ...response.crew
-        ];
+        ]
         this.props.onDetailsFetched(getUriPopulated(movieList, config, 'posterSizeForImageList'),
-                                    'movies',
-                                    this.props.currentTab);
+          'movies',
+          this.props.currentTab)
       }).catch((error) => {
-        console.error(error);
-      });
+        console.error(error)
+      })
   }
 
-  render() {
-    const {onShowDetails, isFetching, details, config} = this.props;
+  render () {
+    const {onShowDetails, isFetching, details, config} = this.props
 
     if (isFetching) {
       return (
         <ScrollView style={style.screenBackgroundColor}>
-          <ActivityIndicator size="large" color={primaryColor}/>
+          <ActivityIndicator size='large' color={primaryColor} />
         </ScrollView>
       )
     }
@@ -78,8 +78,8 @@ class CastDetails extends Component {
             <Image
               style={[style.avatarSize, style.avatarBigSize]}
               source={{
-              uri: details.imageSrc
-            }}/>
+                uri: details.imageSrc
+              }} />
             <Text style={[style.text, style.titleText]}>
               {details.name}
             </Text>
@@ -101,7 +101,7 @@ class CastDetails extends Component {
               title='Known For'
               style={config.style.posterSize}
               onPress={onShowDetails.bind(this)}
-              images={details.movies || []}/>
+              images={details.movies || []} />
           </View>
         </ScrollView>
       </View>
@@ -110,7 +110,7 @@ class CastDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  const currentTab = state.tabNavHelper.currentTab;
+  const currentTab = state.tabNavHelper.currentTab
   const mapScreenToStateProps = {
     'Movies': 'movies',
     'TvShows': 'tvShows',
@@ -127,7 +127,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onFetching: (currentTab) => {
-    dispatch(fetchingCastDetails(currentTab));
+    dispatch(fetchingCastDetails(currentTab))
   },
   onDetailsFetched: (details, category, currentTab) => {
     if (currentTab === 'Search') {
@@ -137,16 +137,16 @@ const mapDispatchToProps = dispatch => ({
     }
   },
   onShowDetails: (movie) => {
-    dispatch(selectedMovie(movie));
+    dispatch(selectedMovie(movie))
     dispatch(NavigationActions.navigate({
       routeName: 'MovieDetails',
       params: {
         name: movie.name || movie.original_title,
         id: movie.id
       }
-    }));
+    }))
   },
   fetchCastDetails
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(CastDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(CastDetails)

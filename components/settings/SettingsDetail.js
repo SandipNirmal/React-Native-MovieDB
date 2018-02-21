@@ -1,12 +1,12 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-import {TouchableListItem} from './../common/ListItem';
+import React from 'react'
+import {View, Text} from 'react-native'
+import {TouchableListItem} from './../common/ListItem'
 
-import style from './../../styles/styles';
+import style from './../../styles/styles'
 
-const Languages = ['IN-hi', 'US-en', 'UK-en'];
-const Regions = ['IN', 'US', 'UK'];
-const Themes = ['light', 'dark'];
+const Languages = ['IN-hi', 'US-en', 'UK-en']
+const Regions = ['IN', 'US', 'UK']
+const Themes = ['light', 'dark']
 
 const Settings = ({name, settings, onPress}) => {
   return (
@@ -19,7 +19,7 @@ const Settings = ({name, settings, onPress}) => {
         <TouchableListItem
           key={setting}
           name={setting}
-          onPress={() => {}}/>
+          onPress={() => {}} />
       ))}
     </View>
   )
@@ -36,11 +36,11 @@ const LanguageSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
-          onPress={() => {}}/>
+          onPress={() => {}} />
       ))}
     </View>
   )
-};
+}
 
 const RegionSettings = (props) => {
   return (
@@ -53,11 +53,11 @@ const RegionSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
-          onPress={() => {}}/>
+          onPress={() => {}} />
       ))}
     </View>
   )
-};
+}
 
 const ThemeSettings = (props) => {
   return (
@@ -70,14 +70,14 @@ const ThemeSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
-          onPress={() => {}}/>
+          onPress={() => {}} />
       ))}
     </View>
   )
-};
+}
 
 export {
   LanguageSettings,
   ThemeSettings,
   RegionSettings
-};
+}

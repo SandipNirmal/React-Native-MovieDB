@@ -10,20 +10,20 @@ export default {
     'cast': {
       'isFetching': false,
       'details': {}
-    },
+    }
   },
   'tvShows': {
     'isFetching': false,
     'categories': {
       'showingToday': [],
       'topRated': [],
-      'popular': [],
+      'popular': []
     },
     'details': {},
     'cast': {
       'isFetching': false,
       'details': {}
-    },
+    }
   },
   'search': {
     'isSearching': false,
@@ -33,18 +33,18 @@ export default {
     'cast': {
       'isFetching': false,
       'details': {}
-    },
+    }
   },
   'config': {
     'apiKey': '',
     'image': {
       'secureBaseUrl': '',
-      'numColumns': 3,  // default
+      'numColumns': 3, // default
       'backdropSize': '',
       'posterSizeForBackground': '',
       'posterSizeForImageList': '',
       'profileSize': '',
-      'stillSize': '',
+      'stillSize': ''
     },
     'style': {
       'posterSize': {},
@@ -62,4 +62,3 @@ export default {
     'currentTab': 'Movies'
   }
 }
-

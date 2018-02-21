@@ -1,7 +1,7 @@
-import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React from 'react'
+import {View, Text, TouchableOpacity} from 'react-native'
 
-import style from './../../styles/styles';
+import style from './../../styles/styles'
 
 const ListItem = (props) => {
   return (
@@ -17,28 +17,28 @@ const ListItem = (props) => {
         </Text>
       </View>
     </View>
-  );
+  )
 }
 
 const LaLuneListItem = (props) => {
-  const {name, value} = props;
+  const {name, value} = props
   return (
     <View>
-      <ListItem name={name} value={value}/>
+      <ListItem name={name} value={value} />
     </View>
   )
 }
 
 const TouchableListItem = (props) => {
-  const {name, value} = props;
+  const {name, value} = props
   return (
     <TouchableOpacity style={style.listContainer} onPress={props.onPress}>
-      <ListItem name={name} value={value}/>
+      <ListItem name={name} value={value} />
     </TouchableOpacity>
-  );
+  )
 }
 
 export {
   LaLuneListItem,
   TouchableListItem
-};
+}

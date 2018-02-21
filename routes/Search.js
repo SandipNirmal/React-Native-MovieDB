@@ -1,12 +1,12 @@
-import React from 'react';
-import {StackNavigator} from 'react-navigation';
+import React from 'react'
+import {StackNavigator} from 'react-navigation'
 
-import Search from './../components/search/Search';
-import { MovieDetailsRoutes } from './Movies';
-import { TvShowDetailsRoutes } from './TvShows';
-import ShareButton from './../components/common/ShareButton';
+import Search from './../components/search/Search'
+import { MovieDetailsRoutes } from './Movies'
+import { TvShowDetailsRoutes } from './TvShows'
+import ShareButton from './../components/common/ShareButton'
 
-import {StackNavHeaderStyles} from '../styles/styles';
+import {StackNavHeaderStyles} from '../styles/styles'
 
 const SearchStack = StackNavigator(
   {
@@ -18,7 +18,7 @@ const SearchStack = StackNavigator(
       }
     },
     ...MovieDetailsRoutes,
-    ...TvShowDetailsRoutes,
+    ...TvShowDetailsRoutes
   },
   {
     headerMode: 'float',
@@ -27,6 +27,6 @@ const SearchStack = StackNavigator(
       // backgroundColor: 'rgba(4, 4, 4, 0.6)'
     }
   }
-);
+)
 
-export default SearchStack;
+export default SearchStack

@@ -1,25 +1,25 @@
-import React from 'react';
-import {Text, View, TouchableOpacity,} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {connect} from 'react-redux';
+import React from 'react'
+import {Text, View, TouchableOpacity} from 'react-native'
+import {Icon} from 'react-native-elements'
+import {connect} from 'react-redux'
 
-import styles from '../../styles/styles';
+import styles from '../../styles/styles'
 
 const TrailerItem = ({style, video, onPlay}) => {
   return (
     <View>
       <Text style={[style.text, style.normalText, style.trailerTitle]}>
-        {video.name}		
+        {video.name}
       </Text>
-      <TouchableOpacity onPress={() => {onPlay(video.url)}}>
-        <View 
-          style={[style.backdropSize, styles.centerContentContainer, styles.trailerContainer]}>		
-          <Icon 
-            name='youtube-play' 
+      <TouchableOpacity onPress={() => { onPlay(video.url) }}>
+        <View
+          style={[style.backdropSize, styles.centerContentContainer, styles.trailerContainer]}>
+          <Icon
+            name='youtube-play'
             type='font-awesome'
-            size={50} 
-            color='#ff0000' 
-            style={style.trailerPlayIcon}/>		
+            size={50}
+            color='#ff0000'
+            style={style.trailerPlayIcon} />
         </View>
       </TouchableOpacity>
     </View>
@@ -29,4 +29,4 @@ const TrailerItem = ({style, video, onPlay}) => {
 const mapStateToProps = state => ({
   style: state.configuration.style
 })
-export default connect(mapStateToProps)(TrailerItem);
+export default connect(mapStateToProps)(TrailerItem)

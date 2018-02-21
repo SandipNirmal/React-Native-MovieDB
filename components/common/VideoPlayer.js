@@ -1,37 +1,37 @@
-import React, {Component} from 'react';
-import {WebView, StyleSheet} from 'react-native';
+import React, {Component} from 'react'
+import {WebView, StyleSheet} from 'react-native'
 
-import style from '../../styles/styles';
-import Orientation from 'react-native-orientation';
+import style from '../../styles/styles'
+import Orientation from 'react-native-orientation'
 
 export default class VideoPlayer extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      url: this.props.navigation.state.params.url,
+      url: this.props.navigation.state.params.url
     }
   }
 
-  componentWillMount(){
+  componentWillMount () {
     Orientation.lockToLandscape()
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     Orientation.lockToPortrait()
   }
 
-  render() {
+  render () {
     return (
       <WebView
         style={style.flexContainer}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        allowsInlineMediaPlayback={true}
+        javaScriptEnabled
+        domStorageEnabled
+        allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
         source={{uri: this.state.url}}
         // source={{html: `<iframe width="560" height="315"
         // src="https://www.youtube.com/embed/D6Ac5JpCHmI?&autoplay=1&controls=1"></iframe>` }}
       />
-    );
+    )
   }
 }
