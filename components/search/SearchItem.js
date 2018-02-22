@@ -1,6 +1,5 @@
 import React from 'react'
-import {View, Text, Image, TouchableOpacity} from 'react-native'
-import {Icon} from 'react-native-elements'
+import {View, Text, Image} from 'react-native'
 
 import style from '../../styles/styles'
 
@@ -27,12 +26,6 @@ const SearchItem = ({item, config}) => {
         <Text style={[style.text, style.headingText]}>{name || title}</Text>
         <Text style={[style.text, style.normalText]}>{media_type.toUpperCase()}</Text>
       </View>
-      {/* <View style={style.rightArrow}>
-      <Icon
-        name='chevron-right'
-        size={40}
-        color='white'/>
-      </View> */}
     </View>
   )
 }

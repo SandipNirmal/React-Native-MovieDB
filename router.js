@@ -2,7 +2,6 @@ import React from 'react'
 import {TabNavigator, TabBarBottom} from 'react-navigation'
 import {Icon} from 'react-native-elements'
 
-import SplashScreen from './components/SplashScreen'
 import MoviesStack from './routes/Movies'
 import TvShowStack from './routes/TvShows'
 import SearchStack from './routes/Search'

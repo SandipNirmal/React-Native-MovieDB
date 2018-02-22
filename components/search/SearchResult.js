@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, ScrollView, TouchableOpacity, Text} from 'react-native'
+import {View, ScrollView, TouchableOpacity} from 'react-native'
 
 import style from '../../styles/styles'
 import SearchItem from './SearchItem'

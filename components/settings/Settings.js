@@ -3,9 +3,8 @@ import {View, ScrollView, Text, Button} from 'react-native';
 import {NavigationActions} from 'react-navigation';
 import {connect} from 'react-redux';
 
-import {languageChangeAction, regionChangeAction, 
-        themeChangeAction, fetchSettingsAction, 
-        saveSettingsAction} from './../../Actions';
+import {languageChangeAction, regionChangeAction, themeChangeAction,
+  fetchSettingsAction, saveSettingsAction} from './../../Actions';
 import {LaLuneListItem, TouchableListItem} from './../common/ListItem';
 import style from './../../styles/styles';
 
@@ -58,29 +57,9 @@ class Settings extends Component {
               key={setting}
               name={setting}
               onPress={() => {
-                NavigationActions.navigate({
-                  routeName: 'LanguageSettings'
-                })}}/>))}
-          </View>
-
-          <View>
-            <Text style={[style.text, style.subHeadingText]}>
-              Added For Testing Redux
-            </Text>
-            <Text style={[style.text, style.normalText]}>
-              Language : {language}
-            </Text>
-            <Text style={[style.text, style.normalText]}>
-              Region : {region}
-            </Text>
-            <Text style={[style.text, style.normalText]}>
-              Theme : {theme}
-            </Text>
-
-            <Button
-              onPress={this.changeTheme}
-              title="Change Theme"
-              accessibilityLabel="Changes application theme."/>
+                this.props.navigation.dispatch(NavigationActions.navigate({
+                  routeName: `${setting}Settings`
+                }))}}/>))}
           </View>
         </ScrollView>
       </View>

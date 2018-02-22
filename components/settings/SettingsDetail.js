@@ -8,22 +8,25 @@ const Languages = ['IN-hi', 'US-en', 'UK-en']
 const Regions = ['IN', 'US', 'UK']
 const Themes = ['light', 'dark']
 
-const Settings = ({name, settings, onPress}) => {
-  return (
-    <View>
-      <Text style={[style.Text, style.subHeading]}>
-        {name} Settings
-      </Text>
+// const Settings = ({name, settings, onPress}) => {
+//   return (
+//     <View>
+//       <Text style={[style.Text, style.subHeading]}>
+//         {name} Settings
+//       </Text>
 
-      {settings.map((setting) => (
-        <TouchableListItem
-          key={setting}
-          name={setting}
-          onPress={() => {}} />
-      ))}
-    </View>
-  )
-}
+//       {settings.map((setting) => (
+//         <TouchableListItem
+//           key={setting}
+//           name={setting}
+//           onPress={() => {}} />
+//       ))}
+//     </View>
+//   )
+// }
+
+// TODO - Add support to show selected item, right tick
+// Support redux action call on item selection
 
 const LanguageSettings = (props) => {
   return (
