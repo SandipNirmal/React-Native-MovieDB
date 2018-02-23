@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {View, ScrollView, Text, Button} from 'react-native';
-import {NavigationActions} from 'react-navigation';
-import {connect} from 'react-redux';
+import { View, ScrollView, Text, Button } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 
-import {languageChangeAction, regionChangeAction, themeChangeAction,
-  fetchSettingsAction, saveSettingsAction} from './../../Actions';
-import {LaLuneListItem, TouchableListItem} from './../common/ListItem';
+import { fetchSettingsAction } from './../../Actions';
+import { LaLuneListItem, TouchableListItem } from './../common/ListItem';
 import style from './../../styles/styles';
 
 const appInfo = [
@@ -24,15 +23,14 @@ class Settings extends Component {
     this.props.fetchSettingsAction();
   }
 
-  changeTheme = () => {
-    const theme = (this.props.settings.theme === 'dark')
-      ? 'light'
-      : 'dark';
-    this.props.saveSettingsAction({...this.props.settings, theme:theme });
-  }
+  // changeTheme = () => {
+  //   const theme = (this.props.settings.theme === 'dark')
+  //     ? 'light'
+  //     : 'dark';
+  //   this.props.saveSettingsAction({...this.props.settings, theme:theme });
+  // }
 
   render() {
-    const {language, region, theme} = this.props.settings;
     return (
       <View>
         <ScrollView
@@ -53,13 +51,17 @@ class Settings extends Component {
             </Text>
 
             {settings.map((setting) => (
-            <TouchableListItem
-              key={setting}
-              name={setting}
-              onPress={() => {
-                this.props.navigation.dispatch(NavigationActions.navigate({
-                  routeName: `${setting}Settings`
-                }))}}/>))}
+              <TouchableListItem
+                key={setting}
+                name={setting}
+                onPress={() => {
+                  this.props.navigation.dispatch(NavigationActions.navigate({
+                    routeName: `${setting}Settings`,
+                    params: {
+                      selected: this.props.settings[setting.toLowerCase()]
+                    }
+                  }))}}/>
+            ))}
           </View>
         </ScrollView>
       </View>
@@ -67,11 +69,12 @@ class Settings extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {settings: state.settings}
+function mapStateToProps({settings}) {
+  return {
+    settings
+  }
 }
 
 export default connect(mapStateToProps, {
-  fetchSettingsAction, 
-  saveSettingsAction}
+  fetchSettingsAction}
 )(Settings);

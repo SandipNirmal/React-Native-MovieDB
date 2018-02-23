@@ -6,24 +6,7 @@ import style from './../../styles/styles'
 
 const Languages = ['IN-hi', 'US-en', 'UK-en']
 const Regions = ['IN', 'US', 'UK']
-const Themes = ['light', 'dark']
-
-// const Settings = ({name, settings, onPress}) => {
-//   return (
-//     <View>
-//       <Text style={[style.Text, style.subHeading]}>
-//         {name} Settings
-//       </Text>
-
-//       {settings.map((setting) => (
-//         <TouchableListItem
-//           key={setting}
-//           name={setting}
-//           onPress={() => {}} />
-//       ))}
-//     </View>
-//   )
-// }
+const Themes = ['Light', 'Dark']
 
 // TODO - Add support to show selected item, right tick
 // Support redux action call on item selection
@@ -39,6 +22,7 @@ const LanguageSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
+          selected={props.navigation.state.params.selected}
           onPress={() => {}} />
       ))}
     </View>
@@ -56,6 +40,7 @@ const RegionSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
+          selected={props.navigation.state.params.selected}
           onPress={() => {}} />
       ))}
     </View>
@@ -73,6 +58,7 @@ const ThemeSettings = (props) => {
         <TouchableListItem
           key={setting}
           name={setting}
+          selected={props.navigation.state.params.selected}
           onPress={() => {}} />
       ))}
     </View>

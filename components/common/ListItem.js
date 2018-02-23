@@ -1,21 +1,30 @@
 import React from 'react'
-import {View, Text, TouchableOpacity} from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'react-native-elements'
 
 import style from './../../styles/styles'
 
-const ListItem = (props) => {
+const ListItem = ({name, value, selected}) => {
   return (
     <View style={style.listContainer}>
       <View style={style.listTitle}>
         <Text style={[style.text, style.subHeadingText]}>
-          {props.name}
+          {name}
         </Text>
       </View>
       <View style={style.listValue}>
         <Text style={[style.text, style.normalText]}>
-          {props.value}
+          {value}
         </Text>
       </View>
+      
+      {name && (name === selected) &&
+      <View>
+          <Icon
+            name='check'
+            color='#00aced'
+          />
+      </View>}
     </View>
   )
 }
@@ -24,16 +33,15 @@ const LaLuneListItem = (props) => {
   const {name, value} = props
   return (
     <View>
-      <ListItem name={name} value={value} />
+      <ListItem name={name} value={value}/>
     </View>
   )
 }
 
-const TouchableListItem = (props) => {
-  const {name, value} = props
+const TouchableListItem = ({name, value, selected, onPress}) => {
   return (
-    <TouchableOpacity style={style.listContainer} onPress={props.onPress}>
-      <ListItem name={name} value={value} />
+    <TouchableOpacity style={style.listContainer} onPress={onPress}>
+      <ListItem name={name} value={value} selected={selected}/>
     </TouchableOpacity>
   )
 }

@@ -8,7 +8,7 @@ import styles from '../../styles/styles'
 const TrailerItem = ({style, video, onPlay}) => {
   return (
     <View>
-      <Text style={[style.text, style.normalText, style.trailerTitle]}>
+      <Text style={[styles.text, styles.normalText, styles.trailerTitle]}>
         {video.name}
       </Text>
       <TouchableOpacity onPress={() => { onPlay(video.url) }}>
