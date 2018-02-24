@@ -4,69 +4,24 @@ import {TouchableListItem} from './../common/ListItem'
 
 import style from './../../styles/styles'
 
-const Languages = ['IN-hi', 'US-en', 'UK-en']
-const Regions = ['IN', 'US', 'UK']
-const Themes = ['Light', 'Dark']
-
-// TODO - Add support to show selected item, right tick
-// Support redux action call on item selection
-
-const LanguageSettings = (props) => {
+const SettingDetails = ({navigation}) => {
+  const {name, values, selected, onSelect} = navigation.state.params;
   return (
     <View>
       <Text style={[style.Text, style.subHeading]}>
-        Languages Settings
+        {name}
+        Settings
       </Text>
 
-      {Languages.map((setting) => (
-        <TouchableListItem
-          key={setting}
-          name={setting}
-          selected={props.navigation.state.params.selected}
-          onPress={() => {}} />
-      ))}
+      {values.map((value) => (
+      <TouchableListItem
+        key={value}
+        name={value}
+        selected={selected}
+        onPress={() => { onSelect(name.toLowerCase(), value)}}
+        />))}
     </View>
   )
 }
 
-const RegionSettings = (props) => {
-  return (
-    <View>
-      <Text style={[style.Text, style.subHeading]}>
-        Regions Settings
-      </Text>
-
-      {Regions.map((setting) => (
-        <TouchableListItem
-          key={setting}
-          name={setting}
-          selected={props.navigation.state.params.selected}
-          onPress={() => {}} />
-      ))}
-    </View>
-  )
-}
-
-const ThemeSettings = (props) => {
-  return (
-    <View>
-      <Text style={[style.Text, style.subHeading]}>
-        Themes Settings
-      </Text>
-
-      {Themes.map((setting) => (
-        <TouchableListItem
-          key={setting}
-          name={setting}
-          selected={props.navigation.state.params.selected}
-          onPress={() => {}} />
-      ))}
-    </View>
-  )
-}
-
-export {
-  LanguageSettings,
-  ThemeSettings,
-  RegionSettings
-}
+export default SettingDetails;

@@ -41,7 +41,7 @@ const LaLuneListItem = (props) => {
 const TouchableListItem = ({name, value, selected, onPress}) => {
   return (
     <TouchableOpacity style={style.listContainer} onPress={onPress}>
-      <ListItem name={name} value={value} selected={selected}/>
+      <ListItem name={name} value={value} selected={selected} />
     </TouchableOpacity>
   )
 }

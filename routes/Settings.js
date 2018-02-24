@@ -1,7 +1,7 @@
 import {StackNavigator} from 'react-navigation'
 
 import Settings from './../components/settings/Settings'
-import {LanguageSettings, RegionSettings, ThemeSettings} from './../components/settings/SettingsDetail'
+import SettingDetails from './../components/settings/SettingsDetail'
 import {StackNavHeaderStyles} from '../styles/styles'
 
 const SettingsStack = StackNavigator({
@@ -12,26 +12,18 @@ const SettingsStack = StackNavigator({
       ...StackNavHeaderStyles
     }
   },
-  LanguageSettings: {
-    screen: LanguageSettings,
-    navigationOptions: {
-      title: 'Choose Language',
+  SettingDetails: {
+    screen: SettingDetails,
+    navigationOptions: ({
+      navigation: {
+        state: {
+          params
+        }
+      }
+    }) => ({
+      title: `Choose ${params.name}`,
       ...StackNavHeaderStyles
-    }
-  },
-  RegionSettings: {
-    screen: RegionSettings,
-    navigationOptions: {
-      title: 'Choose Region',
-      ...StackNavHeaderStyles
-    }
-  },
-  ThemeSettings: {
-    screen: ThemeSettings,
-    navigationOptions: {
-      title: 'Choose Theme',
-      ...StackNavHeaderStyles
-    }
+    })
   }
 }, {
   headerMode: 'float',

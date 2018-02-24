@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { View, ScrollView, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { fetchSettingsAction } from './../../Actions';
+import { fetchSettingsAction, saveSettingsAction } from './../../Actions';
 import { LaLuneListItem, TouchableListItem } from './../common/ListItem';
 import style from './../../styles/styles';
 
@@ -16,19 +16,30 @@ const appInfo = [
     value: '0.0.1'
   }
 ];
-const settings = ['Language', 'Region', 'Theme'];
+
+const settings = [
+  {
+    name: 'Language',
+    values: ['IN-hi', 'US-en', 'UK-en']
+  }, {
+    name: 'Region',
+    values: ['IN', 'US', 'UK']
+  }, {
+    name: 'Theme',
+    values: ['Light', 'Dark']
+  }
+]
 
 class Settings extends Component {
   componentDidMount() {
     this.props.fetchSettingsAction();
   }
 
-  // changeTheme = () => {
-  //   const theme = (this.props.settings.theme === 'dark')
-  //     ? 'light'
-  //     : 'dark';
-  //   this.props.saveSettingsAction({...this.props.settings, theme:theme });
-  // }
+  onSettingsChange = (key, value) => {
+    let changes = {};
+    changes[key] = value;
+    this.props.saveSettingsAction(Object.assign({}, this.props.settings, changes));
+  }
 
   render() {
     return (
@@ -42,7 +53,7 @@ class Settings extends Component {
             About
           </Text>
           {appInfo.map((info, index) => (
-            <LaLuneListItem name={info.name} value={info.value} key={index}/>
+          <LaLuneListItem name={info.name} value={info.value} key={index}/>
           ))}
 
           <View style={{marginTop: 20}}>
@@ -50,18 +61,20 @@ class Settings extends Component {
               Language and Region
             </Text>
 
-            {settings.map((setting) => (
-              <TouchableListItem
-                key={setting}
-                name={setting}
-                onPress={() => {
-                  this.props.navigation.dispatch(NavigationActions.navigate({
-                    routeName: `${setting}Settings`,
-                    params: {
-                      selected: this.props.settings[setting.toLowerCase()]
-                    }
-                  }))}}/>
-            ))}
+            {settings.map(({name, values}) => (<TouchableListItem
+              key={name}
+              name={name}
+              onPress={() => {
+              this.props.navigation.dispatch(NavigationActions.navigate({
+                  routeName: 'SettingDetails',
+                  params: {
+                    name,
+                    values,
+                    selected: this.props.settings[name.toLowerCase()],
+                    onSelect: this.onSettingsChange
+                  }
+                }))
+            }}/>))}
           </View>
         </ScrollView>
       </View>
@@ -70,11 +83,7 @@ class Settings extends Component {
 }
 
 function mapStateToProps({settings}) {
-  return {
-    settings
-  }
+  return {settings}
 }
 
-export default connect(mapStateToProps, {
-  fetchSettingsAction}
-)(Settings);
+export default connect(mapStateToProps, { fetchSettingsAction, saveSettingsAction })(Settings);
