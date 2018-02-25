@@ -3,7 +3,7 @@ import { View, ScrollView, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { fetchSettingsAction, saveSettingsAction } from './../../Actions';
+import { fetchSettingsAction, saveSettingsAction } from './../../Actions'
 import { LaLuneListItem, TouchableListItem } from './../common/ListItem';
 import style from './../../styles/styles';
 
@@ -44,11 +44,7 @@ class Settings extends Component {
   render() {
     return (
       <View>
-        <ScrollView
-          style={{
-          marginTop: 20,
-          minHeight: 400
-        }}>
+        <ScrollView style={{marginTop: 20,minHeight: 400}}>
           <Text style={[style.text, style.headingText]}>
             About
           </Text>
@@ -70,7 +66,6 @@ class Settings extends Component {
                   params: {
                     name,
                     values,
-                    selected: this.props.settings[name.toLowerCase()],
                     onSelect: this.onSettingsChange
                   }
                 }))

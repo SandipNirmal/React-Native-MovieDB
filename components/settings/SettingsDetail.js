@@ -1,27 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {View, Text} from 'react-native'
-import {TouchableListItem} from './../common/ListItem'
+import { connect } from 'react-redux'
 
+import { fetchSettingsAction } from './../../Actions'
+import {TouchableListItem} from './../common/ListItem'
 import style from './../../styles/styles'
 
-const SettingDetails = ({navigation}) => {
-  const {name, values, selected, onSelect} = navigation.state.params;
-  return (
-    <View>
-      <Text style={[style.Text, style.subHeading]}>
-        {name}
-        Settings
-      </Text>
+class SettingDetails extends Component {
 
-      {values.map((value) => (
-      <TouchableListItem
-        key={value}
-        name={value}
-        selected={selected}
-        onPress={() => { onSelect(name.toLowerCase(), value)}}
-        />))}
-    </View>
-  )
+  componentDidMount() {
+    this.props.fetchSettingsAction();
+  }
+
+  render() {
+    const {name, values, onSelect} = this.props.navigation.state.params;
+    const selected = this.props.settings[name.toLowerCase()];
+
+    return (
+      <View>
+        <Text style={[style.Text, style.subHeading]}>
+          {name}
+          Settings
+        </Text>
+  
+        {values.map((value) => (
+        <TouchableListItem
+          key={value}
+          name={value}
+          selected={selected}
+          onPress={() => { onSelect(name.toLowerCase(), value)}}
+          />))}
+      </View>
+    )
+  }
 }
 
-export default SettingDetails;
+function mapStateToProps({settings}) {
+  return {settings}
+}
+
+export default connect(mapStateToProps, {fetchSettingsAction})(SettingDetails);
