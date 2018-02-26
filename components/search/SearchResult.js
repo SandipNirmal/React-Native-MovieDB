@@ -1,19 +1,26 @@
 import React from 'react'
-import {View, ScrollView, TouchableOpacity} from 'react-native'
+import {View, ScrollView, TouchableOpacity, Text} from 'react-native'
 
 import style from '../../styles/styles'
 import SearchItem from './SearchItem'
 
 // TODO - Rewrite using react-native-elements List, ListItem
-const SearchResult = (props) => {
+const SearchResult = ({items, popular, config, onSelect}) => {
   return (
     <View>
       <ScrollView style={style.searchResult}>
-        {props.items.map((item, index) => (
-          <TouchableOpacity key={index} onPress={() => { props.onSelect(item) }}>
-            <SearchItem item={item} config={props.config} />
+        {items.length ? 
+        items.map((item, index) => (
+          <TouchableOpacity key={index} onPress={() => { onSelect(item) }}>
+            <SearchItem item={item} config={config} />
           </TouchableOpacity>
-        ))}
+        ))
+        :
+        popular.map((popular) => (
+          // TODO - add seperate component for popular searches 
+          <Text style={[style.text, style.normalText]} key={popular.id}>{popular.title}</Text>
+        ))
+      }
       </ScrollView>
     </View>
   )

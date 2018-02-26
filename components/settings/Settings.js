@@ -3,7 +3,7 @@ import { View, ScrollView, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { fetchSettingsAction, saveSettingsAction } from './../../Actions'
+import { saveSettingsAction } from './../../Actions'
 import { LaLuneListItem, TouchableListItem } from './../common/ListItem';
 import style from './../../styles/styles';
 
@@ -31,14 +31,9 @@ const settings = [
 ]
 
 class Settings extends Component {
-  componentDidMount() {
-    this.props.fetchSettingsAction();
-  }
 
-  onSettingsChange = (key, value) => {
-    let changes = {};
-    changes[key] = value;
-    this.props.saveSettingsAction(Object.assign({}, this.props.settings, changes));
+  onSettingsChange = (values) => {
+    this.props.saveSettingsAction(values);
   }
 
   render() {
@@ -77,8 +72,4 @@ class Settings extends Component {
   }
 }
 
-function mapStateToProps({settings}) {
-  return {settings}
-}
-
-export default connect(mapStateToProps, { fetchSettingsAction, saveSettingsAction })(Settings);
+export default connect(null, { saveSettingsAction })(Settings);

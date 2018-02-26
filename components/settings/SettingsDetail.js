@@ -12,8 +12,14 @@ class SettingDetails extends Component {
     this.props.fetchSettingsAction();
   }
 
+  _changeSettings = (key, value) => {
+    let changes = {};
+    changes[key] = value;
+    this.props.navigation.state.params.onSelect(Object.assign({}, this.props.settings, changes));
+  }
+
   render() {
-    const {name, values, onSelect} = this.props.navigation.state.params;
+    const {name, values} = this.props.navigation.state.params;
     const selected = this.props.settings[name.toLowerCase()];
 
     return (
@@ -28,7 +34,7 @@ class SettingDetails extends Component {
           key={value}
           name={value}
           selected={selected}
-          onPress={() => { onSelect(name.toLowerCase(), value)}}
+          onPress={() => { this._changeSettings(name.toLowerCase(), value)}}
           />))}
       </View>
     )

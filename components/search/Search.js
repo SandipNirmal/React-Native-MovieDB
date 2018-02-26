@@ -49,7 +49,7 @@ class Search extends Component {
 
   render() {
     const {results, isSearching, onFilterChanged, onSearchResultSelected,
-      selectedIndex, config} = this.props;
+      selectedIndex, config, popular} = this.props;
     const filteredResults = this.filterSearchResults(results, selectedIndex);
 
     return (
@@ -73,7 +73,7 @@ class Search extends Component {
         <View>
         {isSearching ? 
           <ActivityIndicator size="large" color={primaryColor}/> :
-          <SearchResult config={config} items={filteredResults} onSelect={onSearchResultSelected}/>}
+          <SearchResult config={config} items={filteredResults} popular={popular} onSelect={onSearchResultSelected}/>}
         </View>
       </View>
     );
@@ -82,6 +82,7 @@ class Search extends Component {
 
 const mapStateToProps = state => ({
   config: state.configuration,
+  popular: state.movies.categories.popular,
   ...state.search,
 });
 
