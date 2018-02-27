@@ -1,10 +1,10 @@
 import React from 'react'
 import {StackNavigator} from 'react-navigation'
 
-import Search from './../components/search/Search'
+import Search from '../components/search/Search'
 import { MovieDetailsRoutes } from './Movies'
 import { TvShowDetailsRoutes } from './TvShows'
-import ShareButton from './../components/common/ShareButton'
+import ShareButton from '../components/common/ShareButton'
 
 import {StackNavHeaderStyles} from '../styles/styles'
 

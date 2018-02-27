@@ -4,9 +4,8 @@ import {StackNavigator} from 'react-navigation'
 import Movies from '../components/movies/Movies'
 import MovieDetails from '../components/movies/MovieDetails'
 import AllMovies from '../components/movies/AllMovies'
-import CastDetails from '../components/common/CastDetails'
-import VideoPlayer from '../components/common/VideoPlayer'
 import ShareButton from './../components/common/ShareButton'
+import CommonRoutes from './Common'
 
 import {StackNavHeaderStyles} from '../styles/styles'
 
@@ -28,31 +27,7 @@ const MovieDetailsRoutes = {
         id={params.id} />
     })
   },
-  CastDetails: {
-    screen: CastDetails,
-    navigationOptions: ({
-      navigation: {
-        state: {
-          params
-        }
-      }
-    }) => ({
-      title: params.name,
-      ...StackNavHeaderStyles,
-      headerRight: <ShareButton
-        name={params.name}
-        type='person'
-        id={params.id} />
-    })
-  },
-  VideoPlayer: {
-    screen: VideoPlayer,
-    navigationOptions: ({navigation}) => ({
-      tabBarVisible: false,
-      headerVisible: false,
-      ...StackNavHeaderStyles
-    })
-  }
+  ...CommonRoutes
 }
 
 const MoviesStack = StackNavigator(

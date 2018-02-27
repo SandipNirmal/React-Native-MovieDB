@@ -5,9 +5,9 @@ import {StackNavigator} from 'react-navigation'
 
 import TvShow from '../components/tv/TvShows'
 import TvShowDetails from '../components/tv/TvShowDetails'
-import CastDetails from '../components/common/CastDetails'
 import AllTvShows from '../components/tv/AllTvShows'
 import SeasonDetails from '../components/tv/SeasonDetails'
+import CommonRoutes from './Common'
 import ShareButton from './../components/common/ShareButton'
 
 import {StackNavHeaderStyles} from '../styles/styles'
@@ -27,27 +27,14 @@ const TvShowDetailsRoutes = {
       headerRight: <ShareButton name={params.name} type='tv' id={params.id} />
     })
   },
-  CastDetails: {
-    screen: CastDetails,
-    navigationOptions: ({
-      navigation: {
-        state: {
-          params
-        }
-      }
-    }) => ({
-      title: params.name,
-      ...StackNavHeaderStyles,
-      headerRight: <ShareButton name={params.name} type='person' id={params.id} />
-    })
-  },
   SeasonDetails: {
     screen: SeasonDetails,
     navigationOptions: ({navigation}) => ({
       title: navigation.state.params.title,
       ...StackNavHeaderStyles
     })
-  }
+  },
+  ...CommonRoutes
 }
 
 const TvShowStack = StackNavigator(
