@@ -201,6 +201,14 @@ const style = StyleSheet.create({
   listValue: {
     flexGrow: 3,
     paddingRight: 5
+  },
+  popularSearchContainer: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  popularSearch: {
+    marginTop: 4
   }
 })
 

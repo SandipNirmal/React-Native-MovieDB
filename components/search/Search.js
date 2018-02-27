@@ -60,7 +60,7 @@ class Search extends Component {
         onChangeText={_.debounce(this.onTextChange, 1000)}
         onClearText={this.onClearText}
         placeholder='Search'
-          />
+      />
 
         <ButtonGroup
             lightTheme={false}
