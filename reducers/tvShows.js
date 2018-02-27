@@ -22,11 +22,15 @@ function tvShows (state = initialState['tvShows'], action) {
       return newState
     case A.TV_SHOW_SELECTED:
       // We can choose to cache the movies. is that necessary?
+      // Clear the earlier data
+      newState.details = {}
       newState.details = Object.assign({}, newState.details, action.tvShow)
       return newState
     case A.TV_SHOW_DETAILS_FETCHED:
       return populateDetails(newState, action)
     case A.TVSHOWS_CAST_SELECTED:
+      // Clear the earlier data
+      newState.cast.details = {}
       newState.cast.details = Object.assign({}, newState.cast.details, action.cast)
       return newState
     case A.FETCHING_TVSHOWS_CAST_DETAILS:

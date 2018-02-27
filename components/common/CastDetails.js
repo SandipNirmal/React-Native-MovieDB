@@ -7,7 +7,7 @@ import {View, Text, Image, ActivityIndicator, ScrollView} from 'react-native'
 import HorizontalImageList from './ImageList'
 import Constant from '../../utilities/constants'
 import {getUriPopulated} from '../../utilities/utils'
-import {castDetailsFetched, fetchingCastDetails, selectedMovie, searchItemDetailsFetched, fetchCastDetails} from '../../Actions'
+import {castDetailsFetched, fetchingCastDetails, selectedTvShow, selectedMovie, searchItemDetailsFetched, fetchCastDetails} from '../../Actions'
 
 import style, {primaryColor, StackNavHeaderStyles} from '../../styles/styles'
 
@@ -59,8 +59,13 @@ class CastDetails extends Component {
       })
   }
 
+  showDetails(item) {
+    const { onShowDetails, currentTab, searchIndex } = this.props
+    onShowDetails(item, currentTab, searchIndex)
+  }
+
   render () {
-    const {onShowDetails, isFetching, details, config} = this.props
+    const {isFetching, details, config} = this.props
 
     if (isFetching) {
       return (
@@ -100,7 +105,7 @@ class CastDetails extends Component {
               isTouchableImage
               title='Known For'
               style={config.style.posterSize}
-              onPress={onShowDetails.bind(this)}
+              onPress={this.showDetails.bind(this)}
               images={details.movies || []} />
           </View>
         </ScrollView>
@@ -120,8 +125,8 @@ const mapStateToProps = state => {
   return {
     config: state.configuration,
     currentTab,
+    searchIndex: (currentTab === 'Search') && state.search.selectedIndex,
     ...state[mapScreenToStateProps[currentTab]].cast,
-    cast: state.cast
   }
 }
 
@@ -136,13 +141,26 @@ const mapDispatchToProps = dispatch => ({
       dispatch(castDetailsFetched(details, category, currentTab))
     }
   },
-  onShowDetails: (movie) => {
-    dispatch(selectedMovie(movie))
+  onShowDetails: (item, currentTab, searchIndex) => {
+    routeName = (currentTab === 'Movies') ? 'MovieDetails' : 'TvShowDetails'
+
+    if (currentTab === 'Search' && searchIndex) {
+      if (searchIndex === 0) {
+        routeName = 'MovieDetails'
+      } else if (searchIndex === 1) {
+        routeName = 'TvShowDetails'
+      } else {
+        // TODO: How do we decide ?
+      }
+    }
+    funcToCall = (routeName === 'MovieDetails') ? selectedMovie : selectedTvShow
+
+    dispatch(funcToCall(item))
     dispatch(NavigationActions.navigate({
-      routeName: 'MovieDetails',
+      routeName: routeName,
       params: {
-        name: movie.name || movie.original_title,
-        id: movie.id
+        name: item.name || item.original_title,
+        id: item.id
       }
     }))
   },

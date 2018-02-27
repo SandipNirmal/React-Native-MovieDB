@@ -20,13 +20,19 @@ const search = (state = initialState['search'], action) => {
       newState.cast.isFetching = true
       return newState
     case A.SEARCH_CAST_SELECTED:
+      // Clear the earlier data
+      newState.cast.details = {}
       newState.cast.details = Object.assign({}, newState.cast.details, action.cast)
       return newState
     case A.SEARCH_RESULT_SELECTED:
       // We can choose to cache the movies. is that necessary think?
       if (action.mediaType === 'person') {
+        // Clear the earlier data
+        newState.cast.details = {}
         newState.cast.details = Object.assign({}, newState.cast.details, action.result)
       } else {
+        // Clear the earlier data
+        newState.details = {}
         newState.details = Object.assign({}, newState.details, action.result)
       }
       return newState
