@@ -7,7 +7,7 @@ LaLune app clone using React native, Redux. This is cross platform app built wit
 #### Clone the app
 
 ```
-git clone https://github.com/SandipNirmal/LaLuneiOSClone
+git clone https://github.com/SandipNirmal/React-Native-MovieDB
 ```
 
 #### Install Dependancies
