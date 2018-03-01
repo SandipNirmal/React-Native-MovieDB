@@ -5,7 +5,7 @@ import PopularSearch from './../search/PopularSearch';
 import style from '../../styles/styles'
 import SearchItem from './SearchItem'
 
-const SearchResult = ({items, popular, config, onSelect}) => {
+const SearchResult = ({items, popular, config, onSelect, onSelectPopular}) => {
   return (
     <View>
       <ScrollView style={style.searchResult}>
@@ -15,7 +15,7 @@ const SearchResult = ({items, popular, config, onSelect}) => {
             <SearchItem item={item} config={config} />
           </TouchableOpacity>
         ))
-        : <PopularSearch data={popular}/>
+        : <PopularSearch data={popular} onSelect={onSelectPopular}/>
       }
       </ScrollView>
     </View>

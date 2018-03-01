@@ -17,9 +17,21 @@ import { connect } from 'react-redux';
 const buttons = ['Movie', 'Tv', 'Person']
 
 class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    }
+  }
+
   onTextChange = (e) => {
     let { api_base_url, lan_region, api_key } = Constant;
     const searchUrl = '/search/multi';
+
+    // Set value
+    this.setState({
+      value: e
+    });
 
     // Search only if there is any value
     if (e) {
@@ -36,7 +48,11 @@ class Search extends Component {
     }
   }
 
-  onClearText = () => {}
+  onClearText = () => {
+    this.setState({
+      value: ''
+    })
+  }
 
   /**
    * Filters search results based on media_type
@@ -54,13 +70,14 @@ class Search extends Component {
 
     return (
       <View>
-      <SearchBar
-        style={{marginTop: 20}}
-        round
-        onChangeText={_.debounce(this.onTextChange, 1000)}
-        onClearText={this.onClearText}
-        placeholder='Search'
-      />
+        <SearchBar
+          style={{marginTop: 20}}
+          round
+          onChangeText={_.debounce(this.onTextChange, 1000)}
+          onClearText={this.onClearText}
+          placeholder='Search'
+          value={this.state.value}
+        />
 
         <ButtonGroup
             lightTheme={false}
@@ -73,7 +90,12 @@ class Search extends Component {
         <View>
         {isSearching ? 
           <ActivityIndicator size="large" color={primaryColor}/> :
-          <SearchResult config={config} items={filteredResults} popular={popular} onSelect={onSearchResultSelected}/>}
+          <SearchResult 
+            config={config} 
+            items={filteredResults} 
+            popular={popular}
+            onSelectPopular={this.onTextChange}
+            onSelect={onSearchResultSelected}/>}
         </View>
       </View>
     );
