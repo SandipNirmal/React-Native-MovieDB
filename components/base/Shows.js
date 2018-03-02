@@ -3,6 +3,8 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native'
+import axios from 'axios'
+
 import HorizontalImageList from '../common/ImageList'
 import Carousel from '../common/Carousel'
 import Constant from '../../utilities/constants'
@@ -26,10 +28,12 @@ class Shows extends Component {
     const { language, region } = this.props.settings
     const uri = `${baseUrl}${route}?${apiKey}&language=${language}&region=${region}&page=1`
 
-    fetch(uri).then((response) => response.json()).then((response) => {
+    axios.get(uri)
+    .then(({data}) => {
       onFetchCompleted(category,
-        getUriPopulated(response.results, config, 'posterSizeForImageList'))
-    }).catch(error => console.error(error))
+        getUriPopulated(data.results, config, 'posterSizeForImageList'))
+    })
+    .catch(error => console.error(error.response))
   }
 
   showDetails (show) {

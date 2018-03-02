@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {View, Text, ScrollView } from 'react-native'
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 import BackgroundImage from '../common/BackgroundImage'
 import ShowOverview from '../common/ShowOverview'
@@ -26,14 +27,13 @@ class SeasonDetails extends Component {
 
     const seasonUrl = `${baseUrl}${seasonAPI}?${apiKey}`
 
-    fetch(seasonUrl)
-      .then((res) => res.json())
-      .then((res) => {
+    axios.get(seasonUrl)
+      .then(({data}) => {
         this.setState({
-          season: res
+          season: data
         })
       }, (err) => {
-        console.log('Error', err)
+        console.log('Error', err.respone)
       })
   }
 

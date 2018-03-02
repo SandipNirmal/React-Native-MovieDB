@@ -8,6 +8,7 @@ import {
   Linking,
   Platform
 } from 'react-native';
+import axios from 'axios'
 
 import BackgroundImage from '../common/BackgroundImage';
 import ShowOverview from '../common/ShowOverview';
@@ -38,20 +39,25 @@ class Details extends Component {
 
   fetchDetails(imagesUri, peopleUri) {
     const { onDetailsFetched, currentTab, config } = this.props;
-    fetch(imagesUri).then((response) => response.json()).then((response) => {
-      response.images = getUriPopulated(response.images.backdrops, config, 'backdropSize');
-      response.videos = this.formVideoUrls(response.videos.results) 
-      onDetailsFetched(response, 'imagesAndVideos', currentTab);
-    }).catch((error) => { console.error(error); });
 
-    fetch(peopleUri).then((response) => response.json()).then((response) => {
-      const people = {
-        'directors': getUriPopulated(response.crew.filter((member) => 
-          member.job === 'Director'), config, 'profileSize'),
-        'casts': getUriPopulated(response.cast.sort((a, b) => a.order - b.order), config, 'profileSize')
-      }
-      onDetailsFetched(people, 'directorsAndCast', currentTab);
-    }).catch((error) => { console.error(error); });
+    axios.get(imagesUri)
+      .then(({data}) => {
+        const {images, videos} = data;
+        data.images = getUriPopulated(images.backdrops, config, 'backdropSize');
+        data.videos = this.formVideoUrls(videos.results) 
+        onDetailsFetched(data, 'imagesAndVideos', currentTab);
+      }).catch((error) => { console.error(error.response); });
+
+    axios.get(peopleUri)
+      .then(({data}) => {
+        const {crew, cast} = data;
+        const people = {
+          'directors': getUriPopulated(crew.filter((member) => 
+            member.job === 'Director'), config, 'profileSize'),
+          'casts': getUriPopulated(cast.sort((a, b) => a.order - b.order), config, 'profileSize')
+        }
+        onDetailsFetched(people, 'directorsAndCast', currentTab);
+      }).catch((error) => { console.error(error.response); });
   }
 
   /**

@@ -3,6 +3,7 @@ import {NavigationActions} from 'react-navigation'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {View, Text, Image, ActivityIndicator, ScrollView} from 'react-native'
+import axios from 'axios'
 
 import HorizontalImageList from './ImageList'
 import Constant from '../../utilities/constants'
@@ -34,22 +35,20 @@ class CastDetails extends Component {
     { this.props.onFetching(currentTab) }
 
     // fetch Cast Details
-    fetch(`${baseUrl}${castDetailUrl}?${apiKey}`)
-      .then((response) => response.json())
-      .then((response) => {
-        response.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${response['profile_path']}`
-        this.props.onDetailsFetched(response, 'bio', this.props.currentTab)
+    axios.get(`${baseUrl}${castDetailUrl}?${apiKey}`)
+      .then(({data}) => {
+        data.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${data['profile_path']}`
+        this.props.onDetailsFetched(data, 'bio', this.props.currentTab)
       }).catch((error) => {
-        console.error(error)
+        console.error(error.response)
       })
 
     // fetch Casts other movies
-    fetch(`${baseUrl}${castKnownForUrl}?${apiKey}`)
-      .then((response) => response.json())
-      .then((response) => {
+    axios.get(`${baseUrl}${castKnownForUrl}?${apiKey}`)
+      .then(({data}) => {
         const movieList = [
-          ...response.cast,
-          ...response.crew
+          ...data.cast,
+          ...data.crew
         ]
         this.props.onDetailsFetched(getUriPopulated(movieList, config, 'posterSizeForImageList'),
           'movies',

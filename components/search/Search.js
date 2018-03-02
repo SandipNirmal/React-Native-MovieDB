@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import { SearchBar, ButtonGroup } from 'react-native-elements'
 import * as _ from 'lodash';
+import axios from 'axios'
 
 import style, { primaryColor } from '../../styles/styles';
 import Constant from '../../utilities/constants';
@@ -38,13 +39,12 @@ class Search extends Component {
       const url = `${api_base_url}${searchUrl}?${api_key}${lan_region}&query=${encodeURIComponent(e)}`;
       this.props.onSearchingForMoviesEtc();
 
-      fetch(url)
-      .then((res) => res.json())
-      .then(res => {
-        this.props.onDoneSearchingMoviesEtc(res.results)
-      }, (err) => {
-        console.error(err);
-      });
+      axios.get(url)
+        .then(({data}) => {
+          this.props.onDoneSearchingMoviesEtc(data.results)
+        }, (err) => {
+          console.error(err.response);
+        });
     }
   }
 
