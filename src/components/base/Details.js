@@ -79,8 +79,7 @@ class Details extends Component {
 
   playVideo(url) {
     if (Platform.OS === 'ios') {
-      this
-        .props
+      this.props
         .navigation
         .navigate('VideoPlayer', {url});
     } else if (Platform.OS === 'android') {

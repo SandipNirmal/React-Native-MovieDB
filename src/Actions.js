@@ -1,15 +1,12 @@
 import axios from 'axios'
 import {AsyncStorage} from 'react-native'
 
+import {getSeasonDetails} from './services/seasons';
 import initialState from './State'
 
 const ROOT_URL = 'https://api.themoviedb.org/3'
 const API_KEY = 'api_key=b8a04ea374eece868a6690782c9e7536'
 const SETTINGS_KEY = 'Settings'
-
-String.prototype.toUnderScore = function () {
-  return this.replace(/([A-Z])/g, '_$1')
-}
 
 // CONFIGURATION
 export const CONFIG_FETCHED = 'CONFIG_FETCHED'
@@ -178,5 +175,17 @@ export const saveSettingsAction = async (values = initialState['settings']) => {
       type: SAVE_SETTINGS,
       payload: null
     }
+  }
+}
+
+// SEASONS
+export const FETCH_SEASON_DETAILS = 'FETCH_SEASON_DETAILS';
+
+export const fetchSeasonDetails = (showId, season_number, success, err) => {
+  const request = getSeasonDetails(showId, season_number);
+
+  return {
+    type: FETCH_SEASON_DETAILS,
+    payload: request
   }
 }

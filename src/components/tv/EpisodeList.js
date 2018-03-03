@@ -3,7 +3,6 @@ import {ScrollView} from 'react-native'
 
 import EpisodeItem from './EpisodeItem'
 
-// TODO - rewrite using List, ListItem from react-native-elements
 const EpisodeList = (props) => {
   return (
     <ScrollView>

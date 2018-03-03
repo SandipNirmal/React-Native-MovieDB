@@ -10,3 +10,11 @@ export const getUriPopulated = (shows, config, key) => {
     return show
   })
 }
+
+String.prototype.toCategory = function () {
+  return this.replace(/ /g, '').replace(/(.)/, c => c.toLowerCase())
+}
+
+String.prototype.toUnderScore = function () {
+  return this.replace(/([A-Z])/g, '_$1')
+}

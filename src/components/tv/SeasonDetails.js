@@ -3,6 +3,7 @@ import {View, Text, ScrollView } from 'react-native'
 import {connect} from 'react-redux'
 import axios from 'axios'
 
+import { fetchSeasonDetails } from './../../Actions'
 import BackgroundImage from '../common/BackgroundImage'
 import ShowOverview from '../common/ShowOverview'
 import EpisodeList from './EpisodeList'
@@ -15,30 +16,22 @@ class SeasonDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      season: this.props.navigation.state.params.season
+      season: this.props.navigation.state.params.season,
+      error: ''
     }
   }
 
   componentDidMount () {
-    const baseUrl = Constant.api_base_url
-    const apiKey = Constant.api_key
     const {tvShowId, season: {season_number}} = this.props.navigation.state.params
-    const seasonAPI = `/tv/${tvShowId}/season/${season_number}`
-
-    const seasonUrl = `${baseUrl}${seasonAPI}?${apiKey}`
-
-    axios.get(seasonUrl)
-      .then(({data}) => {
-        this.setState({
-          season: data
-        })
-      }, (err) => {
-        console.log('Error', err.respone)
+    this.props.fetchSeasonDetails(tvShowId, season_number, null, (err) => {
+      this.setState({
+        error: err.response.data.message
       })
+    })
   }
 
   render () {
-    const { poster_path, air_date, episode_count, season_number, episodes = [] } = this.state.season
+    const { poster_path, air_date, episode_count, season_number, episodes = [] } = this.props.season || this.state.season
     const { secureBaseUrl, posterSizeForBackground } = this.props.config.image
     const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`
 
@@ -62,7 +55,9 @@ class SeasonDetails extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  config: state.configuration
+const mapStateToProps = ({configuration, season}) => ({
+  config: configuration,
+  season
 })
-export default connect(mapStateToProps)(SeasonDetails)
+
+export default connect(mapStateToProps, {fetchSeasonDetails})(SeasonDetails)

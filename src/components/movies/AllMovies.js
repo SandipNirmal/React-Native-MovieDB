@@ -12,11 +12,6 @@ import style from '../../styles/styles'
 const {height, width} = Dimensions.get('window')
 const numColumns = parseInt(width / (92 + (5 * 2)))
 
-// TODO: find a common place for this
-String.prototype.toCategory = function () {
-  return this.replace(/ /g, '').replace(/(.)/, c => c.toLowerCase())
-}
-
 class AllMovies extends Component {
   render () {
     const { onShowDetails, categories, config } = this.props

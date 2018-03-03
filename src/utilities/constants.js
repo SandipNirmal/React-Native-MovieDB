@@ -8,7 +8,6 @@ const APP_CONSTANT = {
   api_base_url: 'https://api.themoviedb.org/3',
   // api_key: API_KEY,
   api_key: 'api_key=b8a04ea374eece868a6690782c9e7536',
-  // TODO - Fetch language and region values from settings state
   lan_region: '&language=IN-hi&region=IN&page=1',
   goldenRatio: 1.618,
   width,
