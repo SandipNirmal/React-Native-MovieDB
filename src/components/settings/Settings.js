@@ -10,7 +10,7 @@ import style from './../../styles/styles';
 const appInfo = [
   {
     name: 'App Name',
-    value: 'La Lune'
+    value: 'MovieDB'
   }, {
     name: 'App Version',
     value: '0.0.1'

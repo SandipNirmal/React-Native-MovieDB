@@ -16,7 +16,6 @@ class SeasonDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      season: this.props.navigation.state.params.season,
       error: ''
     }
   }
@@ -31,7 +30,8 @@ class SeasonDetails extends Component {
   }
 
   render () {
-    const { poster_path, air_date, episode_count, season_number, episodes = [] } = this.props.season || this.state.season
+    const season = this.props.navigation.state.params.season;
+    const { poster_path, air_date, episode_count, season_number, episodes = [] } = this.props.season || season
     const { secureBaseUrl, posterSizeForBackground } = this.props.config.image
     const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`
 

@@ -40,13 +40,13 @@ class SplashScreen extends Component {
           containerStyle={{
           backgroundColor: primaryColor
         }}
-          title='L'
+          title='M'
           titleStyle={{
           fontWeight: '900',
           fontSize: 100
         }}/>
         <Text style={[style.appName, style.startupScreenTextProps]}>
-          LaLune
+          MovieDB
         </Text>
         <View style={{
           marginTop: 50,
