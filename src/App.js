@@ -7,7 +7,7 @@ import promise from 'redux-promise'
 
 import AppNavigation from './components/AppNavigation'
 import SplashScreen from './components/SplashScreen'
-import LaLune from './reducers/root'
+import MovieDB from './reducers/root'
 import {layoutChanged} from './Actions'
 
 class Screen extends Component {
@@ -42,7 +42,7 @@ export default class App extends Component {
     const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
     return (
-      <Provider store={createStoreWithMiddleware(LaLune)}>
+      <Provider store={createStoreWithMiddleware(MovieDB)}>
         <AppRoot />
       </Provider>
     )
