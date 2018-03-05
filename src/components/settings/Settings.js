@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { saveSettingsAction } from './../../Actions'
-import { LaLuneListItem, TouchableListItem } from './../common/ListItem';
+import { MovieDBListItem, TouchableListItem } from './../common/ListItem';
 import style from './../../styles/styles';
 
 const appInfo = [
@@ -44,7 +44,7 @@ class Settings extends Component {
             About
           </Text>
           {appInfo.map((info, index) => (
-          <LaLuneListItem name={info.name} value={info.value} key={index}/>
+          <MovieDBListItem name={info.name} value={info.value} key={index}/>
           ))}
 
           <View style={{marginTop: 20}}>

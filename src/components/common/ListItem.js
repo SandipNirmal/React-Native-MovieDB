@@ -29,7 +29,7 @@ const ListItem = ({name, value, selected}) => {
   )
 }
 
-const LaLuneListItem = (props) => {
+const MovieDBListItem = (props) => {
   const {name, value} = props
   return (
     <View>
@@ -47,6 +47,6 @@ const TouchableListItem = ({name, value, selected, onPress}) => {
 }
 
 export {
-  LaLuneListItem,
+  MovieDBListItem,
   TouchableListItem
 }

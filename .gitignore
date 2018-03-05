@@ -28,8 +28,8 @@ package-lock.json
 ios/build/
 ios/main.jsbundle
 ios/main.jsbundle.meta
-ios/LaLuneClone.xcodeproj/project.xcworkspace/*
-ios/LaLuneClone.xcodeproj/xcuserdata/*
+ios/MovieDB.xcodeproj/project.xcworkspace/*
+ios/MovieDB.xcodeproj/xcuserdata/*
 android/app/
 android/build
 android/.gradle/

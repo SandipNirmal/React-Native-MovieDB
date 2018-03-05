@@ -7,7 +7,7 @@ const os = Platform.OS
 
 const onShare = (title, media_type, media_id) => {
   Share.share({
-    message: `Checkout ${title} on @themoviedb via LaLuneClone.`,
+    message: `Checkout ${title} on @themoviedb via MovieDB.`,
     url: `https://www.themoviedb.org/${media_type}/${media_id}`
   }, {
     // Android only:
