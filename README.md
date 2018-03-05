@@ -1,6 +1,6 @@
-# LaLune App Clone using React Native
+# The Movie DB using React Native
 
-LaLune app clone using React native, Redux. This is cross platform app built with React Native and by using the MovieDB apis. Purpose of this project was to get our hands dirty with React Native and redux, where we just want to focus on application UI development.
+This is cross platform app built with React Native and by using the MovieDB apis. Purpose of this project was to get our hands dirty with React Native and redux, where we just want to focus on application UI development.
 
 ### Getting Started
 
