@@ -1,8 +1,8 @@
 import axios from 'axios';
 
+import * as index from './index';
 import Constant from './../utilities/constants';
 
-const baseUrl = Constant.api_base_url;
 const apiKey = Constant.api_key
 
 /**
@@ -14,7 +14,7 @@ const apiKey = Constant.api_key
  */
 const getSeasonDetails = (tvShowId, season_number) => {
   const seasonAPI = `/tv/${tvShowId}/season/${season_number}`
-  const seasonUrl = `${baseUrl}${seasonAPI}?${apiKey}`
+  const seasonUrl = `${seasonAPI}?${apiKey}`
 
   return axios.get(seasonUrl);
 }
