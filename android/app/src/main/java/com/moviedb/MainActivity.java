@@ -1,4 +1,4 @@
-package com.laluneclone;
+package com.moviedb;
 
 import com.facebook.react.ReactActivity;
 

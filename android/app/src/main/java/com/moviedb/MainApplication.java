@@ -1,4 +1,4 @@
-package com.laluneclone;
+package com.moviedb;
 
 import android.app.Application;
 
@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected String getJSMainModuleName() {
-      return "index";
+      return "index.android";
     }
   };
 

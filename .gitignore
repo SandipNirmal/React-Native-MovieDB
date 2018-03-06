@@ -30,6 +30,6 @@ ios/main.jsbundle
 ios/main.jsbundle.meta
 ios/MovieDB.xcodeproj/project.xcworkspace/*
 ios/MovieDB.xcodeproj/xcuserdata/*
-android/app/
+android/app/build
 android/build
 android/.gradle/
