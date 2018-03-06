@@ -13,8 +13,13 @@ import {layoutChanged} from './Actions'
 class Screen extends Component {
   render () {
     const {isFetching, onLayoutChange} = this.props
+    const color = isFetching ? "#000000" : "#222222"
     return (
       <View style={styles.container} onLayout={onLayoutChange}>
+         <StatusBar
+           backgroundColor={color}
+           barStyle="light-content"
+         />
         { isFetching ? <SplashScreen /> : <AppNavigation /> }
       </View>
     )
