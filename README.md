@@ -56,3 +56,5 @@ NSURL *jsCodeLocation;
  3. The Apk should be availabe at android/app/build/outputs/apk/
 ```
 
+### Screenshots
+![Movie DB](screenshots/demo.gif)
