@@ -49,7 +49,7 @@ NSURL *jsCodeLocation;
 //  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 ```
 
-### For Android
+#### For Android
 ``` Javascript
  1. Update the alias and the password in the file android/gradle.properties
  2. Run cd android && ./gradlew assembleRelease; cd ..
