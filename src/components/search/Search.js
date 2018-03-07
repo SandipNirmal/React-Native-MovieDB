@@ -26,17 +26,19 @@ class Search extends Component {
   }
 
   onTextChange = (e) => {
+    // Set value
+    this.setState({ value: e });
+    _.debounce(this.onSearch, 500)()
+  }
+
+  onSearch = () => {
     let { api_base_url, lan_region, api_key } = Constant;
     const searchUrl = '/search/multi';
 
-    // Set value
-    this.setState({
-      value: e
-    });
-
     // Search only if there is any value
-    if (e) {
-      const url = `${api_base_url}${searchUrl}?${api_key}${lan_region}&query=${encodeURIComponent(e)}`;
+    const {value} = this.state
+    if (value) {
+      const url = `${api_base_url}${searchUrl}?${api_key}${lan_region}&query=${encodeURIComponent(value)}`;
       this.props.onSearchingForMoviesEtc();
 
       axios.get(url)
@@ -73,7 +75,7 @@ class Search extends Component {
         <SearchBar
           style={{marginTop: 20}}
           round
-          onChangeText={_.debounce(this.onTextChange, 1000)}
+          onChangeText={this.onTextChange}
           onClearText={this.onClearText}
           placeholder='Search'
           value={this.state.value}
