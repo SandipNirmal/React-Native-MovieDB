@@ -16,22 +16,49 @@ git clone https://github.com/SandipNirmal/React-Native-MovieDB
 npm i
 ```
 
+#### Add Configurations ( one time activity )
 
-#### Link Dependancies
+Create ```.env``` file in application root similar to ```.env.example```. Replace dummy values present in ```.env.example``` with your values.
+
+```javascript
+# MovieDB API key
+API_KEY='YOUR_API_KEY'
+
+# Other key value pairs
+```
+
+#### Link Dependancies ( one time activity )
 
 ``` JavaScript
-react-native link react-native-orientation // link orientation
+// link orientation
+react-native link react-native-orientation 
 
-react-native link react-native-vector-icons // fonts
+// link fonts
+react-native link react-native-vector-icons
+
+// link environment variables
+react-native link react-native-configs
 
 ```
 #### Run Application
 
+##### iOS Simulator
 ```
 react-native run-ios
 
 npm start
 ```
+
+##### Android emulator
+
+Start AVD (emulator) before following commands
+
+```
+react-native run-android
+
+npm start
+```
+
 #### Bundle Application for Device
 
 ``` JavaScript

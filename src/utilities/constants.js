@@ -1,13 +1,12 @@
 import {Dimensions} from 'react-native'
-// import {API_KEY} from 'react-native-dotenv';
+import Config from 'react-native-config';
 
 const {height, width} = Dimensions.get('screen')
 const tabBarHeight = 54
 
 const APP_CONSTANT = {
-  api_base_url: 'https://api.themoviedb.org/3',
-  // api_key: API_KEY,
-  api_key: 'api_key=b8a04ea374eece868a6690782c9e7536',
+  api_base_url: Config.API_ENDPOINT,
+  api_key: Config.API_KEY,
   lan_region: '&language=IN-hi&region=IN&page=1',
   goldenRatio: 1.618,
   width,
