@@ -8,7 +8,13 @@ import axios from 'axios'
 import HorizontalImageList from './ImageList'
 import Constant from '../../utilities/constants'
 import {getUriPopulated} from '../../utilities/utils'
-import {castDetailsFetched, fetchingCastDetails, selectedTvShow, selectedMovie, searchItemDetailsFetched, fetchCastDetails} from '../../Actions'
+import {
+  castDetailsFetched, 
+  fetchingCastDetails, 
+  selectedTvShow, 
+  selectedMovie, 
+  searchItemDetailsFetched, 
+  fetchCastDetails} from '../../Actions'
 
 import style, {primaryColor, StackNavHeaderStyles} from '../../styles/styles'
 

@@ -2,10 +2,9 @@ import axios from 'axios'
 import {AsyncStorage} from 'react-native'
 
 import {getSeasonDetails} from './services/seasons';
+import {getCastDetails} from './services/person';
 import initialState from './State'
 
-const ROOT_URL = 'https://api.themoviedb.org/3'
-const API_KEY = 'api_key=b8a04ea374eece868a6690782c9e7536'
 const SETTINGS_KEY = 'Settings'
 
 // CONFIGURATION
@@ -129,10 +128,10 @@ export const castDetailsFetched = (details, category, screen) => ({
 })
 
 export const FETCH_CAST_DETAILS = 'FETCH_CAST_DETAILS'
-export function fetchCastDetails (castId) {
-  const castDetailUrl = `/person/${castId}`
-  const request = axios.get(`${ROOT_URL}${castDetailUrl}?${API_KEY}`)
 
+export function fetchCastDetails (castId) {
+  const request = getCastDetails(castId);
+  
   return {
     type: FETCH_CAST_DETAILS,
     payload: request
