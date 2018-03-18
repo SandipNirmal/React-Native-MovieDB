@@ -23,7 +23,6 @@ yarn.lock
 package.json-lock
 
 *.orig
-package-lock.json
 .env
 ios/build/
 ios/main.jsbundle
