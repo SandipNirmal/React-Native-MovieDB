@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { SearchBar, ButtonGroup } from 'react-native-elements'
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import * as _ from 'lodash';
-import axios from 'axios'
 
 import style, { primaryColor } from '../../styles/styles';
-import Constant from '../../utilities/constants';
 import SearchResult from './SearchResult';
 import { 
   doneSearchingMoviesEtc,
   searchFilterChanged, searchingForMoviesEtc, searchResultSelected,
   selectedMovie, selectedTvShow,
 } from '../../Actions';
-import { NavigationActions } from 'react-navigation';
-import { connect } from 'react-redux';
+import { searchItem } from '../../services/search'
   
 const buttons = ['Movie', 'Tv', 'Person']
 
@@ -32,21 +31,17 @@ class Search extends Component {
   }
 
   onSearch = () => {
-    let { api_base_url, lan_region, api_key } = Constant;
-    const searchUrl = '/search/multi';
-
     // Search only if there is any value
     const {value} = this.state
     if (value) {
-      const url = `${api_base_url}${searchUrl}?${api_key}${lan_region}&query=${encodeURIComponent(value)}`;
       this.props.onSearchingForMoviesEtc();
+      const { settings: { language, region } } = this.props
 
-      axios.get(url)
-        .then(({data}) => {
-          this.props.onDoneSearchingMoviesEtc(data.results)
-        }, (err) => {
-          console.error(err.response);
-        });
+      searchItem(value, language, region)
+      .then(({data}) => {
+        this.props.onDoneSearchingMoviesEtc(data.results)
+      })
+      .catch(error => console.error(error.response))
     }
   }
 
@@ -107,6 +102,7 @@ class Search extends Component {
 const mapStateToProps = state => ({
   config: state.configuration,
   popular: state.movies.categories.popular,
+  settings: state.settings,
   ...state.search,
 });
 

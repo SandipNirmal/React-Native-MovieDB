@@ -2,33 +2,29 @@ import React, {Component} from 'react'
 import {ActivityIndicator, Text, View} from 'react-native'
 import * as _ from 'lodash'
 import {connect} from 'react-redux'
-import axios from 'axios'
 
 import {configFetched, movieFetched} from '../Actions'
 import {Avatar} from 'react-native-elements'
 import {getUriPopulated} from '../utilities/utils'
-import Constant from '../utilities/constants'
+import {getConfiguration} from '../services/index'
+import {getShows} from '../services/shows'
 
 import style, {primaryColor} from '../styles/styles'
 
 class SplashScreen extends Component {
   componentDidMount() {
-    const apiKey = Constant.api_key
-    let uri = `${Constant.api_base_url}/configuration?${apiKey}`
-    const {onFetchCompleted, onConfigFetched, config, settings: {
-        language
-      }} = this.props
+    const {onFetchCompleted, onConfigFetched, config, settings} = this.props
 
-    axios.get(uri)
+    getConfiguration()
+    .then(({data}) => {
+      onConfigFetched(data)
+      getShows('/movie/now_playing', settings.language, settings.region)
       .then(({data}) => {
-        onConfigFetched(data)
-        uri = `${Constant.api_base_url}/movie/now_playing?${apiKey}&language=${language}&page=1`
-
-        axios.get(uri).
-          then(({data}) => {
-            onFetchCompleted('nowShowing', getUriPopulated(data.results, config, 'posterSizeForImageList'))
-          }).catch(error => console.log(error.response))
-      }).catch(error => console.log(error.response))
+        onFetchCompleted('nowShowing', getUriPopulated(data.results, config, 'posterSizeForImageList'))
+      })
+      .catch(error => console.log(error.response))
+    })
+    .catch(error => console.log(error.response))
   }
 
   render() {

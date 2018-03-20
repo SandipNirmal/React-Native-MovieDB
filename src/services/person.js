@@ -15,6 +15,11 @@ const getCastDetails = (castId) => {
   return axios.get(`/person/${castId}?${apiKey}`)
 }
 
+const getCastKnowFor = (castId) => {
+  return axios.get(`/person/${castId}/movie_credits?${apiKey}`)
+}
+
 export {
-  getCastDetails
+  getCastDetails,
+  getCastKnowFor
 }

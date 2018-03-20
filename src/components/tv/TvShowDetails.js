@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import Details from '../base/Details'
-import Constant from '../../utilities/constants'
 import HorizontalImageList from '../common/ImageList'
 import style from '../../styles/styles'
 import * as _ from 'lodash'
@@ -15,16 +14,7 @@ import { NavigationActions } from 'react-navigation'
 
 class TvShowDetails extends Details {
   componentDidMount () {
-    const baseUrl = Constant.api_base_url
-    const apiKey = Constant.api_key
-    const tvShow_url = '/tv/'
-    const appendResponse = 'append_to_response=videos,images'
-    const tvShowId = this.props.details.id
-
-    const tvShowUrl = `${baseUrl}${tvShow_url}${tvShowId}?${apiKey}&${appendResponse}`
-    const tvShowCreditsUrl = `${baseUrl}${tvShow_url}${tvShowId}/credits?${apiKey}`
-
-    this.fetchDetails(tvShowUrl, tvShowCreditsUrl)
+    this.fetchDetails('/tv/', this.props.details.id)
   }
 
   showSeasonDetails (season) {

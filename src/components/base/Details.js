@@ -8,7 +8,6 @@ import {
   Linking,
   Platform
 } from 'react-native';
-import axios from 'axios'
 
 import BackgroundImage from '../common/BackgroundImage';
 import ShowOverview from '../common/ShowOverview';
@@ -16,6 +15,7 @@ import HorizontalImageList from '../common/ImageList';
 import CastList from '../common/CastList'
 import TrailerList from '../common/TrailerList';
 import CastDetails from '../common/CastDetails';
+import { getShowDetails, getShowCredits } from '../../services/shows'
 
 import { getUriPopulated } from '../../utilities/utils';
 import style, {marginTop} from '../../styles/styles';
@@ -37,27 +37,29 @@ class Details extends Component {
     console.error("Override!!");
   }
 
-  fetchDetails(imagesUri, peopleUri) {
+  fetchDetails(route, id) {
     const { onDetailsFetched, currentTab, config } = this.props;
 
-    axios.get(imagesUri)
-      .then(({data}) => {
-        const {images, videos} = data;
-        data.images = getUriPopulated(images.backdrops, config, 'backdropSize');
-        data.videos = this.formVideoUrls(videos.results) 
-        onDetailsFetched(data, 'imagesAndVideos', currentTab);
-      }).catch((error) => { console.error(error.response); });
+    getShowDetails(route, id)
+    .then(({data}) => {
+      const {images, videos} = data;
+      data.images = getUriPopulated(images.backdrops, config, 'backdropSize');
+      data.videos = this.formVideoUrls(videos.results) 
+      onDetailsFetched(data, 'imagesAndVideos', currentTab);
+    })
+    .catch((error) => { console.error(error.response); });
 
-    axios.get(peopleUri)
-      .then(({data}) => {
-        const {crew, cast} = data;
-        const people = {
-          'directors': getUriPopulated(crew.filter((member) => 
-            member.job === 'Director'), config, 'profileSize'),
-          'casts': getUriPopulated(cast.sort((a, b) => a.order - b.order), config, 'profileSize')
-        }
-        onDetailsFetched(people, 'directorsAndCast', currentTab);
-      }).catch((error) => { console.error(error.response); });
+    getShowCredits(route, id)
+    .then(({data}) => {
+      const {crew, cast} = data;
+      const people = {
+        'directors': getUriPopulated(crew.filter((member) => 
+          member.job === 'Director'), config, 'profileSize'),
+        'casts': getUriPopulated(cast.sort((a, b) => a.order - b.order), config, 'profileSize')
+      }
+      onDetailsFetched(people, 'directorsAndCast', currentTab);
+    })
+    .catch((error) => { console.error(error.response); });
   }
 
   /**

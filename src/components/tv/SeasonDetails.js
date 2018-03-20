@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import {View, Text, ScrollView } from 'react-native'
 import {connect} from 'react-redux'
-import axios from 'axios'
 
 import { fetchSeasonDetails } from './../../Actions'
 import BackgroundImage from '../common/BackgroundImage'
 import ShowOverview from '../common/ShowOverview'
 import EpisodeList from './EpisodeList'
 
-import Constant from './../../utilities/constants'
 import style from '../../styles/styles'
 
 class SeasonDetails extends Component {

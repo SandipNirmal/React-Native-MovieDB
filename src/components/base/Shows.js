@@ -3,12 +3,11 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native'
-import axios from 'axios'
 
 import HorizontalImageList from '../common/ImageList'
 import Carousel from '../common/Carousel'
-import Constant from '../../utilities/constants'
 import { getUriPopulated } from '../../utilities/utils'
+import { getShows } from '../../services/shows'
 
 import style, { primaryColor } from '../../styles/styles'
 
@@ -22,13 +21,8 @@ class Shows extends Component {
   }
 
   fetch (category, route) {
-    const baseUrl = Constant.api_base_url
-    const apiKey = Constant.api_key
-    const { onFetchCompleted, config } = this.props
-    const { language, region } = this.props.settings
-    const uri = `${baseUrl}${route}?${apiKey}&language=${language}&region=${region}&page=1`
-
-    axios.get(uri)
+    const { onFetchCompleted, config, settings } = this.props
+    getShows(route, settings.language, settings.region)
     .then(({data}) => {
       onFetchCompleted(category,
         getUriPopulated(data.results, config, 'posterSizeForImageList'))
