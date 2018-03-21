@@ -1,19 +1,18 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
-
-import style from './../../styles/styles'
+import {styles} from 'react-native-theme'
 
 const ListItem = ({name, value, selected}) => {
   return (
-    <View style={style.listContainer}>
-      <View style={style.listTitle}>
-        <Text style={[style.text, style.subHeadingText]}>
+    <View style={styles.listContainer}>
+      <View style={styles.listTitle}>
+        <Text style={[styles.text, styles.subHeadingText]}>
           {name}
         </Text>
       </View>
-      <View style={style.listValue}>
-        <Text style={[style.text, style.normalText]}>
+      <View style={styles.listValue}>
+        <Text style={[styles.text, styles.normalText]}>
           {value}
         </Text>
       </View>
@@ -40,7 +39,7 @@ const MovieDBListItem = (props) => {
 
 const TouchableListItem = ({name, value, selected, onPress}) => {
   return (
-    <TouchableOpacity style={style.listContainer} onPress={onPress}>
+    <TouchableOpacity style={styles.listContainer} onPress={onPress}>
       <ListItem name={name} value={value} selected={selected} />
     </TouchableOpacity>
   )

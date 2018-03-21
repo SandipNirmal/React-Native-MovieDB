@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Image,
-  Text, TouchableOpacity
-} from 'react-native'
-
-import style from '../../styles/styles'
+import {Image, Text, TouchableOpacity} from 'react-native'
+import {styles} from 'react-native-theme'
 
 export const TouchableImage = (props) => (
   <TouchableOpacity
@@ -28,8 +24,8 @@ TouchableImage.propTypes = {
 }
 
 export const TouchableText = (props) => (
-  <TouchableOpacity onPress={() => props.onPress()} style={style.textStickToBottom}>
-    <Text style={[style.text, style.normalText]}>
+  <TouchableOpacity onPress={() => props.onPress()} style={styles.textStickToBottom}>
+    <Text style={[styles.text, styles.normalText]}>
       {props.text}
     </Text>
   </TouchableOpacity>

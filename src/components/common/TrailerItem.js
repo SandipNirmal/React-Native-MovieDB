@@ -2,8 +2,7 @@ import React from 'react'
 import {Text, View, TouchableOpacity} from 'react-native'
 import {Icon} from 'react-native-elements'
 import {connect} from 'react-redux'
-
-import styles from '../../styles/styles'
+import {styles} from 'react-native-theme'
 
 const TrailerItem = ({style, video, onPlay}) => {
   return (
@@ -19,7 +18,7 @@ const TrailerItem = ({style, video, onPlay}) => {
             type='font-awesome'
             size={50}
             color='#ff0000'
-            style={style.trailerPlayIcon} />
+            style={styles.trailerPlayIcon} />
         </View>
       </TouchableOpacity>
     </View>

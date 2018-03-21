@@ -3,13 +3,15 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native'
+import axios from 'axios'
+import {styles} from 'react-native-theme'
 
 import HorizontalImageList from '../common/ImageList'
 import Carousel from '../common/Carousel'
 import { getUriPopulated } from '../../utilities/utils'
 import { getShows } from '../../services/shows'
 
-import style, { primaryColor } from '../../styles/styles'
+import { primaryColor } from '../../styles/styles'
 
 String.prototype.toTitle = function () {
   return this.replace(/([A-Z])/g, ' $1').replace(/(.)/, c => c.toUpperCase())
@@ -17,7 +19,7 @@ String.prototype.toTitle = function () {
 
 class Shows extends Component {
   componentDidMount () {
-    console.error('Need to override this in base class')
+    console.log('Need to override this in base class')
   }
 
   fetch (category, route) {
@@ -27,15 +29,15 @@ class Shows extends Component {
       onFetchCompleted(category,
         getUriPopulated(data.results, config, 'posterSizeForImageList'))
     })
-    .catch(error => console.error(error.response))
+    .catch(error => console.log(error.response))
   }
 
   showDetails (show) {
-    console.error('need to override this in base class')
+    console.log('need to override this in base class')
   }
 
   showAll (category, shows) {
-    console.error('need to override this in base class')
+    console.log('need to override this in base class')
   }
 
   render () {
@@ -43,10 +45,10 @@ class Shows extends Component {
 
     return (
       isFetching
-        ? <ScrollView style={style.screenBackgroundColor}>
+        ? <ScrollView style={styles.screenBackgroundColor}>
           <ActivityIndicator size='large' color={primaryColor} />
         </ScrollView>
-        : <ScrollView style={style.screenBackgroundColor}>
+        : <ScrollView style={styles.screenBackgroundColor}>
           <Carousel
             images={getUriPopulated(categories[this.carouselCategory], config, 'backdropSize')}
             onPress={onShowDetails.bind(this)}

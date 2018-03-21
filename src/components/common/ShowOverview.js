@@ -2,34 +2,36 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import {Icon} from 'react-native-elements'
 import PropTypes from 'prop-types'
+import {styles} from 'react-native-theme'
 
-import style, { primaryColor } from '../../styles/styles'
+import {primaryColor} from '../../styles/styles'
 
 const ShowOverview = (props) => {
   return (
     <View style={Style.container}>
       <View style={Style.infoItems}>
-        <Icon name='event' color={primaryColor} size={30} />
-        <Text style={[style.text, Style.infoText]}>
+        <Icon name='event' color={primaryColor} size={30}/>
+        <Text style={[styles.text, Style.infoText]}>
           {props.date}
         </Text>
       </View>
-      { props.runtime &&
-        <View style={Style.infoItems}>
-          <Icon name='schedule' color={primaryColor} />
-          <Text style={[style.text, Style.infoText]}>
-            {props.runtime} Min
-          </Text>
-        </View>
-      }
+      {props.runtime && <View style={Style.infoItems}>
+        <Icon name='schedule' color={primaryColor}/>
+        <Text style={[styles.text, Style.infoText]}>
+          {props.runtime}
+          Min
+        </Text>
+      </View>
+}
       <View style={Style.infoItems}>
-        { props.ratings
-          ? <Icon name='stars' color={primaryColor} />
+        {props.ratings
+          ? <Icon name='stars' color={primaryColor}/>
           : props.episodes
-            ? <Text style={[style.text, Style.titleText]}>Episodes: </Text>
+            ? <Text style={[styles.text, Style.titleText]}>Episodes:
+              </Text>
             : null
-        }
-        <Text style={[style.text, Style.infoText]}>
+}
+        <Text style={[styles.text, Style.infoText]}>
           {props.ratings || props.episodes}
         </Text>
       </View>

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import {styles} from 'react-native-theme';
 
 import { saveSettingsAction } from './../../Actions'
 import { MovieDBListItem, TouchableListItem } from './../common/ListItem';
-import style from './../../styles/styles';
 
 const appInfo = [
   {
@@ -40,31 +40,33 @@ class Settings extends Component {
     return (
       <View>
         <ScrollView style={{marginTop: 20,minHeight: 400}}>
-          <Text style={[style.text, style.headingText]}>
+          <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
             About
           </Text>
           {appInfo.map((info, index) => (
-          <MovieDBListItem name={info.name} value={info.value} key={index}/>
+            <MovieDBListItem name={info.name} value={info.value} key={index}/>
           ))}
 
           <View style={{marginTop: 20}}>
-            <Text style={[style.text, style.headingText]}>
+            <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
               Language and Region
             </Text>
 
-            {settings.map(({name, values}) => (<TouchableListItem
-              key={name}
-              name={name}
-              onPress={() => {
-              this.props.navigation.dispatch(NavigationActions.navigate({
-                  routeName: 'SettingDetails',
-                  params: {
-                    name,
-                    values,
-                    onSelect: this.onSettingsChange
-                  }
-                }))
-            }}/>))}
+            {settings.map(({name, values}) => (
+              <TouchableListItem
+                key={name}
+                name={name}
+                onPress={() => {
+                this.props.navigation.dispatch(NavigationActions.navigate({
+                    routeName: 'SettingDetails',
+                    params: {
+                      name,
+                      values,
+                      onSelect: this.onSettingsChange
+                    }
+                  }))
+              }}/>
+            ))}
           </View>
         </ScrollView>
       </View>

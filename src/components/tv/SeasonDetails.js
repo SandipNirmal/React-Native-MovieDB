@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {View, Text, ScrollView } from 'react-native'
 import {connect} from 'react-redux'
+import axios from 'axios'
+import {styles} from 'react-native-theme'
 
 import { fetchSeasonDetails } from './../../Actions'
 import BackgroundImage from '../common/BackgroundImage'
 import ShowOverview from '../common/ShowOverview'
 import EpisodeList from './EpisodeList'
-
-import style from '../../styles/styles'
+import Constant from './../../utilities/constants'
 
 class SeasonDetails extends Component {
   // TODO: Use redux store
@@ -34,11 +35,11 @@ class SeasonDetails extends Component {
     const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`
 
     return (
-      <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
+      <View style={[{ flex: 1 }, styles.screenBackgroundColor]}>
         <BackgroundImage uri={bgImage} />
         <ScrollView>
-          <View style={style.detailsContainer}>
-            <Text style={[style.text, style.titleText]}>
+          <View style={styles.detailsContainer}>
+            <Text style={[styles.text, styles.titleText]}>
               Season {season_number}
             </Text>
             <ShowOverview

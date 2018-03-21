@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native'
 import * as _ from 'lodash'
-import style from './../../styles/styles'
+import {styles} from 'react-native-theme'
 
 class Carousel extends Component {
   componentDidMount () {
@@ -51,8 +51,8 @@ class Carousel extends Component {
         pagingEnabled
         ref={ref => this.scrollView = ref}
         showsHorizontalScrollIndicator={false}
-        style={style.flexContainer}
-      >
+        style={style.flexContainer}>
+
         {images.map((image, index) => (
           <TouchableOpacity
             key={index}
@@ -72,15 +72,15 @@ const ImageWithTitle = (props) => (
       style={props.style}
       source={{uri: props.image.uri}}
     />
-    <View style={styles.absoluteTitle}>
-      <Text style={[style.titleText, styles.titleText]}>
+    <View style={style.absoluteTitle}>
+      <Text style={[styles.titleText, style.titleText]}>
         {props.image.original_title || props.image.original_name}
       </Text>
     </View>
   </View>
 )
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   absoluteTitle: {
     position: 'absolute',
     top: 0,

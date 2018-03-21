@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
+
 import Details from '../base/Details'
 import CastList from '../common/CastList'
-import { connect } from 'react-redux'
 import {
   castSelected,
   searchItemDetailsFetched,
   movieDetailsFetched
 } from '../../Actions'
-import { NavigationActions } from 'react-navigation'
 
 class MovieDetails extends Details {
   componentDidMount () {
@@ -18,8 +19,7 @@ class MovieDetails extends Details {
     return <CastList
       title='Director'
       items={this.props.details.directors || []}
-      onPress={this.showCastDetails.bind(this)}
-    />
+      onPress={this.showCastDetails.bind(this)}/>
   }
 }
 

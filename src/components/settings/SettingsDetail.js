@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {View, Text} from 'react-native'
 import { connect } from 'react-redux'
+import theme, {styles} from 'react-native-theme'
 
 import { fetchSettingsAction } from './../../Actions'
 import {TouchableListItem} from './../common/ListItem'
-import style from './../../styles/styles'
 
 class SettingDetails extends Component {
 
@@ -24,9 +24,8 @@ class SettingDetails extends Component {
 
     return (
       <View>
-        <Text style={[style.Text, style.subHeading]}>
-          {name}
-          Settings
+        <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
+          {name} Settings
         </Text>
   
         {values.map((value) => (

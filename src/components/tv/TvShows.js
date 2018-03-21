@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Shows from '../base/Shows'
-import {selectedTvShow, fetchingTvShows, tvShowsFetched} from '../../Actions'
 import {NavigationActions} from 'react-navigation'
 import * as _ from 'lodash'
 
-import style from '../../styles/styles'
+import Shows from '../base/Shows'
+import {selectedTvShow, fetchingTvShows, tvShowsFetched} from '../../Actions'
+
 
 class TvShows extends Shows {
   constructor (props) {
@@ -19,9 +19,7 @@ class TvShows extends Shows {
   componentDidMount () {
     // calls base class functions
     if (_.isEmpty(this.props.categories.showingToday)) {
-      this
-        .props
-        .onFetching()
+      this.props.onFetching()
     }
     this.fetch('showingToday', '/tv/airing_today')
     this.fetch('topRated', '/tv/top_rated')

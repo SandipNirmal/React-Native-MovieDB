@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import { 
+import {
   ActivityIndicator,
   Button,
-  ScrollView, StyleSheet,
+  ScrollView,
+  StyleSheet,
   Text,
   View,
   Linking,
   Platform
 } from 'react-native';
+import axios from 'axios'
+import {styles} from 'react-native-theme'
 
 import BackgroundImage from '../common/BackgroundImage';
 import ShowOverview from '../common/ShowOverview';
@@ -17,8 +20,8 @@ import TrailerList from '../common/TrailerList';
 import CastDetails from '../common/CastDetails';
 import { getShowDetails, getShowCredits } from '../../services/shows'
 
-import { getUriPopulated } from '../../utilities/utils';
-import style, {marginTop} from '../../styles/styles';
+import {getUriPopulated} from '../../utilities/utils';
+import {marginTop} from '../../styles/styles';
 
 class Details extends Component {
   constructor(props) {
@@ -30,11 +33,11 @@ class Details extends Component {
   }
 
   componentDidMount() {
-    console.error("Override!!");
+    console.log("Override!!");
   }
 
   getSpecialComponent() {
-    console.error("Override!!");
+    console.log("Override!!");
   }
 
   fetchDetails(route, id) {
@@ -47,7 +50,7 @@ class Details extends Component {
       data.videos = this.formVideoUrls(videos.results) 
       onDetailsFetched(data, 'imagesAndVideos', currentTab);
     })
-    .catch((error) => { console.error(error.response); });
+    .catch((error) => { console.log(error.response); });
 
     getShowCredits(route, id)
     .then(({data}) => {
@@ -58,8 +61,9 @@ class Details extends Component {
         'casts': getUriPopulated(cast.sort((a, b) => a.order - b.order), config, 'profileSize')
       }
       onDetailsFetched(people, 'directorsAndCast', currentTab);
-    })
-    .catch((error) => { console.error(error.response); });
+    }).catch((error) => {
+      console.log(error.response);
+    });
   }
 
   /**
@@ -68,10 +72,7 @@ class Details extends Component {
   formVideoUrls(videos) {
     const filteredVideos = videos.filter((video) => video.site === 'YouTube');
     return filteredVideos.map((video) => {
-      return {
-        name: video.name,
-        url: `https://www.youtube.com/embed/${video.key}?&autoplay=1`
-      };
+      return {name: video.name, url: `https://www.youtube.com/embed/${video.key}?&autoplay=1`};
     });
   }
 
@@ -81,13 +82,11 @@ class Details extends Component {
 
   playVideo(url) {
     if (Platform.OS === 'ios') {
-      this.props
-        .navigation
-        .navigate('VideoPlayer', {url});
+      this.props.navigation.navigate('VideoPlayer', {url});
     } else if (Platform.OS === 'android') {
       Linking
         .openURL(url)
-        .catch(err => console.error('An error occurred', err));
+        .catch(err => console.log('An error occurred', err));
     }
   }
 
@@ -96,76 +95,76 @@ class Details extends Component {
     const blurConstant = 10;
     // If Y scroll position is more than detail poster then blur it
     if (yOffset > marginTop) {
-      this.setState({
-        opacity: 0,
-        blur: blurConstant
-      })
+      this.setState({opacity: 0, blur: blurConstant})
     } else {
-      const opacity = 1 - (yOffset/marginTop);
-      const blur = parseInt((yOffset * blurConstant ) / marginTop, 10);
-      this.setState({
-        opacity,
-        blur
-      })
+      const opacity = 1 - (yOffset / marginTop);
+      const blur = parseInt((yOffset * blurConstant) / marginTop, 10);
+      this.setState({opacity, blur})
     }
   }
 
   render() {
     const {
       config: {
-        image: { secureBaseUrl, posterSizeForBackground },
-        style: { backdropSize }
+        image: {
+          secureBaseUrl,
+          posterSizeForBackground
+        },
+        style: {
+          backdropSize
+        }
       },
       details: {
-        title, images, videos, release_date, casts, first_air_date, runtime,
-        vote_average, overview, poster_path
+        title,
+        images,
+        videos,
+        release_date,
+        casts,
+        first_air_date,
+        runtime,
+        vote_average,
+        overview,
+        poster_path
       }
     } = this.props;
     const bgImage = `${secureBaseUrl}${posterSizeForBackground}/${poster_path}`;
 
     return (
-      <View style={[{ flex: 1 }, style.screenBackgroundColor]}>
-        <BackgroundImage 
-          uri={bgImage} 
+      <View style={[{flex: 1}, styles.screenBackgroundColor]}>
+        <BackgroundImage
+          uri={bgImage}
           opacity={this.state.opacity}
           blur={this.state.blur}/>
-        <ScrollView>
 
-        { // TODO - Disabling onScroll blur. Need better solution
+        <ScrollView>
+          {// TODO - Disabling onScroll blur. Need better solution
           /* onScroll={this.handleOnScroll} scrollEventThrottle={160} */}
-          <View style={style.detailsContainer}>
-            <Text style={[style.text, style.titleText]}>
+          <View style={styles.detailsContainer}>
+            <Text style={[styles.text, styles.titleText]}>
               {title}
             </Text>
 
             <ShowOverview
               date={release_date || first_air_date || ''}
               runtime={runtime || 100}
-              ratings={vote_average}
-              />
+              ratings={vote_average}/>
 
-            <Text style={[style.text, style.normalText]}>
+            <Text style={[styles.text, styles.normalText]}>
               {overview}
             </Text>
 
-            <HorizontalImageList
-              title="Photos"
-              images={images || []}
-              style={backdropSize}
-            />
+            <HorizontalImageList title="Photos" images={images || []} style={backdropSize}/>
 
-            <TrailerList 
-              videos={videos || []} 
-              playVideo={this.playVideo.bind(this)}
-            />
+            <TrailerList
+              videos={videos || []}
+              playVideo={this.playVideo.bind(this)}/>
 
-            {this.getSpecialComponent()} 
+            {this.getSpecialComponent()}
 
             <CastList
               title="Cast"
               items={casts || []}
-              onPress={this.showCastDetails.bind(this)}
-            />
+              onPress={this.showCastDetails.bind(this)}/>
           </View>
         </ScrollView>
       </View>
