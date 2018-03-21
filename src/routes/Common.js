@@ -10,8 +10,6 @@ const StackNavHeaderStyles = (theme.name === 'Dark' || theme.name === 'default')
   ? StackNavHeaderStyles_Dark
   : StackNavHeaderStyles_Light;
 
-console.log('theme.name', theme.name);
-
 const CommonRoutes = {
   CastDetails: {
     screen: CastDetails,
