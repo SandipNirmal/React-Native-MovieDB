@@ -19,6 +19,8 @@ import {
   selectedTvShow
 } from '../../Actions';
 
+import { searchItem } from '../../services/search'
+  
 const buttons = ['Movie', 'Tv', 'Person']
 
 class Search extends Component {
@@ -36,26 +38,17 @@ class Search extends Component {
   }
 
   onSearch = () => {
-    let {api_base_url, lan_region, api_key} = Constant;
-    const searchUrl = '/search/multi';
-
     // Search only if there is any value
     const {value} = this.state
     if (value) {
-      const url = `${api_base_url}${searchUrl}?${api_key}${lan_region}&query=${encodeURIComponent(value)}`;
-      this
-        .props
-        .onSearchingForMoviesEtc();
+      this.props.onSearchingForMoviesEtc();
+      const { settings: { language, region } } = this.props
 
-      axios
-        .get(url)
-        .then(({data}) => {
-          this
-            .props
-            .onDoneSearchingMoviesEtc(data.results)
-        }, (err) => {
-          console.error(err.response);
-        });
+      searchItem(value, language, region)
+      .then(({data}) => {
+        this.props.onDoneSearchingMoviesEtc(data.results)
+      })
+      .catch(error => console.log(error.response))
     }
   }
 
@@ -122,7 +115,8 @@ class Search extends Component {
 const mapStateToProps = state => ({
   config: state.configuration,
   popular: state.movies.categories.popular,
-  ...state.search
+  settings: state.settings,
+  ...state.search,
 });
 
 const mapDispatchToProps = dispatch => ({

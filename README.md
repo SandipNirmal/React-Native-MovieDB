@@ -65,7 +65,7 @@ npm start
 #### Bundle Application for Device
 
 ``` JavaScript
-react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
+react-native bundle --entry-file src/index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
 ```
 
 #### For iOS

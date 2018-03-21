@@ -7,8 +7,8 @@ import axios from 'axios'
 import {styles} from 'react-native-theme'
 
 import HorizontalImageList from './ImageList'
-import Constant from '../../utilities/constants'
 import {getUriPopulated} from '../../utilities/utils'
+import {getCastDetails, getCastKnowFor} from '../../services/person'
 import {
   castDetailsFetched, 
   fetchingCastDetails, 
@@ -21,12 +21,9 @@ import {primaryColor} from '../../styles/styles'
 
 class CastDetails extends Component {
   componentDidMount () {
-    this.props.fetchCastDetails(this.props.details.id)
+    const castId = this.props.details.id
+    this.props.fetchCastDetails(castId)
 
-    const baseUrl = Constant.api_base_url
-    const apiKey = Constant.api_key
-    const castDetailUrl = `/person/${this.props.details.id}`
-    const castKnownForUrl = `${castDetailUrl}/movie_credits`
     const {
       config,
       currentTab,
@@ -42,27 +39,25 @@ class CastDetails extends Component {
     { this.props.onFetching(currentTab) }
 
     // fetch Cast Details
-    axios.get(`${baseUrl}${castDetailUrl}?${apiKey}`)
-      .then(({data}) => {
-        data.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${data['profile_path']}`
-        this.props.onDetailsFetched(data, 'bio', this.props.currentTab)
-      }).catch((error) => {
-        console.error(error.response)
-      })
+    getCastDetails(castId)
+    .then(({data}) => {
+      data.imageSrc = `${secureBaseUrl}${posterSizeForBackground}${data['profile_path']}`
+      this.props.onDetailsFetched(data, 'bio', this.props.currentTab)
+    })
+    .catch(error => console.log(error.response))
 
     // fetch Casts other movies
-    axios.get(`${baseUrl}${castKnownForUrl}?${apiKey}`)
-      .then(({data}) => {
-        const movieList = [
-          ...data.cast,
-          ...data.crew
-        ]
-        this.props.onDetailsFetched(getUriPopulated(movieList, config, 'posterSizeForImageList'),
-          'movies',
-          this.props.currentTab)
-      }).catch((error) => {
-        console.error(error)
-      })
+    getCastKnowFor(castId)
+    .then(({data}) => {
+      const movieList = [
+        ...data.cast,
+        ...data.crew
+      ]
+      this.props.onDetailsFetched(getUriPopulated(movieList, config, 'posterSizeForImageList'),
+        'movies',
+        this.props.currentTab)
+    })
+    .catch(error => console.log(error.response))
   }
 
   showDetails(item) {

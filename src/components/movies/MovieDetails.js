@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
 import Details from '../base/Details'
-import Constant from '../../utilities/constants'
 import CastList from '../common/CastList'
 import {
   castSelected,
@@ -13,16 +12,7 @@ import {
 
 class MovieDetails extends Details {
   componentDidMount () {
-    const baseUrl = Constant.api_base_url
-    const apiKey = Constant.api_key
-    const movie_url = '/movie/'
-    const appendResponse = 'append_to_response=videos,images'
-    const movieId = this.props.details.id
-
-    const movieUrl = `${baseUrl}${movie_url}${movieId}?${apiKey}&${appendResponse}`
-    const movieCreditsUrl = `${baseUrl}${movie_url}${movieId}/credits?${apiKey}`
-
-    this.fetchDetails(movieUrl, movieCreditsUrl)
+    this.fetchDetails('/movie/', this.props.details.id)
   }
 
   getSpecialComponent () {

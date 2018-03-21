@@ -8,7 +8,6 @@ import { fetchSeasonDetails } from './../../Actions'
 import BackgroundImage from '../common/BackgroundImage'
 import ShowOverview from '../common/ShowOverview'
 import EpisodeList from './EpisodeList'
-
 import Constant from './../../utilities/constants'
 
 class SeasonDetails extends Component {
