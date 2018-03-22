@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {ActivityIndicator, Text, View} from 'react-native'
+import {ActivityIndicator, Text, View, Alert} from 'react-native'
 import * as _ from 'lodash'
 import {connect} from 'react-redux'
 import axios from 'axios'
@@ -24,9 +24,13 @@ class SplashScreen extends Component {
       .then(({data}) => {
         onFetchCompleted('nowShowing', getUriPopulated(data.results, config, 'posterSizeForImageList'))
       })
-      .catch(error => console.log(error.response))
+      .catch(error => {
+        Alert.alert('Error', 'Error fetching Data!');
+      }
+    )})
+    .catch(error => {
+      Alert.alert('Error', 'Error fetching Data!');
     })
-    .catch(error => console.log(error.response))
   }
 
   render() {

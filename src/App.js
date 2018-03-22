@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createStore, applyMiddleware} from 'redux'
 import {Provider, connect} from 'react-redux'
-import {StyleSheet, View, StatusBar} from 'react-native'
+import {StyleSheet, View, StatusBar, AsyncStorage} from 'react-native'
 import Orientation from 'react-native-orientation'
 import promise from 'redux-promise'
 import theme, {styles} from 'react-native-theme';
@@ -50,19 +50,13 @@ export default class App extends Component {
   componentWillMount() {
     theme.setRoot(this);
 
-    theme.active('Dark');
-    // theme.active('Light');
-    // const value = this.fetchTheme();
-    // theme.active(value)
-  }
-
-  fetchTheme = async () => {
-    try {
-      const payload = JSON.parse(await AsyncStorage.getItem('Settings'))
-      return payload.theme;
-    } catch(err) {
-      return 'Dark'
-    }
+    AsyncStorage.getItem('Settings')
+      .then((settings) => {
+        const themeName = JSON.parse(settings).theme;
+        theme.active(themeName);
+      }).catch((err) => {
+        theme.active('Dark')
+      });
   }
 
   render () {
