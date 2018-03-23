@@ -316,7 +316,16 @@ const lightTheme = {
     backgroundColor: searchItemBackground_light,
     shadowRadius: 0,
     shadowColor: '#191919'
-  }
+  },
+  listContainer: {
+    flexGrow: 1,
+    flexDirection: 'row',
+    height: 54,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4
+  },
 };
 
 // Style for dark theme
@@ -381,7 +390,16 @@ const darkTheme = {
     backgroundColor: searchItemBackground_dark,
     shadowRadius: 0,
     shadowColor: '#191919'
-  }
+  },
+  listContainer: {
+    flexGrow: 1,
+    flexDirection: 'row',
+    height: 54,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4
+  },
 };
 
 const StackNavHeaderStyles_Dark = {

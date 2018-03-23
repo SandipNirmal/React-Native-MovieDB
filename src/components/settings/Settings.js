@@ -38,7 +38,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <View>
+      <View style={[{ flex: 1 }, styles.screenBackgroundColor]}>
         <ScrollView style={{marginTop: 20,minHeight: 400}}>
           <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
             About
