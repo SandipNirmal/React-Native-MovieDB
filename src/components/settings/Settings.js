@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import {styles} from 'react-native-theme';
+import theme, {styles} from 'react-native-theme';
 
 import { saveSettingsAction } from './../../Actions'
 import { MovieDBListItem, TouchableListItem } from './../common/ListItem';
@@ -37,6 +37,7 @@ class Settings extends Component {
   }
 
   render() {
+    console.log('Theme Name', theme.name);
     return (
       <View style={[{ flex: 1 }, styles.screenBackgroundColor]}>
         <ScrollView style={{marginTop: 20,minHeight: 400}}>
