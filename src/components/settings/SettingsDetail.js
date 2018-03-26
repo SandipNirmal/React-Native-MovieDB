@@ -30,8 +30,8 @@ class SettingDetails extends Component {
     const selected = this.props.settings[name.toLowerCase()];
 
     return (
-      <View style={[{flex: 1}]}>
-        <View style={[styles.screenBackgroundColor]}>
+      <View style={[{flex: 1}, styles.screenBackgroundColor]}>
+        <View>
           <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
             {name}
             Settings

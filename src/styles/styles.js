@@ -192,7 +192,7 @@ const defaultStyle = {
     paddingLeft: 25
   },
   searchResult: {
-    marginBottom: 200
+    marginBottom: 120
   },
   rightArrow: {
     flexGrow: 1,

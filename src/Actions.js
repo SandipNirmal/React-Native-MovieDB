@@ -120,7 +120,6 @@ export const fetchSettingsAction = async() => {
 export const saveSettingsAction = async(values = initialState['settings']) => {
   try {
     await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(values))
-    // const payload = JSON.parse(await AsyncStorage.getItem(SETTINGS_KEY))
 
     // TODO - Might need to seperate each settings action handlers
     if (theme.name !== values.theme) {
