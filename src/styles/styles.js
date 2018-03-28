@@ -439,5 +439,3 @@ export {
   headerBackgroundColor_dark,
   headerBackgroundColor_light
 };
-
-//styles.backdropSize, styles.centerContentContainer, styles.trailerContainer

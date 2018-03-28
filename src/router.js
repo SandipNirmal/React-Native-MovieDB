@@ -14,17 +14,23 @@ import {
   headerBorderColor_Dark,
   headerBackgroundColor_Light,
   headerBorderColor_Light
-} from "./styles/styles.js";
+} from "./styles/styles";
 
 // Theme name
 const themeName = theme.name;
 
 const headerBackgroundColor =
-  themeName === "Dark"
+  (themeName === "Dark" || themeName === "default")
     ? headerBackgroundColor_Dark
     : headerBackgroundColor_Light;
 const headerBorderColor =
-  themeName === "Dark" ? headerBorderColor_Dark : headerBorderColor_Light;
+  (themeName === "Dark" || themeName === "default")
+    ? headerBorderColor_Dark
+    : headerBorderColor_Light;
+
+console.log('themeName', themeName)
+console.log('headerBackgroundColor', headerBackgroundColor);
+console.log('headerBorderColor', headerBorderColor);
 
 // Application router
 const MainScreen = TabNavigator(

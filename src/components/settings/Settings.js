@@ -37,6 +37,7 @@ class Settings extends Component {
   }
 
   render() {
+    console.log('styles.screenBackgroundColor', styles.screenBackgroundColor);
     return (
       <View style={[{flex: 1}, styles.screenBackgroundColor]}>
         <ScrollView style={{marginTop: 20, minHeight: 480}}>

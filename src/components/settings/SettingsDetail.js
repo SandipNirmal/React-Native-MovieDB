@@ -33,8 +33,7 @@ class SettingDetails extends Component {
       <View style={[{flex: 1}, styles.screenBackgroundColor]}>
         <View>
           <Text style={[styles.text, styles.subHeading, styles.settingDetailsTitle]}>
-            {name}
-            Settings
+            {`${name} Settings`}
           </Text>
 
           {values.map((value) => (
