@@ -14,7 +14,7 @@ import {
 
 class TvShowDetails extends Details {
   componentDidMount () {
-    this.fetchDetails('/tv/', this.props.details.id)
+    this.fetchDetails('/tv/', this.props.details.id || this.props.navigation.state.params.id)
   }
 
   showSeasonDetails (season) {

@@ -151,10 +151,11 @@ const mapDispatchToProps = dispatch => ({
       } else if (searchIndex === 1) {
         routeName = 'TvShowDetails'
       } else {
-        // TODO: How do we decide ?
+        // For people search - known for results only have movie results and not tv shows
+        routeName = 'MovieDetails'
       }
     }
-    funcToCall = (routeName === 'MovieDetails') ? selectedMovie : selectedTvShow
+    funcToCall = (routeName === 'TvShowDetails') ? selectedTvShow : selectedMovie
 
     dispatch(funcToCall(item))
     dispatch(NavigationActions.navigate({

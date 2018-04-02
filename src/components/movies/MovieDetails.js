@@ -12,7 +12,7 @@ import {
 
 class MovieDetails extends Details {
   componentDidMount () {
-    this.fetchDetails('/movie/', this.props.details.id)
+    this.fetchDetails('/movie/', this.props.details.id || this.props.navigation.state.params.id)
   }
 
   getSpecialComponent () {

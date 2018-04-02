@@ -14,7 +14,6 @@ const SearchItem = ({item, config}) => {
   }
 
   const uri = `${secureBaseUrl}${size}${path}`
-  console.log('uri ', uri)
 
   return (
     <View style={styles.searchItem}>

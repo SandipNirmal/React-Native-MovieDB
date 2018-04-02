@@ -28,10 +28,6 @@ const headerBorderColor =
     ? headerBorderColor_Dark
     : headerBorderColor_Light;
 
-console.log('themeName', themeName)
-console.log('headerBackgroundColor', headerBackgroundColor);
-console.log('headerBorderColor', headerBorderColor);
-
 // Application router
 const MainScreen = TabNavigator(
   {
