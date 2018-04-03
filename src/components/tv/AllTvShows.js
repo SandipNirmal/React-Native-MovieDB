@@ -21,7 +21,7 @@ class AllTvShows extends Component {
         numColumns={config.image.numColumns}
         style={{
           bgColor: styles.screenBackgroundColor,
-          imageStyle: config.styles.posterSize
+          imageStyle: config.style.posterSize
         }}
         images={categories[category.toCategory()]}
         onPress={onShowDetails.bind(this)}

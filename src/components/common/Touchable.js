@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {Image, Text, TouchableOpacity} from 'react-native'
 import {styles} from 'react-native-theme'
+import ImageLoad from 'react-native-image-placeholder'
 
 export const TouchableImage = (props) => (
   <TouchableOpacity
     onPress={() => props.onPress()}>
-    <Image
+    <ImageLoad
       style={props.style}
       source={{uri: props.uri}}
     />
