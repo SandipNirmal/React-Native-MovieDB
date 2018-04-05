@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   Dimensions,
-  Image,
   ScrollView, StyleSheet,
   Text, TouchableOpacity,
   View
 } from 'react-native'
 import * as _ from 'lodash'
 import {styles} from 'react-native-theme'
+import ImageLoad from 'react-native-image-placeholder'
 
 class Carousel extends Component {
   componentDidMount () {
@@ -68,7 +68,7 @@ class Carousel extends Component {
 
 const ImageWithTitle = (props) => (
   <View>
-    <Image
+    <ImageLoad
       style={props.style}
       source={{uri: props.image.uri}}
     />
