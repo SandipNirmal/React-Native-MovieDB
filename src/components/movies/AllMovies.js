@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Dimensions} from 'react-native'
+import { Dimensions } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import {styles} from 'react-native-theme'
+import { styles } from 'react-native-theme'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -9,11 +9,11 @@ import { FlatImageList } from '../common/ImageList'
 import { selectedMovie } from '../../Actions'
 
 // return device width and height
-const {height, width} = Dimensions.get('window')
-const numColumns = parseInt(width / (92 + (5 * 2)))
+const { height, width } = Dimensions.get('window')
+const numColumns = parseInt(width / (92 + 5 * 2))
 
 class AllMovies extends Component {
-  render () {
+  render() {
     const { onShowDetails, categories, config } = this.props
     const { category } = this.props.navigation.state.params
 
@@ -38,13 +38,17 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onShowDetails: (movie) => {
+  onShowDetails: movie => {
     dispatch(selectedMovie(movie))
-    dispatch(NavigationActions.navigate({routeName: 'MovieDetails',
-      params: {
-        name: movie.name,
-        id: movie.id
-      }}))
+    dispatch(
+      NavigationActions.navigate({
+        routeName: 'MovieDetails',
+        params: {
+          name: movie.name,
+          id: movie.id
+        }
+      })
+    )
   }
 })
 

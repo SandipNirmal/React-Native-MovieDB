@@ -46,9 +46,9 @@ class AppNavigation extends Component {
     if (this.closeApp()) return false
     this.props.dispatch(NavigationActions.back())
     return true
-  };
+  }
 
-  render () {
+  render() {
     const { navigationState, dispatch } = this.props
     return (
       <MainScreen
