@@ -42,7 +42,9 @@ class Search extends Component {
     const { value } = this.state
     if (value) {
       this.props.onSearchingForMoviesEtc()
-      const { settings: { language, region } } = this.props
+      const {
+        settings: { language, region }
+      } = this.props
 
       searchItem(value, language, region)
         .then(({ data }) => {
@@ -109,7 +111,7 @@ class Search extends Component {
             <SearchResult
               config={config}
               items={filteredResults}
-              popular={popular}
+              popular={selectedIndex < 2 ? popular[selectedIndex] : []}
               onSelectPopular={this.onTextChange}
               onSelect={onSearchResultSelected}
             />
@@ -122,7 +124,7 @@ class Search extends Component {
 
 const mapStateToProps = state => ({
   config: state.configuration,
-  popular: state.movies.categories.popular,
+  popular: [state.movies.categories.popular, state.tvShows.categories.popular],
   settings: state.settings,
   ...state.search
 })
