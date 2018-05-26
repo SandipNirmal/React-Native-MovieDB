@@ -80,6 +80,14 @@ NSURL *jsCodeLocation;
 ```
 
 #### For Android
+
+##### Generate keyStore file
+Use following instructions to generate keystore file
+
+``` javascript
+https://facebook.github.io/react-native/docs/signed-apk-android.html
+```
+
 ``` Javascript
  1. Update the alias and the password in the file android/gradle.properties
  2. Run cd android && ./gradlew assembleRelease; cd ..
