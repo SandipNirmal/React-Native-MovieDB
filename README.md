@@ -19,6 +19,7 @@ npm i
 #### Add Configurations ( one time activity )
 
 Create ```.env``` file in application root similar to ```.env.example```. Replace dummy values present in ```.env.example``` with your values.
+Create acccount on MovieDB and generate API_KEY.
 
 ```javascript
 # MovieDB API key
