@@ -33,3 +33,4 @@ android/app/build
 android/build
 android/.gradle/
 package-lock.json
+android/app/*.keystore
