@@ -97,3 +97,8 @@ https://facebook.github.io/react-native/docs/signed-apk-android.html
 <div style="text-align:center">
 	<img src="screenshots/demo.gif" />
 </div>
+
+
+### Available on:
+[Google Play Store](https://play.google.com/store/apps/details?id=com.moviedb)
+
