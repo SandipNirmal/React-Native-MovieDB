@@ -100,5 +100,7 @@ https://facebook.github.io/react-native/docs/signed-apk-android.html
 
 
 ### Available on:
-[Google Play Store](https://play.google.com/store/apps/details?id=com.moviedb)
+Our app is now available on Google Play.
+
+<a href='https://play.google.com/store/apps/details?id=com.moviedb&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_gb/badges/images/generic/en_badge_web_generic.png'/></a>
 
