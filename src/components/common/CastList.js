@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import {styles} from 'react-native-theme'
+// import Image from './../base/Image'
 
 const CastList = (props) => {
   return (

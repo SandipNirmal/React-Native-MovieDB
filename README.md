@@ -34,7 +34,7 @@ API_KEY='YOUR_API_KEY'
 // link orientation
 react-native link react-native-orientation 
 
-// link fonts
+// link vector icons
 react-native link react-native-vector-icons
 
 // link environment variables
